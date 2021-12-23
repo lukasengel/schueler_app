@@ -1,7 +1,7 @@
 class Settings {
   String username;
   String password;
-  bool sortingAZ;
+  bool reversed;
   int themeColor;
   List<String> filters;
 
@@ -9,7 +9,7 @@ class Settings {
     required this.username,
     required this.password,
     required this.themeColor,
-    required this.sortingAZ,
+    required this.reversed,
     required this.filters,
   });
 
@@ -17,6 +17,6 @@ class Settings {
       : username = "",
         password = "",
         themeColor = 1,
-        sortingAZ = true,
+        reversed = true,
         filters = [];
 }

@@ -2,23 +2,28 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import './theme.dart';
 
 import './controllers/local_data.dart';
 import './controllers/web_data.dart';
+import './controllers/authentication.dart';
 
 import './pages/home_page/home_page.dart';
 import './pages/login_page/login_page.dart';
 import './pages/settings_page/settings_page.dart';
 import './pages/settings_page/settings_subpages/filters_page.dart';
+import './pages/settings_page/settings_subpages/personalization_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   final localData = Get.put(LocalData());
-  final webData = Get.put(WebData());
+  Get.put(WebData());
+  final auth = Get.put(Authentication());
   await localData.initialize();
-  await webData.initialize();
+  await auth.login();
   runApp(MyApp());
 }
 
@@ -38,16 +43,22 @@ class MyApp extends StatelessWidget {
           Platform.isIOS ? Transition.cupertino : Transition.fade,
       title: "GG-Schüler-App",
       getPages: [
-        GetPage(name: HomePage.route, page: () => HomePage()),
-        GetPage(name: LoginPage.route, page: () => LoginPage()),
-        GetPage(name: SettingsPage.route, page: () => SettingsPage()),
-        GetPage(name: FiltersPage.route, page: () => FiltersPage())
+        GetPage(name: HomePage.route, page: () => const HomePage()),
+        GetPage(name: LoginPage.route, page: () => const LoginPage()),
+        GetPage(name: SettingsPage.route, page: () => const SettingsPage()),
+        GetPage(name: FiltersPage.route, page: () => const FiltersPage()),
+        GetPage(
+          name: PersonalizationPage.route,
+          page: () => const PersonalizationPage(),
+        )
       ],
-      home: GetBuilder<WebData>(builder: (controller) {
-        return controller.authState == AuthState.loggedOff
-            ? const LoginPage()
-            : const HomePage();
-      }),
+      home: GetBuilder<Authentication>(
+        builder: (controller) {
+          return controller.authState == AuthState.LoggedIn
+              ? const HomePage()
+              : const LoginPage();
+        },
+      ),
     );
   }
 }

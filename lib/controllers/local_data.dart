@@ -53,7 +53,7 @@ class LocalData extends GetxController {
         username: prefs.getString("username") ?? "",
         password: prefs.getString("password") ?? "",
         themeColor: prefs.getInt("themeColor") ?? 1,
-        sortingAZ: prefs.getBool("sortingAZ") ?? true,
+        reversed: prefs.getBool("reversed") ?? true,
         filters: prefs.getStringList("filters") ?? [],
       );
     } catch (e) {
@@ -68,11 +68,29 @@ class LocalData extends GetxController {
       await prefs.setString("username", settings.username);
       await prefs.setString("password", settings.password);
       await prefs.setInt("themeColor", settings.themeColor);
-      await prefs.setBool("sortingAZ", settings.sortingAZ);
+      await prefs.setBool("reversed", settings.reversed);
       await prefs.setStringList("filters", settings.filters);
     } catch (e) {
       error = e.toString();
     }
     update();
+  }
+
+  Future<void> toggleFilter(String key) async {
+    if (settings.filters.contains(key)) {
+      settings.filters.remove(key);
+    } else {
+      settings.filters.add(key);
+    }
+    await writeSettings();
+  }
+
+  Future<void> clearSettings() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.clear();
+    } catch (e) {
+      error = e.toString();
+    }
   }
 }

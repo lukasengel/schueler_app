@@ -1,5 +1,5 @@
 name: schueler_app
-description: A new Flutter project.
+description: Schüler-App des Gnadenthal-Gymnasiums.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -44,8 +44,12 @@ dependencies:
   flutter_easyrefresh: ^2.2.1
   settings_ui: ^1.0.0
   fluttericon: ^2.0.0
-  marquee: ^2.2.0
   url_launcher: ^6.0.15
+  marquee_text: ^2.5.0+1
+  firebase_core: ^1.10.2
+  firebase_database: ^8.2.0
+  cached_network_image: ^3.2.0
+  firebase_auth: ^3.3.0
 
 dev_dependencies:
   flutter_test:
@@ -78,6 +82,23 @@ flutter:
     - family: Montserrat
       fonts:
         - asset: assets/fonts/Montserrat/Montserrat-Regular.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Montserrat/Montserrat-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Montserrat/Montserrat-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Montserrat/Montserrat-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Montserrat/Montserrat-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Montserrat/Montserrat-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Montserrat/Montserrat-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Montserrat/Montserrat-Thin.ttf
+          weight: 100
+      
     - family: LobsterTwo
       fonts:
         - asset: assets/fonts/LobsterTwo/LobsterTwo-Regular.ttf

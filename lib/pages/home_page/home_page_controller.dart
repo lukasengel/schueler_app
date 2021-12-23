@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../settings_page/settings_page.dart';
@@ -19,12 +20,20 @@ class HomePageController extends GetxController {
   }
 
   void invertSorting() async {
-    localData.settings.sortingAZ = !localData.settings.sortingAZ;
+    localData.settings.reversed = !localData.settings.reversed;
     await localData.writeSettings();
     webData.update();
   }
 
-  Future<void> onRefresh() async {
-    await webData.fetchData();
+  Future<void> onRefresh(BuildContext context) async {
+    try {
+      await webData.fetchData();
+    } catch (e) {
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("error".tr.toUpperCase() + ": " + e.toString()),
+        duration: const Duration(seconds: 5),
+      ));
+    }
   }
 }

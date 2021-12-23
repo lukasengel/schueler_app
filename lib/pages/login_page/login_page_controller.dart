@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/local_data.dart';
-import '../../controllers/web_data.dart';
+import '../../controllers/authentication.dart';
 
 import '../../models/web_data_exception.dart';
+import '../../models/auth_data_exception.dart';
 import '../../widgets/dynamic_message_dialog.dart';
 
 class LoginPageController extends GetxController {
   late LocalData localData;
-  late WebData webData;
+  late Authentication auth;
   final usernameController = TextEditingController();
   final passwortController = TextEditingController();
   RxBool working = false.obs;
@@ -19,24 +21,28 @@ class LoginPageController extends GetxController {
   @override
   onInit() {
     localData = Get.find<LocalData>();
-    webData = Get.find<WebData>();
+    auth = Get.find<Authentication>();
     usernameController.text = localData.settings.username;
     passwortController.text = localData.settings.password;
-    error.value =
-        webData.error != WebDataException.emptyCredentials().toString()
-            ? translateError(webData.error)
-            : "";
+    error.value = auth.error != AuthDataException.emptyCredentials().toString()
+        ? translateError(auth.error)
+        : "";
     super.onInit();
   }
 
   Future<void> login() async {
+    HapticFeedback.heavyImpact();
     working.value = true;
     error.value = "";
     localData.settings.username = usernameController.text;
     localData.settings.password = passwortController.text;
     await localData.writeSettings();
-    await webData.fetchData();
-    error.value = translateError(webData.error);
+    await auth.login();
+    error.value = translateError(auth.error);
+    if (error.isEmpty) {
+      usernameController.clear();
+      passwortController.clear();
+    }
     working.value = false;
   }
 
@@ -67,7 +73,7 @@ class LoginPageController extends GetxController {
   }
 
   String translateError(String e) {
-    if (e == WebDataException.emptyCredentials().toString()) {
+    if (e == AuthDataException.emptyCredentials().toString()) {
       return "empty_credentials".tr;
     } else if (e == WebDataException.unauthorized().toString()) {
       return "unauthorized".tr + "\n($e)";

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class SplashyBottomNavigationBar extends StatelessWidget {
   final List<SplashyBottomNavigationBarItem> items;
   final Function(int)? onTap;
+  final bool hapticFeedback;
   final Color? backgroundColor;
   final Color? selectedItemColor;
   final TextStyle? selectedLabelStyle;
@@ -15,7 +17,7 @@ class SplashyBottomNavigationBar extends StatelessWidget {
   final int? currentIndex;
   final double? elevation;
 
-  SplashyBottomNavigationBar({
+  const SplashyBottomNavigationBar({
     required this.items,
     required this.onTap,
     this.elevation,
@@ -27,9 +29,11 @@ class SplashyBottomNavigationBar extends StatelessWidget {
     this.selectedIconTheme,
     this.unselectedIconTheme,
     this.currentIndex = 0,
+    this.hapticFeedback = true,
     this.showSelectedLabels,
     this.showUnselectedLabels,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -63,9 +67,9 @@ class SplashyBottomNavigationBar extends StatelessWidget {
     EdgeInsets padding(bool selected, bool label) {
       if ((label && selected && (theme.showSelectedLabels ?? true)) ||
           (label && !selected && (theme.showUnselectedLabels ?? true))) {
-        return EdgeInsets.fromLTRB(12, 8, 12, 0);
+        return const EdgeInsets.fromLTRB(12, 8, 12, 0);
       } else {
-        return EdgeInsets.fromLTRB(12, 16, 12, 16);
+        return const EdgeInsets.fromLTRB(12, 16, 12, 16);
       }
     }
 
@@ -93,7 +97,7 @@ class SplashyBottomNavigationBar extends StatelessWidget {
       child: BottomAppBar(
         elevation: 0,
         color: theme.backgroundColor,
-        child: Container(
+        child: SizedBox(
           height: 56,
           child: Row(
             children: List.generate(
@@ -109,14 +113,23 @@ class SplashyBottomNavigationBar extends StatelessWidget {
                     splashColor: theme.selectedItemColor?.withOpacity(0.15),
                     highlightColor: Colors.transparent,
                     splashFactory: InkRipple.splashFactory,
-                    onTap: onTap != null ? () => onTap!(index) : null,
+                    onTap: onTap != null
+                        ? () {
+                            if (hapticFeedback) {
+                              HapticFeedback.lightImpact();
+                            }
+                            onTap!(index);
+                          }
+                        : null,
                     child: Padding(
                       padding: padding(selected, item.label != null),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           IconTheme(
-                            child: item.icon,
+                            child: selected
+                                ? item.activeIcon ?? item.icon
+                                : item.icon,
                             data: iconTheme(selected),
                           ),
                           if (item.label != null &&

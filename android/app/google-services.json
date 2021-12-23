@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "574633232939",
+    "firebase_url": "https://gg-schueler-app-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "gg-schueler-app",
+    "storage_bucket": "gg-schueler-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:574633232939:android:a29786af88a2b158d6386e",
+        "android_client_info": {
+          "package_name": "de.gnadenthalgymnasium.schueler_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "574633232939-qililq71gv7a0qgbmejkq19o1q2ninne.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCC03iSUYoIzerWcpfagQGkHRu5H5L9x9I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "574633232939-qililq71gv7a0qgbmejkq19o1q2ninne.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

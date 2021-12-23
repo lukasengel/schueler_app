@@ -9,9 +9,6 @@ class WebDataException implements Exception {
 
   WebDataException(this.error, this.details);
 
-  WebDataException.emptyCredentials()
-      : error = "ERROR",
-        details = "Empty Credentials";
   WebDataException.noData()
       : error = "ERROR FETCHING DATA",
         details = "No Response";

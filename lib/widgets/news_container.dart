@@ -2,30 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 
-class NewsContainer extends StatelessWidget {
-  final List<String> text;
-  const NewsContainer({Key? key, required this.text}) : super(key: key);
+import '../models/news_item.dart';
 
-  String insertDayOfWeek(String text) {
-    RegExp regex = RegExp(r"\d\d\.\d\d\.\d\d\d\d");
-    final match = regex.firstMatch(text);
-    if (match != null) {
-      final dateString = text.substring(match.start, match.end);
-      final formatter = DateFormat(r"d.M.y");
-      final datetime = formatter.parse(dateString);
-      final dow = DateFormat("EEEE");
-      text = text.substring(0, match.start) +
-          dow.format(datetime).toLowerCase().tr +
-          ", " +
-          dateString;
-    }
-    return text;
-  }
+class NewsContainer extends StatelessWidget {
+  final NewsItem item;
+  const NewsContainer({Key? key, required this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final bool entry = text.length > 2;
+    String insertDayOfWeek(String text) {
+      RegExp regex = RegExp(r"\d\d\.\d\d\.\d\d\d\d");
+      final match = regex.firstMatch(text);
+      if (match != null) {
+        final dateString = text.substring(match.start, match.end);
+        final formatter = DateFormat(r"d.M.y");
+        final datetime = formatter.parse(dateString);
+        final dow = DateFormat("EEEE");
+        text = text.substring(0, match.start) +
+            dow.format(datetime).toLowerCase().tr +
+            ", " +
+            dateString;
+      }
+      return text;
+    }
+
     return Container(
+      constraints: const BoxConstraints(maxWidth: 700),
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       padding: const EdgeInsets.symmetric(vertical: 20),
       decoration: BoxDecoration(
@@ -42,30 +44,34 @@ class NewsContainer extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (entry) const SizedBox(height: 10),
           Text(
-            insertDayOfWeek(text[0]),
+            insertDayOfWeek(item.headline),
             style: Theme.of(context).textTheme.headline4,
           ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Divider(
-                color: Get.textTheme.bodyText2!.color,
-                indent: 30,
-                endIndent: 30,
-              ),
-              const SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                child: Text(
-                  entry ? text[1] : text.last,
-                  textAlign: TextAlign.left,
-                  style: Get.textTheme.bodyText2,
-                ),
-              ),
-            ],
+          Divider(
+            color: Get.textTheme.bodyText2!.color,
+            indent: 30,
+            endIndent: 30,
           ),
+          const SizedBox(height: 10),
+          if (item.subheadline.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40.0),
+              child: Text(
+                item.subheadline,
+                textAlign: TextAlign.left,
+                style: Get.textTheme.bodyText2,
+              ),
+            ),
+          if (item.content.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40.0),
+              child: Text(
+                item.content,
+                textAlign: TextAlign.left,
+                style: Get.textTheme.bodyText2,
+              ),
+            ),
         ],
       ),
     );

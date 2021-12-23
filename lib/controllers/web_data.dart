@@ -1,185 +1,202 @@
 import 'dart:convert';
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:html/parser.dart' as html;
 import 'package:http/http.dart' as http;
 import 'package:html/dom.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
+import '../models/school_life_item.dart';
+import '../models/substitution_table.dart';
 import '../models/web_data_exception.dart';
+import '../models/news_item.dart';
 import './local_data.dart';
 
-enum AuthState { loggedOn, loggedOff }
-
 class WebData extends GetxController {
-  List<List<List<String>>> dailyTables = [];
-  List<List<List<int>>> groups = [];
-  List<List<String>> news = [];
-  List<List<String>> newsInverted = [];
-  String ticker = "";
+  //HTML Data
+  List<SubstitutionTable> substitutionTables = [];
+  List<NewsItem> news = [];
   String latestUpdate = "";
+  String ticker = "";
 
-  String htmlData = "";
-  String error = "";
-
-  AuthState authState = AuthState.loggedOff;
-
-  Future<void> initialize() async {
-    await fetchData();
-  }
+  //Database Data
+  List<SchoolLifeItem> schoolLifeItems = [];
 
   Future<void> fetchData() async {
-    error = "";
-    try {
-      final localData = Get.find<LocalData>();
-      if (localData.settings.username.isEmpty ||
-          localData.settings.password.isEmpty) {
-        throw (WebDataException.emptyCredentials());
-      }
-      final username = localData.settings.username;
-      final password = localData.settings.password;
-      final basicAuth =
-          'Basic ' + base64Encode(utf8.encode('$username:$password'));
-      final url = Uri.parse(
-          "https://schule-infoportal.de/infoscreen/?type=student&refresh=100&fontsize=16&days=5&theme=light&news=1&absent=&absent2=1");
-      final response = await http.get(
-        url,
-        headers: {
-          "authorization": basicAuth,
-          "Access-Control-Allow-Origin": "*",
-        },
-      );
-
-      int statusCode = response.statusCode;
-      htmlData = response.body;
-
-      if (htmlData.isEmpty || statusCode == 0) {
-        throw (WebDataException.noData());
-      }
-      if (statusCode >= 226 || statusCode <= 103) {
-        switch (statusCode) {
-          case 401:
-            throw (WebDataException.unauthorized());
-          case 403:
-            throw (WebDataException.forbidden());
-          case 404:
-            throw (WebDataException.notFound());
-          default:
-            throw (WebDataException.unknownHttpError(statusCode));
-        }
-      }
-      setAuthState(true);
-      parseHtml();
-    } catch (e) {
-      error = e.toString();
-    }
+    await fetchHtml();
+    await fetchDatabse();
     update();
   }
 
-  void setAuthState(bool value) {
-    if (value) {
-      authState = AuthState.loggedOn;
-    } else {
-      authState = AuthState.loggedOff;
-    }
-    update();
-  }
+//########################################################################
+//#                           Fetching Data                              #
+//########################################################################
 
-  void parseHtml() {
-    final document = html.parse(htmlData);
-    var elements = document.getElementsByClassName("text_8pt");
-    latestUpdate = parseLatestUpdate(elements[0]);
+  Future<void> fetchHtml() async {
+    final settings = Get.find<LocalData>().settings;
+    final basicAuth = 'Basic ' +
+        base64Encode(utf8.encode("${settings.username}:${settings.password}"));
+    final url = Uri.parse(
+      "https://schule-infoportal.de/infoscreen/?type=student&days=5&news=1&absent=&absent2=1",
+    );
+    final response = await http.get(url, headers: {"authorization": basicAuth});
+
+    final statusCode = response.statusCode;
+    final htmlData = response.body;
+
+    if (htmlData.isEmpty || statusCode == 0) {
+      throw (WebDataException.noData());
+    }
+    if (statusCode >= 226 || statusCode <= 103) {
+      switch (statusCode) {
+        case 401:
+          throw (WebDataException.unauthorized());
+        case 403:
+          throw (WebDataException.forbidden());
+        case 404:
+          throw (WebDataException.notFound());
+        default:
+          throw (WebDataException.unknownHttpError(statusCode));
+      }
+    }
+
+    final document = html.parse(response.body);
+    var elements = document.getElementsByClassName("daily_table");
+    substitutionTables = parseSubstitutions(elements);
     elements = document.getElementsByClassName("ticker-wrap_ende");
-    ticker = parseTickerItems(elements[0]);
+    ticker = parseTicker(elements[0]);
+    elements = document.getElementsByClassName("text_8pt");
+    latestUpdate = parseLatestUpdate(elements[0]);
     var element = document.getElementById("news_container");
     news = parseNews(element);
-    newsInverted = news.reversed.toList();
-    elements = document.getElementsByClassName("daily_table");
-    dailyTables = parseDailyTables(elements);
-    groups = groupDailyTables(dailyTables);
+  }
+
+  Future<void> fetchDatabse() async {
+    final database = FirebaseDatabase.instance.reference();
+    final snapshot = await database.get();
+    schoolLifeItems = await parseSchoolLife(snapshot);
+  }
+
+//########################################################################
+//#                              HTML Parse                              #
+//########################################################################
+
+  List<SubstitutionTable> parseSubstitutions(List<Element> elements) {
+    List<SubstitutionTable> list = [];
+
+    for (var element in elements) {
+      List<SubstitutionTableRow> rows = [];
+      final rowElements = element.getElementsByTagName("tr");
+      for (int i = 3; i < rowElements.length; i++) {
+        final fields = rowElements[i].getElementsByTagName("td");
+        if (fields.length == 6) {
+          rows.add(SubstitutionTableRow(
+            course: fields[0].text.isNotEmpty ? fields[0].text : "",
+            period: fields[1].text.isNotEmpty ? fields[1].text : "",
+            absent: fields[2].text.isNotEmpty ? fields[2].text : "",
+            substitute: fields[3].text.isNotEmpty ? fields[3].text : "",
+            room: fields[4].text.isNotEmpty ? fields[4].text : "",
+            info: fields[5].text.isNotEmpty ? fields[5].text : "",
+          ));
+        }
+      }
+      list.add(SubstitutionTable(
+        rows: rows,
+        date: parseDate(rowElements[0].text) ?? DateTime(2000),
+      ));
+    }
+    return list;
+  }
+
+  List<NewsItem> parseNews(Element? element) {
+    List<NewsItem> newsItems = [];
+    if (element != null) {
+      final news = element.getElementsByTagName("div");
+      newsItems = news.map((item) {
+        List<Element> headlines = item.getElementsByTagName("p");
+        Element content = item.getElementsByTagName("span")[0];
+        return NewsItem(
+          headline: headlines[0].text.trim(),
+          subheadline: headlines.length > 1 ? headlines[1].text.trim() : "",
+          content:
+              content.text.isNotEmpty ? formatContent(content.innerHtml) : "",
+        );
+      }).toList();
+    }
+    return newsItems;
+  }
+
+  String parseTicker(Element element) {
+    List<Element> items = element.getElementsByClassName("ticker__item");
+    String ticker = "";
+    items.forEach((element) {
+      ticker = ticker + (element.text.trim()) + ' ';
+    });
+    return ticker;
   }
 
   String parseLatestUpdate(Element element) {
     String text = element.text;
     RegExp regex = RegExp(
-      r"Letzte\sAktualisierung:\s([0-9]+(\.[0-9]+)+)\s([0-9]+(:[0-9]+)+)",
-    );
+        r"Letzte\sAktualisierung:\s([0-9]+(\.[0-9]+)+)\s([0-9]+(:[0-9]+)+)");
     RegExpMatch? match = regex.firstMatch(text);
     return match != null ? text.substring(match.start, match.end) : "";
   }
 
-  String parseTickerItems(Element element) {
-    List<Element> items = element.getElementsByClassName("ticker__item");
-    String string = "";
-    items.forEach((element) {
-      string = string + (element.text.trim()) + ' ';
-    });
-    return string;
-  }
+//########################################################################
+//#                          Parse Database                              #
+//########################################################################
 
-  List<List<String>> parseNews(Element? element) {
-    if (element != null) {
-      final newsContainer = element.getElementsByTagName("div");
-      return newsContainer.map((e) {
-        return parseNewsList(e);
-      }).toList();
-    } else {
-      return [];
+  Future<List<SchoolLifeItem>> parseSchoolLife(DataSnapshot data) async {
+    final content = data.value;
+
+    List<SchoolLifeItem> list = [];
+    if (content is Map) {
+      final schoolLife = content["schoolLife"];
+      schoolLife.forEach((key, value) {
+        final item = Map<String, dynamic>.from(value);
+        list.add(SchoolLifeItem.fromJson(item));
+      });
+      list.sort((a, b) {
+        return b.datetime.millisecondsSinceEpoch
+            .compareTo(a.datetime.millisecondsSinceEpoch);
+      });
     }
+    return list;
   }
 
-  List<String> parseNewsList(Element element) {
-    List<Element> headlines = element.getElementsByTagName("p");
-    Element content = element.getElementsByTagName("span")[0];
-    String cleanContent = removeHtmlTags(content.innerHtml);
-    return [
-      ...headlines.map((e) => e.text),
-      cleanContent,
-    ];
-  }
+//########################################################################
+//#                           String format                              #
+//########################################################################
 
-  List<List<List<String>>> parseDailyTables(List<Element> elements) {
-    return elements.map((e) => parseDailyTable(e)).toList();
-  }
-
-  List<List<String>> parseDailyTable(Element element) {
-    List<Element> rows = element.getElementsByTagName("tr");
-    List<List<String>> content = rows.map((e) {
-      List<Element> fields = e.getElementsByTagName("td");
-      return fields.map((ee) {
-        return ee.text.isEmpty ? "" : ee.text;
-      }).toList();
-    }).toList();
-    return content;
-  }
-
-  List<List<List<int>>> groupDailyTables(List<List<List<String>>> tables) {
-    List<List<List<int>>> grouped = [];
-    tables.forEach((element) {
-      int groupIndex = 0;
-      List<List<int>> groups = [];
-      for (int i = 3; i < element.length; i++) {
-        if (element[i].first == String.fromCharCode(160) && groups.isNotEmpty) {
-          groups[groupIndex].add(i);
-        } else {
-          groups.add([i]);
-          groupIndex = groups.length - 1;
-        }
+  String formatContent(String text) {
+    if (text.isNotEmpty) {
+      text = text
+          .replaceAll("<br>", "\n")
+          .replaceAll("<br />", "\n")
+          .replaceAll("&gt;", ">")
+          .replaceAll("&lt;", "<")
+          .replaceAll("&quot;", "\"")
+          .replaceAll("&amp;", "&")
+          .replaceAll("&nbsp;", "")
+          .replaceAll("\n\n---\n\n", "\n---\n")
+          .trim();
+      if (text.isNotEmpty &&
+          text.substring(text.length - 3, text.length) == "---") {
+        text = text.substring(0, text.length - 3).trim();
       }
-      grouped.add(groups);
-    });
-    return grouped;
+    }
+    return text;
   }
+}
 
-  String removeHtmlTags(String raw) {
-    String clean = raw
-        .replaceAll("<br>", "\n")
-        .replaceAll("<br />", "\n")
-        .replaceAll("&gt;", ">")
-        .replaceAll("&lt;", "<")
-        .replaceAll("&quot;", "\"")
-        .replaceAll("&amp;", "&")
-        .replaceAll("&nbsp;", "")
-        .trim();
-    return clean;
+DateTime? parseDate(String text) {
+  RegExp regex = RegExp(r"\d\d\.\d\d\.\d\d\d\d");
+  final match = regex.firstMatch(text);
+  if (match != null) {
+    final dateString = text.substring(match.start, match.end);
+    final formatter = DateFormat(r"d.M.y");
+    return formatter.parse(dateString);
   }
 }

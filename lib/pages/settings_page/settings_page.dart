@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 
 import './settings_page_controller.dart';
-import '../../widgets/settings_tile.dart';
+import '../../widgets/settings_ui/settings_tile.dart';
 
 class SettingsPage extends StatelessWidget {
   static const route = "/settings";
@@ -17,41 +17,47 @@ class SettingsPage extends StatelessWidget {
         title: Text("settings".tr),
       ),
       body: SafeArea(
+        bottom: false,
         child: GetBuilder<SettingsPageController>(builder: (controller) {
-          return Padding(
+          return ListView(
             padding: const EdgeInsets.only(top: 5),
-            child: Column(
-              children: [
-                SettingsTile(
-                  icon: const Icon(Icons.filter_list),
-                  label: "filters".tr,
-                  onTap: controller.onTapFilters,
-                ),
-                SettingsTile(
-                  icon: const Icon(Icons.report_problem),
-                  label: "report_a_bug".tr,
-                  onTap: () {},
-                ),
-                SettingsTile(
-                  icon: const Icon(FontAwesome5.github_square),
-                  label: "github".tr,
-                  onTap: () {},
-                ),
-                SettingsSwitch(
-                  label: "gender_language".tr,
-                  value: false,
-                  onChanged: controller.genderLanguage,
-                ),
-                const SizedBox(height: 5),
-                ElevatedButton(
+            children: [
+              SettingsTile(
+                icon: const Icon(Icons.edit),
+                label: "personalization".tr,
+                onTap: controller.onTapPersonalization,
+              ),
+              SettingsTile(
+                icon: const Icon(Icons.filter_list),
+                label: "filters".tr,
+                onTap: controller.onTapFilters,
+              ),
+              SettingsTile(
+                icon: const Icon(Icons.notifications),
+                label: "notifications".tr,
+                onTap: () {},
+              ),
+              SettingsTile(
+                icon: const Icon(Icons.report_problem),
+                label: "report_a_bug".tr,
+                onTap: () {},
+              ),
+              SettingsTile(
+                icon: const Icon(FontAwesome5.github_square),
+                label: "github".tr,
+                onTap: () {},
+              ),
+              const SizedBox(height: 5),
+              Center(
+                child: ElevatedButton(
                   onPressed: controller.logout,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text("logout".tr),
                   ),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           );
         }),
       ),
