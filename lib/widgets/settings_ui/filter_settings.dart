@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/local_data.dart';
@@ -90,7 +91,10 @@ class _FilterSwitchState extends State<FilterSwitch> {
     return MaterialButton(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       padding: const EdgeInsets.only(left: 25),
-      onPressed: toggle,
+      onPressed: () {
+        HapticFeedback.lightImpact();
+        toggle();
+      },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
