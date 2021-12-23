@@ -28,7 +28,7 @@ class NewsContainer extends StatelessWidget {
 
     return Container(
       constraints: const BoxConstraints(maxWidth: 700),
-      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       padding: const EdgeInsets.symmetric(vertical: 20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),

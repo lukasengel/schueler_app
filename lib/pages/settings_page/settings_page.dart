@@ -45,7 +45,7 @@ class SettingsPage extends StatelessWidget {
               SettingsTile(
                 icon: const Icon(FontAwesome5.github_square),
                 label: "github".tr,
-                onTap: () {},
+                onTap: controller.onTapGithub,
               ),
               const SizedBox(height: 5),
               Center(

@@ -181,7 +181,7 @@ class TableContainer extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            margin: const EdgeInsets.all(10),
+            margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
             padding: const EdgeInsets.only(top: 20),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),

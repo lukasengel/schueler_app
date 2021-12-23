@@ -76,23 +76,29 @@ class SchooLifeContainer extends StatelessWidget {
             children: [
               Container(
                 constraints: const BoxConstraints(maxHeight: 500),
-                child: CachedNetworkImage(
-                  width: double.infinity,
-                  imageUrl: item.imageUrl,
-                  fit: BoxFit.fitWidth,
-                  placeholder: (context, url) => SizedBox(
+                child: ClipRRect(
+                  borderRadius:
+                      const BorderRadius.vertical(top: Radius.circular(15)),
+                  child: CachedNetworkImage(
                     width: double.infinity,
-                    height: 200,
-                    child: Center(
-                      child:
-                          SpinKitThreeBounce(color: context.theme.primaryColor),
+                    imageUrl: item.imageUrl,
+                    fit: BoxFit.fitWidth,
+                    placeholder: (context, url) => SizedBox(
+                      width: double.infinity,
+                      height: 200,
+                      child: Center(
+                        child: SpinKitThreeBounce(
+                            color: context.theme.primaryColor),
+                      ),
                     ),
                   ),
                 ),
               ),
               Container(
                 padding: const EdgeInsets.all(10),
-                color: Colors.white.withOpacity(0.5),
+                color: item.dark
+                    ? Colors.black.withOpacity(0.4)
+                    : Colors.white.withOpacity(0.4),
                 child: Text(
                   item.header.toUpperCase(),
                   maxLines: 3,
@@ -194,8 +200,9 @@ class SchoolLifeBaseContainer extends StatelessWidget {
       onPressed: item.hyperlink.isNotEmpty ? openUrl : null,
       child: Container(
         constraints: const BoxConstraints(maxWidth: 500),
-        margin: const EdgeInsets.symmetric(vertical: 5),
+        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
         decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),

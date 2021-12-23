@@ -22,6 +22,7 @@ String stringFromType(ItemType type) {
 
 class SchoolLifeItem {
   String header;
+  bool dark;
   ItemType type;
   String content;
   String imageUrl;
@@ -31,6 +32,7 @@ class SchoolLifeItem {
 
   SchoolLifeItem({
     required this.header,
+    required this.dark,
     required this.type,
     required this.content,
     required this.imageUrl,
@@ -46,6 +48,7 @@ class SchoolLifeItem {
       hyperlink:
           json.containsKey("hyperlink") ? json["hyperlink"] as String : "",
       imageUrl: json.containsKey("imageUrl") ? json["imageUrl"] as String : "",
+      dark: json.containsKey("dark") ? json["dark"] as bool : false,
       type: typeFromString(json["type"] as String),
       datetime: DateTime.parse(json["datetime"]),
       evenTime: json.containsKey("eventTime")

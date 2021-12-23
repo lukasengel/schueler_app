@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
 import './settings_subpages/personalization_page.dart';
 import './settings_subpages/filters_page.dart';
@@ -32,5 +33,9 @@ class SettingsPageController extends GetxController {
 
   void onTapPersonalization() async {
     Get.toNamed(PersonalizationPage.route);
+  }
+
+  void onTapGithub() async {
+    await url_launcher.launch("https://github.com/lukasengel/schueler_app");
   }
 }

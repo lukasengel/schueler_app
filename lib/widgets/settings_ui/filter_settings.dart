@@ -18,7 +18,7 @@ class _GradeFilterSettingsState extends State<GradeFilterSettings> {
   @override
   Widget build(BuildContext context) {
     return SettingsContainer(
-      padding: const EdgeInsets.fromLTRB(20, 5, 0, 5),
+      padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
       child: Column(
         children: List.generate(8, (index) {
           final grade = (index + 5).toString();
@@ -47,7 +47,7 @@ class _MiscFilterSettingsState extends State<MiscFilterSettings> {
   @override
   Widget build(BuildContext context) {
     return SettingsContainer(
-      padding: const EdgeInsets.fromLTRB(20, 5, 0, 5),
+      padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
       child: Column(
         children: [
           FilterSwitch(filterKey: "i", label: "inst".tr),
@@ -79,33 +79,42 @@ class _FilterSwitchState extends State<FilterSwitch> {
   @override
   Widget build(BuildContext context) {
     final localData = Get.find<LocalData>();
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          widget.label,
-          overflow: TextOverflow.ellipsis,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(right: 15),
-          child: Switch.adaptive(
-            value: !localData.settings.filters.contains(widget.filterKey),
-            onChanged: (_) async {
-              setState(() {});
-              await localData.toggleFilter(widget.filterKey);
-              Get.find<WebData>().update();
-              setState(() {});
-            },
-            activeColor: Theme.of(context).primaryColor,
+
+    void toggle() async {
+      setState(() {});
+      await localData.toggleFilter(widget.filterKey);
+      Get.find<WebData>().update();
+      setState(() {});
+    }
+
+    return MaterialButton(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      padding: const EdgeInsets.only(left: 25),
+      onPressed: toggle,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            widget.label,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.bodyText2,
           ),
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.only(right: 15),
+            child: Switch.adaptive(
+              value: !localData.settings.filters.contains(widget.filterKey),
+              onChanged: (_) => toggle(),
+              activeColor: Theme.of(context).primaryColor,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
 
 const _divider = Divider(
   height: 3,
-  indent: 18,
+  indent: 25,
   color: Colors.grey,
 );
