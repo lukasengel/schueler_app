@@ -47,7 +47,12 @@ class ReportBugPage extends StatelessWidget {
                     autocorrect: false,
                     controller: controller.nameController,
                     textInputAction: TextInputAction.next,
+                    style: TextStyle(
+                      color:
+                          Get.isPlatformDarkMode ? Colors.white : Colors.black,
+                    ),
                     decoration: InputDecoration(
+                      fillColor: Colors.transparent,
                       hintText: "name".tr,
                       border: InputBorder.none,
                       suffixIcon: IconButton(
@@ -67,7 +72,12 @@ class ReportBugPage extends StatelessWidget {
                     autocorrect: false,
                     controller: controller.emailController,
                     textInputAction: TextInputAction.next,
+                    style: TextStyle(
+                      color:
+                          Get.isPlatformDarkMode ? Colors.white : Colors.black,
+                    ),
                     decoration: InputDecoration(
+                      fillColor: Colors.transparent,
                       hintText: "email".tr,
                       border: InputBorder.none,
                     ),
@@ -81,7 +91,11 @@ class ReportBugPage extends StatelessWidget {
                 maxLength: 500,
                 maxLines: 10,
                 controller: controller.messageController,
+                style: TextStyle(
+                  color: Get.isPlatformDarkMode ? Colors.white : Colors.black,
+                ),
                 decoration: InputDecoration(
+                  fillColor: Colors.transparent,
                   hintText: "message".tr,
                   border: InputBorder.none,
                 ),
