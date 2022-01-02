@@ -8,9 +8,9 @@ import './settings_container.dart';
 class SettingsSwitchTile extends StatefulWidget {
   final Future<bool> Function(bool) onChanged;
   final String label;
-  bool value;
+  final bool value;
 
-  SettingsSwitchTile({
+  const SettingsSwitchTile({
     required this.label,
     required this.onChanged,
     required this.value,
@@ -22,13 +22,21 @@ class SettingsSwitchTile extends StatefulWidget {
 }
 
 class _SettingsSwitchTileState extends State<SettingsSwitchTile> {
+  late bool value;
+
+  @override
+  void initState() {
+    value = widget.value;
+    super.initState();
+  }
+
   void onChanged(val) async {
     if (Platform.isIOS) {
       HapticFeedback.lightImpact();
     }
-    setState(() => widget.value = val);
+    setState(() => value = val);
     final input = await widget.onChanged(val);
-    setState(() => widget.value = input);
+    setState(() => value = input);
   }
 
   @override
@@ -46,7 +54,7 @@ class _SettingsSwitchTileState extends State<SettingsSwitchTile> {
           ),
           Switch.adaptive(
             activeColor: Theme.of(context).primaryColor,
-            value: widget.value,
+            value: value,
             onChanged: onChanged,
           ),
         ],

@@ -5,11 +5,11 @@ import './local_data.dart';
 import './web_data.dart';
 import '../models/auth_data_exception.dart';
 
-enum AuthState { LoggedIn, LoggedOff }
+enum AuthState { LOGGED_IN, LOGGED_OFF }
 
 class Authentication extends GetxController {
   String error = "";
-  AuthState authState = AuthState.LoggedOff;
+  AuthState authState = AuthState.LOGGED_OFF;
   late Rx<User?> firebaseUser;
 
   @override
@@ -21,9 +21,9 @@ class Authentication extends GetxController {
 
   void changeState(User? user) {
     if (user == null) {
-      authState = AuthState.LoggedOff;
+      authState = AuthState.LOGGED_OFF;
     } else {
-      authState = AuthState.LoggedIn;
+      authState = AuthState.LOGGED_IN;
     }
     update();
   }
@@ -44,7 +44,7 @@ class Authentication extends GetxController {
       );
       await webData.fetchData();
       ever(firebaseUser, changeState);
-      authState = AuthState.LoggedIn;
+      authState = AuthState.LOGGED_IN;
     } on FirebaseAuthException catch (e) {
       error = e.message ?? e.toString();
     } catch (e) {

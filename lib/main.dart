@@ -15,6 +15,7 @@ import './pages/login_page/login_page.dart';
 import './pages/settings_page/settings_page.dart';
 import './pages/settings_page/settings_subpages/filters_page.dart';
 import './pages/settings_page/settings_subpages/personalization_page.dart';
+import './pages/settings_page/settings_subpages/report_bug_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,11 +51,12 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: PersonalizationPage.route,
           page: () => const PersonalizationPage(),
-        )
+        ),
+        GetPage(name: ReportBugPage.route, page: () => const ReportBugPage())
       ],
       home: GetBuilder<Authentication>(
         builder: (controller) {
-          return controller.authState == AuthState.LoggedIn
+          return controller.authState == AuthState.LOGGED_IN
               ? const HomePage()
               : const LoginPage();
         },

@@ -89,6 +89,7 @@ class LocalData extends GetxController {
     try {
       final prefs = await SharedPreferences.getInstance();
       await prefs.clear();
+      settings = Settings.empty();
     } catch (e) {
       error = e.toString();
     }

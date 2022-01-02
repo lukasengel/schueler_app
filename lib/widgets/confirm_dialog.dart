@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-Future<bool> showConfirmLogoutDialog(String header, String warning) async {
+Future<bool> showConfirmDialog(
+    String header, String warning, String confirm) async {
   if (Platform.isIOS) {
     final input = await showCupertinoModalPopup(
         context: Get.context!,
@@ -15,7 +16,7 @@ Future<bool> showConfirmLogoutDialog(String header, String warning) async {
             actions: [
               CupertinoActionSheetAction(
                 child: Text(
-                  "logout".tr,
+                  confirm,
                   style: const TextStyle(color: CupertinoColors.systemRed),
                 ),
                 onPressed: () => Get.back(result: true),
@@ -41,7 +42,7 @@ Future<bool> showConfirmLogoutDialog(String header, String warning) async {
       buttonPadding: const EdgeInsets.all(20),
       actions: <Widget>[
         TextButton(
-          child: Text("logout".tr.toUpperCase()),
+          child: Text(confirm.toUpperCase()),
           onPressed: () => Get.back(result: true),
         ),
         TextButton(

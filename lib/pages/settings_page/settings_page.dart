@@ -40,7 +40,7 @@ class SettingsPage extends StatelessWidget {
               SettingsTile(
                 icon: const Icon(Icons.report_problem),
                 label: "report_a_bug".tr,
-                onTap: () {},
+                onTap: controller.onTapReportABug,
               ),
               SettingsTile(
                 icon: const Icon(FontAwesome5.github_square),

@@ -11,6 +11,7 @@ import '../models/school_life_item.dart';
 import '../models/substitution_table.dart';
 import '../models/web_data_exception.dart';
 import '../models/news_item.dart';
+import '../models/feedback_item.dart';
 import './local_data.dart';
 
 class WebData extends GetxController {
@@ -65,7 +66,9 @@ class WebData extends GetxController {
     var elements = document.getElementsByClassName("daily_table");
     substitutionTables = parseSubstitutions(elements);
     elements = document.getElementsByClassName("ticker-wrap_ende");
-    ticker = parseTicker(elements[0]);
+    if (elements.isNotEmpty) {
+      ticker = parseTicker(elements[0]);
+    }
     elements = document.getElementsByClassName("text_8pt");
     latestUpdate = parseLatestUpdate(elements[0]);
     var element = document.getElementById("news_container");
@@ -75,7 +78,7 @@ class WebData extends GetxController {
   Future<void> fetchDatabse() async {
     final database = FirebaseDatabase.instance.reference();
     final snapshot = await database.get();
-    schoolLifeItems = await parseSchoolLife(snapshot);
+    schoolLifeItems = parseSchoolLife(snapshot);
   }
 
 //########################################################################
@@ -130,9 +133,12 @@ class WebData extends GetxController {
   String parseTicker(Element element) {
     List<Element> items = element.getElementsByClassName("ticker__item");
     String ticker = "";
-    items.forEach((element) {
-      ticker = ticker + (element.text.trim()) + ' ';
-    });
+    if (items.isNotEmpty) {
+      items.forEach((element) {
+        ticker = ticker + (element.text.trim()) + ' ';
+      });
+    }
+
     return ticker;
   }
 
@@ -148,7 +154,7 @@ class WebData extends GetxController {
 //#                          Parse Database                              #
 //########################################################################
 
-  Future<List<SchoolLifeItem>> parseSchoolLife(DataSnapshot data) async {
+  List<SchoolLifeItem> parseSchoolLife(DataSnapshot data) {
     final content = data.value;
 
     List<SchoolLifeItem> list = [];
@@ -188,6 +194,19 @@ class WebData extends GetxController {
       }
     }
     return text;
+  }
+
+  Future<void> submitFeedback(FeedbackItem item) async {
+    final database = FirebaseDatabase.instance.reference();
+    final feedback = database.child("feedback");
+    final hash = DateTime.now().toString().hashCode.toString();
+    return feedback.update({
+      hash: {
+        "name": item.name.isEmpty ? null : item.name,
+        "email": item.email.isEmpty ? null : item.email,
+        "message": item.message,
+      }
+    });
   }
 }
 

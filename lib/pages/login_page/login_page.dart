@@ -5,6 +5,10 @@ import 'package:get/get.dart';
 
 import './login_page_controller.dart';
 
+//TODO: Filtermechanismus verbessern, Sonstiges-Filter implementieren
+//TODO: Klassenauswahl-Mechanismus
+//TODO: Benachrichtigungen
+
 class LoginPage extends StatelessWidget {
   static const route = "/login";
   const LoginPage({Key? key}) : super(key: key);
@@ -107,6 +111,8 @@ class LoginPage extends StatelessWidget {
                         child: Column(
                           children: [
                             TextField(
+                              enableSuggestions: false,
+                              autocorrect: false,
                               style: context.textTheme.bodyText1,
                               decoration: InputDecoration(
                                 hintText: "username".tr,
@@ -118,6 +124,8 @@ class LoginPage extends StatelessWidget {
                             const SizedBox(height: 10),
                             Obx(
                               () => TextField(
+                                enableSuggestions: false,
+                                autocorrect: false,
                                 style: context.textTheme.bodyText1,
                                 decoration: InputDecoration(
                                   hintText: "password".tr,
