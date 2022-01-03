@@ -37,9 +37,8 @@ class SubstitutionTab extends StatelessWidget {
                   );
                 },
                 itemCount: controller.webData.substitutionTables.length),
-            Container(
-              margin: const EdgeInsets.only(bottom: 8),
-              padding: const EdgeInsets.all(8),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16),
               child: SmoothPageIndicator(
                 controller: controller.pageController,
                 count: controller.webData.substitutionTables.length,
