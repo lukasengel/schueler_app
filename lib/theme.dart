@@ -22,7 +22,7 @@ class AppTheme {
     inputDecorationTheme: InputDecorationTheme(
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
       focusColor: redAccent,
-      fillColor: Colors.white,
+      fillColor: Colors.grey.shade100,
       filled: true,
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(

@@ -49,7 +49,7 @@
     "logout_warning": "Bei der Abmeldung gehen alle Ihre persönlichen Einstellungen verloren.",
     "name": "Name (optional)",
     "why_name_header": "Verwendung Ihrer Daten",
-    "why_name_message": "Bitte geben Sie Ihren Namen und Ihre E-Mail-Adresse an, damit wir uns bei eventuellen Rückfragen an Sie wenden können.",
+    "why_name_message": "Wenn Sie Ihren Namen und Ihre E-Mail-Adresse angeben, können wir uns bei eventuellen Rückfragen an Sie wenden. Ihre Daten werden verschlüsselt übertragen und nicht an Dritte weitergegeben.",
     "contact_information": "Kontaktinformationen",
     "email":"E-Mail-Adresse (optional)",
     "message":"Nachricht",
@@ -60,5 +60,6 @@
     "confirm_submit":"Übermitteln",
     "discard":"Nachricht verwerfen?",
     "discard_message":"Dies kann nicht rückgängig gemacht werden.",
-    "confirm_discard":"Verwerfen"
+    "confirm_discard":"Verwerfen",
+    "no_news":"(Noch) Keine Nachrichten verfügbar."
 }

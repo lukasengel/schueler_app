@@ -22,13 +22,12 @@ class FiltersPage extends StatelessWidget {
       body: SafeArea(
         bottom: false,
         child: ListView(
-          padding: const EdgeInsets.symmetric(vertical: 5),
+          padding: const EdgeInsets.fromLTRB(0, 5, 0, 25),
           children: [
             SettingsText(text: "choose_grade".tr),
             const GradeFilterSettings(),
             SettingsText(text: "misc".tr),
             const MiscFilterSettings(),
-            const SizedBox(height: 65),
           ],
         ),
       ),

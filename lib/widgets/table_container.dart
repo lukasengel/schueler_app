@@ -150,14 +150,12 @@ class TableContainer extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(
-              Icons.watch_later_outlined,
-              size: 100,
-            ),
+            const Icon(Icons.update, size: 100),
             Text(
               DateFormat.yMMMMEEEEd(Get.locale.toString()).format(item.date),
               style: context.textTheme.headline4,
             ),
+            const SizedBox(height: 10),
             Text(
               "no_data".tr,
               style: context.textTheme.bodyText1,
@@ -178,6 +176,7 @@ class TableContainer extends StatelessWidget {
 //########################################################################
 
     return SliverToBoxAdapter(
+      //TODO: SliverList
       child: Column(
         children: [
           Container(
@@ -226,6 +225,9 @@ class TableContainer extends StatelessWidget {
           Text(
             latestUpdate,
             style: context.textTheme.bodyText1,
+          ),
+          const SizedBox(
+            height: 65,
           ),
         ],
       ),

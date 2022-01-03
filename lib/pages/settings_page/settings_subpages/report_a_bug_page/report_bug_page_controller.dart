@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../controllers/web_data.dart';
-import '../../../widgets/dynamic_message_dialog.dart';
-import '../../../widgets/confirm_dialog.dart';
-import '../../../models/feedback_item.dart';
+import '../../../../controllers/web_data.dart';
+import '../../../../widgets/dynamic_message_dialog.dart';
+import '../../../../widgets/confirm_dialog.dart';
+import '../../../../models/feedback_item.dart';
 
 class ReportBugPageController extends GetxController {
   RxBool valid = false.obs;
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final messageController = TextEditingController();
+  final node = FocusNode();
+
+  @override
+  void dispose() {
+    node.dispose();
+    super.dispose();
+  }
 
   void onPressedHelp() {
     showDynamicMessageDialog(

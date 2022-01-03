@@ -20,7 +20,7 @@ class SettingsPage extends StatelessWidget {
         bottom: false,
         child: GetBuilder<SettingsPageController>(builder: (controller) {
           return ListView(
-            padding: const EdgeInsets.only(top: 5),
+            padding: const EdgeInsets.fromLTRB(0, 5, 0, 25),
             children: [
               SettingsTile(
                 icon: const Icon(Icons.edit),

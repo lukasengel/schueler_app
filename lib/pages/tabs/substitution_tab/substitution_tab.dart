@@ -33,11 +33,6 @@ class SubstitutionTab extends StatelessWidget {
                           latestUpdate: webData.latestUpdate,
                         );
                       }),
-                      const SliverToBoxAdapter(
-                        child: SizedBox(
-                          height: 65,
-                        ),
-                      ),
                     ],
                   );
                 },
@@ -45,16 +40,15 @@ class SubstitutionTab extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(bottom: 8),
               padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Get.theme.cardColor,
-                borderRadius: BorderRadius.circular(15),
-              ),
               child: SmoothPageIndicator(
                 controller: controller.pageController,
                 count: controller.webData.substitutionTables.length,
-                effect: ScrollingDotsEffect(
-                  activeDotColor: Get.theme.primaryColor,
-                  dotColor: context.theme.primaryColor.withOpacity(0.3),
+                effect: ColorTransitionEffect(
+                  spacing: 12,
+                  dotHeight: 12,
+                  dotWidth: 12,
+                  activeDotColor: Colors.grey.shade600.withOpacity(0.8),
+                  dotColor: Colors.grey.shade400.withOpacity(0.8),
                 ),
                 onDotClicked: (index) {
                   controller.pageController.jumpToPage(index);

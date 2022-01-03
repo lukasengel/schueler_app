@@ -3,7 +3,7 @@ import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
 import './settings_subpages/personalization_page.dart';
 import './settings_subpages/filters_page.dart';
-import './settings_subpages/report_bug_page.dart';
+import './settings_subpages/report_a_bug_page/report_bug_page.dart';
 
 import '../../controllers/local_data.dart';
 import '../../controllers/web_data.dart';

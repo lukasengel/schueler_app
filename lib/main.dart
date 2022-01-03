@@ -15,7 +15,7 @@ import './pages/login_page/login_page.dart';
 import './pages/settings_page/settings_page.dart';
 import './pages/settings_page/settings_subpages/filters_page.dart';
 import './pages/settings_page/settings_subpages/personalization_page.dart';
-import './pages/settings_page/settings_subpages/report_bug_page.dart';
+import './pages/settings_page/settings_subpages/report_a_bug_page/report_bug_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
