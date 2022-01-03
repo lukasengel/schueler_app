@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -92,7 +94,9 @@ class _FilterSwitchState extends State<FilterSwitch> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       padding: const EdgeInsets.only(left: 25),
       onPressed: () {
-        HapticFeedback.lightImpact();
+        if (Platform.isIOS) {
+          HapticFeedback.lightImpact();
+        }
         toggle();
       },
       child: Row(

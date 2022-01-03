@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import '../../../../controllers/web_data.dart';
 import '../../../../widgets/dynamic_message_dialog.dart';
@@ -41,6 +42,12 @@ class ReportBugPageController extends GetxController {
           name: nameController.text.trim(),
           email: emailController.text.trim(),
           message: messageController.text.trim(),
+        ));
+      } on FirebaseException catch (e) {
+        ScaffoldMessenger.of(Get.context!).clearSnackBars();
+        ScaffoldMessenger.of(Get.context!).showSnackBar(SnackBar(
+          content: Text("error".tr.toUpperCase() + ": " + e.message!),
+          duration: const Duration(seconds: 5),
         ));
       } catch (e) {
         ScaffoldMessenger.of(Get.context!).clearSnackBars();
