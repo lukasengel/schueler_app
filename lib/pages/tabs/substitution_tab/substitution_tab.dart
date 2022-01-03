@@ -46,8 +46,8 @@ class SubstitutionTab extends StatelessWidget {
                   spacing: 12,
                   dotHeight: 12,
                   dotWidth: 12,
-                  activeDotColor: Colors.grey.shade600.withOpacity(0.8),
-                  dotColor: Colors.grey.shade400.withOpacity(0.8),
+                  activeDotColor: context.theme.indicatorColor.withOpacity(0.9),
+                  dotColor: Colors.grey.shade400.withOpacity(0.7),
                 ),
                 onDotClicked: (index) {
                   controller.pageController.jumpToPage(index);

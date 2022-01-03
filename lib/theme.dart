@@ -85,6 +85,7 @@ class AppTheme {
       ),
     ),
     errorColor: Colors.red[900],
+    indicatorColor: Colors.grey.shade600,
   );
 
   static ThemeData dark = ThemeData(
@@ -184,6 +185,7 @@ class AppTheme {
           color: Colors.white,
           fontSize: 16,
         )),
+    indicatorColor: Colors.white,
   );
 }
 
