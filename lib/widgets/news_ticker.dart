@@ -29,7 +29,7 @@ class PersistentHeader extends SliverPersistentHeaderDelegate {
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 5),
+      margin: const EdgeInsets.only(top: 5),
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
@@ -46,10 +46,10 @@ class PersistentHeader extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get maxExtent => 56.0;
+  double get maxExtent => 51.0;
 
   @override
-  double get minExtent => 56.0;
+  double get minExtent => 51.0;
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {

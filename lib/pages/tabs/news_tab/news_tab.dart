@@ -43,7 +43,7 @@ class NewsTab extends StatelessWidget {
               if (controller.news.isNotEmpty)
                 SliverSafeArea(
                   sliver: SliverPadding(
-                    padding: const EdgeInsets.only(bottom: 5),
+                    padding: const EdgeInsets.symmetric(vertical: 5),
                     sliver: GetBuilder<LocalData>(builder: (localData) {
                       return SliverList(
                         delegate: SliverChildListDelegate([

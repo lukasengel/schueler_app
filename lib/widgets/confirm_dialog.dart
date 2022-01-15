@@ -42,12 +42,12 @@ Future<bool> showConfirmDialog(
       buttonPadding: const EdgeInsets.all(20),
       actions: <Widget>[
         TextButton(
-          child: Text(confirm.toUpperCase()),
-          onPressed: () => Get.back(result: true),
-        ),
-        TextButton(
           child: Text("cancel".tr.toUpperCase()),
           onPressed: Get.back,
+        ),
+        TextButton(
+          child: Text(confirm.toUpperCase()),
+          onPressed: () => Get.back(result: true),
         ),
       ],
     ),

@@ -175,10 +175,9 @@ class TableContainer extends StatelessWidget {
 //#                                 Table                                #
 //########################################################################
 
-    return SliverToBoxAdapter(
-      //TODO: SliverList
-      child: Column(
-        children: [
+    return SliverList(
+      delegate: SliverChildListDelegate(
+        [
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
             padding: const EdgeInsets.only(top: 20),

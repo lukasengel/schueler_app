@@ -38,16 +38,16 @@ class SubstitutionTab extends StatelessWidget {
                 },
                 itemCount: controller.webData.substitutionTables.length),
             Padding(
-              padding: const EdgeInsets.only(bottom: 16),
+              padding: const EdgeInsets.only(bottom: 12),
               child: SmoothPageIndicator(
                 controller: controller.pageController,
                 count: controller.webData.substitutionTables.length,
                 effect: ColorTransitionEffect(
                   spacing: 12,
-                  dotHeight: 12,
-                  dotWidth: 12,
-                  activeDotColor: context.theme.indicatorColor.withOpacity(0.9),
-                  dotColor: Colors.grey.shade400.withOpacity(0.7),
+                  dotHeight: 5,
+                  dotWidth: 20,
+                  activeDotColor: context.theme.primaryColor,
+                  dotColor: context.theme.indicatorColor,
                 ),
                 onDotClicked: (index) {
                   controller.pageController.jumpToPage(index);
