@@ -17,10 +17,10 @@ class SettingsTile extends StatelessWidget {
       onTap: onTap,
       child: Row(
         children: [
-          Expanded(child: icon),
+          icon,
           const SizedBox(width: 10),
-          Expanded(flex: 8, child: Text(label)),
-          const Expanded(child: Icon(Icons.chevron_right, color: Colors.grey)),
+          Expanded(child: Text(label)),
+          const Icon(Icons.chevron_right, color: Colors.grey),
         ],
       ),
     );

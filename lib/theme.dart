@@ -14,16 +14,13 @@ class AppTheme {
       elevation: 1,
       centerTitle: false,
       titleTextStyle: TextStyle(
-        // color: redAccent,
         fontFamily: "Montserrat",
         fontSize: 25,
       ),
     ),
-    inputDecorationTheme: InputDecorationTheme(
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
+    inputDecorationTheme: const InputDecorationTheme(
+      border: InputBorder.none,
       focusColor: redAccent,
-      fillColor: Colors.grey.shade100,
-      filled: true,
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Colors.white,
@@ -43,6 +40,7 @@ class AppTheme {
     ),
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
+        splashFactory: InkRipple.splashFactory,
         shape: MaterialStateProperty.resolveWith(
           (_) => RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
@@ -65,7 +63,7 @@ class AppTheme {
       ),
       headline6: const TextStyle(
         color: redAccent,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w500,
         fontSize: 24,
         letterSpacing: 1,
       ),
@@ -73,7 +71,11 @@ class AppTheme {
       //#     News Container     #
       //##########################
       headline4: const TextStyle(
-          fontSize: 25, color: Colors.black, fontFamily: "LobsterTwo"),
+        fontSize: 22,
+        color: Colors.black,
+        fontFamily: "Montserrat",
+        letterSpacing: 1,
+      ),
       bodyText2: const TextStyle(
         color: Colors.black,
         fontSize: 18,
@@ -110,14 +112,9 @@ class AppTheme {
     iconTheme: const IconThemeData(
       color: Colors.white,
     ),
-    inputDecorationTheme: InputDecorationTheme(
+    inputDecorationTheme: const InputDecorationTheme(
       focusColor: redAccent,
-      suffixStyle: const TextStyle(color: Colors.white),
-      fillColor: Colors.grey[800],
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-      filled: true,
+      border: InputBorder.none,
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: Colors.grey[800],
@@ -163,7 +160,7 @@ class AppTheme {
         ),
         headline6: TextStyle(
           color: redAccent,
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w400,
           fontSize: 24,
           letterSpacing: 1,
         ),

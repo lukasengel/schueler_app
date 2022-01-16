@@ -34,12 +34,15 @@ class TableContainer extends StatelessWidget {
   bool showGroup(String groupTitle) {
     final settings = Get.find<LocalData>().settings;
     bool show = true;
-    settings.filters.forEach((element) {
+    bool match = false;
+    for (var element in settings.filters.keys) {
       if (groupTitle.startsWith(element)) {
-        show = false;
+        match = true;
+        show = settings.filters[element]!;
+        break;
       }
-    });
-    return show;
+    }
+    return match ? show : settings.filters["misc"];
   }
 
   TableRow get getHeaderRow {
@@ -210,8 +213,8 @@ class TableContainer extends StatelessWidget {
                     1: FlexColumnWidth(2.5),
                     2: FlexColumnWidth(4),
                     3: FlexColumnWidth(4),
-                    4: FlexColumnWidth(4),
-                    5: FlexColumnWidth(7),
+                    4: FlexColumnWidth(3.5),
+                    5: FlexColumnWidth(7.5),
                   },
                   children: [
                     getHeaderRow,
@@ -221,9 +224,11 @@ class TableContainer extends StatelessWidget {
               ],
             ),
           ),
-          Text(
-            latestUpdate,
-            style: context.textTheme.bodyText1,
+          Center(
+            child: Text(
+              latestUpdate,
+              style: context.textTheme.bodyText1,
+            ),
           ),
           const SizedBox(
             height: 65,

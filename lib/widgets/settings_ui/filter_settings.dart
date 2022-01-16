@@ -62,6 +62,8 @@ class _MiscFilterSettingsState extends State<MiscFilterSettings> {
           FilterSwitch(filterKey: "OGTS", label: "ogts".tr),
           _divider,
           FilterSwitch(filterKey: "GGTS", label: "ggts".tr),
+          _divider,
+          FilterSwitch(filterKey: "misc", label: "misc".tr),
         ],
       ),
     );
@@ -110,7 +112,7 @@ class _FilterSwitchState extends State<FilterSwitch> {
           Padding(
             padding: const EdgeInsets.only(right: 15),
             child: Switch.adaptive(
-              value: !localData.settings.filters.contains(widget.filterKey),
+              value: localData.settings.filters[widget.filterKey]!,
               onChanged: (_) => toggle(),
               activeColor: Theme.of(context).primaryColor,
             ),

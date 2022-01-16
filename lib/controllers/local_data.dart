@@ -54,7 +54,8 @@ class LocalData extends GetxController {
         password: prefs.getString("password") ?? "",
         themeColor: prefs.getInt("themeColor") ?? 1,
         reversed: prefs.getBool("reversed") ?? true,
-        filters: prefs.getStringList("filters") ?? [],
+        filters: json
+            .decode(prefs.getString("filters") ?? Settings.defaultFiltersStr),
       );
     } catch (e) {
       throw LocalDataException.settingsParseError(e.toString());
@@ -69,7 +70,7 @@ class LocalData extends GetxController {
       await prefs.setString("password", settings.password);
       await prefs.setInt("themeColor", settings.themeColor);
       await prefs.setBool("reversed", settings.reversed);
-      await prefs.setStringList("filters", settings.filters);
+      await prefs.setString("filters", json.encode(settings.filters));
     } catch (e) {
       error = e.toString();
     }
@@ -77,12 +78,10 @@ class LocalData extends GetxController {
   }
 
   Future<void> toggleFilter(String key) async {
-    if (settings.filters.contains(key)) {
-      settings.filters.remove(key);
-    } else {
-      settings.filters.add(key);
+    if (settings.filters.containsKey(key)) {
+      settings.filters[key] = !settings.filters[key]!;
+      await writeSettings();
     }
-    await writeSettings();
   }
 
   Future<void> clearSettings() async {

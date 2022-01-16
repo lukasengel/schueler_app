@@ -42,7 +42,7 @@ class ReportBugPage extends StatelessWidget {
             children: [
               SettingsText(text: "contact_information".tr),
               SettingsContainer(
-                padding: const EdgeInsets.all(5),
+                padding: const EdgeInsets.fromLTRB(15, 5, 5, 5),
                 child: Column(
                   children: [
                     TextField(
@@ -50,15 +50,11 @@ class ReportBugPage extends StatelessWidget {
                       autocorrect: false,
                       controller: controller.nameController,
                       textInputAction: TextInputAction.next,
-                      style: TextStyle(
-                          color: Get.isPlatformDarkMode
-                              ? Colors.white
-                              : Colors.black),
+                      style:
+                          context.textTheme.bodyText2!.copyWith(fontSize: 16),
                       onSubmitted: (_) => controller.node.requestFocus(),
                       decoration: InputDecoration(
-                        fillColor: Colors.transparent,
                         hintText: "name".tr,
-                        border: InputBorder.none,
                         suffixIcon: IconButton(
                           color: Colors.grey,
                           splashRadius: 20,
@@ -78,11 +74,8 @@ class ReportBugPage extends StatelessWidget {
                       controller: controller.emailController,
                       textInputAction: TextInputAction.next,
                       focusNode: controller.node,
-                      style: TextStyle(
-                        color: Get.isPlatformDarkMode
-                            ? Colors.white
-                            : Colors.black,
-                      ),
+                      style:
+                          context.textTheme.bodyText2!.copyWith(fontSize: 16),
                       decoration: InputDecoration(
                         fillColor: Colors.transparent,
                         hintText: "email".tr,
@@ -98,9 +91,7 @@ class ReportBugPage extends StatelessWidget {
                   maxLength: 500,
                   maxLines: 10,
                   controller: controller.messageController,
-                  style: TextStyle(
-                    color: Get.isPlatformDarkMode ? Colors.white : Colors.black,
-                  ),
+                  style: context.textTheme.bodyText2!.copyWith(fontSize: 16),
                   decoration: InputDecoration(
                     fillColor: Colors.transparent,
                     hintText: "message".tr,

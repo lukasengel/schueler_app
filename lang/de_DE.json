@@ -4,6 +4,7 @@
     "username": "Benutzername",
     "password": "Passwort",
     "login": "Anmelden",
+    "sign_in":"Anmeldung",
     "credentials": "Welche Nutzerdaten brauche ich?",
     "login_help_title": "Hilfe bei der Anmeldung",
     "login_help_content": "Bitte geben Sie die Anmeldedaten des Online-Vertretungsplanes ein. Diese haben Sie Anfang des Schuljahres in einem Elternbrief erhalten.",
