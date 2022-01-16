@@ -171,7 +171,8 @@ class AppTheme {
         headline4: TextStyle(
           fontSize: 25,
           color: Colors.white,
-          fontFamily: "LobsterTwo",
+          fontFamily: "Montserrat",
+          letterSpacing: 1,
         ),
         bodyText2: TextStyle(
           color: Colors.white,

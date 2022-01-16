@@ -7,7 +7,6 @@ import './login_page_controller.dart';
 
 //TODO: Klassenauswahl-Mechanismus
 //TODO: Benachrichtigungen
-//TODO: Neue Anmeldeseite
 
 class LoginPage extends StatelessWidget {
   static const route = "/login";
