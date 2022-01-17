@@ -206,7 +206,7 @@ class LoginPage extends StatelessWidget {
                             style: Get.textTheme.headline2,
                             textAlign: TextAlign.center,
                             overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
+                            maxLines: 1,
                           ),
                         ],
                       ),

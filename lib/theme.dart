@@ -55,7 +55,7 @@ class AppTheme {
         fontFamily: "LobsterTwo",
       ),
       headline2: const TextStyle(
-        fontSize: 16,
+        fontSize: 14,
       ),
       headline3: TextStyle(
         fontSize: 22,
@@ -71,10 +71,9 @@ class AppTheme {
       //#     News Container     #
       //##########################
       headline4: const TextStyle(
-        fontSize: 22,
+        fontSize: 21,
         color: Colors.black,
-        fontFamily: "Montserrat",
-        letterSpacing: 1,
+        letterSpacing: 0.8,
       ),
       bodyText2: const TextStyle(
         color: Colors.black,
@@ -152,7 +151,7 @@ class AppTheme {
         ),
         headline2: TextStyle(
           color: Colors.grey,
-          fontSize: 16,
+          fontSize: 14,
         ),
         headline3: TextStyle(
           fontSize: 22,
@@ -169,10 +168,9 @@ class AppTheme {
         //#     News Container     #
         //##########################
         headline4: TextStyle(
-          fontSize: 25,
+          fontSize: 21,
           color: Colors.white,
-          fontFamily: "Montserrat",
-          letterSpacing: 1,
+          letterSpacing: 0.8,
         ),
         bodyText2: TextStyle(
           color: Colors.white,
