@@ -47,6 +47,8 @@ class NewsContainer extends StatelessWidget {
           Text(
             insertDayOfWeek(item.headline),
             style: Theme.of(context).textTheme.headline4,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
           Divider(
             color: Get.textTheme.bodyText2!.color,

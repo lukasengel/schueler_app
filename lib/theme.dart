@@ -67,9 +67,6 @@ class AppTheme {
         fontSize: 24,
         letterSpacing: 1,
       ),
-      //##########################
-      //#     News Container     #
-      //##########################
       headline4: const TextStyle(
         fontSize: 21,
         color: Colors.black,
@@ -184,8 +181,6 @@ class AppTheme {
     indicatorColor: Colors.white,
   );
 }
-
-//const redAccent = Colors.indigo;
 
 const redAccent = MaterialColor(0xfffa2244, {
   50: Color(0xfffa2244),

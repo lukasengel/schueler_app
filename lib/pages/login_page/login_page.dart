@@ -7,6 +7,7 @@ import './login_page_controller.dart';
 
 //TODO: Klassenauswahl-Mechanismus
 //TODO: Benachrichtigungen
+//TODO: Lehrerkürzel
 
 class LoginPage extends StatelessWidget {
   static const route = "/login";
@@ -40,9 +41,13 @@ class LoginPage extends StatelessWidget {
                     children: [
                       Expanded(
                         flex: 2,
-                        child: Image.asset(
-                          "assets/images/logo.png",
-                          fit: BoxFit.scaleDown,
+                        child: CircleAvatar(
+                          backgroundColor: Get.theme.primaryColor,
+                          radius: double.infinity,
+                          child: Image.asset(
+                            "assets/images/logo_light.png",
+                            fit: BoxFit.scaleDown,
+                          ),
                         ),
                       ),
                       Expanded(

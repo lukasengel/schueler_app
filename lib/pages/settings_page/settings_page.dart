@@ -4,6 +4,7 @@ import 'package:fluttericon/font_awesome5_icons.dart';
 
 import './settings_page_controller.dart';
 import '../../widgets/settings_ui/settings_tile.dart';
+import '../../widgets/settings_ui/copyright_notice.dart';
 
 class SettingsPage extends StatelessWidget {
   static const route = "/settings";
@@ -56,7 +57,8 @@ class SettingsPage extends StatelessWidget {
                     child: Text("logout".tr),
                   ),
                 ),
-              )
+              ),
+              const CopyrightNotice(),
             ],
           );
         }),

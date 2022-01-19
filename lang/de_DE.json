@@ -62,5 +62,10 @@
     "discard":"Nachricht verwerfen?",
     "discard_message":"Dies kann nicht rückgängig gemacht werden.",
     "confirm_discard":"Verwerfen",
-    "no_news":"(Noch) Keine Nachrichten verfügbar."
+    "no_news":"(Noch) Keine Nachrichten verfügbar.",
+    "logo_artist":"Logo-Gestaltung",
+    "nika":"Nika Peskova",
+    "developer":"Entwicklung",
+    "lukas":"Lukas Engel",
+    "license":"2022, Quelloffen: MIT-Lizenz"
 }
