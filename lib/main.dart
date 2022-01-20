@@ -16,6 +16,7 @@ import './pages/settings_page/settings_page.dart';
 import './pages/settings_page/settings_subpages/filters_page.dart';
 import './pages/settings_page/settings_subpages/personalization_page.dart';
 import './pages/settings_page/settings_subpages/report_a_bug_page/report_bug_page.dart';
+import 'pages/settings_page/settings_subpages/abbreviations_page/abbreviations_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,7 +53,11 @@ class MyApp extends StatelessWidget {
           name: PersonalizationPage.route,
           page: () => const PersonalizationPage(),
         ),
-        GetPage(name: ReportBugPage.route, page: () => const ReportBugPage())
+        GetPage(name: ReportBugPage.route, page: () => const ReportBugPage()),
+        GetPage(
+          name: AbbreviationsPage.route,
+          page: () => const AbbreviationsPage(),
+        ),
       ],
       home: GetBuilder<Authentication>(
         builder: (controller) {

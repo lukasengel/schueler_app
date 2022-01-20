@@ -1,8 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../pages/settings_page/settings_subpages/abbreviations_page/abbreviations_page.dart';
+
 import '../controllers/local_data.dart';
+import '../controllers/web_data.dart';
+
 import '../models/substitution_table.dart';
 
 class TableContainer extends StatelessWidget {
@@ -79,6 +84,32 @@ class TableContainer extends StatelessWidget {
 
     List<TableRow> getRows() {
       final lastVisibleGroup = indexOfLastVisibleGroup();
+      final teachers = Get.find<WebData>().teachers;
+
+      void lookup(String substitute) {
+        String one = "";
+        String two = "no_information".tr;
+
+        if (substitute.length >= 3) {
+          final content = substitute.substring(0, 3);
+          final index =
+              teachers.where((element) => element.abbreviation == content);
+          if (index.isNotEmpty) {
+            one = index.first.abbreviation;
+            two = index.first.name;
+          }
+        }
+
+        ScaffoldMessenger.of(context).clearSnackBars();
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: one.isEmpty ? Text(two) : Text(one + ": " + two),
+            duration: const Duration(seconds: 5),
+            action: SnackBarAction(
+              label: "Alle anzeigen",
+              onPressed: () => Get.toNamed(AbbreviationsPage.route),
+            )));
+      }
+
       List<TableRow> groupRows = [];
       bool even = false;
       for (var group in groups) {
@@ -112,13 +143,23 @@ class TableContainer extends StatelessWidget {
                   item.rows[group[i]].period,
                   style: Get.textTheme.bodyText1,
                 ),
-                Text(
-                  item.rows[group[i]].absent,
-                  style: Get.textTheme.bodyText1,
+                CupertinoButton(
+                  minSize: 0,
+                  padding: EdgeInsets.zero,
+                  child: Text(
+                    item.rows[group[i]].absent,
+                    style: Get.textTheme.bodyText1,
+                  ),
+                  onPressed: () => lookup(item.rows[group[i]].absent),
                 ),
-                Text(
-                  item.rows[group[i]].substitute,
-                  style: Get.textTheme.bodyText1,
+                CupertinoButton(
+                  minSize: 0,
+                  padding: EdgeInsets.zero,
+                  child: Text(
+                    item.rows[group[i]].substitute,
+                    style: Get.textTheme.bodyText1,
+                  ),
+                  onPressed: () => lookup(item.rows[group[i]].substitute),
                 ),
                 Text(
                   item.rows[group[i]].room,

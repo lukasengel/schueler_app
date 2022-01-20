@@ -8,6 +8,7 @@ import './login_page_controller.dart';
 //TODO: Klassenauswahl-Mechanismus
 //TODO: Benachrichtigungen
 //TODO: Lehrerkürzel
+//TODO: Englische Übersetzung
 
 class LoginPage extends StatelessWidget {
   static const route = "/login";

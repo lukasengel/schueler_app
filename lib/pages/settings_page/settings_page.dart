@@ -39,6 +39,11 @@ class SettingsPage extends StatelessWidget {
                 onTap: () {},
               ),
               SettingsTile(
+                icon: const Icon(Icons.history_edu),
+                label: "abbreviations".tr,
+                onTap: controller.onTapAbbreviations,
+              ),
+              SettingsTile(
                 icon: const Icon(Icons.report_problem),
                 label: "report_a_bug".tr,
                 onTap: controller.onTapReportABug,

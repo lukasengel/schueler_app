@@ -12,6 +12,7 @@ import '../models/substitution_table.dart';
 import '../models/web_data_exception.dart';
 import '../models/news_item.dart';
 import '../models/feedback_item.dart';
+import '../models/teacher.dart';
 import './local_data.dart';
 
 class WebData extends GetxController {
@@ -23,6 +24,7 @@ class WebData extends GetxController {
 
   //Database Data
   List<SchoolLifeItem> schoolLifeItems = [];
+  List<Teacher> teachers = [];
 
   Future<void> fetchData() async {
     await fetchHtml();
@@ -79,6 +81,7 @@ class WebData extends GetxController {
     final database = FirebaseDatabase.instance.reference();
     final snapshot = await database.get();
     schoolLifeItems = parseSchoolLife(snapshot);
+    teachers = parseTeachers(snapshot);
   }
 
 //########################################################################
@@ -168,6 +171,22 @@ class WebData extends GetxController {
         return b.datetime.millisecondsSinceEpoch
             .compareTo(a.datetime.millisecondsSinceEpoch);
       });
+    }
+    return list;
+  }
+
+  List<Teacher> parseTeachers(DataSnapshot data) {
+    final content = data.value;
+
+    List<Teacher> list = [];
+
+    if (content is Map) {
+      final teachers = content["teachers"];
+      if (teachers is Map) {
+        teachers.forEach((key, value) {
+          list.add(Teacher(key, value));
+        });
+      }
     }
     return list;
   }
