@@ -24,4 +24,4 @@ Ermöglicht den Zugriff auf den aktuellen Vertretungsplan, die Nachrichten der S
 Der Quellcode steht unter der MIT-Lizenz öffentlich zur Verfügung. Weitere Informationen unter license.txt.
 
 ## Screenshots
-<img alt="Screenshot" src="https://firebasestorage.googleapis.com/v0/b/gg-schueler-app.appspot.com/o/github%2FAnimiert.gif?alt=media&token=2f5c299a-529e-4b99-b07f-956508ae95fa" height="600">
+<img alt="Screenshot" src="https://firebasestorage.googleapis.com/v0/b/gg-schueler-app.appspot.com/o/github%2FAnimiert.gif?alt=media&token=9c7b5f94-313e-41eb-a4d3-1d44f7b9f42b" height="600">
