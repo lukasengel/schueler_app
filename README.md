@@ -7,7 +7,7 @@ Ermöglicht den Zugriff auf den aktuellen Vertretungsplan, die Nachrichten der S
 
 ## Funktionen
 - Vertretungsplan, Nachrichten der Schulleitung, Schulleben-Seite
-- Nachtmodus/Dunkler-Modus
+- Nachtmodus/Dunkelmodus
 - Anpassung an Plattform (Android/iOS)
 - Filtern der Vertretungsplan-Tabelle nach Klassen
 - Feedback/Bug-Meldung
