@@ -11,9 +11,9 @@ Ermöglicht den Zugriff auf den aktuellen Vertretungsplan, die Nachrichten der S
 - Anpassung an Plattform (Android/iOS)
 - Filtern der Vertretungsplan-Tabelle nach Klassen
 - Feedback/Bug-Meldung
+- Lehrerkürzel-Übersicht
 
 ## Geplante Features
-- Lehrerkürzel-Übersicht
 - Benachrichtigungen (entfallene Stunden, Neuigkeiten)
 
 ## Mitwirkende
