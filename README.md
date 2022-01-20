@@ -1,6 +1,8 @@
+<img alt="Logo" src="https://firebasestorage.googleapis.com/v0/b/gg-schueler-app.appspot.com/o/github%2FLogo.png?alt=media&token=2c25500e-86ec-4ff7-9c53-46d066140dc0" height="200">
+
 # GG Schüler-App
 Schüler-App des Gnadenthal-Gymnasium Ingolstadt.
-<img alt="Logo" src="https://firebasestorage.googleapis.com/v0/b/gg-schueler-app.appspot.com/o/github%2FLogo.png?alt=media&token=2c25500e-86ec-4ff7-9c53-46d066140dc0" height="100">
+
 Ermöglicht den Zugriff auf den aktuellen Vertretungsplan, die Nachrichten der Schulleitung und ein schwarzes Brett mit Neuigkeiten im Schulleben (z.B. Veranstaltungen, Ankündigungen, Beiträge).
 
 ## Funktionen
