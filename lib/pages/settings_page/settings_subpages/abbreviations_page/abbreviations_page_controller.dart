@@ -20,14 +20,17 @@ class AbbreviationsPageController extends GetxController {
   }
 
   void onSearchInput(String input) {
-    if (input.trim() == "Opfer") {
+    final trimmed = input.trim().toLowerCase();
+    if (trimmed.isEmpty) {
+      list = [...webData.teachers];
+    } else if (trimmed == "opfer") {
       list = webData.teachers
           .where((element) => element.abbreviation == "fla")
           .toList();
     } else {
       list = webData.teachers.where((element) {
-        return element.abbreviation.contains(input) ||
-            element.name.contains(input);
+        return element.abbreviation.toLowerCase().contains(trimmed) ||
+            element.name.toLowerCase().contains(trimmed);
       }).toList();
     }
     update();
@@ -35,5 +38,8 @@ class AbbreviationsPageController extends GetxController {
 
   void clearInput() {
     searchController.clear();
+    Get.focusScope!.unfocus();
+    list = [...webData.teachers];
+    update();
   }
 }

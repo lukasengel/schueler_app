@@ -36,6 +36,8 @@ class AbbreviationsPage extends StatelessWidget {
                         ),
                         Expanded(
                           child: TextField(
+                            style: context.textTheme.bodyText2!
+                                .copyWith(fontSize: 16),
                             controller: controller.searchController,
                             onChanged: controller.onSearchInput,
                             decoration: InputDecoration(hintText: "search".tr),
