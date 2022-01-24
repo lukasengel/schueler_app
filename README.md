@@ -19,7 +19,7 @@ Ermöglicht den Zugriff auf den aktuellen Vertretungsplan, die Nachrichten der S
 ## Mitwirkende
 - Logo-Gestaltung:  Nika Peskova
 - Entwicklung:  Lukas Engel, Jacob Drew
-- Person, der den Schulleiter nervt und sich für die App einsetzt: Lars Seth
+- Person, die sich beim Schulleiter für die App einsetzt: Lars Seth
 
 ## Lizenz
 Der Quellcode steht unter der MIT-Lizenz öffentlich zur Verfügung. Weitere Informationen unter license.txt.
