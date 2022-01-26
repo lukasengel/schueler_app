@@ -11,15 +11,15 @@ Ermöglicht den Zugriff auf den aktuellen Vertretungsplan, die Nachrichten der S
 - Anpassung an Plattform (Android/iOS)
 - Filtern der Vertretungsplan-Tabelle nach Klassen
 - Feedback/Bug-Meldung
+- Lehrerkürzel-Übersicht
 
 ## Geplante Features
-- Lehrerkürzel-Übersicht
 - Benachrichtigungen (entfallene Stunden, Neuigkeiten)
 
 ## Mitwirkende
 - Logo-Gestaltung:  Nika Peskova
 - Entwicklung:  Lukas Engel, Jacob Drew
-- Person, der den Schulleiter nervt und sich für die App einsetzt: Lars Seth
+- Person, die sich beim Schulleiter für die App einsetzt: Lars Seth
 
 ## Lizenz
 Der Quellcode steht unter der MIT-Lizenz öffentlich zur Verfügung. Weitere Informationen unter license.txt.
