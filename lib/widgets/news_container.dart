@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../models/news_item.dart';
 
@@ -10,18 +10,25 @@ class NewsContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String insertDayOfWeek(String text) {
+    String formatDate(String text) {
+      bool entry = text.contains("Eintrag");
       RegExp regex = RegExp(r"\d\d\.\d\d\.\d\d\d\d");
       final match = regex.firstMatch(text);
       if (match != null) {
         final dateString = text.substring(match.start, match.end);
         final formatter = DateFormat(r"d.M.y");
         final datetime = formatter.parse(dateString);
-        final dow = DateFormat("EEEE");
-        text = text.substring(0, match.start) +
-            dow.format(datetime).toLowerCase().tr +
-            ", " +
-            dateString;
+
+        String date;
+        if (Get.locale.toString() == "en_US") {
+          date =
+              DateFormat("EEEE, M/d/y", Get.locale.toString()).format(datetime);
+        } else {
+          date =
+              DateFormat("EEEE, d.M.y", Get.locale.toString()).format(datetime);
+        }
+
+        text = entry ? "home/entry".tr + date : date;
       }
       return text;
     }
@@ -45,7 +52,7 @@ class NewsContainer extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            insertDayOfWeek(item.headline),
+            formatDate(item.headline),
             style: Theme.of(context).textTheme.headline4,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

@@ -13,10 +13,11 @@ import './controllers/authentication.dart';
 import './pages/home_page/home_page.dart';
 import './pages/login_page/login_page.dart';
 import './pages/settings_page/settings_page.dart';
-import './pages/settings_page/settings_subpages/filters_page.dart';
-import './pages/settings_page/settings_subpages/personalization_page.dart';
+import './pages/settings_page/settings_subpages/filters_page/filters_page.dart';
+import './pages/settings_page/settings_subpages/personalizations_page/personalization_page.dart';
 import './pages/settings_page/settings_subpages/report_a_bug_page/report_bug_page.dart';
-import 'pages/settings_page/settings_subpages/abbreviations_page/abbreviations_page.dart';
+import './pages/settings_page/settings_subpages/abbreviations_page/abbreviations_page.dart';
+import './pages/settings_page/settings_subpages/notifications_page/notifications_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,15 +35,28 @@ class MyApp extends StatelessWidget {
 
   final localData = Get.find<LocalData>();
 
+  Locale get getLocale {
+    Locale locale = const Locale("de", "DE");
+    final deviceLocale = Get.deviceLocale;
+    if (!localData.settings.forceGerman &&
+        localData.supported.contains(deviceLocale) &&
+        deviceLocale != null) {
+      locale = Get.deviceLocale!;
+    }
+    return locale;
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: AppTheme.light,
+      debugShowCheckedModeBanner: false,
       darkTheme: AppTheme.dark,
       translationsKeys: localData.translations,
-      locale: const Locale("de", "DE"),
+      locale: getLocale,
       defaultTransition:
           Platform.isIOS ? Transition.cupertino : Transition.fade,
+      fallbackLocale: const Locale("de", "DE"),
       title: "GG-Schüler-App",
       getPages: [
         GetPage(name: HomePage.route, page: () => const HomePage()),
@@ -58,6 +72,9 @@ class MyApp extends StatelessWidget {
           name: AbbreviationsPage.route,
           page: () => const AbbreviationsPage(),
         ),
+        GetPage(
+            name: NotificationsPage.route,
+            page: () => const NotificationsPage())
       ],
       home: GetBuilder<Authentication>(
         builder: (controller) {

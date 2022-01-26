@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import './settings_container.dart';
 
 class SettingsSwitchTile extends StatefulWidget {
-  final Future<bool> Function(bool) onChanged;
+  final Future<bool> Function() onChanged;
   final String label;
   final bool value;
 
@@ -35,7 +35,7 @@ class _SettingsSwitchTileState extends State<SettingsSwitchTile> {
       HapticFeedback.lightImpact();
     }
     setState(() => value = val);
-    final input = await widget.onChanged(val);
+    final input = await widget.onChanged();
     setState(() => value = input);
   }
 

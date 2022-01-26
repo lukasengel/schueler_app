@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-Future<bool> showConfirmDialog(
-    String header, String warning, String confirm) async {
+Future<bool> showDynamicConfirmDialog({
+  required String header,
+  String warning = "",
+  required String confirm,
+}) async {
   if (Platform.isIOS) {
     final input = await showCupertinoModalPopup(
         context: Get.context!,
@@ -25,7 +28,7 @@ Future<bool> showConfirmDialog(
             cancelButton: CupertinoActionSheetAction(
               isDefaultAction: true,
               child: Text(
-                "cancel".tr,
+                "general/cancel".tr,
                 style: const TextStyle(color: CupertinoColors.activeBlue),
               ),
               onPressed: Get.back,
@@ -42,12 +45,12 @@ Future<bool> showConfirmDialog(
       buttonPadding: const EdgeInsets.all(20),
       actions: <Widget>[
         TextButton(
-          child: Text("cancel".tr.toUpperCase()),
-          onPressed: Get.back,
-        ),
-        TextButton(
           child: Text(confirm.toUpperCase()),
           onPressed: () => Get.back(result: true),
+        ),
+        TextButton(
+          child: Text("general/cancel".tr.toUpperCase()),
+          onPressed: Get.back,
         ),
       ],
     ),

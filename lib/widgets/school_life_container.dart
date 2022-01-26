@@ -220,7 +220,7 @@ class SchoolLifeBaseContainer extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(15, 5, 15, 0),
                 alignment: Alignment.centerRight,
                 child: Text(
-                  "click".tr,
+                  "home/read_more".tr,
                   style: const TextStyle(
                       color: Colors.grey,
                       fontFamily: "Montserrat",
@@ -240,7 +240,7 @@ class SchoolLifeBaseContainer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    stringFromType(item.type).tr,
+                    ("home/" + stringFromType(item.type)).tr,
                     style: Get.textTheme.bodyText1!
                         .copyWith(fontWeight: FontWeight.w300),
                   ),

@@ -66,7 +66,8 @@ class NewsTab extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Icon(Icons.update, size: 100),
-                      Text("no_news".tr, style: context.textTheme.bodyText1),
+                      Text("home/no_news".tr,
+                          style: context.textTheme.bodyText1),
                       const SizedBox(height: 10),
                       Text(
                         controller.latestUpdate,

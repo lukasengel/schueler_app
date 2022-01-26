@@ -4,7 +4,6 @@ import 'package:fluttericon/font_awesome5_icons.dart';
 
 import './settings_page_controller.dart';
 import '../../widgets/settings_ui/settings_tile.dart';
-import '../../widgets/settings_ui/copyright_notice.dart';
 
 class SettingsPage extends StatelessWidget {
   static const route = "/settings";
@@ -15,42 +14,45 @@ class SettingsPage extends StatelessWidget {
     Get.put(SettingsPageController());
     return Scaffold(
       appBar: AppBar(
-        title: Text("settings".tr),
+        title: Text("general/settings".tr),
       ),
       body: SafeArea(
         bottom: false,
+// ###################################################################################
+// #                               SETTING TILES                                     #
+// ###################################################################################
         child: GetBuilder<SettingsPageController>(builder: (controller) {
           return ListView(
-            padding: const EdgeInsets.fromLTRB(0, 5, 0, 25),
+            padding: const EdgeInsets.fromLTRB(0, 5, 0, 60),
             children: [
               SettingsTile(
                 icon: const Icon(Icons.edit),
-                label: "personalization".tr,
+                label: "settings/personalization".tr,
                 onTap: controller.onTapPersonalization,
               ),
               SettingsTile(
                 icon: const Icon(Icons.filter_list),
-                label: "filters".tr,
+                label: "settings/filters".tr,
                 onTap: controller.onTapFilters,
               ),
               SettingsTile(
                 icon: const Icon(Icons.notifications),
-                label: "notifications".tr,
-                onTap: () {},
+                label: "settings/notifications".tr,
+                onTap: controller.onTapNotifications,
               ),
               SettingsTile(
                 icon: const Icon(Icons.history_edu),
-                label: "abbreviations".tr,
+                label: "settings/abbreviations".tr,
                 onTap: controller.onTapAbbreviations,
               ),
               SettingsTile(
                 icon: const Icon(Icons.report_problem),
-                label: "report_a_bug".tr,
+                label: "settings/report_a_bug".tr,
                 onTap: controller.onTapReportABug,
               ),
               SettingsTile(
                 icon: const Icon(FontAwesome5.github_square),
-                label: "github".tr,
+                label: "settings/github".tr,
                 onTap: controller.onTapGithub,
               ),
               const SizedBox(height: 5),
@@ -59,11 +61,68 @@ class SettingsPage extends StatelessWidget {
                   onPressed: controller.logout,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text("logout".tr),
+                    child: Text("settings/logout".tr),
                   ),
                 ),
               ),
-              const CopyrightNotice(),
+// ###################################################################################
+// #                               COPYRIGHT NOTICE                                  #
+// ###################################################################################
+              Builder(builder: (context) {
+                const style1 = TextStyle(
+                  color: Colors.grey,
+                  fontSize: 16,
+                  fontFamily: "Montserrat",
+                  letterSpacing: 1,
+                );
+
+                const style2 = TextStyle(
+                  color: Colors.grey,
+                  fontSize: 20,
+                  fontFamily: "Montserrat",
+                  letterSpacing: 1,
+                );
+
+                const spacer1 = SizedBox(height: 5);
+                const spacer2 = SizedBox(height: 10);
+
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Column(
+                    children: [
+                      Text(
+                        "settings/copyright/logo_artist".tr,
+                        style: style1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      spacer1,
+                      Text(
+                        "settings/copyright/nika".tr.tr.toUpperCase(),
+                        style: style2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      spacer2,
+                      Text(
+                        "settings/copyright/developer".tr,
+                        style: style1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      spacer1,
+                      Text(
+                        "settings/copyright/lukas".tr.toUpperCase(),
+                        style: style2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 40),
+                      Text(
+                        "settings/copyright/license".tr.toUpperCase(),
+                        style: style1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+                );
+              }),
             ],
           );
         }),

@@ -56,6 +56,10 @@ class LocalData extends GetxController {
         reversed: prefs.getBool("reversed") ?? true,
         filters: json
             .decode(prefs.getString("filters") ?? Settings.defaultFiltersStr),
+        dailyNotifications: prefs.getBool("dailyNotifications") ?? false,
+        smvNotifications: prefs.getBool("smvNotifications") ?? false,
+        notifications: prefs.getStringList("notifications") ?? [],
+        forceGerman: prefs.getBool("forceGerman") ?? false,
       );
     } catch (e) {
       throw LocalDataException.settingsParseError(e.toString());
@@ -71,6 +75,10 @@ class LocalData extends GetxController {
       await prefs.setInt("themeColor", settings.themeColor);
       await prefs.setBool("reversed", settings.reversed);
       await prefs.setString("filters", json.encode(settings.filters));
+      await prefs.setBool("dailyNotifications", settings.dailyNotifications);
+      await prefs.setBool("smvNotifications", settings.smvNotifications);
+      await prefs.setStringList("notifications", settings.notifications);
+      await prefs.setBool("forceGerman", settings.forceGerman);
     } catch (e) {
       error = e.toString();
     }

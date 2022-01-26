@@ -22,6 +22,7 @@
 
 #Firebase
 /android/app/google-services.json
+/android/key.properties
 /ios/Runner/GoogleService-Info.plist
 
 # Flutter/Dart/Pub related

@@ -19,7 +19,11 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
-    final headlines = ["substitutions".tr, "news".tr, "smv".tr];
+    final headlines = [
+      "general/substitutions".tr,
+      "general/news".tr,
+      "general/school_life".tr,
+    ];
     const tabs = [SubstitutionTab(), NewsTab(), SmvTab()];
     Get.put(HomePageController());
 
@@ -32,7 +36,7 @@ class HomePage extends StatelessWidget {
             IconButton(
               onPressed: controller.onPressedSettings,
               icon: const Icon(Icons.settings_outlined),
-              tooltip: "settings".tr,
+              tooltip: "general/settings".tr,
             ),
           ],
         ),
@@ -41,7 +45,9 @@ class HomePage extends StatelessWidget {
             ? GetBuilder<LocalData>(builder: (localData) {
                 return FloatingActionButton.extended(
                   label: Text(
-                    !localData.settings.reversed ? "asc".tr : "desc".tr,
+                    !localData.settings.reversed
+                        ? "home/asc".tr
+                        : "home/desc".tr,
                   ),
                   icon: Icon(
                     !localData.settings.reversed
@@ -57,17 +63,17 @@ class HomePage extends StatelessWidget {
             SplashyBottomNavigationBarItem(
               icon: const Icon(Icons.event_note_outlined),
               activeIcon: const Icon(Icons.event_note),
-              label: "substitutions".tr,
+              label: "general/substitutions".tr,
             ),
             SplashyBottomNavigationBarItem(
               icon: const Icon(Icons.campaign_outlined),
               activeIcon: const Icon(Icons.campaign),
-              label: "news".tr,
+              label: "general/news".tr,
             ),
             SplashyBottomNavigationBarItem(
               icon: const Icon(Icons.people_outline),
               activeIcon: const Icon(Icons.people),
-              label: "smv".tr,
+              label: "general/school_life".tr,
             ),
           ],
           onTap: controller.switchTabs,

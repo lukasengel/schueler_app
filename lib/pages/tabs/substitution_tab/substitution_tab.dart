@@ -5,7 +5,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../home_page/home_page_controller.dart';
 import '../../../controllers/web_data.dart';
-import '../../../widgets/table_container.dart';
+import '../../../widgets/table_container/table_container.dart';
 import './substitution_tab_controller.dart';
 
 class SubstitutionTab extends StatelessWidget {
@@ -28,10 +28,7 @@ class SubstitutionTab extends StatelessWidget {
                     header: BallPulseHeader(color: Get.theme.primaryColor),
                     slivers: [
                       GetBuilder<WebData>(builder: (webData) {
-                        return TableContainer(
-                          item: webData.substitutionTables[index],
-                          latestUpdate: webData.latestUpdate,
-                        );
+                        return TableContainer(index);
                       }),
                     ],
                   );

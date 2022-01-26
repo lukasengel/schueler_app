@@ -4,6 +4,9 @@ class Settings {
   bool reversed;
   int themeColor;
   Map<String, dynamic> filters;
+  bool dailyNotifications, smvNotifications;
+  List<String> notifications;
+  bool forceGerman;
 
   Settings({
     required this.username,
@@ -11,6 +14,10 @@ class Settings {
     required this.themeColor,
     required this.reversed,
     required this.filters,
+    required this.dailyNotifications,
+    required this.smvNotifications,
+    required this.notifications,
+    required this.forceGerman,
   });
 
   Settings.empty()
@@ -18,7 +25,11 @@ class Settings {
         password = "",
         themeColor = 1,
         reversed = true,
-        filters = defaultFilters;
+        filters = defaultFilters,
+        dailyNotifications = false,
+        smvNotifications = false,
+        notifications = [],
+        forceGerman = false;
 
   static Map<String, bool> get defaultFilters {
     return {

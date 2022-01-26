@@ -188,6 +188,9 @@ class WebData extends GetxController {
         });
       }
     }
+    list.sort((a, b) {
+      return a.abbreviation.compareTo(b.abbreviation);
+    });
     return list;
   }
 

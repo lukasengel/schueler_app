@@ -5,10 +5,9 @@ import 'package:get/get.dart';
 
 import './login_page_controller.dart';
 
-//TODO: Klassenauswahl-Mechanismus
 //TODO: Benachrichtigungen
-//TODO: Lehrerkürzel
-//TODO: Englische Übersetzung
+//TODO: Kompakte/Schöne Ansicht
+//TODO: Einführung beim ersten Start und Hilfe-Seite, Deutsch erzwingen
 
 class LoginPage extends StatelessWidget {
   static const route = "/login";
@@ -28,9 +27,9 @@ class LoginPage extends StatelessWidget {
         onTap: controller.onTappedScaffold,
         child: Column(
           children: [
-// // ###################################################################################
-// // #                              LOGO AND HEADLINE                                  #
-// // ###################################################################################
+// ###################################################################################
+// #                              LOGO AND HEADLINE                                  #
+// ###################################################################################
             Expanded(
               flex: 2,
               child: Container(
@@ -54,7 +53,7 @@ class LoginPage extends StatelessWidget {
                       Expanded(
                         child: FittedBox(
                           child: Text(
-                            "app_title".tr,
+                            "general/app_title".tr,
                             textAlign: TextAlign.center,
                             style: context.textTheme.headline1,
                           ),
@@ -91,14 +90,14 @@ class LoginPage extends StatelessWidget {
                           Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              "sign_in".tr,
+                              "login/login_header".tr,
                               style: Get.textTheme.headline6,
                             ),
                           ),
                           const SizedBox(height: 15),
-                          // // ###################################################################################
-                          // // #                              ERROR MESSSAGE                                     #
-                          // // ###################################################################################
+                          // ###################################################################################
+                          // #                              ERROR MESSSAGE                                     #
+                          // ###################################################################################
                           Obx(
                             () => controller.error.isNotEmpty
                                 ? Padding(
@@ -114,9 +113,9 @@ class LoginPage extends StatelessWidget {
                                     ))
                                 : Container(),
                           ),
-                          // // ###################################################################################
-                          // // #                                  LOGIN FORM                                     #
-                          // // ###################################################################################
+                          // ###################################################################################
+                          // #                                  LOGIN FORM                                     #
+                          // ###################################################################################
                           SizedBox(
                             width: context.width >= 800
                                 ? context.width / 2
@@ -130,7 +129,7 @@ class LoginPage extends StatelessWidget {
                                   style: context.textTheme.bodyText2!
                                       .copyWith(fontSize: 16),
                                   decoration: InputDecoration(
-                                    hintText: "username".tr,
+                                    hintText: "login/username".tr,
                                   ),
                                   autofillHints: const [AutofillHints.username],
                                   controller: controller.usernameController,
@@ -148,7 +147,7 @@ class LoginPage extends StatelessWidget {
                                     style: context.textTheme.bodyText2!
                                         .copyWith(fontSize: 16),
                                     decoration: InputDecoration(
-                                      hintText: "password".tr,
+                                      hintText: "login/password".tr,
                                       suffixIcon: IconButton(
                                         splashRadius: 20,
                                         icon: Icon(
@@ -186,7 +185,8 @@ class LoginPage extends StatelessWidget {
                                             : Padding(
                                                 padding:
                                                     const EdgeInsets.all(10.0),
-                                                child: Text("login".tr),
+                                                child: Text(
+                                                    "login/login_button".tr),
                                               ),
                                       ),
                                     ),
@@ -197,7 +197,7 @@ class LoginPage extends StatelessWidget {
                                   onPressed: controller.onPressedHelp,
                                   icon: const Icon(Icons.help_outline),
                                   label: Text(
-                                    "credentials".tr,
+                                    "login/credentials_button".tr,
                                     maxLines: 1,
                                   ),
                                 ),
@@ -208,7 +208,7 @@ class LoginPage extends StatelessWidget {
                           // #                                  BOTTOM TEXT                                    #
                           // ###################################################################################
                           Text(
-                            "school_name".tr.toUpperCase(),
+                            "general/school_name".tr.toUpperCase(),
                             style: Get.textTheme.headline2,
                             textAlign: TextAlign.center,
                             overflow: TextOverflow.ellipsis,

@@ -7,7 +7,7 @@ class AppTheme {
     fontFamily: "Montserrat",
     hintColor: Colors.grey,
     cardColor: Colors.white,
-    canvasColor: Colors.grey[300],
+    canvasColor: const Color(0xFFEFEFF4),
     appBarTheme: const AppBarTheme(
       backgroundColor: redAccent,
       foregroundColor: Colors.white,
@@ -91,7 +91,7 @@ class AppTheme {
     primarySwatch: redAccent,
     hintColor: Colors.grey,
     cardColor: const Color(0xff1c1c1e),
-    canvasColor: Colors.grey[800],
+    canvasColor: Colors.grey[900],
     errorColor: Colors.red[500],
     fontFamily: "Montserrat",
     appBarTheme: const AppBarTheme(

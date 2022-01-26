@@ -10,8 +10,23 @@ class SettingsContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const defaultPadding = EdgeInsets.symmetric(horizontal: 15, vertical: 8);
+    const defaultMargin = EdgeInsets.symmetric(horizontal: 10, vertical: 5);
+
+    if (onTap == null) {
+      return Container(
+        margin: defaultMargin,
+        padding: padding ?? defaultPadding,
+        decoration: BoxDecoration(
+          color: Theme.of(context).cardColor,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Material(child: child, color: Colors.transparent),
+      );
+    }
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      padding: defaultMargin,
       child: Material(
         borderRadius: BorderRadius.circular(8),
         color: Theme.of(context).cardColor,
@@ -19,8 +34,7 @@ class SettingsContainer extends StatelessWidget {
           onTap: onTap,
           borderRadius: BorderRadius.circular(8),
           child: Padding(
-            padding: padding ??
-                const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+            padding: padding ?? defaultPadding,
             child: child,
           ),
         ),

@@ -14,7 +14,7 @@ class AbbreviationsPage extends StatelessWidget {
     final controller = Get.put(AbbreviationsPageController());
     return Scaffold(
       appBar: AppBar(
-        title: Text("abbreviations".tr),
+        title: Text("settings/abbreviations".tr),
       ),
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -24,50 +24,46 @@ class AbbreviationsPage extends StatelessWidget {
           child: GetBuilder<AbbreviationsPageController>(
             builder: (controller) {
               return ListView(
-                padding: const EdgeInsets.symmetric(vertical: 5),
+                padding: const EdgeInsets.fromLTRB(0, 5, 0, 60),
                 children: [
                   SettingsContainer(
                     padding: const EdgeInsets.only(left: 10),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.search,
-                          size: 28,
+                    child: Row(children: [
+                      const Icon(Icons.search, size: 28),
+                      Expanded(
+                        child: TextField(
+                          style: context.textTheme.bodyText2!
+                              .copyWith(fontSize: 16),
+                          controller: controller.searchController,
+                          onChanged: controller.onSearchInput,
+                          decoration: InputDecoration(
+                              hintText: "settings/abbreviations/search".tr),
+                          autocorrect: false,
+                          enableSuggestions: false,
                         ),
-                        Expanded(
-                          child: TextField(
-                            style: context.textTheme.bodyText2!
-                                .copyWith(fontSize: 16),
-                            controller: controller.searchController,
-                            onChanged: controller.onSearchInput,
-                            decoration: InputDecoration(hintText: "search".tr),
-                            autocorrect: false,
-                            enableSuggestions: false,
-                          ),
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.clear),
-                          onPressed: controller.clearInput,
-                          splashRadius: 20,
-                          iconSize: 28,
-                          color: Get.isPlatformDarkMode ? Colors.grey : null,
-                        ),
-                      ],
-                    ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.clear),
+                        onPressed: controller.clearInput,
+                        splashRadius: 20,
+                        iconSize: 28,
+                        color: Get.isPlatformDarkMode ? Colors.grey : null,
+                      ),
+                    ]),
                   ),
                   ...controller.list.map((e) {
                     return SettingsContainer(
-                        child: Row(
-                      children: [
-                        Expanded(
-                          child: Text(e.abbreviation),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 3,
+                          vertical: 5,
                         ),
-                        Expanded(
-                          child: Text(e.name),
-                          flex: 4,
-                        )
-                      ],
-                    ));
+                        child: Row(children: [
+                          Expanded(child: Text(e.abbreviation)),
+                          Expanded(child: Text(e.name), flex: 4),
+                        ]),
+                      ),
+                    );
                   }),
                 ],
               );

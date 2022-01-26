@@ -62,9 +62,9 @@ class LoginPageController extends GetxController {
 
   void onPressedHelp() async {
     await showDynamicMessageDialog(
-      Get.context!,
-      "login_help_title".tr,
-      Text("login_help_content".tr),
+      context: Get.context!,
+      title: "login/help_dialog/header".tr,
+      content: Text("login/help_dialog/message".tr),
     );
   }
 
@@ -74,13 +74,13 @@ class LoginPageController extends GetxController {
 
   String translateError(String e) {
     if (e == AuthDataException.emptyCredentials().toString()) {
-      return "empty_credentials".tr;
+      return "login/error/empty_credentials".tr;
     } else if (e == WebDataException.unauthorized().toString()) {
-      return "unauthorized".tr + "\n($e)";
+      return "login/error/unauthorized".tr + "\n($e)";
     } else if (e == WebDataException.forbidden().toString()) {
-      return "forbidden".tr + "\n($e)";
+      return "login/error/forbidden".tr + "\n($e)";
     } else if (e == WebDataException.notFound().toString()) {
-      return "not_found".tr + "\n($e)";
+      return "login/error/not_found".tr + "\n($e)";
     } else {
       return e;
     }

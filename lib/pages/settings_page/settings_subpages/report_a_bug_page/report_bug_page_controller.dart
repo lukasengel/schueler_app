@@ -4,7 +4,8 @@ import 'package:firebase_core/firebase_core.dart';
 
 import '../../../../controllers/web_data.dart';
 import '../../../../widgets/dynamic_message_dialog.dart';
-import '../../../../widgets/confirm_dialog.dart';
+import '../../../../widgets/dynamic_confirm_dialog.dart';
+import '../../../../widgets/snackbar.dart';
 import '../../../../models/feedback_item.dart';
 
 class ReportBugPageController extends GetxController {
@@ -22,9 +23,9 @@ class ReportBugPageController extends GetxController {
 
   void onPressedHelp() {
     showDynamicMessageDialog(
-      Get.context!,
-      "why_name_header".tr,
-      Text("why_name_message".tr),
+      context: Get.context!,
+      title: "settings/feedback/privacy_dialog/header".tr,
+      content: Text("settings/feedback/privacy_dialog/message".tr),
     );
   }
 
@@ -33,8 +34,11 @@ class ReportBugPageController extends GetxController {
   }
 
   void submit() async {
-    final input = await showConfirmDialog(
-        "submit".tr, "submit_message".tr, "confirm_submit".tr);
+    final input = await showDynamicConfirmDialog(
+      header: "settings/feedback/submit_dialog/header".tr,
+      warning: "settings/feedback/submit_dialog/message".tr,
+      confirm: "settings/feedback/submit_dialog/confirm".tr,
+    );
     if (input) {
       final webData = Get.find<WebData>();
       try {
@@ -44,17 +48,22 @@ class ReportBugPageController extends GetxController {
           message: messageController.text.trim(),
         ));
       } on FirebaseException catch (e) {
-        ScaffoldMessenger.of(Get.context!).clearSnackBars();
-        ScaffoldMessenger.of(Get.context!).showSnackBar(SnackBar(
-          content: Text("error".tr.toUpperCase() + ": " + e.message!),
-          duration: const Duration(seconds: 5),
-        ));
+        showSnackBar(
+          context: Get.context!,
+          snackbar: SnackBar(
+            content: Text("general/error".tr.toUpperCase() + ": " + e.message!),
+            duration: const Duration(seconds: 5),
+          ),
+        );
       } catch (e) {
-        ScaffoldMessenger.of(Get.context!).clearSnackBars();
-        ScaffoldMessenger.of(Get.context!).showSnackBar(SnackBar(
-          content: Text("error".tr.toUpperCase() + ": " + e.toString()),
-          duration: const Duration(seconds: 5),
-        ));
+        showSnackBar(
+          context: Get.context!,
+          snackbar: SnackBar(
+            content:
+                Text("general/error".tr.toUpperCase() + ": " + e.toString()),
+            duration: const Duration(seconds: 5),
+          ),
+        );
       }
       Get.back();
     }
@@ -68,8 +77,11 @@ class ReportBugPageController extends GetxController {
 
   void discard() async {
     if (isNotEmpty) {
-      final input = await showConfirmDialog(
-          "discard".tr, "discard_message".tr, "confirm_discard".tr);
+      final input = await showDynamicConfirmDialog(
+        header: "settings/feedback/discard_dialog/header".tr,
+        warning: "settings/feedback/discard_dialog/message".tr,
+        confirm: "settings/feedback/discard_dialog/confirm".tr,
+      );
       if (!input) {
         return;
       }

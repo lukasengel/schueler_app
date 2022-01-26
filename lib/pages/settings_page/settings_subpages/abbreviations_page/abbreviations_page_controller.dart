@@ -21,6 +21,7 @@ class AbbreviationsPageController extends GetxController {
 
   void onSearchInput(String input) {
     final trimmed = input.trim().toLowerCase();
+
     if (trimmed.isEmpty) {
       list = [...webData.teachers];
     } else if (trimmed == "opfer") {

@@ -19,7 +19,7 @@ class ReportBugPage extends StatelessWidget {
     final controller = Get.put(ReportBugPageController());
     return Scaffold(
       appBar: AppBar(
-        title: Text("feedback".tr),
+        title: Text("settings/feedback/app_bar_title".tr),
         leading: IconButton(
           icon: Icon(Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back),
           onPressed: controller.discard,
@@ -40,7 +40,7 @@ class ReportBugPage extends StatelessWidget {
           child: ListView(
             padding: const EdgeInsets.fromLTRB(0, 5, 0, 25),
             children: [
-              SettingsText(text: "contact_information".tr),
+              SettingsText(text: "settings/feedback/contact_details".tr),
               SettingsContainer(
                 padding: const EdgeInsets.fromLTRB(15, 5, 5, 5),
                 child: Column(
@@ -54,7 +54,7 @@ class ReportBugPage extends StatelessWidget {
                           context.textTheme.bodyText2!.copyWith(fontSize: 16),
                       onSubmitted: (_) => controller.node.requestFocus(),
                       decoration: InputDecoration(
-                        hintText: "name".tr,
+                        hintText: "settings/feedback/name".tr,
                         suffixIcon: IconButton(
                           color: Colors.grey,
                           splashRadius: 20,
@@ -78,14 +78,14 @@ class ReportBugPage extends StatelessWidget {
                           context.textTheme.bodyText2!.copyWith(fontSize: 16),
                       decoration: InputDecoration(
                         fillColor: Colors.transparent,
-                        hintText: "email".tr,
+                        hintText: "settings/feedback/email".tr,
                         border: InputBorder.none,
                       ),
                     ),
                   ],
                 ),
               ),
-              SettingsText(text: "report".tr),
+              SettingsText(text: "settings/feedback/feedback".tr),
               SettingsContainer(
                 child: TextField(
                   maxLength: 500,
@@ -94,7 +94,7 @@ class ReportBugPage extends StatelessWidget {
                   style: context.textTheme.bodyText2!.copyWith(fontSize: 16),
                   decoration: InputDecoration(
                     fillColor: Colors.transparent,
-                    hintText: "message".tr,
+                    hintText: "settings/feedback/message".tr,
                     border: InputBorder.none,
                   ),
                   onChanged: controller.validate,

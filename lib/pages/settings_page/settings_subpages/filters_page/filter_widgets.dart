@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/local_data.dart';
-import '../../controllers/web_data.dart';
-import './settings_container.dart';
+import '../../../../controllers/local_data.dart';
+import '../../../../controllers/web_data.dart';
+import '../../../../widgets/settings_ui/settings_container.dart';
 
 class GradeFilterSettings extends StatefulWidget {
   const GradeFilterSettings({
@@ -18,6 +18,13 @@ class GradeFilterSettings extends StatefulWidget {
 }
 
 class _GradeFilterSettingsState extends State<GradeFilterSettings> {
+  String get enumeration {
+    if (Get.locale == const Locale("en", "US")) {
+      return "th ";
+    }
+    return ". ";
+  }
+
   @override
   Widget build(BuildContext context) {
     return SettingsContainer(
@@ -27,7 +34,10 @@ class _GradeFilterSettingsState extends State<GradeFilterSettings> {
           final grade = (index + 5).toString();
           return Column(
             children: [
-              FilterSwitch(filterKey: grade, label: "$grade. " + "grade".tr),
+              FilterSwitch(
+                filterKey: grade,
+                label: grade + enumeration + "settings/filters/grade".tr,
+              ),
               if (index != 7) _divider,
             ],
           );
@@ -53,17 +63,17 @@ class _MiscFilterSettingsState extends State<MiscFilterSettings> {
       padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
       child: Column(
         children: [
-          FilterSwitch(filterKey: "i", label: "inst".tr),
+          FilterSwitch(filterKey: "i", label: "settings/filters/inst".tr),
           _divider,
-          FilterSwitch(filterKey: "Wku", label: "wku".tr),
+          FilterSwitch(filterKey: "Wku", label: "settings/filters/wku".tr),
           _divider,
-          FilterSwitch(filterKey: "Fku", label: "fku".tr),
+          FilterSwitch(filterKey: "Fku", label: "settings/filters/fku".tr),
           _divider,
-          FilterSwitch(filterKey: "OGTS", label: "ogts".tr),
+          FilterSwitch(filterKey: "OGTS", label: "settings/filters/ogts".tr),
           _divider,
-          FilterSwitch(filterKey: "GGTS", label: "ggts".tr),
+          FilterSwitch(filterKey: "GGTS", label: "settings/filters/ggts".tr),
           _divider,
-          FilterSwitch(filterKey: "misc", label: "misc".tr),
+          FilterSwitch(filterKey: "misc", label: "settings/filters/misc".tr),
         ],
       ),
     );
