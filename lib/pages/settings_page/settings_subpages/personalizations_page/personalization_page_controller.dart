@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:schueler_app/widgets/snackbar.dart';
 
 import '../../../../controllers/local_data.dart';
 

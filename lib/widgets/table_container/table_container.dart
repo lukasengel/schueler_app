@@ -155,45 +155,50 @@ class TableContainer extends StatelessWidget {
         : SliverList(
             delegate: SliverChildListDelegate(
               [
-                Container(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                  padding: const EdgeInsets.only(top: 20),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 1,
-                        blurRadius: 1,
-                      ),
-                    ],
-                    color: Get.theme.cardColor,
-                  ),
-                  child: Column(
-                    children: [
-                      Text(
-                        DateFormat.yMMMMEEEEd(Get.locale.toString())
-                            .format(controller.table.date),
-                        style: context.textTheme.headline4,
-                      ),
-                      Divider(
-                        color: context.textTheme.bodyText2!.color,
-                        indent: 30,
-                        endIndent: 30,
-                      ),
-                      Table(
-                        columnWidths: const {
-                          0: FlexColumnWidth(3.5),
-                          1: FlexColumnWidth(2.5),
-                          2: FlexColumnWidth(4),
-                          3: FlexColumnWidth(4),
-                          4: FlexColumnWidth(3.5),
-                          5: FlexColumnWidth(7.5),
-                        },
-                        children: [getHeaderRow(), ...rows],
-                      ),
-                    ],
+                Center(
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 5,
+                      vertical: 10,
+                    ),
+                    padding: const EdgeInsets.only(top: 20),
+                    constraints: const BoxConstraints(maxWidth: 800),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1,
+                          blurRadius: 1,
+                        )
+                      ],
+                      color: Get.theme.cardColor,
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          DateFormat.yMMMMEEEEd(Get.locale.toString())
+                              .format(controller.table.date),
+                          style: context.textTheme.headline4,
+                        ),
+                        Divider(
+                          color: context.textTheme.bodyText2!.color,
+                          indent: 30,
+                          endIndent: 30,
+                        ),
+                        Table(
+                          columnWidths: const {
+                            0: FlexColumnWidth(3.5),
+                            1: FlexColumnWidth(2.5),
+                            2: FlexColumnWidth(4),
+                            3: FlexColumnWidth(4),
+                            4: FlexColumnWidth(3.5),
+                            5: FlexColumnWidth(7.5),
+                          },
+                          children: [getHeaderRow(), ...rows],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Center(

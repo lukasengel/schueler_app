@@ -2,9 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-// import './../../../controllers/local_data.dart';
-// import './../../../controllers/web_data.dart';
+import 'package:schueler_app/widgets/dynamic_app_bar.dart';
 
 import '../../../../widgets/settings_ui/settings_container.dart';
 import '../../../../widgets/settings_ui/settings_text.dart';
@@ -18,20 +16,18 @@ class ReportBugPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(ReportBugPageController());
     return Scaffold(
-      appBar: AppBar(
-        title: Text("settings/feedback/app_bar_title".tr),
-        leading: IconButton(
-          icon: Icon(Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back),
+      appBar: dynamicAppBar(
+        context: context,
+        title: "settings/feedback/app_bar_title".tr,
+        leading: DynamicAppBarAction(
+          icon: Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back,
           onPressed: controller.discard,
-          tooltip: "Back",
         ),
-        actions: [
-          Obx(() => IconButton(
-                disabledColor: Colors.grey,
-                onPressed: controller.valid.value ? controller.submit : null,
-                icon: const Icon(Icons.done),
-              )),
-        ],
+        action: DynamicAppBarAction(
+          icon: Icons.done,
+          onPressed: controller.submit,
+          enabled: controller.valid,
+        ),
       ),
       body: GestureDetector(
         onTap: controller.unfocus,

@@ -27,7 +27,7 @@
     "home/event": "Veranstaltung",
     "home/article": "Beitrag",
     "home/announcement": "Mitteilung",
-    "home/read_more": "Klicken, um mehr zu lesen",
+    "home/read_more": "Tippen, um mehr zu lesen",
     "home/no_information": "Unbekannter Lehrer",
     "home/show_all":"Alle anzeigen",
     "home/entry":"Eintrag vom ",
@@ -42,7 +42,7 @@
 
     "settings/personalization/gender_neutral_language": "Gendergerechte Sprache",
     "settings/personalization/force_german": "Anzeigesprache: Deutsch",
-    "settings/personalization/language_note" : "Umgeht die Spracheinstellungen des Systems - nur erforderlich, wenn die Systemsprache nicht Deutsch ist.",
+    "settings/personalization/language_note" : "Umgeht die Spracheinstellungen des Systems. Nur erforderlich, wenn die Systemsprache nicht Deutsch ist.",
 
     "settings/filters/choose_grade": "Jahrgangsstufen",
     "settings/filters/misc": "Sonstiges",

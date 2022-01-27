@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
@@ -25,61 +26,64 @@ class NewsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<WebData>(builder: (controller) {
-      return EasyRefresh.builder(
-        onRefresh: () => Get.find<HomePageController>().onRefresh(context),
-        header: BallPulseHeader(color: Get.theme.primaryColor),
-        builder: (context, index, header, footer) {
-          return CustomScrollView(
-            physics: const BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics(),
-            ),
-            slivers: [
-              if (header != null) header,
-              if (controller.ticker.isNotEmpty)
-                SliverPadding(
-                  padding: const EdgeInsets.only(top: 5),
-                  sliver: NewsTicker(controller.ticker),
-                ),
-              if (controller.news.isNotEmpty)
-                SliverSafeArea(
-                  sliver: SliverPadding(
-                    padding: const EdgeInsets.symmetric(vertical: 5),
-                    sliver: GetBuilder<LocalData>(builder: (localData) {
-                      return SliverList(
-                        delegate: SliverChildListDelegate([
-                          ...(localData.settings.reversed
-                                  ? controller.news.map(buildNewsItem)
-                                  : controller.news.reversed.map(buildNewsItem))
-                              .toList(),
-                          const SizedBox(
-                            height: 65,
-                          ),
-                        ]),
-                      );
-                    }),
+      return CupertinoScrollbar(
+        child: EasyRefresh.builder(
+          onRefresh: () => Get.find<HomePageController>().onRefresh(context),
+          header: BallPulseHeader(color: Get.theme.primaryColor),
+          builder: (context, index, header, footer) {
+            return CustomScrollView(
+              physics: const BouncingScrollPhysics(
+                parent: AlwaysScrollableScrollPhysics(),
+              ),
+              slivers: [
+                if (header != null) header,
+                if (controller.ticker.isNotEmpty)
+                  SliverPadding(
+                    padding: const EdgeInsets.only(top: 5),
+                    sliver: NewsTicker(controller.ticker),
                   ),
-                ),
-              if (controller.news.isEmpty)
-                SliverFillRemaining(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.update, size: 100),
-                      Text("home/no_news".tr,
-                          style: context.textTheme.bodyText1),
-                      const SizedBox(height: 10),
-                      Text(
-                        controller.latestUpdate,
-                        style: Get.textTheme.bodyText1,
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
+                if (controller.news.isNotEmpty)
+                  SliverSafeArea(
+                    sliver: SliverPadding(
+                      padding: const EdgeInsets.symmetric(vertical: 5),
+                      sliver: GetBuilder<LocalData>(builder: (localData) {
+                        return SliverList(
+                          delegate: SliverChildListDelegate([
+                            ...(localData.settings.reversed
+                                    ? controller.news.map(buildNewsItem)
+                                    : controller.news.reversed
+                                        .map(buildNewsItem))
+                                .toList(),
+                            const SizedBox(
+                              height: 65,
+                            ),
+                          ]),
+                        );
+                      }),
+                    ),
                   ),
-                )
-            ],
-          );
-        },
+                if (controller.news.isEmpty)
+                  SliverFillRemaining(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.update, size: 100),
+                        Text("home/no_news".tr,
+                            style: context.textTheme.bodyText1),
+                        const SizedBox(height: 10),
+                        Text(
+                          controller.latestUpdate,
+                          style: Get.textTheme.bodyText1,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  )
+              ],
+            );
+          },
+        ),
       );
     });
   }

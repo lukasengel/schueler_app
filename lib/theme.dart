@@ -14,8 +14,10 @@ class AppTheme {
       elevation: 1,
       centerTitle: false,
       titleTextStyle: TextStyle(
+        color: Colors.white,
         fontFamily: "Montserrat",
         fontSize: 25,
+        fontWeight: FontWeight.w400,
       ),
     ),
     inputDecorationTheme: const InputDecorationTheme(
@@ -103,6 +105,7 @@ class AppTheme {
         color: redAccent,
         fontFamily: "Montserrat",
         fontSize: 25,
+        fontWeight: FontWeight.w400,
       ),
     ),
     iconTheme: const IconThemeData(

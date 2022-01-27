@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:schueler_app/widgets/dynamic_app_bar.dart';
 import 'package:schueler_app/widgets/settings_ui/settings_container.dart';
 
 import './notifications_page_controller.dart';
@@ -16,8 +17,9 @@ class NotificationsPage extends StatelessWidget {
     final controller = Get.put(NotificationsPageController());
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text("settings/notifications".tr),
+      appBar: dynamicAppBar(
+        context: context,
+        title: "settings/notifications".tr,
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),

@@ -11,6 +11,7 @@ import '../tabs/smv_tab.dart/smv_tab.dart';
 import '../tabs/news_tab/news_tab.dart';
 
 import '../../widgets/splashy_bottom_navigation_bar.dart';
+import '../../widgets/dynamic_app_bar.dart';
 
 class HomePage extends StatelessWidget {
   static const route = "/home";
@@ -30,15 +31,14 @@ class HomePage extends StatelessWidget {
     return GetBuilder<HomePageController>(builder: (controller) {
       initializeDateFormatting(Get.locale.toString(), null);
       return Scaffold(
-        appBar: AppBar(
-          title: Text(headlines[controller.selectedTab]),
-          actions: [
-            IconButton(
-              onPressed: controller.onPressedSettings,
-              icon: const Icon(Icons.settings_outlined),
-              tooltip: "general/settings".tr,
-            ),
-          ],
+        appBar: dynamicAppBar(
+          context: context,
+          title: headlines[controller.selectedTab],
+          action: DynamicAppBarAction(
+            icon: Icons.settings_outlined,
+            onPressed: controller.onPressedSettings,
+          ),
+          canGoBack: false,
         ),
         body: tabs[controller.selectedTab],
         floatingActionButton: controller.selectedTab > 0

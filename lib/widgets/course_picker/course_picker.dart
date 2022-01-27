@@ -10,22 +10,41 @@ import '../settings_ui/settings_switch_tile.dart';
 // #                             MODAL BOTTOM SHEET                                  #
 // ###################################################################################
 Future<String?> showCoursePicker(BuildContext context) async {
-  final input = await showModalBottomSheet(
-    backgroundColor: context.theme.canvasColor,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
-    ),
-    isScrollControlled: true,
-    constraints: const BoxConstraints(maxWidth: 500, maxHeight: 600),
-    context: context,
-    builder: (context) => const GradePicker(),
-  );
+  String input;
+
+  if (context.isTablet) {
+    input = await showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        backgroundColor: context.theme.canvasColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Container(
+          constraints: const BoxConstraints(maxHeight: 600, maxWidth: 500),
+          child: const CoursePicker(),
+        ),
+      ),
+    );
+  } else {
+    input = await showModalBottomSheet(
+      backgroundColor: context.theme.canvasColor,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
+      ),
+      isScrollControlled: true,
+      constraints: const BoxConstraints(maxWidth: 500, maxHeight: 600),
+      context: context,
+      builder: (context) => const CoursePicker(),
+    );
+  }
   Get.delete<CoursePickerController>();
+
   return input;
 }
 
-class GradePicker extends StatelessWidget {
-  const GradePicker({Key? key}) : super(key: key);
+class CoursePicker extends StatelessWidget {
+  const CoursePicker({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +98,9 @@ class GradePicker extends StatelessWidget {
                         children: controller.courses.map((e) {
                           return Text(e,
                               style: TextStyle(
-                                  color: context.textTheme.bodyText2!.color));
+                                color: context.textTheme.bodyText2!.color,
+                                fontSize: 25,
+                              ));
                         }).toList(),
                         onSelectedItemChanged: controller.onCourseChanged,
                       ),
@@ -94,8 +115,9 @@ class GradePicker extends StatelessWidget {
                               children: controller.letters.map((e) {
                                 return Text(e,
                                     style: TextStyle(
-                                        color: context
-                                            .textTheme.bodyText2!.color));
+                                      color: context.textTheme.bodyText2!.color,
+                                      fontSize: 25,
+                                    ));
                               }).toList(),
                               onSelectedItemChanged: controller.onLetterChanged,
                             )

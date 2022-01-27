@@ -27,7 +27,7 @@
     "home/event": "Event",
     "home/article": "Article",
     "home/announcement": "Announcement",
-    "home/read_more": "Click to read more",
+    "home/read_more": "Tap to read more",
     "home/no_information": "Unknown teacher",
     "home/show_all":"Show All",
     "home/entry":"Entry from ",
@@ -43,7 +43,7 @@
 
     "settings/personalization/gender_neutral_language": "Gender-neutral Language",
     "settings/personalization/force_german": "Display-Language: German",
-    "settings/personalization/language_note" : "Bypasses the system language settings - only necessary for system languages other than German.",
+    "settings/personalization/language_note" : "Bypasses the system language settings. Only necessary for system languages other than German.",
 
     "settings/filters/choose_grade": "Grades",
     "settings/filters/misc": "Miscellaneous",

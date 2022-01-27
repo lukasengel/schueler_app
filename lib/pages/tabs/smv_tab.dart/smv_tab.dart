@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 
@@ -16,19 +16,21 @@ class SmvTab extends StatelessWidget {
 
     return SafeArea(
       child: GetBuilder<WebData>(builder: (controller) {
-        return EasyRefresh(
-          onRefresh: () => Get.find<HomePageController>().onRefresh(context),
-          header: BallPulseHeader(color: Get.theme.primaryColor),
-          child: ListView.builder(
-            padding: const EdgeInsets.fromLTRB(0, 5, 0, 65),
-            itemBuilder: (context, index) {
-              return SchooLifeContainer(
-                Get.find<LocalData>().settings.reversed
-                    ? webData.schoolLifeItems[index]
-                    : webData.schoolLifeItems.reversed.toList()[index],
-              );
-            },
-            itemCount: webData.schoolLifeItems.length,
+        return CupertinoScrollbar(
+          child: EasyRefresh(
+            onRefresh: () => Get.find<HomePageController>().onRefresh(context),
+            header: BallPulseHeader(color: Get.theme.primaryColor),
+            child: ListView.builder(
+              padding: const EdgeInsets.fromLTRB(0, 5, 0, 65),
+              itemBuilder: (context, index) {
+                return SchooLifeContainer(
+                  Get.find<LocalData>().settings.reversed
+                      ? webData.schoolLifeItems[index]
+                      : webData.schoolLifeItems.reversed.toList()[index],
+                );
+              },
+              itemCount: webData.schoolLifeItems.length,
+            ),
           ),
         );
       }),
