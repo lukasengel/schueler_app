@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -22,17 +22,15 @@ class SubstitutionTab extends StatelessWidget {
             PageView.builder(
                 controller: controller.pageController,
                 itemBuilder: (context, index) {
-                  return CupertinoScrollbar(
-                    child: EasyRefresh.custom(
-                      onRefresh: () =>
-                          Get.find<HomePageController>().onRefresh(context),
-                      header: BallPulseHeader(color: Get.theme.primaryColor),
-                      slivers: [
-                        GetBuilder<WebData>(builder: (webData) {
-                          return TableContainer(index);
-                        }),
-                      ],
-                    ),
+                  return EasyRefresh.custom(
+                    onRefresh: () =>
+                        Get.find<HomePageController>().onRefresh(context),
+                    header: BallPulseHeader(color: Get.theme.primaryColor),
+                    slivers: [
+                      GetBuilder<WebData>(builder: (webData) {
+                        return TableContainer(index);
+                      }),
+                    ],
                   );
                 },
                 itemCount: controller.webData.substitutionTables.length),

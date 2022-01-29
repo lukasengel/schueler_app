@@ -6,8 +6,8 @@ import 'package:get/get.dart';
 import './login_page_controller.dart';
 
 //TODO: Benachrichtigungen
-//TODO: Kompakte/Schöne Ansicht
 //TODO: Einführung beim ersten Start und Hilfe-Seite, Deutsch erzwingen
+//TODO: ZZZ-Icon
 
 class LoginPage extends StatelessWidget {
   static const route = "/login";

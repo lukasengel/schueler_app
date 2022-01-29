@@ -1,9 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import 'package:schueler_app/widgets/table_container/table_container_controller.dart';
+import '../../controllers/local_data.dart';
+import '../../controllers/web_data.dart';
+
+import '../../models/substitution_table.dart';
+import '../../pages/settings_page/settings_subpages/abbreviations_page/abbreviations_page.dart';
+
+import '../snackbar.dart';
+import './table_row_widget.dart';
 
 class TableContainer extends StatelessWidget {
   final int index;
@@ -12,14 +18,68 @@ class TableContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (Get.isRegistered(tag: "$index")) {
-      Get.delete(tag: "$index");
-    }
-    final controller = Get.put(TableContainerController(index), tag: "$index");
+    final webData = Get.find<WebData>();
+    final table = webData.substitutionTables[index];
 
-//########################################################################
-//#                             Builders                                 #
-//########################################################################
+// //########################################################################
+// //#                               Logic                                  #
+// //########################################################################
+
+    void lookup(String substitute) {
+      final teachers = Get.find<WebData>().teachers;
+      String one = "";
+      String two = "home/no_information".tr;
+
+      if (substitute.length >= 3) {
+        final content = substitute.substring(0, 3);
+        final index =
+            teachers.where((element) => element.abbreviation == content);
+        if (index.isNotEmpty) {
+          one = index.first.abbreviation;
+          two = index.first.name;
+        }
+      }
+
+      showSnackBar(
+        context: Get.context!,
+        snackbar: SnackBar(
+          content: one.isEmpty ? Text(two) : Text(one + ": " + two),
+          duration: const Duration(seconds: 5),
+          action: SnackBarAction(
+            label: "home/show_all".tr,
+            onPressed: () => Get.toNamed(AbbreviationsPage.route),
+          ),
+        ),
+      );
+    }
+
+    bool showGroup(String group) {
+      final filters = Get.find<LocalData>().settings.filters;
+      bool show = true;
+      bool match = false;
+      for (var element in filters.keys) {
+        if (group.startsWith(element)) {
+          match = true;
+          show = filters[element]!;
+          break;
+        }
+      }
+      return match ? show : filters["misc"];
+    }
+
+    bool isLastVisibleGroup(String group) {
+      String id = "";
+      for (int i = 0; i < table.groups.length; i++) {
+        if (showGroup(table.groups[i])) {
+          id = table.groups[i];
+        }
+      }
+      return id == group;
+    }
+
+// //########################################################################
+// //#                             Builders                                 #
+// //########################################################################
 
     Widget buildNoDataScreen() {
       return SliverFillRemaining(
@@ -29,8 +89,7 @@ class TableContainer extends StatelessWidget {
           children: [
             const Icon(Icons.update, size: 100),
             Text(
-              DateFormat.yMMMMEEEEd(Get.locale.toString())
-                  .format(controller.table.date),
+              DateFormat.yMMMMEEEEd(Get.locale.toString()).format(table.date),
               style: context.textTheme.headline4,
             ),
             const SizedBox(height: 10),
@@ -40,7 +99,10 @@ class TableContainer extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              controller.latestUpdate,
+              "home/as_of".tr +
+                  DateFormat.yMd(Get.locale.toString())
+                      .add_jms()
+                      .format(webData.latestUpdate),
               style: Get.textTheme.bodyText1,
               textAlign: TextAlign.center,
             ),
@@ -49,169 +111,93 @@ class TableContainer extends StatelessWidget {
       );
     }
 
-    TableRow getHeaderRow() {
-      final headerRow = ["Kl.", "Std.", "Abw.", "Ver.", "Raum", "Info"];
-      return TableRow(
-        children: headerRow.map((content) {
-          return Padding(
-            padding: const EdgeInsets.fromLTRB(5, 10, 0, 10),
-            child: Text(
-              content,
-              overflow: TextOverflow.ellipsis,
-              style: Get.textTheme.bodyText1!.copyWith(
-                fontWeight: FontWeight.bold,
+    List<Widget> buildRows() {
+      List<Widget> list = [];
+      bool even = false;
+      table.groups.forEach((group) {
+        if (showGroup(group)) {
+          list.add(
+            Container(
+              decoration: even
+                  ? BoxDecoration(
+                      borderRadius: isLastVisibleGroup(group)
+                          ? const BorderRadius.vertical(
+                              bottom: Radius.circular(8),
+                            )
+                          : null,
+                      color: Get.isPlatformDarkMode
+                          ? Colors.grey.shade800
+                          : Colors.grey.shade200,
+                    )
+                  : null,
+              child: Column(
+                children: table.getGroup(group).map((row) {
+                  return TableRowWidget(
+                    row: row,
+                    lookup: lookup,
+                  );
+                }).toList(),
               ),
             ),
           );
-        }).toList(),
-      );
-    }
-
-    List<TableRow> getRows() {
-      List<TableRow> groupRows = [];
-      bool even = false;
-
-      for (var group in controller.groups) {
-        bool show =
-            controller.showGroup(controller.table.rows[group[0]].course);
-        if (show) {
           even = !even;
         }
-        for (int i = 0; i < group.length; i++) {
-          if (!show) {
-            break;
-          }
-          groupRows.add(TableRow(
-            decoration: BoxDecoration(
-              borderRadius:
-                  group == controller.groups[controller.lastVisibleGroup] &&
-                          i == group.length - 1
-                      ? const BorderRadius.vertical(bottom: Radius.circular(15))
-                      : null,
-              color: Get.isPlatformDarkMode
-                  ? even
-                      ? Get.theme.cardColor
-                      : Colors.grey[850]
-                  : even
-                      ? Colors.white
-                      : Colors.grey[200],
-            ),
-            children: [
-              Text(
-                controller.table.rows[group[i]].course,
-                style: Get.textTheme.bodyText1!
-                    .copyWith(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                controller.table.rows[group[i]].period,
-                style: Get.textTheme.bodyText1,
-              ),
-              CupertinoButton(
-                  minSize: 0,
-                  padding: EdgeInsets.zero,
-                  child: Text(
-                    controller.table.rows[group[i]].absent,
-                    style: Get.textTheme.bodyText1,
-                  ),
-                  onPressed: () {
-                    controller.lookup(controller.table.rows[group[i]].absent);
-                  }),
-              CupertinoButton(
-                  minSize: 0,
-                  padding: EdgeInsets.zero,
-                  child: Text(
-                    controller.table.rows[group[i]].substitute,
-                    style: Get.textTheme.bodyText1,
-                  ),
-                  onPressed: () {
-                    controller
-                        .lookup(controller.table.rows[group[i]].substitute);
-                  }),
-              Text(
-                controller.table.rows[group[i]].room,
-                style: Get.textTheme.bodyText1,
-              ),
-              Text(
-                controller.table.rows[group[i]].info,
-                style: Get.textTheme.bodyText1,
-              ),
-            ].map((e) {
-              return Padding(
-                  child: e, padding: const EdgeInsets.fromLTRB(5, 5, 0, 5));
-            }).toList(),
-          ));
-        }
-      }
-      return groupRows;
+      });
+      return list;
     }
 
-//########################################################################
-//#                                 Table                                #
-//########################################################################
+    final rows = buildRows();
 
-    final rows = getRows();
     return rows.isEmpty
         ? buildNoDataScreen()
         : SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                Center(
-                  child: Container(
+            delegate: SliverChildListDelegate([
+              Center(
+                child: Container(
+                    constraints: const BoxConstraints(maxWidth: 800),
                     margin: const EdgeInsets.symmetric(
                       horizontal: 5,
                       vertical: 10,
                     ),
-                    padding: const EdgeInsets.only(top: 20),
-                    constraints: const BoxConstraints(maxWidth: 800),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
+                          color: Colors.grey.withOpacity(0.4),
                           spreadRadius: 1,
                           blurRadius: 1,
                         )
                       ],
-                      color: Get.theme.cardColor,
+                      color: context.theme.cardColor,
+                      borderRadius: BorderRadius.circular(11),
                     ),
+                    padding: const EdgeInsets.only(top: 10),
                     child: Column(
                       children: [
                         Text(
                           DateFormat.yMMMMEEEEd(Get.locale.toString())
-                              .format(controller.table.date),
+                              .format(table.date),
                           style: context.textTheme.headline4,
                         ),
-                        Divider(
-                          color: context.textTheme.bodyText2!.color,
-                          indent: 30,
-                          endIndent: 30,
+                        const Divider(
+                          color: Colors.grey,
+                          indent: 20,
+                          endIndent: 20,
                         ),
-                        Table(
-                          columnWidths: const {
-                            0: FlexColumnWidth(3.5),
-                            1: FlexColumnWidth(2.5),
-                            2: FlexColumnWidth(4),
-                            3: FlexColumnWidth(4),
-                            4: FlexColumnWidth(3.5),
-                            5: FlexColumnWidth(7.5),
-                          },
-                          children: [getHeaderRow(), ...rows],
-                        ),
+                        const TableHeaderRow(header: SubstitutionTable.header),
+                        ...rows,
                       ],
-                    ),
-                  ),
-                ),
-                Center(
-                  child: Text(
-                    controller.latestUpdate,
-                    style: context.textTheme.bodyText1,
-                  ),
-                ),
-                const SizedBox(
-                  height: 60,
-                ),
-              ],
-            ),
+                    )),
+              ),
+              Text(
+                "home/as_of".tr +
+                    DateFormat.yMd(Get.locale.toString())
+                        .add_jms()
+                        .format(webData.latestUpdate),
+                style: context.textTheme.bodyText1,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 30),
+            ]),
           );
   }
 }

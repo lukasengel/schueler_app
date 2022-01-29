@@ -3,8 +3,7 @@ import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import '../../../../controllers/web_data.dart';
-import '../../../../widgets/dynamic_message_dialog.dart';
-import '../../../../widgets/dynamic_confirm_dialog.dart';
+import '../../../../widgets/dynamic_dialogs.dart';
 import '../../../../widgets/snackbar.dart';
 import '../../../../models/feedback_item.dart';
 
@@ -23,7 +22,6 @@ class ReportBugPageController extends GetxController {
 
   void onPressedHelp() {
     showDynamicMessageDialog(
-      context: Get.context!,
       title: "settings/feedback/privacy_dialog/header".tr,
       content: Text("settings/feedback/privacy_dialog/message".tr),
     );

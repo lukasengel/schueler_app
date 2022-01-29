@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:schueler_app/widgets/settings_ui/settings_info_box.dart';
 
 import './personalization_page_controller.dart';
 
@@ -37,13 +38,12 @@ class PersonalizationPage extends StatelessWidget {
                 onChanged: controller.forceGerman,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
-                child: Text(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 10,
+                ),
+                child: SettingsInfoBox(
                   "settings/personalization/language_note".tr,
-                  style: context.textTheme.bodyText1!.copyWith(
-                    color: Colors.grey,
-                  ),
-                  textAlign: TextAlign.center,
                 ),
               ),
             ],

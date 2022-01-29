@@ -31,6 +31,7 @@
     "home/no_information": "Unbekannter Lehrer",
     "home/show_all":"Alle anzeigen",
     "home/entry":"Eintrag vom ",
+    "home/as_of":"Stand: ",
 
     "settings/personalization": "Personalisierung",
     "settings/filters": "Tabelle filtern",

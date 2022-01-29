@@ -19,7 +19,7 @@ class WebData extends GetxController {
   //HTML Data
   List<SubstitutionTable> substitutionTables = [];
   List<NewsItem> news = [];
-  String latestUpdate = "";
+  DateTime latestUpdate = DateTime.now();
   String ticker = "";
 
   //Database Data
@@ -72,7 +72,7 @@ class WebData extends GetxController {
       ticker = parseTicker(elements[0]);
     }
     elements = document.getElementsByClassName("text_8pt");
-    latestUpdate = parseLatestUpdate(elements[0]);
+    latestUpdate = parseLatestUpdate(elements[0]) ?? DateTime.now();
     var element = document.getElementById("news_container");
     news = parseNews(element);
   }
@@ -94,22 +94,38 @@ class WebData extends GetxController {
     for (var element in elements) {
       List<SubstitutionTableRow> rows = [];
       final rowElements = element.getElementsByTagName("tr");
+      String group = "";
+      List<String> groups = [];
       for (int i = 3; i < rowElements.length; i++) {
         final fields = rowElements[i].getElementsByTagName("td");
+
         if (fields.length == 6) {
+          final course = fields[0].text.isNotEmpty ? fields[0].text : "";
+          if (course != String.fromCharCode(160)) {
+            if (groups.contains(course)) {
+              break;
+            }
+            group = course;
+          }
+          if (!groups.contains(group)) {
+            groups.add(group);
+          }
           rows.add(SubstitutionTableRow(
-            course: fields[0].text.isNotEmpty ? fields[0].text : "",
+            course: course,
             period: fields[1].text.isNotEmpty ? fields[1].text : "",
             absent: fields[2].text.isNotEmpty ? fields[2].text : "",
             substitute: fields[3].text.isNotEmpty ? fields[3].text : "",
             room: fields[4].text.isNotEmpty ? fields[4].text : "",
             info: fields[5].text.isNotEmpty ? fields[5].text : "",
+            group: group,
           ));
         }
       }
+
       list.add(SubstitutionTable(
         rows: rows,
         date: parseDate(rowElements[0].text) ?? DateTime(2000),
+        groups: groups,
       ));
     }
     return list;
@@ -145,12 +161,17 @@ class WebData extends GetxController {
     return ticker;
   }
 
-  String parseLatestUpdate(Element element) {
+  DateTime? parseLatestUpdate(Element element) {
     String text = element.text;
-    RegExp regex = RegExp(
-        r"Letzte\sAktualisierung:\s([0-9]+(\.[0-9]+)+)\s([0-9]+(:[0-9]+)+)");
-    RegExpMatch? match = regex.firstMatch(text);
-    return match != null ? text.substring(match.start, match.end) : "";
+
+    RegExp regex = RegExp(r"\d\d\.\d\d\.\d\d\d\d \d\d:\d\d:\d\d");
+    final match = regex.firstMatch(text);
+    if (match != null) {
+      final dateString = text.substring(match.start, match.end);
+      final formatter = DateFormat(r"d.M.y H:m:s");
+      final datetime = formatter.parse(dateString);
+      return datetime;
+    }
   }
 
 //########################################################################

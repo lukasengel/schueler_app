@@ -38,10 +38,10 @@ class NewsContainer extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       padding: const EdgeInsets.symmetric(vertical: 20),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(11),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
+            color: Colors.grey.withOpacity(0.4),
             spreadRadius: 1,
             blurRadius: 1,
           ),

@@ -7,7 +7,7 @@ import '../../controllers/authentication.dart';
 
 import '../../models/web_data_exception.dart';
 import '../../models/auth_data_exception.dart';
-import '../../widgets/dynamic_message_dialog.dart';
+import '../../widgets/dynamic_dialogs.dart';
 
 class LoginPageController extends GetxController {
   late LocalData localData;
@@ -62,7 +62,6 @@ class LoginPageController extends GetxController {
 
   void onPressedHelp() async {
     await showDynamicMessageDialog(
-      context: Get.context!,
       title: "login/help_dialog/header".tr,
       content: Text("login/help_dialog/message".tr),
     );

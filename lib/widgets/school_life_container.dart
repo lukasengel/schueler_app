@@ -78,7 +78,7 @@ class SchooLifeContainer extends StatelessWidget {
                 constraints: const BoxConstraints(maxHeight: 500),
                 child: ClipRRect(
                   borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(15)),
+                      const BorderRadius.vertical(top: Radius.circular(11)),
                   child: CachedNetworkImage(
                     width: double.infinity,
                     imageUrl: item.imageUrl,
@@ -202,10 +202,10 @@ class SchoolLifeBaseContainer extends StatelessWidget {
         constraints: const BoxConstraints(maxWidth: 500),
         margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(11),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
+              color: Colors.grey.withOpacity(0.4),
               spreadRadius: 1,
               blurRadius: 1,
             ),

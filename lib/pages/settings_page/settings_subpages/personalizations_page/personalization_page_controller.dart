@@ -3,14 +3,13 @@ import 'package:get/get.dart';
 
 import '../../../../controllers/local_data.dart';
 
-import '../../../../widgets/dynamic_message_dialog.dart';
+import '../../../../widgets/dynamic_dialogs.dart';
 
 class PersonalizationPageController extends GetxController {
   final localData = Get.find<LocalData>();
 
   Future<bool> genderLanguage() async {
     await showDynamicMessageDialog(
-      context: Get.context!,
       content: Image.asset("assets/images/lindner.gif"),
     );
     return false;

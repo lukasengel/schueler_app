@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:schueler_app/widgets/dynamic_app_bar.dart';
 import 'package:schueler_app/widgets/settings_ui/settings_container.dart';
+import 'package:schueler_app/widgets/settings_ui/settings_info_box.dart';
 
 import './notifications_page_controller.dart';
 
@@ -47,21 +48,12 @@ class NotificationsPage extends StatelessWidget {
                   SettingsText(text: "settings/notifications/relevant".tr),
                   if (notifications.isEmpty)
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Column(
-                        children: [
-                          const Icon(
-                            Icons.pending_outlined,
-                            color: Colors.grey,
-                            size: 45,
-                          ),
-                          Text(
-                            "settings/notifications/add_courses_here".tr,
-                            style: context.textTheme.bodyText1!
-                                .copyWith(color: Colors.grey),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
+                      ),
+                      child: SettingsInfoBox(
+                        "settings/notifications/add_courses_here".tr,
                       ),
                     ),
                   if (notifications.isNotEmpty)

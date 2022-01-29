@@ -11,7 +11,7 @@ import '../../controllers/local_data.dart';
 import '../../controllers/web_data.dart';
 import '../../controllers/authentication.dart';
 
-import '../../widgets/dynamic_confirm_dialog.dart';
+import '../../widgets/dynamic_dialogs.dart';
 
 class SettingsPageController extends GetxController {
   final localData = Get.find<LocalData>();
@@ -28,6 +28,7 @@ class SettingsPageController extends GetxController {
       await localData.clearSettings();
       await auth.signOut();
       Get.back();
+      Get.updateLocale(Get.deviceLocale!);
     }
   }
 
