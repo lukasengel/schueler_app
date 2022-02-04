@@ -86,29 +86,30 @@ class FloatingSearchBar extends StatelessWidget {
           ),
           child: Material(
             color: Colors.transparent,
-            child:
-                Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-              const Icon(Icons.search, size: 28),
-              Expanded(
-                child: TextField(
-                  style: context.textTheme.bodyText2,
-                  controller: controller.searchController,
-                  onChanged: controller.onSearchInput,
-                  decoration: InputDecoration(
-                    hintText: "settings/abbreviations/search".tr,
+            child: Row(
+              children: [
+                const Icon(Icons.search, size: 28),
+                Expanded(
+                  child: TextField(
+                    controller: controller.searchController,
+                    onChanged: controller.onSearchInput,
+                    decoration: InputDecoration(
+                      hintText: "settings/abbreviations/search".tr,
+                    ),
+                    autocorrect: false,
+                    enableSuggestions: false,
                   ),
-                  autocorrect: false,
-                  enableSuggestions: false,
                 ),
-              ),
-              IconButton(
-                icon: const Icon(Icons.clear),
-                onPressed: controller.clearInput,
-                splashRadius: 20,
-                iconSize: 28,
-                color: Get.isPlatformDarkMode ? Colors.grey : null,
-              ),
-            ]),
+                IconButton(
+                  padding: EdgeInsets.zero,
+                  icon: const Icon(Icons.clear),
+                  onPressed: controller.clearInput,
+                  splashRadius: 20,
+                  iconSize: 28,
+                  color: Get.isPlatformDarkMode ? Colors.grey : null,
+                ),
+              ],
+            ),
           ),
         ),
       ),

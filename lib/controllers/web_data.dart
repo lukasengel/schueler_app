@@ -78,7 +78,7 @@ class WebData extends GetxController {
   }
 
   Future<void> fetchDatabse() async {
-    final database = FirebaseDatabase.instance.reference();
+    final database = FirebaseDatabase.instance.ref();
     final snapshot = await database.get();
     schoolLifeItems = parseSchoolLife(snapshot);
     teachers = parseTeachers(snapshot);
@@ -240,7 +240,7 @@ class WebData extends GetxController {
   }
 
   Future<void> submitFeedback(FeedbackItem item) async {
-    final database = FirebaseDatabase.instance.reference();
+    final database = FirebaseDatabase.instance.ref();
     final feedback = database.child("feedback");
     final hash = DateTime.now().toString().hashCode.toString();
     return feedback.update({

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import './theme.dart';
+import './routes.dart' as routes;
 
 import './controllers/local_data.dart';
 import './controllers/web_data.dart';
@@ -12,12 +13,6 @@ import './controllers/authentication.dart';
 
 import './pages/home_page/home_page.dart';
 import './pages/login_page/login_page.dart';
-import './pages/settings_page/settings_page.dart';
-import './pages/settings_page/settings_subpages/filters_page/filters_page.dart';
-import './pages/settings_page/settings_subpages/personalizations_page/personalization_page.dart';
-import './pages/settings_page/settings_subpages/report_a_bug_page/report_bug_page.dart';
-import './pages/settings_page/settings_subpages/abbreviations_page/abbreviations_page.dart';
-import './pages/settings_page/settings_subpages/notifications_page/notifications_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -58,24 +53,7 @@ class MyApp extends StatelessWidget {
           Platform.isIOS ? Transition.cupertino : Transition.fade,
       fallbackLocale: const Locale("de", "DE"),
       title: "GG-Schüler-App",
-      getPages: [
-        GetPage(name: HomePage.route, page: () => const HomePage()),
-        GetPage(name: LoginPage.route, page: () => const LoginPage()),
-        GetPage(name: SettingsPage.route, page: () => const SettingsPage()),
-        GetPage(name: FiltersPage.route, page: () => const FiltersPage()),
-        GetPage(
-          name: PersonalizationPage.route,
-          page: () => const PersonalizationPage(),
-        ),
-        GetPage(name: ReportBugPage.route, page: () => const ReportBugPage()),
-        GetPage(
-          name: AbbreviationsPage.route,
-          page: () => const AbbreviationsPage(),
-        ),
-        GetPage(
-            name: NotificationsPage.route,
-            page: () => const NotificationsPage())
-      ],
+      getPages: routes.getPages,
       home: GetBuilder<Authentication>(
         builder: (controller) {
           return controller.authState == AuthState.LOGGED_IN

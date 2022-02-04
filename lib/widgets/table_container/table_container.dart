@@ -21,9 +21,9 @@ class TableContainer extends StatelessWidget {
     final webData = Get.find<WebData>();
     final table = webData.substitutionTables[index];
 
-// //########################################################################
-// //#                               Logic                                  #
-// //########################################################################
+//########################################################################
+//#                               Logic                                  #
+//########################################################################
 
     void lookup(String substitute) {
       final teachers = Get.find<WebData>().teachers;
