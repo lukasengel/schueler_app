@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../settings_page/settings_page.dart';
+import '../../routes.dart' as routes;
 import '../../controllers/local_data.dart';
 import '../../controllers/web_data.dart';
 
@@ -18,7 +18,7 @@ class HomePageController extends GetxController {
   }
 
   void onPressedSettings() {
-    Get.toNamed(SettingsPage.route);
+    Get.toNamed(routes.settings);
   }
 
   void invertSorting() async {

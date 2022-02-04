@@ -6,7 +6,7 @@ import '../../controllers/local_data.dart';
 import '../../controllers/web_data.dart';
 
 import '../../models/substitution_table.dart';
-import '../../pages/settings_page/settings_subpages/abbreviations_page/abbreviations_page.dart';
+import '../../routes.dart' as routes;
 
 import '../snackbar.dart';
 import './table_row_widget.dart';
@@ -47,7 +47,7 @@ class TableContainer extends StatelessWidget {
           duration: const Duration(seconds: 5),
           action: SnackBarAction(
             label: "home/show_all".tr,
-            onPressed: () => Get.toNamed(AbbreviationsPage.route),
+            onPressed: () => Get.toNamed(routes.abbreviations),
           ),
         ),
       );
