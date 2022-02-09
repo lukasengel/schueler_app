@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import './login_page_controller.dart';
 
 //TODO: Benachrichtigungen
+//TODO: iOS Splash Screen
 //TODO: Einführung beim ersten Start und Hilfe-Seite, Deutsch erzwingen
 //TODO: ZZZ-Icon
 //TODO: Login Page Logic
