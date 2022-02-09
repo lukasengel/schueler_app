@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class SubstitutionTable {
   final DateTime date;
   final List<SubstitutionTableRow> rows;
@@ -30,6 +32,27 @@ class SubstitutionTable {
     }
     return list;
   }
+
+  String toJson() {
+    final data = {
+      "date": date.toIso8601String(),
+      "rows": rows.map((e) => e.toJson()).toList(),
+      "groups": groups,
+    };
+    final json = jsonEncode(data);
+    return json;
+  }
+
+  factory SubstitutionTable.fromJson(String json) {
+    final Map<String, dynamic> data = jsonDecode(json);
+    return SubstitutionTable(
+      date: DateTime.tryParse(data["date"]) ?? DateTime.now(),
+      rows: (data["rows"] as List)
+          .map((e) => SubstitutionTableRow.fromJson(e))
+          .toList(),
+      groups: data["groups"],
+    );
+  }
 }
 
 class SubstitutionTableRow {
@@ -54,5 +77,31 @@ class SubstitutionTableRow {
   @override
   String toString() {
     return ("$course;$period;$absent;$substitute;$room;$info;$group");
+  }
+
+  String toJson() {
+    final data = {
+      "course": course,
+      "period": period,
+      "absent": absent,
+      "substitute": substitute,
+      "room": room,
+      "info": info,
+      "group": group,
+    };
+    return jsonEncode(data);
+  }
+
+  factory SubstitutionTableRow.fromJson(String json) {
+    final Map<String, dynamic> data = jsonDecode(json);
+    return SubstitutionTableRow(
+      course: data["course"],
+      period: data["period"],
+      absent: data["absent"],
+      substitute: data["substitute"],
+      room: data["room"],
+      info: data["info"],
+      group: data["group"],
+    );
   }
 }

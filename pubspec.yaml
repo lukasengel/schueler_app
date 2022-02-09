@@ -27,6 +27,7 @@ dependencies:
   firebase_database: ^9.0.6
   cached_network_image: ^3.2.0
   firebase_auth: ^3.3.0
+  background_fetch: ^1.0.3
 
 dev_dependencies:
   flutter_test:
