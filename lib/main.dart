@@ -7,7 +7,6 @@ import 'package:background_fetch/background_fetch.dart';
 
 import './theme.dart';
 import './routes.dart' as routes;
-import './notifications.dart';
 
 import './controllers/local_data.dart';
 import './controllers/web_data.dart';
