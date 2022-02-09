@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:background_fetch/background_fetch.dart';
 
 import './theme.dart';
 import './routes.dart' as routes;
