@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class SubstitutionTable {
   final DateTime date;
   final List<SubstitutionTableRow> rows;
@@ -33,24 +31,25 @@ class SubstitutionTable {
     return list;
   }
 
-  String toJson() {
-    final data = {
-      "date": date.toIso8601String(),
-      "rows": rows.map((e) => e.toJson()).toList(),
-      "groups": groups,
-    };
-    final json = jsonEncode(data);
-    return json;
-  }
+  factory SubstitutionTable.fromJson(Map<String, dynamic> json) {
+    List<SubstitutionTableRow> rows = [];
+    List<String> groups = [];
 
-  factory SubstitutionTable.fromJson(String json) {
-    final Map<String, dynamic> data = jsonDecode(json);
+    if (json["rows"] != null) {
+      json["rows"].forEach((e) {
+        final item = Map<String, dynamic>.from(e);
+        rows.add(SubstitutionTableRow.fromJson(item));
+      });
+    }
+
+    if (json["groups"] != null) {
+      groups = List<String>.from(json["groups"]);
+    }
+
     return SubstitutionTable(
-      date: DateTime.tryParse(data["date"]) ?? DateTime.now(),
-      rows: (data["rows"] as List)
-          .map((e) => SubstitutionTableRow.fromJson(e))
-          .toList(),
-      groups: data["groups"],
+      date: DateTime.tryParse(json["date"]) ?? DateTime.now(),
+      rows: rows,
+      groups: groups,
     );
   }
 }
@@ -79,29 +78,15 @@ class SubstitutionTableRow {
     return ("$course;$period;$absent;$substitute;$room;$info;$group");
   }
 
-  String toJson() {
-    final data = {
-      "course": course,
-      "period": period,
-      "absent": absent,
-      "substitute": substitute,
-      "room": room,
-      "info": info,
-      "group": group,
-    };
-    return jsonEncode(data);
-  }
-
-  factory SubstitutionTableRow.fromJson(String json) {
-    final Map<String, dynamic> data = jsonDecode(json);
+  factory SubstitutionTableRow.fromJson(Map<String, dynamic> json) {
     return SubstitutionTableRow(
-      course: data["course"],
-      period: data["period"],
-      absent: data["absent"],
-      substitute: data["substitute"],
-      room: data["room"],
-      info: data["info"],
-      group: data["group"],
+      course: json["course"] ?? "",
+      period: json["period"] ?? "",
+      absent: json["absent"] ?? "",
+      substitute: json["substitute"] ?? "",
+      room: json["room"] ?? "",
+      info: json["info"] ?? "",
+      group: json["group"] ?? "",
     );
   }
 }

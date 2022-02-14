@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import '../../controllers/local_data.dart';
 import '../../controllers/authentication.dart';
 
-import '../../models/web_data_exception.dart';
 import '../../models/auth_data_exception.dart';
 import '../../widgets/dynamic_dialogs.dart';
 
@@ -74,12 +73,6 @@ class LoginPageController extends GetxController {
   String translateError(String e) {
     if (e == AuthDataException.emptyCredentials().toString()) {
       return "login/error/empty_credentials".tr;
-    } else if (e == WebDataException.unauthorized().toString()) {
-      return "login/error/unauthorized".tr + "\n($e)";
-    } else if (e == WebDataException.forbidden().toString()) {
-      return "login/error/forbidden".tr + "\n($e)";
-    } else if (e == WebDataException.notFound().toString()) {
-      return "login/error/not_found".tr + "\n($e)";
     } else {
       return e;
     }

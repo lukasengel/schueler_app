@@ -13,4 +13,12 @@ class NewsItem {
   String toString() {
     return "$headline-$subheadline-$content";
   }
+
+  factory NewsItem.fromJson(Map<String, dynamic> json) {
+    return NewsItem(
+      headline: json["headline"] ?? "",
+      subheadline: json["subheadline"] ?? "",
+      content: json["content"] ?? "",
+    );
+  }
 }

@@ -20,7 +20,6 @@ class TableContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final webData = Get.find<WebData>();
     final table = webData.substitutionTables[index];
-
 //########################################################################
 //#                               Logic                                  #
 //########################################################################
@@ -28,7 +27,7 @@ class TableContainer extends StatelessWidget {
     void lookup(String substitute) {
       final teachers = Get.find<WebData>().teachers;
       String one = "";
-      String two = "home/no_information".tr;
+      String two = "home/unknown_teacher".tr;
 
       if (substitute.length >= 3) {
         final content = substitute.substring(0, 3);
