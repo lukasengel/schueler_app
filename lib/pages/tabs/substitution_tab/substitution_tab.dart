@@ -22,7 +22,10 @@ class SubstitutionTab extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.block, size: 100),
+                    const ImageIcon(
+                      AssetImage("assets/images/lucky_cat.png"),
+                      size: 100,
+                    ),
                     Text("home/no_information".tr),
                   ],
                 ),

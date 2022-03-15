@@ -66,7 +66,10 @@ class NewsTab extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.update, size: 100),
+                      const ImageIcon(
+                        AssetImage("assets/images/lucky_cat.png"),
+                        size: 100,
+                      ),
                       Text("home/no_news".tr,
                           style: context.textTheme.bodyText1),
                       const SizedBox(height: 10),

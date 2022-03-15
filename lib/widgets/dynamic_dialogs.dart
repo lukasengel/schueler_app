@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:get/get.dart';
-import 'package:schueler_app/theme.dart' as theme;
+
+import '../theme.dart' as theme;
 
 ThemeData get _getTheme {
   return ThemeData(

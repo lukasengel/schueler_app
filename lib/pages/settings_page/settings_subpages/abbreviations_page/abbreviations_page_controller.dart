@@ -24,10 +24,6 @@ class AbbreviationsPageController extends GetxController {
 
     if (trimmed.isEmpty) {
       list = [...webData.teachers];
-    } else if (trimmed == "opfer") {
-      list = webData.teachers
-          .where((element) => element.abbreviation == "fla")
-          .toList();
     } else {
       list = webData.teachers.where((element) {
         return element.abbreviation.toLowerCase().contains(trimmed) ||

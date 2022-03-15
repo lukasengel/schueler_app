@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:schueler_app/widgets/settings_ui/settings_info_box.dart';
 
 import './personalization_page_controller.dart';
 
 import '../../../../widgets/settings_ui/settings_switch_tile.dart';
 import '../../../../widgets/settings_ui/settings_text.dart';
+import '../../../../widgets//settings_ui/settings_info_box.dart';
 
 class PersonalizationPage extends StatelessWidget {
   static const route = "/settings/personalization";

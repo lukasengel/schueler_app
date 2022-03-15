@@ -88,7 +88,10 @@ class TableContainer extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.update, size: 100),
+            const ImageIcon(
+              AssetImage("assets/images/lucky_cat.png"),
+              size: 100,
+            ),
             Text(
               DateFormat.yMMMMEEEEd(Get.locale.toString()).format(table.date),
               style: context.textTheme.headline4,
