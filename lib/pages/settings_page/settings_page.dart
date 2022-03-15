@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
-import 'package:schueler_app/widgets/dynamic_app_bar.dart';
 
 import './settings_page_controller.dart';
 import '../../widgets/settings_ui/settings_tile.dart';
@@ -14,7 +13,9 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(SettingsPageController());
     return Scaffold(
-      appBar: dynamicAppBar(context: context, title: "general/settings".tr),
+      appBar: AppBar(
+        title: Text("general/settings".tr),
+      ),
       body: SafeArea(
         bottom: false,
 // ###################################################################################

@@ -1,7 +1,7 @@
 class Settings {
   String username;
   String password;
-  bool reversed;
+  bool reversed, reversedSchoolLife;
   int themeColor;
   Map<String, dynamic> filters;
   bool dailyNotifications, smvNotifications;
@@ -13,6 +13,7 @@ class Settings {
     required this.password,
     required this.themeColor,
     required this.reversed,
+    required this.reversedSchoolLife,
     required this.filters,
     required this.dailyNotifications,
     required this.smvNotifications,
@@ -25,6 +26,7 @@ class Settings {
         password = "",
         themeColor = 1,
         reversed = true,
+        reversedSchoolLife = true,
         filters = defaultFilters,
         dailyNotifications = false,
         smvNotifications = false,

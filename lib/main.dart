@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -49,8 +47,6 @@ class MyApp extends StatelessWidget {
       darkTheme: AppTheme.dark,
       translationsKeys: localData.translations,
       locale: getLocale,
-      defaultTransition:
-          Platform.isIOS ? Transition.cupertino : Transition.fade,
       fallbackLocale: const Locale("de", "DE"),
       title: "GG-Schüler-App",
       getPages: routes.getPages,

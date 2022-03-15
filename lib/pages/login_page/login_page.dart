@@ -7,9 +7,11 @@ import './login_page_controller.dart';
 
 //TODO: Benachrichtigungen
 //TODO: iOS Splash Screen
-//TODO: Einführung beim ersten Start und Hilfe-Seite, Deutsch erzwingen
+//TODO: Indexed Stack instead of GetBuilder
 //TODO: ZZZ-Icon
-//TODO: Login Page Logic
+//TODO: Login Page Logi
+//TODO: Broadcast Message
+//TODO: Android Cursor Size
 
 class LoginPage extends StatelessWidget {
   static const route = "/login";

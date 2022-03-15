@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import './abbreviations_page_controller.dart';
 
 import '../../../../widgets/settings_ui/settings_container.dart';
-import '../../../../widgets/dynamic_app_bar.dart';
 
 class AbbreviationsPage extends StatelessWidget {
   static const route = "/settings/abbreviations";
@@ -14,9 +13,8 @@ class AbbreviationsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(AbbreviationsPageController());
     return Scaffold(
-      appBar: dynamicAppBar(
-        context: context,
-        title: "settings/abbreviations".tr,
+      appBar: AppBar(
+        title: Text("settings/abbreviations".tr),
       ),
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -96,6 +94,9 @@ class FloatingSearchBar extends StatelessWidget {
                     decoration: InputDecoration(
                       hintText: "settings/abbreviations/search".tr,
                     ),
+                    style: TextStyle(
+                      color: context.textTheme.bodyText1?.color,
+                    ),
                     autocorrect: false,
                     enableSuggestions: false,
                   ),
@@ -106,7 +107,6 @@ class FloatingSearchBar extends StatelessWidget {
                   onPressed: controller.clearInput,
                   splashRadius: 20,
                   iconSize: 28,
-                  color: Get.isPlatformDarkMode ? Colors.grey : null,
                 ),
               ],
             ),

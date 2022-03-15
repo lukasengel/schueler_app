@@ -6,7 +6,6 @@ import './personalization_page_controller.dart';
 
 import '../../../../widgets/settings_ui/settings_switch_tile.dart';
 import '../../../../widgets/settings_ui/settings_text.dart';
-import '../../../../widgets/dynamic_app_bar.dart';
 
 class PersonalizationPage extends StatelessWidget {
   static const route = "/settings/personalization";
@@ -16,9 +15,8 @@ class PersonalizationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(PersonalizationPageController());
     return Scaffold(
-      appBar: dynamicAppBar(
-        context: context,
-        title: "settings/personalization".tr,
+      appBar: AppBar(
+        title: Text("settings/personalization".tr),
       ),
       body: SafeArea(
         bottom: false,

@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:schueler_app/widgets/dynamic_app_bar.dart';
 
 import '../../../../widgets/settings_ui/settings_container.dart';
 import '../../../../widgets/settings_ui/settings_text.dart';
@@ -16,18 +15,18 @@ class ReportBugPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(ReportBugPageController());
     return Scaffold(
-      appBar: dynamicAppBar(
-        context: context,
-        title: "settings/feedback/app_bar_title".tr,
-        leading: DynamicAppBarAction(
-          icon: Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back,
+      appBar: AppBar(
+        title: Text("settings/feedback/app_bar_title".tr),
+        leading: IconButton(
+          icon: Icon(Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back),
           onPressed: controller.discard,
         ),
-        action: DynamicAppBarAction(
-          icon: Icons.done,
-          onPressed: controller.submit,
-          enabled: controller.valid,
-        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.done),
+            onPressed: controller.valid.value ? controller.submit : null,
+          )
+        ],
       ),
       body: GestureDetector(
         onTap: controller.unfocus,

@@ -29,7 +29,9 @@ class TableContainer extends StatelessWidget {
       String one = "";
       String two = "home/unknown_teacher".tr;
 
-      if (substitute.length >= 3) {
+      if (substitute.trim()[0] == '-') {
+        two = "home/no_teacher".tr;
+      } else if (substitute.length >= 3) {
         final content = substitute.substring(0, 3);
         final index =
             teachers.where((element) => element.abbreviation == content);

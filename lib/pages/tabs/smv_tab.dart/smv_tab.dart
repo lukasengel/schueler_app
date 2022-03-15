@@ -23,7 +23,7 @@ class SmvTab extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(0, 5, 0, 75),
             itemBuilder: (context, index) {
               return SchooLifeContainer(
-                Get.find<LocalData>().settings.reversed
+                Get.find<LocalData>().settings.reversedSchoolLife
                     ? webData.schoolLifeItems[index]
                     : webData.schoolLifeItems.reversed.toList()[index],
               );

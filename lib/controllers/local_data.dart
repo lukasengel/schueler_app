@@ -54,6 +54,7 @@ class LocalData extends GetxController {
         password: prefs.getString("password") ?? "",
         themeColor: prefs.getInt("themeColor") ?? 1,
         reversed: prefs.getBool("reversed") ?? true,
+        reversedSchoolLife: prefs.getBool("reversedSchoolLife") ?? true,
         filters: json
             .decode(prefs.getString("filters") ?? Settings.defaultFiltersStr),
         dailyNotifications: prefs.getBool("dailyNotifications") ?? false,
@@ -74,6 +75,7 @@ class LocalData extends GetxController {
       await prefs.setString("password", settings.password);
       await prefs.setInt("themeColor", settings.themeColor);
       await prefs.setBool("reversed", settings.reversed);
+      await prefs.setBool("reversedSchoolLife", settings.reversedSchoolLife);
       await prefs.setString("filters", json.encode(settings.filters));
       await prefs.setBool("dailyNotifications", settings.dailyNotifications);
       await prefs.setBool("smvNotifications", settings.smvNotifications);

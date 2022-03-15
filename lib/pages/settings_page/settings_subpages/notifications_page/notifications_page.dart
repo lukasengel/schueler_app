@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:schueler_app/widgets/dynamic_app_bar.dart';
-import 'package:schueler_app/widgets/settings_ui/settings_container.dart';
-import 'package:schueler_app/widgets/settings_ui/settings_info_box.dart';
 
 import './notifications_page_controller.dart';
 
 import '../../../../widgets/settings_ui/settings_switch_tile.dart';
 import '../../../../widgets/settings_ui/settings_text.dart';
+import '../../../../widgets/settings_ui/settings_container.dart';
+import '../../../../widgets/settings_ui/settings_info_box.dart';
 
 class NotificationsPage extends StatelessWidget {
   static const route = "/settings/notifications";
@@ -18,9 +17,8 @@ class NotificationsPage extends StatelessWidget {
     final controller = Get.put(NotificationsPageController());
 
     return Scaffold(
-      appBar: dynamicAppBar(
-        context: context,
-        title: "settings/notifications".tr,
+      appBar: AppBar(
+        title: Text("settings/notifications".tr),
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),

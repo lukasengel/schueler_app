@@ -22,7 +22,12 @@ class HomePageController extends GetxController {
   }
 
   void invertSorting() async {
-    localData.settings.reversed = !localData.settings.reversed;
+    if (selectedTab == 1) {
+      localData.settings.reversed = !localData.settings.reversed;
+    } else {
+      localData.settings.reversedSchoolLife =
+          !localData.settings.reversedSchoolLife;
+    }
     await localData.writeSettings();
     webData.update();
   }

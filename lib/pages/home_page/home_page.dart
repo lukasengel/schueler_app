@@ -11,7 +11,6 @@ import '../tabs/smv_tab.dart/smv_tab.dart';
 import '../tabs/news_tab/news_tab.dart';
 
 import '../../widgets/splashy_bottom_navigation_bar.dart';
-import '../../widgets/dynamic_app_bar.dart';
 
 class HomePage extends StatelessWidget {
   static const route = "/home";
@@ -31,26 +30,32 @@ class HomePage extends StatelessWidget {
     return GetBuilder<HomePageController>(builder: (controller) {
       initializeDateFormatting(Get.locale.toString(), null);
       return Scaffold(
-        appBar: dynamicAppBar(
-          context: context,
-          title: headlines[controller.selectedTab],
-          action: DynamicAppBarAction(
-            icon: Icons.settings_outlined,
-            onPressed: controller.onPressedSettings,
-          ),
-          canGoBack: false,
+        appBar: AppBar(
+          title: Text(headlines[controller.selectedTab]),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.settings_outlined),
+              onPressed: controller.onPressedSettings,
+            )
+          ],
         ),
         body: tabs[controller.selectedTab],
         floatingActionButton: controller.selectedTab > 0
             ? GetBuilder<LocalData>(builder: (localData) {
                 return FloatingActionButton.extended(
                   label: Text(
-                    !localData.settings.reversed
+                    controller.selectedTab == 1 &&
+                                !localData.settings.reversed ||
+                            controller.selectedTab == 2 &&
+                                !localData.settings.reversedSchoolLife
                         ? "home/asc".tr
                         : "home/desc".tr,
                   ),
                   icon: Icon(
-                    !localData.settings.reversed
+                    controller.selectedTab == 1 &&
+                                !localData.settings.reversed ||
+                            controller.selectedTab == 2 &&
+                                !localData.settings.reversedSchoolLife
                         ? Icons.vertical_align_bottom
                         : Icons.vertical_align_top,
                   ),

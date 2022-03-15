@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:schueler_app/widgets/dynamic_app_bar.dart';
 
 import './filter_widgets.dart';
 
@@ -13,9 +12,8 @@ class FiltersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: dynamicAppBar(
-        context: context,
-        title: "settings/filters".tr,
+      appBar: AppBar(
+        title: Text("settings/filters".tr),
       ),
       body: SafeArea(
         bottom: false,
