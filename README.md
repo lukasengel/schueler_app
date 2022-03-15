@@ -23,7 +23,7 @@ Ermöglicht den Zugriff auf den aktuellen Vertretungsplan, die Nachrichten der S
 Der Quellcode steht unter der MIT-Lizenz öffentlich zur Verfügung. Weitere Informationen unter license.txt.
 
 ## Screenshots
-<img alt="Screenshot" src="./github/screenshot.gif" height="600">
+<img alt="Screenshot" src=".github/screenshot.gif" height="600">
 
 ## Weitere Repositories
 - Schüler-App-Backend: https://github.com/lukasengel/schueler_app_backend
