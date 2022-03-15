@@ -1,4 +1,4 @@
-<img alt="Logo" src=".github/logo.png" height="200">
+<img alt="Logo" src=".github/logo_app.png" height="200">
 
 # GG Schüler-App
 Schüler-App des Gnadenthal-Gymnasium Ingolstadt.
