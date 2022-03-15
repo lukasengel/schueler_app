@@ -4,7 +4,7 @@ class Settings {
   bool reversed, reversedSchoolLife;
   int themeColor;
   Map<String, dynamic> filters;
-  bool dailyNotifications, smvNotifications;
+  bool dailyNotifications, smvNotifications, broadcastNotifications;
   List<String> notifications;
   bool forceGerman;
 
@@ -17,6 +17,7 @@ class Settings {
     required this.filters,
     required this.dailyNotifications,
     required this.smvNotifications,
+    required this.broadcastNotifications,
     required this.notifications,
     required this.forceGerman,
   });
@@ -30,6 +31,7 @@ class Settings {
         filters = defaultFilters,
         dailyNotifications = false,
         smvNotifications = false,
+        broadcastNotifications = false,
         notifications = [],
         forceGerman = false;
 

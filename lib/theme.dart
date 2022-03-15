@@ -77,7 +77,7 @@ class AppTheme {
       bodyText2: const TextStyle(
         color: Colors.black,
         fontSize: 18,
-        height: 1,
+        // height: 1,
       ),
       caption: TextStyle(
         color: Colors.grey[800],
@@ -175,7 +175,7 @@ class AppTheme {
         bodyText2: TextStyle(
           color: Colors.white,
           fontSize: 18,
-          height: 1,
+          // height: 1,
         ),
         caption: TextStyle(
           color: Colors.white,

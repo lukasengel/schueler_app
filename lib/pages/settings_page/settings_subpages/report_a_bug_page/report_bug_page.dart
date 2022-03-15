@@ -22,10 +22,11 @@ class ReportBugPage extends StatelessWidget {
           onPressed: controller.discard,
         ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.done),
-            onPressed: controller.valid.value ? controller.submit : null,
-          )
+          Obx(() => IconButton(
+            disabledColor: Colors.grey,
+                icon: const Icon(Icons.done),
+                onPressed: controller.valid.value ? controller.submit : null,
+              ))
         ],
       ),
       body: GestureDetector(

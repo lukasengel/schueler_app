@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -48,8 +50,10 @@ class MyApp extends StatelessWidget {
       translationsKeys: localData.translations,
       locale: getLocale,
       fallbackLocale: const Locale("de", "DE"),
-      title: "GG-Schüler-App",
+      title: "GG Schüler-App",
       getPages: routes.getPages,
+      defaultTransition:
+          Platform.isIOS ? Transition.cupertino : Transition.topLevel,
       home: GetBuilder<Authentication>(
         builder: (controller) {
           return controller.authState == AuthState.LOGGED_IN

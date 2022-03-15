@@ -79,6 +79,7 @@
     "settings/notifications/smv_news":"News from School",
     "settings/notifications/substitutions":"Substitutions (daily)",
     "settings/notifications/relevant":"Relevant Substitutions",
+    "settings/notifications/broadcast":"Broadcasts",
     "settings/notifications/add_courses_here":"Add here the courses for which you would like to be notified about changes.",
     "settings/notifications/pick_substitutions":"New Rule",
 

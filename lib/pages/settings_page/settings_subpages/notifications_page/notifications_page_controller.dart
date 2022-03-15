@@ -36,4 +36,11 @@ class NotificationsPageController extends GetxController {
     await localData.writeSettings();
     update();
   }
+
+  Future<bool> onChangedBroadcast() async {
+    final settings = localData.settings;
+    settings.broadcastNotifications = !settings.broadcastNotifications;
+    await localData.writeSettings();
+    return settings.broadcastNotifications;
+  }
 }

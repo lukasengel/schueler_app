@@ -14,6 +14,7 @@ class SubstitutionTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(SubstitutionTabController());
+
     return SafeArea(
       child: GetBuilder<SubstitutionTabController>(builder: (controller) {
         return controller.webData.substitutionTables.isEmpty
@@ -42,7 +43,10 @@ class SubstitutionTab extends StatelessWidget {
                         header: BallPulseHeader(color: Get.theme.primaryColor),
                         slivers: [
                           GetBuilder<WebData>(builder: (webData) {
-                            return TableContainer(index);
+                            return TableContainer(
+                              index,
+                              key: UniqueKey(),
+                            );
                           }),
                         ],
                       );

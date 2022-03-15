@@ -78,6 +78,7 @@
     "settings/notifications/smv_news":"Neues aus dem Schulleben",
     "settings/notifications/substitutions":"Vertretungen (täglich)",
     "settings/notifications/relevant":"Relevante Vertretungen",
+    "settings/notifications/broadcast":"Rundnachrichten",
     "settings/notifications/add_courses_here":"Fügen Sie hier die Klassen bzw. Kurse hinzu, bei denen Sie über Vertretungen/Änderungen benachrichtigt werden wollen.",
     "settings/notifications/pick_substitutions":"Neue Richtlinie",
 

@@ -59,6 +59,7 @@ class LocalData extends GetxController {
             .decode(prefs.getString("filters") ?? Settings.defaultFiltersStr),
         dailyNotifications: prefs.getBool("dailyNotifications") ?? false,
         smvNotifications: prefs.getBool("smvNotifications") ?? false,
+        broadcastNotifications: prefs.getBool("broadcastNotifications") ?? false,
         notifications: prefs.getStringList("notifications") ?? [],
         forceGerman: prefs.getBool("forceGerman") ?? false,
       );
@@ -79,6 +80,7 @@ class LocalData extends GetxController {
       await prefs.setString("filters", json.encode(settings.filters));
       await prefs.setBool("dailyNotifications", settings.dailyNotifications);
       await prefs.setBool("smvNotifications", settings.smvNotifications);
+      await prefs.setBool("broadcastNotifications", settings.broadcastNotifications);
       await prefs.setStringList("notifications", settings.notifications);
       await prefs.setBool("forceGerman", settings.forceGerman);
     } catch (e) {
