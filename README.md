@@ -1,4 +1,4 @@
-<img alt="Logo" src="https://firebasestorage.googleapis.com/v0/b/gg-schueler-app.appspot.com/o/github%2FLogo.png?alt=media&token=2c25500e-86ec-4ff7-9c53-46d066140dc0" height="200">
+<img alt="Logo" src=".github/logo.png" height="200">
 
 # GG Schüler-App
 Schüler-App des Gnadenthal-Gymnasium Ingolstadt.
@@ -6,15 +6,13 @@ Schüler-App des Gnadenthal-Gymnasium Ingolstadt.
 Ermöglicht den Zugriff auf den aktuellen Vertretungsplan, die Nachrichten der Schulleitung und ein schwarzes Brett mit Neuigkeiten im Schulleben (z.B. Veranstaltungen, Ankündigungen, Beiträge).
 
 ## Funktionen
-- Vertretungsplan, Nachrichten der Schulleitung, Schulleben-Seite
-- Nachtmodus/Dunkelmodus
-- Anpassung an Plattform (Android/iOS)
-- Filtern der Vertretungsplan-Tabelle nach Klassen
-- Feedback/Bug-Meldung
-- Lehrerkürzel-Übersicht
-
-## Geplante Features
-- Benachrichtigungen (entfallene Stunden, Neuigkeiten)
+- [x] Vertretungsplan, Nachrichten der Schulleitung, Schulleben-Seite
+- [x] Nachtmodus/Dunkelmodus
+- [x] Anpassung an Plattform (Android/iOS)
+- [x] Filtern der Vertretungsplan-Tabelle nach Klassen
+- [x] Feedback/Bug-Meldung
+- [x] Lehrerkürzel-Übersicht
+- [ ] Benachrichtigungen (entfallene Stunden, Neuigkeiten)
 
 ## Mitwirkende
 - Logo-Gestaltung:  Nika Peskova
@@ -25,4 +23,8 @@ Ermöglicht den Zugriff auf den aktuellen Vertretungsplan, die Nachrichten der S
 Der Quellcode steht unter der MIT-Lizenz öffentlich zur Verfügung. Weitere Informationen unter license.txt.
 
 ## Screenshots
-<img alt="Screenshot" src="https://firebasestorage.googleapis.com/v0/b/gg-schueler-app.appspot.com/o/github%2FAnimiert.gif?alt=media&token=9c7b5f94-313e-41eb-a4d3-1d44f7b9f42b" height="600">
+<img alt="Screenshot" src="./github/screenshot.gif" height="600">
+
+## Weitere Repositories
+- Schüler-App-Backend: https://github.com/lukasengel/schueler_app_backend
+- Schüler-App-Manager: https://github.com/lukasengel/schueler_app_manager
