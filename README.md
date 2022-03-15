@@ -1,4 +1,4 @@
-<img alt="Logo" src="https://firebasestorage.googleapis.com/v0/b/gg-schueler-app.appspot.com/o/github%2FLogo.png?alt=media&token=2c25500e-86ec-4ff7-9c53-46d066140dc0" height="200">
+<img alt="Logo" src="https://firebasestorage.googleapis.com/v0/b/gg-schueler-app.appspot.com/o/github%2Flogo_app.png?alt=media&token=af7469c3-387b-4162-a265-027b1afe6538" height="200">
 
 # GG Schüler-App
 Schüler-App des Gnadenthal-Gymnasium Ingolstadt.
@@ -25,4 +25,4 @@ Ermöglicht den Zugriff auf den aktuellen Vertretungsplan, die Nachrichten der S
 Der Quellcode steht unter der MIT-Lizenz öffentlich zur Verfügung. Weitere Informationen unter license.txt.
 
 ## Screenshots
-<img alt="Screenshot" src="https://firebasestorage.googleapis.com/v0/b/gg-schueler-app.appspot.com/o/github%2FAnimiert.gif?alt=media&token=9c7b5f94-313e-41eb-a4d3-1d44f7b9f42b" height="600">
+<img alt="Screenshot" src="https://firebasestorage.googleapis.com/v0/b/gg-schueler-app.appspot.com/o/github%2Fscreenshot.gif?alt=media&token=9e67510b-ec0c-4044-a5de-193c0d4dedde" height="600">
