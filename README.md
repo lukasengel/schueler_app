@@ -26,3 +26,7 @@ Der Quellcode steht unter der MIT-Lizenz öffentlich zur Verfügung. Weitere Inf
 
 ## Screenshots
 <img alt="Screenshot" src="https://firebasestorage.googleapis.com/v0/b/gg-schueler-app.appspot.com/o/github%2Fscreenshot.gif?alt=media&token=9e67510b-ec0c-4044-a5de-193c0d4dedde" height="600">
+
+## Weitere Repositories
+- Schüler-App-Backend: https://github.com/lukasengel/schueler_app_backend
+- Schüler-App-Manager: https://github.com/lukasengel/schueler_app_manager
