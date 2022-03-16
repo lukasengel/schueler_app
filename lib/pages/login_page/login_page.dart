@@ -6,8 +6,6 @@ import 'package:get/get.dart';
 import './login_page_controller.dart';
 
 //TODO: Benachrichtigungen
-//TODO: Login Page Logic
-//TODO: Empty News Page
 //TODO: PageView Performance
 
 class LoginPage extends StatelessWidget {

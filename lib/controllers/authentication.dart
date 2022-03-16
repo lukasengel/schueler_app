@@ -9,7 +9,7 @@ enum AuthState { LOGGED_IN, LOGGED_OFF }
 
 class Authentication extends GetxController {
   String error = "";
-  AuthState authState = AuthState.LOGGED_OFF;
+  Rx<AuthState> authState = AuthState.LOGGED_OFF.obs;
   late Rx<User?> firebaseUser;
 
   @override
@@ -21,9 +21,9 @@ class Authentication extends GetxController {
 
   void changeState(User? user) {
     if (user == null) {
-      authState = AuthState.LOGGED_OFF;
+      authState.value = AuthState.LOGGED_OFF;
     } else {
-      authState = AuthState.LOGGED_IN;
+      authState.value = AuthState.LOGGED_IN;
     }
     update();
   }
@@ -44,7 +44,7 @@ class Authentication extends GetxController {
       );
       await webData.fetchData();
       ever(firebaseUser, changeState);
-      authState = AuthState.LOGGED_IN;
+      authState.value = AuthState.LOGGED_IN;
     } on FirebaseAuthException catch (e) {
       error = e.message ?? e.toString();
     } catch (e) {

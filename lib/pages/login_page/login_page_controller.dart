@@ -8,6 +8,8 @@ import '../../controllers/authentication.dart';
 import '../../models/auth_data_exception.dart';
 import '../../widgets/dynamic_dialogs.dart';
 
+import '../../routes.dart' as routes;
+
 class LoginPageController extends GetxController {
   late LocalData localData;
   late Authentication auth;
@@ -39,6 +41,7 @@ class LoginPageController extends GetxController {
     await auth.login();
     error.value = translateError(auth.error);
     if (error.isEmpty) {
+      Get.offAndToNamed(routes.home);
       usernameController.clear();
       passwortController.clear();
     }

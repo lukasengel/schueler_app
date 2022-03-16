@@ -42,7 +42,7 @@ class TableRowWidget extends StatelessWidget {
             child: CupertinoButton(
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.zero,
-              onPressed: () => lookup(row.absent.substring(0, 3)),
+              onPressed: () => lookup(row.absent),
               child: Text(
                 row.absent,
                 style: style,
@@ -54,7 +54,7 @@ class TableRowWidget extends StatelessWidget {
             child: CupertinoButton(
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.zero,
-              onPressed: () => lookup(row.substitute.substring(0, 3)),
+              onPressed: () => lookup(row.substitute),
               child: Text(
                 insertLinefeed(row.substitute),
                 textAlign: TextAlign.center,

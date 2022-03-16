@@ -16,20 +16,58 @@ class SmvTab extends StatelessWidget {
 
     return SafeArea(
       child: GetBuilder<WebData>(builder: (controller) {
-        return EasyRefresh(
+        return EasyRefresh.builder(
           onRefresh: () => Get.find<HomePageController>().onRefresh(context),
           header: BallPulseHeader(color: Get.theme.primaryColor),
-          child: ListView.builder(
-            padding: const EdgeInsets.fromLTRB(0, 5, 0, 75),
-            itemBuilder: (context, index) {
-              return SchooLifeContainer(
-                Get.find<LocalData>().settings.reversedSchoolLife
-                    ? webData.schoolLifeItems[index]
-                    : webData.schoolLifeItems.reversed.toList()[index],
-              );
-            },
-            itemCount: webData.schoolLifeItems.length,
-          ),
+          builder: (context, index, header, footer) {
+            return CustomScrollView(
+              physics: const BouncingScrollPhysics(
+                parent: AlwaysScrollableScrollPhysics(),
+              ),
+              slivers: [
+                if (header != null) header,
+                webData.schoolLifeItems.isNotEmpty
+                    ? SliverPadding(
+                        padding: const EdgeInsets.only(top: 5),
+                        sliver: SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                            (context, index) {
+                              return SchooLifeContainer(
+                                Get.find<LocalData>()
+                                        .settings
+                                        .reversedSchoolLife
+                                    ? webData.schoolLifeItems[index]
+                                    : webData.schoolLifeItems.reversed
+                                        .toList()[index],
+                              );
+                            },
+                            childCount: webData.schoolLifeItems.length,
+                          ),
+                        ),
+                      )
+                    : SliverFillRemaining(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const ImageIcon(
+                              AssetImage("assets/images/lucky_cat.png"),
+                              size: 100,
+                            ),
+                            Text("home/no_news".tr,
+                                style: context.textTheme.bodyText1),
+                          ],
+                        ),
+                      ),
+                if (webData.schoolLifeItems.isNotEmpty)
+                  const SliverToBoxAdapter(
+                    child: SizedBox(
+                      height: 75,
+                    ),
+                  )
+              ],
+            );
+          },
         );
       }),
     );

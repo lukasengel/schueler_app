@@ -24,7 +24,7 @@ class SettingsPageController extends GetxController {
     if (input) {
       await localData.clearSettings();
       await auth.signOut();
-      Get.back();
+      Get.offAllNamed(routes.login);
       Get.updateLocale(Get.deviceLocale!);
     }
   }

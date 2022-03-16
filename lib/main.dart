@@ -43,6 +43,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authState = Get.find<Authentication>().authState;
     return GetMaterialApp(
       theme: AppTheme.light,
       debugShowCheckedModeBanner: false,
@@ -54,13 +55,9 @@ class MyApp extends StatelessWidget {
       getPages: routes.getPages,
       defaultTransition:
           Platform.isIOS ? Transition.cupertino : Transition.topLevel,
-      home: GetBuilder<Authentication>(
-        builder: (controller) {
-          return controller.authState == AuthState.LOGGED_IN
-              ? const HomePage()
-              : const LoginPage();
-        },
-      ),
+      home: authState.value == AuthState.LOGGED_IN
+                  ? const HomePage()
+                  : const LoginPage(),
     );
   }
 }

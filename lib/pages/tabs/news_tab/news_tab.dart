@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:intl/intl.dart';
 
 import '../../../controllers/local_data.dart';
 import '../../../controllers/web_data.dart';
@@ -47,17 +46,22 @@ class NewsTab extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 5),
                     sliver: GetBuilder<LocalData>(builder: (localData) {
                       return SliverList(
-                        delegate: SliverChildListDelegate([
-                          ...(localData.settings.reversed
-                                  ? controller.news.map(buildNewsItem)
-                                  : controller.news.reversed.map(buildNewsItem))
-                              .toList(),
-                          const SizedBox(
-                            height: 75,
-                          ),
-                        ]),
+                        delegate: SliverChildBuilderDelegate(
+                          (context, index) {
+                            return buildNewsItem(localData.settings.reversed
+                                ? controller.news[index]
+                                : controller.news.reversed.toList()[index]);
+                          },
+                          childCount: controller.news.length,
+                        ),
                       );
                     }),
+                  ),
+                ),
+              if (controller.ticker.isNotEmpty)
+                const SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: 75,
                   ),
                 ),
               if (controller.news.isEmpty)
@@ -72,15 +76,6 @@ class NewsTab extends StatelessWidget {
                       ),
                       Text("home/no_news".tr,
                           style: context.textTheme.bodyText1),
-                      const SizedBox(height: 10),
-                      Text(
-                        "home/as_of".tr +
-                            DateFormat.yMd(Get.locale.toString())
-                                .add_jms()
-                                .format(controller.latestUpdate),
-                        style: Get.textTheme.bodyText1,
-                        textAlign: TextAlign.center,
-                      ),
                     ],
                   ),
                 )
