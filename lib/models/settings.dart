@@ -6,6 +6,8 @@ class Settings {
   Map<String, dynamic> filters;
   bool dailyNotifications, smvNotifications, broadcastNotifications;
   List<String> notifications;
+  List<String> removalPending;
+  bool needToRenew;
   bool forceGerman;
 
   Settings({
@@ -19,6 +21,8 @@ class Settings {
     required this.smvNotifications,
     required this.broadcastNotifications,
     required this.notifications,
+    required this.removalPending,
+    required this.needToRenew,
     required this.forceGerman,
   });
 
@@ -33,6 +37,8 @@ class Settings {
         smvNotifications = false,
         broadcastNotifications = false,
         notifications = [],
+        removalPending = [],
+        needToRenew = true,
         forceGerman = false;
 
   static Map<String, bool> get defaultFilters {

@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import './local_data.dart';
 import './web_data.dart';
+import './notifications.dart';
+
 import '../models/auth_data_exception.dart';
 
 enum AuthState { LOGGED_IN, LOGGED_OFF }
@@ -32,6 +34,7 @@ class Authentication extends GetxController {
     error = "";
     final webData = Get.find<WebData>();
     final localData = Get.find<LocalData>();
+    final notifications = Get.find<Notifications>();
 
     try {
       if (localData.settings.username.isEmpty ||
@@ -43,6 +46,7 @@ class Authentication extends GetxController {
         password: localData.settings.password,
       );
       await webData.fetchData();
+      await notifications.manageSubscriptions();
       ever(firebaseUser, changeState);
       authState.value = AuthState.LOGGED_IN;
     } on FirebaseAuthException catch (e) {

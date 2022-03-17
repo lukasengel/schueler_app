@@ -10,6 +10,7 @@ import './routes.dart' as routes;
 import './controllers/local_data.dart';
 import './controllers/web_data.dart';
 import './controllers/authentication.dart';
+import './controllers/notifications.dart';
 
 import './pages/home_page/home_page.dart';
 import './pages/login_page/login_page.dart';
@@ -20,8 +21,10 @@ void main() async {
   final localData = Get.put(LocalData());
   Get.put(WebData());
   final auth = Get.put(Authentication());
+  final notifications = Get.put(Notifications());
   await localData.initialize();
   await auth.login();
+  await notifications.initialize();
   runApp(MyApp());
 }
 

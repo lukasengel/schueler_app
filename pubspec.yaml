@@ -25,6 +25,8 @@ dependencies:
   firebase_database: ^9.0.6
   cached_network_image: ^3.2.0
   firebase_auth: ^3.3.0
+  firebase_messaging: ^11.2.7
+  flutter_local_notifications: ^9.4.0
 
 dev_dependencies:
   flutter_test:

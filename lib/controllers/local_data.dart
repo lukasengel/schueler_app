@@ -59,8 +59,11 @@ class LocalData extends GetxController {
             .decode(prefs.getString("filters") ?? Settings.defaultFiltersStr),
         dailyNotifications: prefs.getBool("dailyNotifications") ?? false,
         smvNotifications: prefs.getBool("smvNotifications") ?? false,
-        broadcastNotifications: prefs.getBool("broadcastNotifications") ?? false,
+        broadcastNotifications:
+            prefs.getBool("broadcastNotifications") ?? false,
         notifications: prefs.getStringList("notifications") ?? [],
+        removalPending: prefs.getStringList("removalPending") ?? [],
+        needToRenew: prefs.getBool("needToRenew") ?? true,
         forceGerman: prefs.getBool("forceGerman") ?? false,
       );
     } catch (e) {
@@ -80,8 +83,11 @@ class LocalData extends GetxController {
       await prefs.setString("filters", json.encode(settings.filters));
       await prefs.setBool("dailyNotifications", settings.dailyNotifications);
       await prefs.setBool("smvNotifications", settings.smvNotifications);
-      await prefs.setBool("broadcastNotifications", settings.broadcastNotifications);
+      await prefs.setBool(
+          "broadcastNotifications", settings.broadcastNotifications);
       await prefs.setStringList("notifications", settings.notifications);
+      await prefs.setStringList("removalPending", settings.removalPending);
+      await prefs.setBool("needToRenew", settings.needToRenew);
       await prefs.setBool("forceGerman", settings.forceGerman);
     } catch (e) {
       error = e.toString();

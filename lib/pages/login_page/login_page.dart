@@ -7,6 +7,7 @@ import './login_page_controller.dart';
 
 //TODO: Benachrichtigungen
 //TODO: PageView Performance
+//TODO: Android-Icon
 
 class LoginPage extends StatelessWidget {
   static const route = "/login";

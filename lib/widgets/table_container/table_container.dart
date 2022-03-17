@@ -20,6 +20,7 @@ class TableContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final webData = Get.find<WebData>();
     final table = webData.substitutionTables[index];
+    
 //########################################################################
 //#                               Logic                                  #
 //########################################################################

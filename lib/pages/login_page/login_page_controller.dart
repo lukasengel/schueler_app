@@ -35,8 +35,8 @@ class LoginPageController extends GetxController {
     HapticFeedback.heavyImpact();
     working.value = true;
     error.value = "";
-    localData.settings.username = usernameController.text;
-    localData.settings.password = passwortController.text;
+    localData.settings.username = usernameController.text.trim();
+    localData.settings.password = passwortController.text.trim();
     await localData.writeSettings();
     await auth.login();
     error.value = translateError(auth.error);
