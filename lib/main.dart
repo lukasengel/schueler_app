@@ -19,19 +19,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   final localData = Get.put(LocalData());
-  try {
-    final webData = Get.put(WebData());
-    final auth = Get.put(Authentication());
-    final notifications = Get.put(Notifications());
-    await localData.initialize();
-    await auth.login();
-    await notifications.initialize();
-    await webData.fetchData();
-    auth.authState.value = AuthState.LOGGED_IN;
-    notifications.manageSubscription();
-  } catch (e) {
-    localData.error = e.toString();
-  }
+  final auth = Get.put(Authentication());
+  Get.put(WebData());
+  Get.put(Notifications());
+  await localData.initialize();
+  await auth.login();
   runApp(MyApp());
 }
 
@@ -42,7 +34,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authState = Get.find<Authentication>().authState;
-    
+
     return GetMaterialApp(
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,

@@ -106,12 +106,14 @@ class LoginPage extends StatelessWidget {
                                         const EdgeInsets.only(bottom: 10.0),
                                     child: Text(
                                       controller.error.value,
+                                      maxLines: 3,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontSize: 14,
                                         color: context.theme.errorColor,
                                       ),
-                                    ))
+                                    ),
+                                  )
                                 : Container(),
                           ),
                           // ###################################################################################
@@ -157,9 +159,8 @@ class LoginPage extends StatelessWidget {
                                               : Icons.visibility_off,
                                         ),
                                         onPressed: controller.toggleVisibility,
-                                        color: Get.isDarkMode
-                                            ? Colors.grey
-                                            : null,
+                                        color:
+                                            Get.isDarkMode ? Colors.grey : null,
                                       ),
                                     ),
                                     autofillHints: const [

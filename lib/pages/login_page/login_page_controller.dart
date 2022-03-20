@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../controllers/local_data.dart';
 import '../../controllers/authentication.dart';
+import '../../controllers/web_data.dart';
 
 import '../../models/exceptions/auth_data_exception.dart';
 import '../../widgets/dynamic_dialogs.dart';
@@ -33,6 +34,7 @@ class LoginPageController extends GetxController {
   }
 
   Future<void> login() async {
+    final webData = Get.find<WebData>();
     HapticFeedback.heavyImpact();
     working.value = true;
     localData.error = null;
@@ -41,6 +43,7 @@ class LoginPageController extends GetxController {
     try {
       await localData.writeSettings();
       await auth.login();
+      await webData.fetchData();
     } catch (e) {
       localData.error = e.toString();
     }

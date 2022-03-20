@@ -8,12 +8,12 @@ import '../../../../models/settings.dart';
 
 class PersonalizationPageController extends GetxController {
   final localData = Get.find<LocalData>();
-   RxList<bool> selectedTheme = [false, true, false].obs;
+  List<bool> selectedTheme = [];
 
   @override
   void onInit() {
     for (int i = 0; i < 3; i++) {
-      selectedTheme[i] = localData.settings.selectedTheme.index == i;
+      selectedTheme.add(localData.settings.selectedTheme.index == i);
     }
     super.onInit();
   }
@@ -29,6 +29,7 @@ class PersonalizationPageController extends GetxController {
     for (int i = 0; i < selectedTheme.length; i++) {
       selectedTheme[i] = i == index;
     }
+    update();
     localData.settings.selectedTheme = ColorMode.values[index];
     switch (localData.settings.selectedTheme) {
       case ColorMode.LIGHT:

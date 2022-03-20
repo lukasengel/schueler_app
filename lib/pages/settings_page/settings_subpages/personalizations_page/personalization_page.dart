@@ -8,7 +8,6 @@ import '../../../../widgets/settings_ui/settings_switch_tile.dart';
 import '../../../../widgets/settings_ui/settings_text.dart';
 import '../../../../widgets/settings_ui/settings_info_box.dart';
 
-
 class PersonalizationPage extends StatelessWidget {
   static const route = "/settings/personalization";
   const PersonalizationPage({Key? key}) : super(key: key);
@@ -30,43 +29,41 @@ class PersonalizationPage extends StatelessWidget {
               SettingsContainer(
                 padding: const EdgeInsets.all(5),
                 child: LayoutBuilder(
-                  builder: (context, constraints) => Obx(
-                    () => ToggleButtons(
-                      renderBorder: false,
-                      borderRadius: BorderRadius.circular(8),
-                      onPressed: controller.onPressedToggleButton,
-                      isSelected: controller.selectedTheme,
-                      constraints:
-                          BoxConstraints(minWidth: constraints.maxWidth / 3),
-                      splashColor: context.theme.primaryColor.withOpacity(0.2),
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 5),
-                          child: Column(
-                            children: [
-                              const Icon(Icons.light_mode_outlined),
-                              Text("settings/personalization/light".tr)
-                            ],
-                          ),
+                  builder: (context, constraints) => ToggleButtons(
+                    renderBorder: false,
+                    borderRadius: BorderRadius.circular(8),
+                    onPressed: controller.onPressedToggleButton,
+                    isSelected: controller.selectedTheme,
+                    constraints:
+                        BoxConstraints(minWidth: constraints.maxWidth / 3),
+                    splashColor: context.theme.primaryColor.withOpacity(0.2),
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: Column(
+                          children: [
+                            const Icon(Icons.light_mode_outlined),
+                            Text("settings/personalization/light".tr)
+                          ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 5),
-                          child: Column(children: [
-                            const Icon(Icons.brightness_6_outlined),
-                            Text("settings/personalization/system".tr)
-                          ]),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: Column(children: [
+                          const Icon(Icons.brightness_6_outlined),
+                          Text("settings/personalization/system".tr)
+                        ]),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: Column(
+                          children: [
+                            const Icon(Icons.dark_mode),
+                            Text("settings/personalization/dark".tr)
+                          ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 5),
-                          child: Column(
-                            children: [
-                              const Icon(Icons.dark_mode),
-                              Text("settings/personalization/dark".tr)
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
