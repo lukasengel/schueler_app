@@ -1,11 +1,11 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
 
-import '../models/school_life_item.dart';
-import '../models/substitution_table.dart';
-import '../models/news_item.dart';
-import '../models/feedback_item.dart';
-import '../models/teacher.dart';
+import '../models/web_data/school_life_item.dart';
+import '../models/web_data/substitution_table.dart';
+import '../models/web_data/news_item.dart';
+import '../models/web_data/feedback_item.dart';
+import '../models/web_data/teacher.dart';
 
 class WebData extends GetxController {
   List<SubstitutionTable> substitutionTables = [];

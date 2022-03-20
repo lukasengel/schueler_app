@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
@@ -25,6 +26,7 @@ class SettingsPageController extends GetxController {
       await localData.clearSettings();
       await auth.signOut();
       Get.offAllNamed(routes.login);
+      Get.changeThemeMode(ThemeMode.system);
       Get.updateLocale(Get.deviceLocale!);
     }
   }

@@ -77,9 +77,7 @@ class FloatingSearchBar extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           padding: const EdgeInsets.only(left: 10),
           decoration: BoxDecoration(
-            color: Get.isPlatformDarkMode
-                ? Colors.grey.shade800
-                : Colors.grey.shade300,
+            color: Get.isDarkMode ? Colors.grey.shade800 : Colors.grey.shade300,
             borderRadius: BorderRadius.circular(8),
           ),
           child: Material(
@@ -93,9 +91,6 @@ class FloatingSearchBar extends StatelessWidget {
                     onChanged: controller.onSearchInput,
                     decoration: InputDecoration(
                       hintText: "settings/abbreviations/search".tr,
-                    ),
-                    style: TextStyle(
-                      color: context.textTheme.bodyText1?.color,
                     ),
                     autocorrect: false,
                     enableSuggestions: false,

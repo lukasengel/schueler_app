@@ -9,14 +9,14 @@ import '../theme.dart' as theme;
 
 ThemeData get _getTheme {
   return ThemeData(
-    brightness: Get.isPlatformDarkMode ? Brightness.dark : Brightness.light,
+    brightness:Get.theme.brightness,
     primarySwatch: theme.redAccent,
   );
 }
 
 CupertinoThemeData get _getCupertinoTheme {
   return CupertinoThemeData(
-    brightness: Get.isPlatformDarkMode ? Brightness.dark : Brightness.light,
+    brightness: Get.theme.brightness,
   );
 }
 

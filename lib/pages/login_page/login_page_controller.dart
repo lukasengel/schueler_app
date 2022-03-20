@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../../controllers/local_data.dart';
 import '../../controllers/authentication.dart';
 
-import '../../models/auth_data_exception.dart';
+import '../../models/exceptions/auth_data_exception.dart';
 import '../../widgets/dynamic_dialogs.dart';
 
 import '../../routes.dart' as routes;
@@ -25,21 +25,26 @@ class LoginPageController extends GetxController {
     auth = Get.find<Authentication>();
     usernameController.text = localData.settings.username;
     passwortController.text = localData.settings.password;
-    error.value = auth.error != AuthDataException.emptyCredentials().toString()
-        ? translateError(auth.error)
-        : "";
+    error.value =
+        localData.error != AuthDataException.emptyCredentials().toString()
+            ? translateError(localData.error)
+            : "";
     super.onInit();
   }
 
   Future<void> login() async {
     HapticFeedback.heavyImpact();
     working.value = true;
-    error.value = "";
+    localData.error = null;
     localData.settings.username = usernameController.text.trim();
     localData.settings.password = passwortController.text.trim();
-    await localData.writeSettings();
-    await auth.login();
-    error.value = translateError(auth.error);
+    try {
+      await localData.writeSettings();
+      await auth.login();
+    } catch (e) {
+      localData.error = e.toString();
+    }
+    error.value = translateError(localData.error);
     if (error.isEmpty) {
       Get.offAndToNamed(routes.home);
       usernameController.clear();
@@ -73,11 +78,11 @@ class LoginPageController extends GetxController {
     obscure.value = !obscure.value;
   }
 
-  String translateError(String e) {
+  String translateError(String? e) {
     if (e == AuthDataException.emptyCredentials().toString()) {
       return "login/error/empty_credentials".tr;
     } else {
-      return e;
+      return e ?? "";
     }
   }
 }

@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
 import 'package:cached_network_image/cached_network_image.dart';
 
-import '../models/school_life_item.dart';
+import '../models/web_data/school_life_item.dart';
 
 class SchooLifeContainer extends StatelessWidget {
   final SchoolLifeItem item;
@@ -33,9 +33,8 @@ class SchooLifeContainer extends StatelessWidget {
               children: [
                 Text(
                   item.header,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontFamily: "Montserrat",
-                    color: context.textTheme.bodyText2!.color,
                     fontWeight: FontWeight.w800,
                     fontSize: 25,
                   ),
@@ -88,7 +87,8 @@ class SchooLifeContainer extends StatelessWidget {
                       height: 200,
                       child: Center(
                         child: SpinKitThreeBounce(
-                            color: context.theme.primaryColor),
+                          color: context.theme.primaryColor,
+                        ),
                       ),
                     ),
                   ),
@@ -137,9 +137,8 @@ class SchooLifeContainer extends StatelessWidget {
               children: [
                 Text(
                   item.header,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontFamily: "Montserrat",
-                    color: context.textTheme.bodyText2!.color,
                     fontWeight: FontWeight.w800,
                     fontSize: 25,
                   ),

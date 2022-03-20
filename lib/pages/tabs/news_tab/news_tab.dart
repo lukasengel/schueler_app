@@ -7,7 +7,7 @@ import '../../../controllers/web_data.dart';
 
 import '../../../widgets/news_container.dart';
 import '../../../widgets/news_ticker.dart';
-import '../../../models/news_item.dart';
+import '../../../models/web_data/news_item.dart';
 import '../../home_page/home_page_controller.dart';
 
 class NewsTab extends StatelessWidget {
@@ -48,7 +48,7 @@ class NewsTab extends StatelessWidget {
                       return SliverList(
                         delegate: SliverChildBuilderDelegate(
                           (context, index) {
-                            return buildNewsItem(localData.settings.reversed
+                            return buildNewsItem(localData.settings.reversedNews
                                 ? controller.news[index]
                                 : controller.news.reversed.toList()[index]);
                           },

@@ -35,7 +35,7 @@ class SmvTab extends StatelessWidget {
                               return SchooLifeContainer(
                                 Get.find<LocalData>()
                                         .settings
-                                        .reversedSchoolLife
+                                        .reversedSmv
                                     ? webData.schoolLifeItems[index]
                                     : webData.schoolLifeItems.reversed
                                         .toList()[index],

@@ -10,7 +10,7 @@ import '../settings_ui/settings_switch_tile.dart';
 // #                             MODAL BOTTOM SHEET                                  #
 // ###################################################################################
 Future<String?> showCoursePicker(BuildContext context) async {
-  String input;
+  dynamic input;
 
   if (context.isTablet) {
     input = await showDialog(
@@ -40,7 +40,7 @@ Future<String?> showCoursePicker(BuildContext context) async {
   }
   Get.delete<CoursePickerController>();
 
-  return input;
+  return input is String ? input : null;
 }
 
 class CoursePicker extends StatelessWidget {

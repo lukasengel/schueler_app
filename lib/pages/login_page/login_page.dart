@@ -5,9 +5,10 @@ import 'package:get/get.dart';
 
 import './login_page_controller.dart';
 
-//TODO: Benachrichtigungen
+//TODO: Click Action
 //TODO: PageView Performance
-//TODO: Android-Icon
+//TODO: Clean code
+//TODO: New ThemeData
 
 class LoginPage extends StatelessWidget {
   static const route = "/login";
@@ -19,7 +20,7 @@ class LoginPage extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
 
     return Scaffold(
-      backgroundColor: Get.isPlatformDarkMode
+      backgroundColor: Get.isDarkMode
           ? Get.theme.scaffoldBackgroundColor
           : Get.theme.primaryColor,
       body: GestureDetector(
@@ -156,7 +157,7 @@ class LoginPage extends StatelessWidget {
                                               : Icons.visibility_off,
                                         ),
                                         onPressed: controller.toggleVisibility,
-                                        color: Get.isPlatformDarkMode
+                                        color: Get.isDarkMode
                                             ? Colors.grey
                                             : null,
                                       ),

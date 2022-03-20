@@ -40,6 +40,10 @@
     "settings/github": "GitHub",
     "settings/logout": "Sign Out",
 
+    "settings/personalization/colors": "Color Theme",
+    "settings/personalization/light": "Light",
+    "settings/personalization/dark": "Dark",
+    "settings/personalization/system": "System",
     "settings/personalization/gender_neutral_language": "Gender-neutral Language",
     "settings/personalization/force_german": "Display-Language: German",
     "settings/personalization/language_note" : "Bypasses the system language settings. Only necessary for system languages other than German.",

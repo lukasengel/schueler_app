@@ -59,17 +59,17 @@ class HomePage extends StatelessWidget {
                 return FloatingActionButton.extended(
                   label: Text(
                     controller.selectedTab == 1 &&
-                                !localData.settings.reversed ||
+                                !localData.settings.reversedNews ||
                             controller.selectedTab == 2 &&
-                                !localData.settings.reversedSchoolLife
+                                !localData.settings.reversedSmv
                         ? "home/asc".tr
                         : "home/desc".tr,
                   ),
                   icon: Icon(
                     controller.selectedTab == 1 &&
-                                !localData.settings.reversed ||
+                                !localData.settings.reversedNews ||
                             controller.selectedTab == 2 &&
-                                !localData.settings.reversedSchoolLife
+                                !localData.settings.reversedSmv
                         ? Icons.vertical_align_bottom
                         : Icons.vertical_align_top,
                   ),

@@ -23,10 +23,9 @@ class HomePageController extends GetxController {
 
   void invertSorting() async {
     if (selectedTab == 1) {
-      localData.settings.reversed = !localData.settings.reversed;
+      localData.settings.reversedNews = !localData.settings.reversedNews;
     } else {
-      localData.settings.reversedSchoolLife =
-          !localData.settings.reversedSchoolLife;
+      localData.settings.reversedSmv = !localData.settings.reversedSmv;
     }
     await localData.writeSettings();
     webData.update();

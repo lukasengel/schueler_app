@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../models/substitution_table.dart';
+import '../../models/web_data/substitution_table.dart';
 
 class TableRowWidget extends StatelessWidget {
   final Function(String) lookup;

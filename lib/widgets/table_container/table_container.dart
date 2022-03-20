@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import '../../controllers/local_data.dart';
 import '../../controllers/web_data.dart';
 
-import '../../models/substitution_table.dart';
+import '../../models/web_data/substitution_table.dart';
 import '../../routes.dart' as routes;
 
 import '../snackbar.dart';
@@ -130,9 +130,7 @@ class TableContainer extends StatelessWidget {
                               bottom: Radius.circular(8),
                             )
                           : null,
-                      color: Get.isPlatformDarkMode
-                          ? Colors.grey.shade800
-                          : Colors.grey.shade200,
+                      color:context.theme.selectedRowColor,
                     )
                   : null,
               child: Column(

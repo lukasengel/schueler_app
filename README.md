@@ -12,7 +12,8 @@ Ermöglicht den Zugriff auf den aktuellen Vertretungsplan, die Nachrichten der S
 - [x] Filtern der Vertretungsplan-Tabelle nach Klassen
 - [x] Feedback/Bug-Meldung
 - [x] Lehrerkürzel-Übersicht
-- [ ] Benachrichtigungen (entfallene Stunden, Neuigkeiten)
+- [x] Benachrichtigungen (entfallene Stunden, Neuigkeiten, Rundnachrichten)
+- [ ] APNs Integration
 
 ## Mitwirkende
 - Logo-Gestaltung:  Nika Peskova

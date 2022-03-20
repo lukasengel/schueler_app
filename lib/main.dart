@@ -19,48 +19,44 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   final localData = Get.put(LocalData());
-  Get.put(WebData());
-  final auth = Get.put(Authentication());
-  final notifications = Get.put(Notifications());
-  await localData.initialize();
-  await auth.login();
-  await notifications.initialize();
+  try {
+    final webData = Get.put(WebData());
+    final auth = Get.put(Authentication());
+    final notifications = Get.put(Notifications());
+    await localData.initialize();
+    await auth.login();
+    await notifications.initialize();
+    await webData.fetchData();
+    auth.authState.value = AuthState.LOGGED_IN;
+    notifications.manageSubscription();
+  } catch (e) {
+    localData.error = e.toString();
+  }
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
-
   final localData = Get.find<LocalData>();
-
-  Locale get getLocale {
-    Locale locale = const Locale("de", "DE");
-    final deviceLocale = Get.deviceLocale;
-    if (!localData.settings.forceGerman &&
-        localData.supported.contains(deviceLocale) &&
-        deviceLocale != null) {
-      locale = Get.deviceLocale!;
-    }
-    return locale;
-  }
 
   @override
   Widget build(BuildContext context) {
     final authState = Get.find<Authentication>().authState;
+    
     return GetMaterialApp(
       theme: AppTheme.light,
-      debugShowCheckedModeBanner: false,
       darkTheme: AppTheme.dark,
+      themeMode: localData.getThemeMode,
       translationsKeys: localData.translations,
-      locale: getLocale,
+      locale: localData.getLocale,
       fallbackLocale: const Locale("de", "DE"),
       title: "GG Schüler-App",
       getPages: routes.getPages,
       defaultTransition:
           Platform.isIOS ? Transition.cupertino : Transition.topLevel,
       home: authState.value == AuthState.LOGGED_IN
-                  ? const HomePage()
-                  : const LoginPage(),
+          ? const HomePage()
+          : const LoginPage(),
     );
   }
 }

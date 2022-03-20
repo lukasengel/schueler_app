@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   static ThemeData light = ThemeData(
+    brightness: Brightness.light,
     primarySwatch: redAccent,
     scaffoldBackgroundColor: const Color(0xFFEFEFF4),
     fontFamily: "Montserrat",
@@ -20,6 +21,7 @@ class AppTheme {
         fontWeight: FontWeight.w400,
       ),
     ),
+    selectedRowColor: Colors.grey.shade200,
     inputDecorationTheme: const InputDecorationTheme(
       border: InputBorder.none,
       focusColor: redAccent,
@@ -28,6 +30,7 @@ class AppTheme {
       backgroundColor: Colors.white,
       foregroundColor: redAccent,
     ),
+
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         textStyle: MaterialStateProperty.resolveWith(
@@ -89,6 +92,9 @@ class AppTheme {
   );
 
   static ThemeData dark = ThemeData(
+    primaryColor: const Color(0xfffa2244),
+    accentColor: const Color(0xfffa2244),
+    brightness: Brightness.dark,
     scaffoldBackgroundColor: Colors.black,
     primarySwatch: redAccent,
     hintColor: Colors.grey,
@@ -108,6 +114,7 @@ class AppTheme {
         fontWeight: FontWeight.w400,
       ),
     ),
+    selectedRowColor: Colors.grey.shade800,
     iconTheme: const IconThemeData(
       color: Colors.white,
     ),

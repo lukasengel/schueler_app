@@ -1,66 +1,28 @@
+enum ColorMode {LIGHT, SYSTEM, DARK}
+
 class Settings {
-  String username;
-  String password;
-  bool reversed, reversedSchoolLife;
-  int themeColor;
+  String username, password;
   Map<String, dynamic> filters;
-  bool dailyNotifications, smvNotifications, broadcastNotifications;
   List<String> notifications;
-  List<String> removalPending;
-  bool needToRenew;
-  bool forceGerman;
+  bool reversedNews,
+      reversedSmv,
+      dailyNotifications,
+      smvNotifications,
+      broadcastNotifications,
+      forceGerman;
+  ColorMode selectedTheme;
 
   Settings({
     required this.username,
     required this.password,
-    required this.themeColor,
-    required this.reversed,
-    required this.reversedSchoolLife,
     required this.filters,
+    required this.notifications,
+    required this.reversedNews,
+    required this.reversedSmv,
     required this.dailyNotifications,
     required this.smvNotifications,
     required this.broadcastNotifications,
-    required this.notifications,
-    required this.removalPending,
-    required this.needToRenew,
     required this.forceGerman,
+    required this.selectedTheme,
   });
-
-  Settings.empty()
-      : username = "",
-        password = "",
-        themeColor = 1,
-        reversed = true,
-        reversedSchoolLife = true,
-        filters = defaultFilters,
-        dailyNotifications = false,
-        smvNotifications = false,
-        broadcastNotifications = false,
-        notifications = [],
-        removalPending = [],
-        needToRenew = true,
-        forceGerman = false;
-
-  static Map<String, bool> get defaultFilters {
-    return {
-      "5": true,
-      "6": true,
-      "7": true,
-      "8": true,
-      "9": true,
-      "10": true,
-      "11": true,
-      "12": true,
-      "i": true,
-      "Wku": true,
-      "Fku": true,
-      "OGTS": true,
-      "GGTS": true,
-      "misc": true,
-    };
-  }
-
-  static String get defaultFiltersStr {
-    return """{"5": true,"6": true,"7": true,"8": true,"9": true,"10": true,"11": true,"12": true,"i": true,"Wku": true,"Fku": true,"OGTS": true,"GGTS": true,"misc": true}""";
-  }
 }

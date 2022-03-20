@@ -5,7 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import '../../../../controllers/web_data.dart';
 import '../../../../widgets/dynamic_dialogs.dart';
 import '../../../../widgets/snackbar.dart';
-import '../../../../models/feedback_item.dart';
+import '../../../../models/web_data/feedback_item.dart';
 
 class ReportBugPageController extends GetxController {
   RxBool valid = false.obs;

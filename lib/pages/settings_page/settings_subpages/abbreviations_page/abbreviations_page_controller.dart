@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../models/teacher.dart';
+import '../../../../models/web_data/teacher.dart';
 import '../../../../controllers/web_data.dart';
 
 class AbbreviationsPageController extends GetxController {

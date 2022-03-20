@@ -1,15 +1,16 @@
 import 'package:get/get.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:schueler_app/models/subscribe_operation.dart';
 
 import './local_data.dart';
 
 class Notifications extends GetxController {
-  late FirebaseMessaging _messaging;
+  final _messaging = FirebaseMessaging.instance;
+  final localData = Get.find<LocalData>();
+  bool blocked = false;
 
   Future<void> initialize() async {
-    _messaging = FirebaseMessaging.instance;
-
     await _messaging.requestPermission(
       alert: true,
       announcement: false,
@@ -20,55 +21,75 @@ class Notifications extends GetxController {
       sound: true,
     );
 
-    const AndroidNotificationChannel channel = AndroidNotificationChannel(
+    const channel = AndroidNotificationChannel(
       'high_importance_channel', // id
       'High Importance Notifications', // title
       importance: Importance.max,
     );
 
-    final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-        FlutterLocalNotificationsPlugin();
+    final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
+
+    localData.enqueuedOperations.listen((operations) {
+      if (!blocked) {
+        manageSubscription();
+      }
+    });
   }
 
-  Future<void> manageSubscriptions() async {
-    final localData = Get.find<LocalData>();
-    final settings = localData.settings;
-
-    if (settings.needToRenew) {
-      var success = true;
-      success = await _setSubscription("smv", settings.smvNotifications);
-      success =
-          await _setSubscription("broadcast", settings.broadcastNotifications);
-
-      settings.removalPending.forEach((element) async {
-        success = await _setSubscription(element, false);
-        if (success) {
-          settings.removalPending.remove(element);
-        }
-      });
-
-      settings.notifications.forEach((element) async {
-        success = await _setSubscription(element, settings.dailyNotifications);
-      });
-
-      if (success) {
-        settings.needToRenew = false;
-        await localData.writeSettings();
-      }
+  void toggleDailyNotifications(OperationMode mode) {
+    for (var i = 0; i < localData.settings.notifications.length; i++) {
+      final topic = localData.settings.notifications[i];
+      enqueueSubscription(topic, mode);
     }
   }
 
-  Future<bool> _setSubscription(String topic, bool enabled) async {
+  void enqueueSubscription(String topic, OperationMode mode) {
+    final operation = SubscribeOperation(topic, mode);
+    final isAlreadyEnqueued = localData.enqueuedOperations
+        .where((item) => item.topic == topic)
+        .isNotEmpty && !blocked;
+
+    if (isAlreadyEnqueued) {
+      localData.enqueuedOperations.removeWhere((item) => item.topic == topic);
+    } else {
+      localData.enqueuedOperations.add(operation);
+    }
+  }
+
+  Future<void> manageSubscription() async {
+    blocked = true;
+    List<SubscribeOperation> list = [];
+    for (var i = 0; i < localData.enqueuedOperations.length; i++) {
+      final operation = localData.enqueuedOperations[i];
+      final success = await _setSubscription(operation);
+      if (success) {
+        list.add(operation);
+      }
+    }
+    list.reversed.forEach((element) {
+      localData.enqueuedOperations.remove(element);
+    });
+    blocked = false;
+  }
+
+  Future<bool> _setSubscription(SubscribeOperation operation) async {
+    final inSettings =
+        localData.settings.notifications.contains(operation.topic);
+
     try {
-      if (enabled) {
-        await _messaging.subscribeToTopic(topic);
+      if (operation.mode == OperationMode.SUBSCRIBE ||
+          (inSettings && localData.settings.dailyNotifications)) {
+        await _messaging.subscribeToTopic(operation.topic);
       } else {
-        await _messaging.unsubscribeFromTopic(topic);
+        if (!inSettings) {
+          localData.settings.notifications.remove(operation.topic);
+        }
+        await _messaging.unsubscribeFromTopic(operation.topic);
       }
     } catch (e) {
       return false;

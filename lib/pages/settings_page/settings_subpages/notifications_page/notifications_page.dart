@@ -43,7 +43,7 @@ class NotificationsPage extends StatelessWidget {
                     onChanged: controller.onChangedSmvNews,
                     value: controller.localData.settings.smvNotifications,
                   ),
-                   SettingsSwitchTile(
+                  SettingsSwitchTile(
                     label: "settings/notifications/broadcast".tr,
                     onChanged: controller.onChangedBroadcast,
                     value: controller.localData.settings.broadcastNotifications,
