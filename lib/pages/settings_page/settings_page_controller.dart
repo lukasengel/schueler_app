@@ -27,7 +27,6 @@ class SettingsPageController extends GetxController {
       await auth.signOut();
       Get.offAllNamed(routes.login);
       Get.changeThemeMode(ThemeMode.system);
-      Get.updateLocale(Get.deviceLocale!);
     }
   }
 

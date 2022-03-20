@@ -1,14 +1,16 @@
 import 'package:get/get.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:schueler_app/models/subscribe_operation.dart';
 
 import './local_data.dart';
+
+import '../models/subscribe_operation.dart';
 
 class Notifications extends GetxController {
   final _messaging = FirebaseMessaging.instance;
   final localData = Get.find<LocalData>();
   bool blocked = false;
+  RxString route = "".obs;
 
   Future<void> initialize() async {
     await _messaging.requestPermission(
@@ -22,8 +24,8 @@ class Notifications extends GetxController {
     );
 
     const channel = AndroidNotificationChannel(
-      'high_importance_channel', // id
-      'High Importance Notifications', // title
+      'high_importance_channel',
+      'High Importance Notifications',
       importance: Importance.max,
     );
 
@@ -51,8 +53,9 @@ class Notifications extends GetxController {
   void enqueueSubscription(String topic, OperationMode mode) {
     final operation = SubscribeOperation(topic, mode);
     final isAlreadyEnqueued = localData.enqueuedOperations
-        .where((item) => item.topic == topic)
-        .isNotEmpty && !blocked;
+            .where((item) => item.topic == topic)
+            .isNotEmpty &&
+        !blocked;
 
     if (isAlreadyEnqueued) {
       localData.enqueuedOperations.removeWhere((item) => item.topic == topic);
@@ -80,7 +83,6 @@ class Notifications extends GetxController {
   Future<bool> _setSubscription(SubscribeOperation operation) async {
     final inSettings =
         localData.settings.notifications.contains(operation.topic);
-
     try {
       if (operation.mode == OperationMode.SUBSCRIBE ||
           (inSettings && localData.settings.dailyNotifications)) {

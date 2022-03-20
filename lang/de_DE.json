@@ -44,8 +44,6 @@
     "settings/personalization/dark": "Dunkel",
     "settings/personalization/system": "System",
     "settings/personalization/gender_neutral_language": "Gendergerechte Sprache",
-    "settings/personalization/force_german": "Anzeigesprache: Deutsch",
-    "settings/personalization/language_note" : "Umgeht die Spracheinstellungen des Systems. Nur erforderlich, wenn die Systemsprache nicht Deutsch ist.",
 
     "settings/filters/choose_grade": "Jahrgangsstufen",
     "settings/filters/misc": "Sonstiges",

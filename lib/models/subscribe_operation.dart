@@ -8,11 +8,10 @@ class SubscribeOperation {
 
   factory SubscribeOperation.fromJson(Map<String, dynamic> json) {
     return SubscribeOperation(
-        json["topic"], OperationMode.values[json["mode"]]);
+      json["topic"],
+      OperationMode.values[json["mode"]],
+    );
   }
 
-  Map<String, dynamic> toJson() => {
-        "topic": topic,
-        "mode": mode.index,
-      };
+  Map<String, dynamic> toJson() => {"topic": topic, "mode": mode.index};
 }

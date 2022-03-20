@@ -3,9 +3,7 @@ class AuthDataException implements Exception {
   final String details;
 
   @override
-  String toString() {
-    return "$error: $details";
-  }
+  String toString() => "$error: $details";
 
   AuthDataException(this.error, this.details);
 

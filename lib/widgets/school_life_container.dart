@@ -21,7 +21,7 @@ class SchooLifeContainer extends StatelessWidget {
             padding: const EdgeInsets.only(top: 10),
             child: Text(
               DateFormat.yMMMMEEEEd(Get.locale.toString())
-                  .format(item.evenTime),
+                  .format(item.eventTime),
               style: Get.textTheme.bodyText1!
                   .copyWith(fontWeight: FontWeight.w300, fontSize: 18),
             ),

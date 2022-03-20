@@ -39,7 +39,7 @@ class NotificationsPageController extends GetxController {
     settings.broadcastNotifications = !settings.broadcastNotifications;
     await localData.writeSettings();
     notifications.enqueueSubscription(
-        "course",
+        "broadcast",
         settings.broadcastNotifications
             ? OperationMode.SUBSCRIBE
             : OperationMode.UNSUBSCRIBE);

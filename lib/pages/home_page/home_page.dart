@@ -39,21 +39,10 @@ class HomePage extends StatelessWidget {
             )
           ],
         ),
-        body: 
-        // AnimatedSwitcher(
-        //   transitionBuilder: (Widget child, Animation<double> animation) {
-        //     return ScaleTransition(scale: animation, child: child);
-        //   },
-        //   switchInCurve: Curves.bounceIn,
-        //   switchOutCurve: Curves.bounceOut,
-        //   duration: const Duration(milliseconds: 200),
-        //   child: 
-          IndexedStack(
-            // key: UniqueKey(),
-            children: tabs,
-            index: controller.selectedTab,
-          ),
-        // ),
+        body: IndexedStack(
+          children: tabs,
+          index: controller.selectedTab,
+        ),
         floatingActionButton: controller.selectedTab > 0
             ? GetBuilder<LocalData>(builder: (localData) {
                 return FloatingActionButton.extended(

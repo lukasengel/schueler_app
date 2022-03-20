@@ -8,6 +8,7 @@ class SubstitutionTable {
     required this.date,
     required this.groups,
   });
+  
   @override
   String toString() {
     return rows.map((row) => row.toString()).toString();

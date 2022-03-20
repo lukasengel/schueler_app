@@ -1,22 +1,24 @@
 enum ItemType { EVENT, ARTICLE, ANNOUNCEMENT }
 
 ItemType typeFromString(String string) {
-  if (string == "event") {
-    return ItemType.EVENT;
-  } else if (string == "article") {
-    return ItemType.ARTICLE;
-  } else {
-    return ItemType.ANNOUNCEMENT;
+  switch (string) {
+    case "event":
+      return ItemType.EVENT;
+    case "article":
+      return ItemType.ARTICLE;
+    default:
+      return ItemType.ANNOUNCEMENT;
   }
 }
 
 String stringFromType(ItemType type) {
-  if (type == ItemType.EVENT) {
-    return "event";
-  } else if (type == ItemType.ARTICLE) {
-    return "article";
-  } else {
-    return "announcement";
+  switch (type) {
+    case ItemType.EVENT:
+      return "event";
+    case ItemType.ARTICLE:
+      return "article";
+    default:
+      return "announcement";
   }
 }
 
@@ -28,7 +30,7 @@ class SchoolLifeItem {
   String imageUrl;
   String hyperlink;
   DateTime datetime;
-  DateTime evenTime;
+  DateTime eventTime;
 
   SchoolLifeItem({
     required this.header,
@@ -38,7 +40,7 @@ class SchoolLifeItem {
     required this.imageUrl,
     required this.hyperlink,
     required this.datetime,
-    required this.evenTime,
+    required this.eventTime,
   });
 
   factory SchoolLifeItem.fromJson(Map<String, dynamic> json) {
@@ -51,7 +53,7 @@ class SchoolLifeItem {
       dark: json.containsKey("dark") ? json["dark"] as bool : false,
       type: typeFromString(json["type"] as String),
       datetime: DateTime.parse(json["datetime"]),
-      evenTime: json.containsKey("eventTime")
+      eventTime: json.containsKey("eventTime")
           ? DateTime.parse(json["eventTime"])
           : DateTime(2000),
     );

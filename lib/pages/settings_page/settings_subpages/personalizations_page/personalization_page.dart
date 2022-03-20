@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:schueler_app/widgets/settings_ui/settings_container.dart';
 
 import './personalization_page_controller.dart';
 
+import '../../../../widgets/settings_ui/settings_container.dart';
 import '../../../../widgets/settings_ui/settings_switch_tile.dart';
 import '../../../../widgets/settings_ui/settings_text.dart';
-import '../../../../widgets/settings_ui/settings_info_box.dart';
 
 class PersonalizationPage extends StatelessWidget {
   static const route = "/settings/personalization";
@@ -72,20 +71,6 @@ class PersonalizationPage extends StatelessWidget {
                 label: "settings/personalization/gender_neutral_language".tr,
                 value: false,
                 onChanged: controller.genderLanguage,
-              ),
-              SettingsSwitchTile(
-                label: "settings/personalization/force_german".tr,
-                value: controller.localData.settings.forceGerman,
-                onChanged: controller.forceGerman,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 10,
-                ),
-                child: SettingsInfoBox(
-                  "settings/personalization/language_note".tr,
-                ),
               ),
             ],
           );

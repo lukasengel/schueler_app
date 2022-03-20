@@ -12,7 +12,6 @@ import '../models/subscribe_operation.dart';
 class LocalData extends GetxController {
   String? error;
   late Settings settings;
-  List<Locale> supported = [];
   RxList<SubscribeOperation> enqueuedOperations = RxList.empty();
   Map<String, Map<String, String>> translations = {};
 
@@ -20,20 +19,16 @@ class LocalData extends GetxController {
     await parseTranslations();
     settings = await parseSettings();
     enqueuedOperations.value = await parseOperations();
-    update();
   }
-
+//########################################################################
+//#                            Translations                              #
+//########################################################################
   Future<void> parseTranslations() async {
     try {
       String data = await rootBundle.loadString("lang/languages.json");
       List<dynamic> availibleLangs = json.decode(data);
-      supported = availibleLangs
-          .map((e) => Locale(e.substring(0, 2), e.substring(3, 5)))
-          .toList();
-
       for (String languageCode in availibleLangs) {
-        String jsonData =
-            await rootBundle.loadString("lang/$languageCode.json");
+        String jsonData = await rootBundle.loadString("lang/$languageCode.json");
         Map<String, dynamic> languageData = json.decode(jsonData);
         Map<String, String> language = languageData.map((key, value) {
           return MapEntry(key, value.toString());
@@ -44,7 +39,9 @@ class LocalData extends GetxController {
       throw LocalDataException.languageParseError(e.toString());
     }
   }
-
+//########################################################################
+//#                              Settings                                #
+//########################################################################
   Future<Settings> parseSettings() async {
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -88,8 +85,10 @@ class LocalData extends GetxController {
     }
     update();
   }
-
-  Future<List<SubscribeOperation>> parseOperations() async {
+//########################################################################
+//#                             Operations                               #
+//########################################################################
+   Future<List<SubscribeOperation>> parseOperations() async {
     try {
       final prefs = await SharedPreferences.getInstance();
       final list = prefs.getStringList("enqueuedOperations") ?? [];
@@ -131,17 +130,6 @@ class LocalData extends GetxController {
     } catch (e) {
       throw LocalDataException.clearSettingsError(e.toString());
     }
-  }
-
-  Locale get getLocale {
-    Locale locale = const Locale("de", "DE");
-    final deviceLocale = Get.deviceLocale;
-    if (!settings.forceGerman &&
-        supported.contains(deviceLocale) &&
-        deviceLocale != null) {
-      locale = Get.deviceLocale!;
-    }
-    return locale;
   }
 
   ThemeMode get getThemeMode {

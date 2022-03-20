@@ -44,13 +44,4 @@ class PersonalizationPageController extends GetxController {
     }
     await localData.writeSettings();
   }
-
-  Future<bool> forceGerman() async {
-    localData.settings.forceGerman = !localData.settings.forceGerman;
-    await localData.writeSettings();
-    Get.updateLocale(localData.settings.forceGerman && Get.deviceLocale != null
-        ? const Locale("de", "DE")
-        : Get.deviceLocale!);
-    return localData.settings.forceGerman;
-  }
 }

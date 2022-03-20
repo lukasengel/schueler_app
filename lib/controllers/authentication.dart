@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:schueler_app/controllers/notifications.dart';
-import 'package:schueler_app/controllers/web_data.dart';
 
+import './notifications.dart';
+import './web_data.dart';
 import './local_data.dart';
 
 import '../models/exceptions/auth_data_exception.dart';
@@ -32,6 +32,8 @@ class Authentication extends GetxController {
   Future<void> login() async {
     final localData = Get.find<LocalData>();
     try {
+      final webData = Get.put(WebData());
+      final notifications = Get.put(Notifications());
       if (localData.settings.username.isEmpty ||
           localData.settings.password.isEmpty) {
         throw (AuthDataException.emptyCredentials());
@@ -40,8 +42,6 @@ class Authentication extends GetxController {
         email: localData.settings.username + "@example.com",
         password: localData.settings.password,
       );
-      final notifications = Get.find<Notifications>();
-      final webData = Get.find<WebData>();
       await notifications.initialize();
       await webData.fetchData();
       authState.value = AuthState.LOGGED_IN;

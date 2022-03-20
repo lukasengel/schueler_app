@@ -8,47 +8,40 @@ import './theme.dart';
 import './routes.dart' as routes;
 
 import './controllers/local_data.dart';
-import './controllers/web_data.dart';
 import './controllers/authentication.dart';
-import './controllers/notifications.dart';
-
-import './pages/home_page/home_page.dart';
-import './pages/login_page/login_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
   final localData = Get.put(LocalData());
   final auth = Get.put(Authentication());
-  Get.put(WebData());
-  Get.put(Notifications());
   await localData.initialize();
   await auth.login();
+  
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
+
   final localData = Get.find<LocalData>();
+  final authState = Get.find<Authentication>().authState;
 
   @override
   Widget build(BuildContext context) {
-    final authState = Get.find<Authentication>().authState;
-
     return GetMaterialApp(
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       themeMode: localData.getThemeMode,
       translationsKeys: localData.translations,
-      locale: localData.getLocale,
-      fallbackLocale: const Locale("de", "DE"),
-      title: "GG Schüler-App",
+      locale: const Locale("de", "DE"),
+      title: "Schüler-App",
       getPages: routes.getPages,
       defaultTransition:
           Platform.isIOS ? Transition.cupertino : Transition.topLevel,
-      home: authState.value == AuthState.LOGGED_IN
-          ? const HomePage()
-          : const LoginPage(),
+      initialRoute:
+          authState.value == AuthState.LOGGED_IN ? routes.home : routes.login,
     );
   }
 }

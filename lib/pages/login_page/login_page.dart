@@ -7,7 +7,6 @@ import './login_page_controller.dart';
 
 //TODO: Click Action
 //TODO: PageView Performance
-//TODO: Clean code
 //TODO: New ThemeData
 
 class LoginPage extends StatelessWidget {

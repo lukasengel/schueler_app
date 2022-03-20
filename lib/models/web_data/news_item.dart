@@ -10,9 +10,7 @@ class NewsItem {
   });
 
   @override
-  String toString() {
-    return "$headline-$subheadline-$content";
-  }
+  String toString() => "$headline-$subheadline-$content";
 
   factory NewsItem.fromJson(Map<String, dynamic> json) {
     return NewsItem(

@@ -3,9 +3,7 @@ class LocalDataException implements Exception {
   final String details;
 
   @override
-  String toString() {
-    return "$error: $details";
-  }
+  String toString() => "$error: $details";
 
   LocalDataException(this.error, this.details);
   LocalDataException.languageParseError(this.details)
@@ -14,10 +12,8 @@ class LocalDataException implements Exception {
       : error = "Error parsing Shared Preferences.";
   LocalDataException.operationsParseError(this.details)
       : error = "Error parsing operation queue.";
-
-      LocalDataException.clearSettingsError(this.details)
+  LocalDataException.clearSettingsError(this.details)
       : error = "Error clearing user settings.";
-
   LocalDataException.settingsWriteError(this.details)
       : error = "Error writing settings to storage";
   LocalDataException.operationsWriteError(this.details)

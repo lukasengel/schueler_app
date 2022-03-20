@@ -171,9 +171,6 @@ class AppTheme {
           letterSpacing: 1,
         ),
         bodyText1: TextStyle(color: Colors.white, fontSize: 14),
-        //##########################
-        //#     News Container     #
-        //##########################
         headline4: TextStyle(
           fontSize: 21,
           color: Colors.white,
