@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 const primaryColor = Color(0xfffa2244);
 
-
 /*
 PRIMARY:            AppBar, Buttons, Switches
 SECONDARY:          ScrollView Overflow
@@ -48,15 +47,9 @@ class AppTheme {
       foregroundColor: primaryColor,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ButtonStyle(
-        textStyle: MaterialStateProperty.resolveWith(
-          (_) => const TextStyle(fontSize: 25, fontFamily: "Montserrat"),
-        ),
-        shape: MaterialStateProperty.resolveWith(
-          (_) => RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
-          ),
-        ),
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        textStyle: const TextStyle(fontSize: 25, fontFamily: "Montserrat"),
       ),
     ),
     textButtonTheme: TextButtonThemeData(
@@ -159,15 +152,10 @@ class AppTheme {
       foregroundColor: primaryColor,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ButtonStyle(
-        textStyle: MaterialStateProperty.resolveWith(
-          (_) => const TextStyle(fontSize: 25, fontFamily: "Montserrat"),
-        ),
-        shape: MaterialStateProperty.resolveWith(
-          (_) => RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
-          ),
-        ),
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        textStyle: const TextStyle(fontSize: 25, fontFamily: "Montserrat"),
+        onPrimary: Colors.white,
       ),
     ),
     textButtonTheme: TextButtonThemeData(

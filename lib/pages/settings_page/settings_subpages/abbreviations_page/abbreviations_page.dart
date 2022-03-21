@@ -99,9 +99,10 @@ class FloatingSearchBar extends StatelessWidget {
                   child: TextField(
                     controller: controller.searchController,
                     onChanged: controller.onSearchInput,
-                    style: context.textTheme.bodyLarge,
+                    style: Get.textTheme.bodyLarge,
                     decoration: InputDecoration(
                       hintText: "settings/abbreviations/search".tr,
+                      hintStyle: Get.textTheme.bodyLarge,
                     ),
                     autocorrect: false,
                     enableSuggestions: false,
