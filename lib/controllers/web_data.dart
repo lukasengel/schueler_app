@@ -12,20 +12,14 @@ class WebData extends GetxController {
   List<NewsItem> news = [];
   DateTime latestUpdate = DateTime.now();
   String ticker = "";
-
   List<SchoolLifeItem> schoolLifeItems = [];
   List<Teacher> teachers = [];
-
-  Future<void> fetchData() async {
-    await fetchDatabse();
-    update();
-  }
 
 //########################################################################
 //#                           Fetching Data                              #
 //########################################################################
 
-  Future<void> fetchDatabse() async {
+  Future<void> fetchData() async {
     final database = FirebaseDatabase.instance.ref();
     final snapshot = await database.get();
     schoolLifeItems = parseSchoolLife(snapshot);
@@ -34,6 +28,7 @@ class WebData extends GetxController {
     substitutionTables = parseSubstitutionTables(snapshot);
     ticker = parseTicker(snapshot);
     latestUpdate = parseLatestUpdate(snapshot);
+    update();
   }
 
 //########################################################################

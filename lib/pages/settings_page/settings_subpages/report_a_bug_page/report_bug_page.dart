@@ -23,7 +23,7 @@ class ReportBugPage extends StatelessWidget {
         ),
         actions: [
           Obx(() => IconButton(
-            disabledColor: Colors.grey,
+                disabledColor: Get.theme.colorScheme.onTertiary,
                 icon: const Icon(Icons.done),
                 onPressed: controller.valid.value ? controller.submit : null,
               ))
@@ -47,22 +47,22 @@ class ReportBugPage extends StatelessWidget {
                       controller: controller.nameController,
                       textInputAction: TextInputAction.next,
                       style:
-                          context.textTheme.bodyText2!.copyWith(fontSize: 16),
+                          context.textTheme.bodyLarge!.copyWith(fontSize: 16),
                       onSubmitted: (_) => controller.node.requestFocus(),
                       decoration: InputDecoration(
                         hintText: "settings/feedback/name".tr,
                         suffixIcon: IconButton(
-                          color: Colors.grey,
+                          color: Get.theme.colorScheme.onTertiary,
                           splashRadius: 20,
                           icon: const Icon(Icons.help_outline),
                           onPressed: controller.onPressedHelp,
                         ),
                       ),
                     ),
-                    const Divider(
+                    Divider(
                       height: 3,
                       indent: 25,
-                      color: Colors.grey,
+                      color: Get.theme.colorScheme.onTertiary,
                     ),
                     TextField(
                       enableSuggestions: false,
@@ -71,7 +71,7 @@ class ReportBugPage extends StatelessWidget {
                       textInputAction: TextInputAction.next,
                       focusNode: controller.node,
                       style:
-                          context.textTheme.bodyText2!.copyWith(fontSize: 16),
+                          context.textTheme.bodyLarge!.copyWith(fontSize: 16),
                       decoration: InputDecoration(
                         fillColor: Colors.transparent,
                         hintText: "settings/feedback/email".tr,
@@ -87,7 +87,7 @@ class ReportBugPage extends StatelessWidget {
                   maxLength: 500,
                   maxLines: 10,
                   controller: controller.messageController,
-                  style: context.textTheme.bodyText2!.copyWith(fontSize: 16),
+                  style: context.textTheme.bodyLarge!.copyWith(fontSize: 16),
                   decoration: InputDecoration(
                     fillColor: Colors.transparent,
                     hintText: "settings/feedback/message".tr,

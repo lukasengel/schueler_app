@@ -18,7 +18,7 @@ class SmvTab extends StatelessWidget {
       child: GetBuilder<WebData>(builder: (controller) {
         return EasyRefresh.builder(
           onRefresh: () => Get.find<HomePageController>().onRefresh(context),
-          header: BallPulseHeader(color: Get.theme.primaryColor),
+          header: BallPulseHeader(color: Get.theme.colorScheme.primary),
           builder: (context, index, header, footer) {
             return CustomScrollView(
               physics: const BouncingScrollPhysics(
@@ -33,9 +33,7 @@ class SmvTab extends StatelessWidget {
                           delegate: SliverChildBuilderDelegate(
                             (context, index) {
                               return SchooLifeContainer(
-                                Get.find<LocalData>()
-                                        .settings
-                                        .reversedSmv
+                                Get.find<LocalData>().settings.reversedSmv
                                     ? webData.schoolLifeItems[index]
                                     : webData.schoolLifeItems.reversed
                                         .toList()[index],
@@ -54,8 +52,10 @@ class SmvTab extends StatelessWidget {
                               AssetImage("assets/images/lucky_cat.png"),
                               size: 100,
                             ),
-                            Text("home/no_news".tr,
-                                style: context.textTheme.bodyText1),
+                            Text(
+                              "home/no_news".tr,
+                              style: context.textTheme.bodyMedium,
+                            ),
                           ],
                         ),
                       ),

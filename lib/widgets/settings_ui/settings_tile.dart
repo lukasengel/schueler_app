@@ -19,8 +19,13 @@ class SettingsTile extends StatelessWidget {
         children: [
           icon,
           const SizedBox(width: 10),
-          Expanded(child: Text(label)),
-          const Icon(Icons.chevron_right, color: Colors.grey),
+          Expanded(
+            child: Text(label, style: Theme.of(context).textTheme.bodyLarge),
+          ),
+          Icon(
+            Icons.chevron_right,
+            color: Theme.of(context).colorScheme.onTertiary,
+          ),
         ],
       ),
     );

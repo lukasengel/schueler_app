@@ -18,7 +18,7 @@ class SettingsContainer extends StatelessWidget {
         margin: defaultMargin,
         padding: padding ?? defaultPadding,
         decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
+          color: Theme.of(context).colorScheme.tertiary,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Material(child: child, color: Colors.transparent),
@@ -29,7 +29,7 @@ class SettingsContainer extends StatelessWidget {
       padding: defaultMargin,
       child: Material(
         borderRadius: BorderRadius.circular(8),
-        color: Theme.of(context).cardColor,
+        color: Theme.of(context).colorScheme.tertiary,
         child: InkWell(
           onTap: onTap,
           borderRadius: BorderRadius.circular(8),

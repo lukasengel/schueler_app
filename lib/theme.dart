@@ -1,36 +1,52 @@
 import 'package:flutter/material.dart';
 
+const primaryColor = Color(0xfffa2244);
+
+
+/*
+PRIMARY:            AppBar, Buttons, Switches
+SECONDARY:          ScrollView Overflow
+ON SECONDARY:       Icons (SchoolLifeContainer), CupertinoPicker (CoursePicker)
+TERTIARY:           Replacement for CardColor
+ON TERTIARY:        Inactive Buttons, SettingsInfoBox, Chevron (SettingsTile), Divider, SuffixIcons
+TERTIARY CONTAINER: Search field (Abbreviations Page)
+INDICATOR COLOR:    Disabled dots of Page Indicator (SubstitutionTab)
+
+HEADLINE LARGE:     App Title (LoginScreen)
+HEADLINE MEDIUM:    Header (LoginScreen)
+HEADLINE SMALL:     Header (TableContainer, NewsItem)
+TITLE LARGE:        AppBar
+TITLE MEDIUM:       Header (SchoolLifeContainer)
+TITLE SMALL:        SettingsText
+LABEL SMALL:        "Tap to read more" (SchoolLifeContainer)
+BODY LARGE:         Subheader (NewsItem), NewsTicker, SettingsTile
+BODY MEDIUM:        Content (NewsItem, SchoolLifeContainer), Empty Pages
+BODY SMALL:         TableRows (TableContainer)
+*/
+
 class AppTheme {
   static ThemeData light = ThemeData(
-    brightness: Brightness.light,
-    primarySwatch: redAccent,
-    scaffoldBackgroundColor: const Color(0xFFEFEFF4),
     fontFamily: "Montserrat",
-    hintColor: Colors.grey,
-    cardColor: Colors.white,
-    canvasColor: const Color(0xFFEFEFF4),
-    appBarTheme: const AppBarTheme(
-      backgroundColor: redAccent,
-      foregroundColor: Colors.white,
-      elevation: 1,
-      centerTitle: false,
-      titleTextStyle: TextStyle(
-        color: Colors.white,
-        fontFamily: "Montserrat",
-        fontSize: 25,
-        fontWeight: FontWeight.w400,
-      ),
+    scaffoldBackgroundColor: const Color(0xffefeff4),
+    colorScheme: ColorScheme.light(
+      primary: primaryColor,
+      secondary: primaryColor,
+      onSecondary: Colors.black,
+      tertiary: Colors.white,
+      onTertiary: Colors.grey,
+      tertiaryContainer: Colors.grey.shade300,
     ),
-    selectedRowColor: Colors.grey.shade200,
-    inputDecorationTheme: const InputDecorationTheme(
-      border: InputBorder.none,
-      focusColor: redAccent,
+    indicatorColor: Colors.grey.shade800,
+    appBarTheme: const AppBarTheme(
+      elevation: 1,
+    ),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      selectedItemColor: primaryColor,
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Colors.white,
-      foregroundColor: redAccent,
+      foregroundColor: primaryColor,
     ),
-
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         textStyle: MaterialStateProperty.resolveWith(
@@ -53,82 +69,94 @@ class AppTheme {
         ),
       ),
     ),
+    inputDecorationTheme: const InputDecorationTheme(
+      border: InputBorder.none,
+      focusColor: primaryColor,
+    ),
     textTheme: TextTheme(
-      headline1: const TextStyle(
+      headlineLarge: const TextStyle(
         fontSize: 50,
         color: Colors.white,
         fontFamily: "LobsterTwo",
       ),
-      headline2: const TextStyle(
-        fontSize: 14,
-      ),
-      headline3: TextStyle(
-        fontSize: 22,
-        color: Colors.grey.shade800,
-      ),
-      headline6: const TextStyle(
-        color: redAccent,
+      headlineMedium: const TextStyle(
+        color: primaryColor,
         fontWeight: FontWeight.w500,
         fontSize: 24,
         letterSpacing: 1,
       ),
-      headline4: const TextStyle(
+      headlineSmall: const TextStyle(
         fontSize: 21,
         color: Colors.black,
         letterSpacing: 0.8,
       ),
-      bodyText2: const TextStyle(
-        color: Colors.black,
-        fontSize: 18,
-        // height: 1,
+      //LABEL-SMALL: Schulleben-Container Mehr Lesen
+      labelSmall: const TextStyle(
+        fontSize: 15,
+        letterSpacing: 0,
+        color: Colors.grey,
+        fontStyle: FontStyle.italic,
       ),
-      caption: TextStyle(
-        color: Colors.grey[800],
+      //TITLE-SMALL: SettingsText
+      titleSmall: TextStyle(
+        fontWeight: FontWeight.w400,
+        color: Colors.grey.shade800,
         fontSize: 16,
+        // fontSize: 25,
       ),
-    ),
-    errorColor: Colors.red[900],
-    indicatorColor: Colors.grey.shade600,
-  );
-
-  static ThemeData dark = ThemeData(
-    primaryColor: const Color(0xfffa2244),
-    accentColor: const Color(0xfffa2244),
-    brightness: Brightness.dark,
-    scaffoldBackgroundColor: Colors.black,
-    primarySwatch: redAccent,
-    hintColor: Colors.grey,
-    cardColor: const Color(0xff1c1c1e),
-    canvasColor: Colors.grey[900],
-    errorColor: Colors.red[500],
-    fontFamily: "Montserrat",
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Color(0xff1c1c1e),
-      foregroundColor: redAccent,
-      elevation: 1,
-      centerTitle: false,
-      titleTextStyle: TextStyle(
-        color: redAccent,
-        fontFamily: "Montserrat",
+      //TITLE-MEDIUM: Schulleben-Container Headline
+      titleMedium: const TextStyle(
+        fontWeight: FontWeight.w800,
+        fontSize: 25,
+      ),
+      //TITLE-LARGE: App-Bar
+      titleLarge: const TextStyle(
         fontSize: 25,
         fontWeight: FontWeight.w400,
       ),
+      //BODY-LARGE: News-Ticker, News-Item Subheader
+      bodyLarge: const TextStyle(
+        fontWeight: FontWeight.normal,
+        fontSize: 18,
+      ),
+      //BODY-MEDIUM: News-Item-Content, Schulleben-Container Content, leere Seiten
+      bodyMedium: const TextStyle(
+        fontSize: 16,
+      ),
+      //BODY-SMALL: Vertretungsplan-Daten
+      bodySmall: const TextStyle(
+        color: Colors.black,
+        fontSize: 15,
+      ),
+    ),
+  );
+
+  static ThemeData dark = ThemeData(
+    fontFamily: "Montserrat",
+    scaffoldBackgroundColor: Colors.black,
+    colorScheme: ColorScheme.dark(
+      primary: primaryColor,
+      secondary: primaryColor,
+      onSecondary: Colors.white,
+      tertiary: const Color(0xff1c1c1e),
+      onTertiary: Colors.grey,
+      tertiaryContainer: Colors.grey.shade700,
     ),
     selectedRowColor: Colors.grey.shade800,
-    iconTheme: const IconThemeData(
-      color: Colors.white,
+    indicatorColor: Colors.white,
+    appBarTheme: const AppBarTheme(
+      color: Color(0xff1c1c1e),
+      foregroundColor: primaryColor,
+      elevation: 1,
     ),
-    inputDecorationTheme: const InputDecorationTheme(
-      focusColor: redAccent,
-      border: InputBorder.none,
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      unselectedItemColor: Colors.white,
+      selectedItemColor: primaryColor,
+      backgroundColor: Color(0xff1c1c1e),
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: Colors.grey[800],
-      foregroundColor: redAccent,
-    ),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: Color(0xff1c1c1e),
-      unselectedItemColor: Colors.white,
+      foregroundColor: primaryColor,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
@@ -136,13 +164,15 @@ class AppTheme {
           (_) => const TextStyle(fontSize: 25, fontFamily: "Montserrat"),
         ),
         shape: MaterialStateProperty.resolveWith(
-          (_) =>
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          (_) => RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
         ),
       ),
     ),
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
+        splashFactory: InkRipple.splashFactory,
         shape: MaterialStateProperty.resolveWith(
           (_) => RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
@@ -150,54 +180,61 @@ class AppTheme {
         ),
       ),
     ),
+    inputDecorationTheme: const InputDecorationTheme(
+      border: InputBorder.none,
+      focusColor: primaryColor,
+    ),
     textTheme: const TextTheme(
-        headline1: TextStyle(
-          fontSize: 50,
-          color: Colors.white,
-          fontFamily: "LobsterTwo",
-        ),
-        headline2: TextStyle(
-          color: Colors.grey,
-          fontSize: 14,
-        ),
-        headline3: TextStyle(
-          fontSize: 22,
-          color: Colors.white,
-        ),
-        headline6: TextStyle(
-          color: redAccent,
-          fontWeight: FontWeight.w400,
-          fontSize: 24,
-          letterSpacing: 1,
-        ),
-        bodyText1: TextStyle(color: Colors.white, fontSize: 14),
-        headline4: TextStyle(
-          fontSize: 21,
-          color: Colors.white,
-          letterSpacing: 0.8,
-        ),
-        bodyText2: TextStyle(
-          color: Colors.white,
-          fontSize: 18,
-          // height: 1,
-        ),
-        caption: TextStyle(
-          color: Colors.white,
-          fontSize: 16,
-        )),
-    indicatorColor: Colors.white,
+      headlineLarge: TextStyle(
+        fontSize: 50,
+        color: Colors.white,
+        fontFamily: "LobsterTwo",
+      ),
+      headlineMedium: TextStyle(
+        color: primaryColor,
+        fontWeight: FontWeight.w500,
+        fontSize: 24,
+        letterSpacing: 1,
+      ),
+      headlineSmall: TextStyle(
+        fontSize: 21,
+        color: Colors.white,
+        letterSpacing: 0.8,
+      ),
+      labelSmall: TextStyle(
+        fontSize: 15,
+        letterSpacing: 0,
+        color: Colors.grey,
+        fontStyle: FontStyle.italic,
+      ),
+      titleSmall: TextStyle(
+        fontWeight: FontWeight.w400,
+        color: Colors.grey,
+        fontSize: 16,
+        // fontSize: 25,
+      ),
+      titleMedium: TextStyle(
+        fontWeight: FontWeight.w800,
+        fontSize: 25,
+      ),
+      titleLarge: TextStyle(
+        color: primaryColor,
+        fontSize: 25,
+        fontWeight: FontWeight.w400,
+      ),
+      bodyLarge: TextStyle(
+        color: Colors.white,
+        fontWeight: FontWeight.normal,
+        fontSize: 18,
+      ),
+      bodyMedium: TextStyle(
+        color: Colors.white,
+        fontSize: 16,
+      ),
+      bodySmall: TextStyle(
+        color: Colors.white,
+        fontSize: 15,
+      ),
+    ),
   );
 }
-
-const redAccent = MaterialColor(0xfffa2244, {
-  50: Color(0xfffa2244),
-  100: Color(0xfffa2244),
-  200: Color(0xfffa2244),
-  300: Color(0xfffa2244),
-  400: Color(0xfffa2244),
-  500: Color(0xfffa2244),
-  600: Color(0xfffa2244),
-  700: Color(0xfffa2244),
-  800: Color(0xfffa2244),
-  900: Color(0xfffa2244),
-});

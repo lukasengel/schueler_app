@@ -85,9 +85,7 @@ class HomePage extends StatelessWidget {
             ),
           ],
           onTap: controller.switchTabs,
-          hapticFeedback: false,
           currentIndex: controller.selectedTab,
-          selectedItemColor: Get.theme.primaryColor,
         ),
       );
     });

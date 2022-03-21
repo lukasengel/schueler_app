@@ -10,7 +10,6 @@ class Notifications extends GetxController {
   final _messaging = FirebaseMessaging.instance;
   final localData = Get.find<LocalData>();
   bool blocked = false;
-  RxString route = "".obs;
 
   Future<void> initialize() async {
     await _messaging.requestPermission(

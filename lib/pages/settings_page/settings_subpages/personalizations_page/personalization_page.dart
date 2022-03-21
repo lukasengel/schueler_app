@@ -35,14 +35,16 @@ class PersonalizationPage extends StatelessWidget {
                     isSelected: controller.selectedTheme,
                     constraints:
                         BoxConstraints(minWidth: constraints.maxWidth / 3),
-                    splashColor: context.theme.primaryColor.withOpacity(0.2),
+                    splashColor: Get.theme.colorScheme.primary.withOpacity(0.2),
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5),
                         child: Column(
                           children: [
                             const Icon(Icons.light_mode_outlined),
-                            Text("settings/personalization/light".tr)
+                            Text(
+                              "settings/personalization/light".tr,
+                            )
                           ],
                         ),
                       ),
@@ -50,7 +52,9 @@ class PersonalizationPage extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 5),
                         child: Column(children: [
                           const Icon(Icons.brightness_6_outlined),
-                          Text("settings/personalization/system".tr)
+                          Text(
+                            "settings/personalization/system".tr,
+                          )
                         ]),
                       ),
                       Padding(
@@ -58,7 +62,9 @@ class PersonalizationPage extends StatelessWidget {
                         child: Column(
                           children: [
                             const Icon(Icons.dark_mode),
-                            Text("settings/personalization/dark".tr)
+                            Text(
+                              "settings/personalization/dark".tr,
+                            )
                           ],
                         ),
                       ),

@@ -6,8 +6,6 @@ import 'package:get/get.dart';
 import './login_page_controller.dart';
 
 //TODO: Click Action
-//TODO: PageView Performance
-//TODO: New ThemeData
 
 class LoginPage extends StatelessWidget {
   static const route = "/login";
@@ -21,7 +19,7 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Get.isDarkMode
           ? Get.theme.scaffoldBackgroundColor
-          : Get.theme.primaryColor,
+          : Get.theme.colorScheme.primary,
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: controller.onTappedScaffold,
@@ -42,7 +40,7 @@ class LoginPage extends StatelessWidget {
                       Expanded(
                         flex: 2,
                         child: CircleAvatar(
-                          backgroundColor: Get.theme.primaryColor,
+                          backgroundColor: Get.theme.colorScheme.primary,
                           radius: double.infinity,
                           child: Image.asset(
                             "assets/images/logo_light.png",
@@ -55,7 +53,7 @@ class LoginPage extends StatelessWidget {
                           child: Text(
                             "general/app_title".tr,
                             textAlign: TextAlign.center,
-                            style: context.textTheme.headline1,
+                            style: context.textTheme.headlineLarge,
                           ),
                         ),
                       ),
@@ -69,7 +67,7 @@ class LoginPage extends StatelessWidget {
               child: Container(
                 width: context.width >= 500 ? 500 : double.infinity,
                 decoration: BoxDecoration(
-                  color: Get.theme.cardColor,
+                  color: Get.theme.colorScheme.tertiary,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
@@ -91,7 +89,7 @@ class LoginPage extends StatelessWidget {
                             alignment: Alignment.centerLeft,
                             child: Text(
                               "login/login_header".tr,
-                              style: Get.textTheme.headline6,
+                              style: Get.textTheme.headlineMedium,
                             ),
                           ),
                           const SizedBox(height: 15),
@@ -128,8 +126,7 @@ class LoginPage extends StatelessWidget {
                                 TextField(
                                   enableSuggestions: false,
                                   autocorrect: false,
-                                  style: context.textTheme.bodyText2!
-                                      .copyWith(fontSize: 16),
+                                  style: context.textTheme.bodyMedium,
                                   decoration: InputDecoration(
                                     hintText: "login/username".tr,
                                   ),
@@ -137,17 +134,16 @@ class LoginPage extends StatelessWidget {
                                   controller: controller.usernameController,
                                   textInputAction: TextInputAction.next,
                                 ),
-                                const Divider(
+                                Divider(
                                   height: 3,
                                   indent: 25,
-                                  color: Colors.grey,
+                                  color: Get.theme.colorScheme.onTertiary,
                                 ),
                                 Obx(
                                   () => TextField(
                                     enableSuggestions: false,
                                     autocorrect: false,
-                                    style: context.textTheme.bodyText2!
-                                        .copyWith(fontSize: 16),
+                                    style: context.textTheme.bodyMedium,
                                     decoration: InputDecoration(
                                       hintText: "login/password".tr,
                                       suffixIcon: IconButton(
@@ -158,8 +154,9 @@ class LoginPage extends StatelessWidget {
                                               : Icons.visibility_off,
                                         ),
                                         onPressed: controller.toggleVisibility,
-                                        color:
-                                            Get.isDarkMode ? Colors.grey : null,
+                                        color: Get.isDarkMode
+                                            ? Get.theme.colorScheme.onTertiary
+                                            : null,
                                       ),
                                     ),
                                     autofillHints: const [
@@ -210,7 +207,7 @@ class LoginPage extends StatelessWidget {
                           // ###################################################################################
                           Text(
                             "general/school_name".tr.toUpperCase(),
-                            style: Get.textTheme.headline2,
+                            style: Get.textTheme.bodySmall,
                             textAlign: TextAlign.center,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,

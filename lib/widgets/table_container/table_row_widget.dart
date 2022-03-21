@@ -16,7 +16,7 @@ class TableRowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = Theme.of(context).textTheme.bodyText1!;
+    final style = Theme.of(context).textTheme.bodySmall!;
 
     return Container(
       constraints: const BoxConstraints(minHeight: 50),
@@ -92,7 +92,7 @@ class TableHeaderRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final style = Theme.of(context)
         .textTheme
-        .bodyText1!
+        .bodySmall!
         .copyWith(fontWeight: FontWeight.bold);
 
     return Container(

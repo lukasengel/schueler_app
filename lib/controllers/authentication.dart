@@ -15,25 +15,22 @@ class Authentication extends GetxController {
 
   @override
   void onInit() {
-    super.onInit();
     firebaseUser = Rx<User?>(FirebaseAuth.instance.currentUser);
     firebaseUser.bindStream(FirebaseAuth.instance.userChanges());
+    super.onInit();
   }
 
   void changeState(User? user) {
-    if (user == null) {
-      authState.value = AuthState.LOGGED_OFF;
-    } else {
-      authState.value = AuthState.LOGGED_IN;
-    }
+    authState.value = user == null ? AuthState.LOGGED_OFF : AuthState.LOGGED_IN;
     update();
   }
 
   Future<void> login() async {
     final localData = Get.find<LocalData>();
+    final notifications = Get.find<Notifications>();
+    final webData = Get.find<WebData>();
+
     try {
-      final webData = Get.put(WebData());
-      final notifications = Get.put(Notifications());
       if (localData.settings.username.isEmpty ||
           localData.settings.password.isEmpty) {
         throw (AuthDataException.emptyCredentials());
@@ -55,7 +52,5 @@ class Authentication extends GetxController {
     update();
   }
 
-  Future<void> signOut() async {
-    await FirebaseAuth.instance.signOut();
-  }
+  Future<void> signOut() => FirebaseAuth.instance.signOut();
 }

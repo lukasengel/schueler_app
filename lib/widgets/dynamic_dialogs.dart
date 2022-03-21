@@ -5,12 +5,10 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:get/get.dart';
 
-import '../theme.dart' as theme;
-
 ThemeData get _getTheme {
   return ThemeData(
-    brightness:Get.theme.brightness,
-    primarySwatch: theme.redAccent,
+    brightness: Get.theme.brightness,
+    colorScheme: Get.theme.colorScheme,
   );
 }
 

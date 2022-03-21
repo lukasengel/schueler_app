@@ -12,33 +12,38 @@ import '../models/subscribe_operation.dart';
 class LocalData extends GetxController {
   String? error;
   late Settings settings;
-  RxList<SubscribeOperation> enqueuedOperations = RxList.empty();
-  Map<String, Map<String, String>> translations = {};
+  late Map<String, Map<String, String>> translations;
+  late RxList<SubscribeOperation> enqueuedOperations;
 
   Future<void> initialize() async {
-    await parseTranslations();
+    translations = await parseTranslations();
     settings = await parseSettings();
-    enqueuedOperations.value = await parseOperations();
+    enqueuedOperations = await parseOperations();
   }
+
 //########################################################################
 //#                            Translations                              #
 //########################################################################
-  Future<void> parseTranslations() async {
+  Future<Map<String, Map<String, String>>> parseTranslations() async {
     try {
+      Map<String, Map<String, String>> map = {};
       String data = await rootBundle.loadString("lang/languages.json");
       List<dynamic> availibleLangs = json.decode(data);
       for (String languageCode in availibleLangs) {
-        String jsonData = await rootBundle.loadString("lang/$languageCode.json");
+        String jsonData =
+            await rootBundle.loadString("lang/$languageCode.json");
         Map<String, dynamic> languageData = json.decode(jsonData);
         Map<String, String> language = languageData.map((key, value) {
           return MapEntry(key, value.toString());
         });
-        translations.addAll({languageCode: language});
+        map.addAll({languageCode: language});
       }
+      return map;
     } catch (e) {
       throw LocalDataException.languageParseError(e.toString());
     }
   }
+
 //########################################################################
 //#                              Settings                                #
 //########################################################################
@@ -85,10 +90,11 @@ class LocalData extends GetxController {
     }
     update();
   }
+
 //########################################################################
 //#                             Operations                               #
 //########################################################################
-   Future<List<SubscribeOperation>> parseOperations() async {
+  Future<RxList<SubscribeOperation>> parseOperations() async {
     try {
       final prefs = await SharedPreferences.getInstance();
       final list = prefs.getStringList("enqueuedOperations") ?? [];
@@ -96,7 +102,7 @@ class LocalData extends GetxController {
       list.forEach((element) {
         operations.add(SubscribeOperation.fromJson(json.decode(element)));
       });
-      return operations;
+      return operations.obs;
     } catch (e) {
       throw LocalDataException.operationsParseError(e.toString());
     }

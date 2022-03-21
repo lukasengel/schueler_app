@@ -66,12 +66,12 @@ class NotificationsPage extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(e, style: context.textTheme.bodyText2),
+                            Text(e, style: context.textTheme.bodyLarge),
                             IconButton(
                               onPressed: () => controller.deleteCourse(e),
                               icon: Icon(
                                 Icons.close,
-                                color: context.theme.primaryColor,
+                                color: context.theme.colorScheme.primary,
                               ),
                               splashRadius: 20,
                             )

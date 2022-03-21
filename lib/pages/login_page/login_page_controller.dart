@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 
 import '../../controllers/local_data.dart';
 import '../../controllers/authentication.dart';
-import '../../controllers/web_data.dart';
 
 import '../../models/exceptions/auth_data_exception.dart';
 import '../../widgets/dynamic_dialogs.dart';
@@ -12,8 +11,8 @@ import '../../widgets/dynamic_dialogs.dart';
 import '../../routes.dart' as routes;
 
 class LoginPageController extends GetxController {
-  late LocalData localData;
-  late Authentication auth;
+  LocalData localData = Get.find<LocalData>();
+  Authentication auth = Get.find<Authentication>();
   final usernameController = TextEditingController();
   final passwortController = TextEditingController();
   RxBool working = false.obs;
@@ -22,19 +21,15 @@ class LoginPageController extends GetxController {
 
   @override
   onInit() {
-    localData = Get.find<LocalData>();
-    auth = Get.find<Authentication>();
     usernameController.text = localData.settings.username;
     passwortController.text = localData.settings.password;
-    error.value =
-        localData.error != AuthDataException.emptyCredentials().toString()
-            ? translateError(localData.error)
-            : "";
+    if (localData.error != AuthDataException.emptyCredentials().toString()) {
+      error.value = translateError(localData.error);
+    }
     super.onInit();
   }
 
   Future<void> login() async {
-    final webData = Get.find<WebData>();
     HapticFeedback.heavyImpact();
     working.value = true;
     localData.error = null;
@@ -43,7 +38,6 @@ class LoginPageController extends GetxController {
     try {
       await localData.writeSettings();
       await auth.login();
-      await webData.fetchData();
     } catch (e) {
       localData.error = e.toString();
     }

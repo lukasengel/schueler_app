@@ -117,14 +117,14 @@ class _FilterSwitchState extends State<FilterSwitch> {
           Text(
             widget.label,
             overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.bodyText2,
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
           Padding(
             padding: const EdgeInsets.only(right: 15),
             child: Switch.adaptive(
               value: localData.settings.filters[widget.filterKey]!,
               onChanged: (_) => toggle(),
-              activeColor: Theme.of(context).primaryColor,
+              activeColor: Theme.of(context).colorScheme.primary,
             ),
           ),
         ],
@@ -133,8 +133,8 @@ class _FilterSwitchState extends State<FilterSwitch> {
   }
 }
 
-const _divider = Divider(
+final _divider = Divider(
   height: 3,
   indent: 25,
-  color: Colors.grey,
+  color: Get.theme.colorScheme.onTertiary,
 );

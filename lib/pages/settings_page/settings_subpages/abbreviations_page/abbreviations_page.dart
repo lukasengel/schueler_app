@@ -24,7 +24,6 @@ class AbbreviationsPage extends StatelessWidget {
           child: GetBuilder<AbbreviationsPageController>(
             builder: (controller) {
               return CustomScrollView(
-                // padding: const EdgeInsets.fromLTRB(0, 5, 0, 60),
                 slivers: [
                   const SliverPadding(
                     padding: EdgeInsets.only(top: 5),
@@ -44,8 +43,19 @@ class AbbreviationsPage extends StatelessWidget {
                                 vertical: 5,
                               ),
                               child: Row(children: [
-                                Expanded(child: Text(item.abbreviation)),
-                                Expanded(child: Text(item.name), flex: 4),
+                                Expanded(
+                                  child: Text(
+                                    item.abbreviation,
+                                    style: context.textTheme.bodyLarge,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    item.name,
+                                    style: context.textTheme.bodyLarge,
+                                  ),
+                                  flex: 4,
+                                ),
                               ]),
                             ),
                           );
@@ -77,7 +87,7 @@ class FloatingSearchBar extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           padding: const EdgeInsets.only(left: 10),
           decoration: BoxDecoration(
-            color: Get.isDarkMode ? Colors.grey.shade800 : Colors.grey.shade300,
+            color: Get.theme.colorScheme.tertiaryContainer,
             borderRadius: BorderRadius.circular(8),
           ),
           child: Material(
@@ -89,6 +99,7 @@ class FloatingSearchBar extends StatelessWidget {
                   child: TextField(
                     controller: controller.searchController,
                     onChanged: controller.onSearchInput,
+                    style: context.textTheme.bodyLarge,
                     decoration: InputDecoration(
                       hintText: "settings/abbreviations/search".tr,
                     ),

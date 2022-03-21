@@ -13,7 +13,10 @@ class NewsTicker extends StatelessWidget {
         widget: MarqueeText(
           alwaysScroll: true,
           speed: 40,
-          text: TextSpan(text: text),
+          text: TextSpan(
+            text: text,
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
         ),
       ),
     );
@@ -37,7 +40,7 @@ class PersistentHeader extends SliverPersistentHeaderDelegate {
             blurRadius: 1,
           ),
         ],
-        color: Theme.of(context).cardColor,
+        color: Theme.of(context).colorScheme.tertiary,
       ),
       alignment: Alignment.center,
       child: widget,

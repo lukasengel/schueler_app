@@ -1,70 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class SplashyBottomNavigationBar extends StatelessWidget {
   final List<SplashyBottomNavigationBarItem> items;
-  final Function(int)? onTap;
-  final bool hapticFeedback;
-  final Color? backgroundColor;
-  final Color? selectedItemColor;
-  final TextStyle? selectedLabelStyle;
-  final IconThemeData? selectedIconTheme;
-  final Color? unselectedItemColor;
-  final TextStyle? unselectedLabelStyle;
-  final IconThemeData? unselectedIconTheme;
-  final bool? showSelectedLabels;
-  final bool? showUnselectedLabels;
-  final int? currentIndex;
-  final double? elevation;
+  final Function(int) onTap;
+  final int currentIndex;
 
   const SplashyBottomNavigationBar({
     required this.items,
     required this.onTap,
-    this.elevation,
-    this.backgroundColor,
-    this.selectedItemColor,
-    this.unselectedItemColor,
-    this.selectedLabelStyle,
-    this.unselectedLabelStyle,
-    this.selectedIconTheme,
-    this.unselectedIconTheme,
     this.currentIndex = 0,
-    this.hapticFeedback = true,
-    this.showSelectedLabels,
-    this.showUnselectedLabels,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context).bottomNavigationBarTheme.copyWith(
-          elevation: elevation,
-          backgroundColor: backgroundColor,
-          selectedIconTheme: selectedIconTheme,
-          selectedItemColor: selectedItemColor,
-          selectedLabelStyle: selectedLabelStyle,
-          showSelectedLabels: showSelectedLabels,
-          unselectedIconTheme: unselectedIconTheme,
-          unselectedItemColor: unselectedItemColor,
-          unselectedLabelStyle: unselectedLabelStyle,
-          showUnselectedLabels: showUnselectedLabels,
-        );
+    final theme = Theme.of(context).bottomNavigationBarTheme;
+    final query = MediaQuery.of(context);
 
-    TextStyle labelStyle(bool selected) {
-      if (theme.selectedLabelStyle != null) {
-        return theme.selectedLabelStyle!.copyWith(
-          fontSize: 12,
-          color: selected ? theme.selectedItemColor : theme.unselectedItemColor,
-        );
-      } else {
-        return TextStyle(
-          fontSize: 12,
-          color: selected ? theme.selectedItemColor : theme.unselectedItemColor,
-        );
-      }
-    }
-
-    EdgeInsets padding(bool selected, bool label) {
+    EdgeInsets getPadding(bool selected, bool label) {
       if ((label && selected && (theme.showSelectedLabels ?? true)) ||
           (label && !selected && (theme.showUnselectedLabels ?? true))) {
         return const EdgeInsets.fromLTRB(12, 8, 12, 0);
@@ -73,26 +26,9 @@ class SplashyBottomNavigationBar extends StatelessWidget {
       }
     }
 
-    IconThemeData iconTheme(bool selected) {
-      if (theme.selectedIconTheme != null) {
-        return theme.selectedIconTheme!.copyWith(
-          size: 24,
-          color: selected ? theme.selectedItemColor : theme.unselectedItemColor,
-        );
-      } else {
-        return IconThemeData(
-          size: 24,
-          color: selected ? theme.selectedItemColor : theme.unselectedItemColor,
-        );
-      }
-    }
-
     return Container(
       decoration: BoxDecoration(boxShadow: [
-        BoxShadow(
-          color: Colors.black54,
-          blurRadius: theme.elevation ?? 1,
-        )
+        BoxShadow(color: Colors.black54, blurRadius: theme.elevation ?? 1)
       ]),
       child: BottomAppBar(
         elevation: 0,
@@ -100,56 +36,54 @@ class SplashyBottomNavigationBar extends StatelessWidget {
         child: SizedBox(
           height: 56,
           child: Row(
-            children: List.generate(
-              items.length,
-              (index) {
-                final item = items[index];
-                final query = MediaQuery.of(context);
-                final bool selected = index == currentIndex;
-                return Expanded(
-                  child: InkResponse(
-                    radius: (query.size.width - query.padding.horizontal) /
-                        (items.length * 1.85),
-                    splashColor: theme.selectedItemColor?.withOpacity(0.15),
-                    highlightColor: Colors.transparent,
-                    splashFactory: InkRipple.splashFactory,
-                    onTap: onTap != null
-                        ? () {
-                            if (hapticFeedback) {
-                              HapticFeedback.lightImpact();
-                            }
-                            onTap!(index);
-                          }
-                        : null,
-                    child: Padding(
-                      padding: padding(selected, item.label != null),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          IconTheme(
-                            child: selected
-                                ? item.activeIcon ?? item.icon
-                                : item.icon,
-                            data: iconTheme(selected),
+            children: List.generate(items.length, (index) {
+              final item = items[index];
+              final bool selected = index == currentIndex;
+              return Expanded(
+                child: InkResponse(
+                  radius: (query.size.width - query.padding.horizontal) /
+                      (items.length * 1.85),
+                  splashColor: theme.selectedItemColor?.withOpacity(0.15),
+                  highlightColor: Colors.transparent,
+                  splashFactory: InkRipple.splashFactory,
+                  onTap: () => onTap(index),
+                  child: Padding(
+                    padding: getPadding(selected, item.label != null),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        IconTheme(
+                          child: selected
+                              ? item.activeIcon ?? item.icon
+                              : item.icon,
+                          data: IconThemeData(
+                            size: 24,
+                            color: selected
+                                ? theme.selectedItemColor
+                                : theme.unselectedItemColor,
                           ),
-                          if (item.label != null &&
-                              (((theme.showSelectedLabels ?? true) &&
-                                      selected) ||
-                                  ((theme.showUnselectedLabels ?? true) &&
-                                      !selected)))
-                            Text(
-                              item.label!,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: labelStyle(selected),
+                        ),
+                        if (item.label != null &&
+                            (((theme.showSelectedLabels ?? true) && selected) ||
+                                ((theme.showUnselectedLabels ?? true) &&
+                                    !selected)))
+                          Text(
+                            item.label!,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: selected
+                                  ? theme.selectedItemColor
+                                  : theme.unselectedItemColor,
                             ),
-                        ],
-                      ),
+                          ),
+                      ],
                     ),
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            }),
           ),
         ),
       ),

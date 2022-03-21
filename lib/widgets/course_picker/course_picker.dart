@@ -61,20 +61,22 @@ class CoursePicker extends StatelessWidget {
             children: [
               IconButton(
                 onPressed: controller.cancel,
-                icon: Icon(Icons.close, color: context.theme.primaryColor),
+                icon:
+                    Icon(Icons.close, color: context.theme.colorScheme.primary),
                 splashRadius: 20,
               ),
               Expanded(
                 child: Text(
                   "settings/notifications/pick_substitutions".tr,
                   textAlign: TextAlign.center,
-                  style: context.textTheme.bodyText2!
+                  style: context.textTheme.bodyLarge!
                       .copyWith(fontWeight: FontWeight.w500),
                 ),
               ),
               IconButton(
                 onPressed: controller.done,
-                icon: Icon(Icons.done, color: context.theme.primaryColor),
+                icon:
+                    Icon(Icons.done, color: context.theme.colorScheme.primary),
                 splashRadius: 20,
               ),
             ],
@@ -98,7 +100,7 @@ class CoursePicker extends StatelessWidget {
                         children: controller.courses.map((e) {
                           return Text(e,
                               style: TextStyle(
-                                color: context.textTheme.bodyText2!.color,
+                                color: context.theme.colorScheme.onSecondary,
                                 fontSize: 25,
                               ));
                         }).toList(),
@@ -115,7 +117,7 @@ class CoursePicker extends StatelessWidget {
                               children: controller.letters.map((e) {
                                 return Text(e,
                                     style: TextStyle(
-                                      color: context.textTheme.bodyText2!.color,
+                                      color: context.theme.colorScheme.onSecondary,
                                       fontSize: 25,
                                     ));
                               }).toList(),

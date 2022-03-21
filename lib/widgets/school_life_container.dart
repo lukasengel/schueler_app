@@ -22,7 +22,7 @@ class SchooLifeContainer extends StatelessWidget {
             child: Text(
               DateFormat.yMMMMEEEEd(Get.locale.toString())
                   .format(item.eventTime),
-              style: Get.textTheme.bodyText1!
+              style: Get.textTheme.bodySmall!
                   .copyWith(fontWeight: FontWeight.w300, fontSize: 18),
             ),
           ),
@@ -31,33 +31,20 @@ class SchooLifeContainer extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  item.header,
-                  style: const TextStyle(
-                    fontFamily: "Montserrat",
-                    fontWeight: FontWeight.w800,
-                    fontSize: 25,
-                  ),
-                ),
-                Icon(
-                  Icons.event,
-                  color: context.textTheme.headline2!.color!.withOpacity(0.7),
-                ),
+                Text(item.header, style: context.textTheme.titleMedium),
+                Icon(Icons.event, color: context.theme.colorScheme.onSecondary),
               ],
             ),
           ),
           Divider(
-            color: context.textTheme.bodyText2!.color,
+            color: context.theme.colorScheme.onTertiary,
             indent: 20,
             endIndent: 20,
             height: 20,
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-            child: Text(
-              item.content,
-              style: context.textTheme.bodyText2,
-            ),
+            child: Text(item.content, style: context.textTheme.bodySmall),
           ),
         ],
       ),
@@ -76,8 +63,9 @@ class SchooLifeContainer extends StatelessWidget {
               Container(
                 constraints: const BoxConstraints(maxHeight: 500),
                 child: ClipRRect(
-                  borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(11)),
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(11),
+                  ),
                   child: CachedNetworkImage(
                     width: double.infinity,
                     imageUrl: item.imageUrl,
@@ -87,7 +75,7 @@ class SchooLifeContainer extends StatelessWidget {
                       height: 200,
                       child: Center(
                         child: SpinKitThreeBounce(
-                          color: context.theme.primaryColor,
+                          color: context.theme.colorScheme.primary,
                         ),
                       ),
                     ),
@@ -102,12 +90,8 @@ class SchooLifeContainer extends StatelessWidget {
                 child: Text(
                   item.header.toUpperCase(),
                   maxLines: 3,
-                  style: const TextStyle(
-                    fontFamily: "Montserrat",
-                    color: Colors.white,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 25,
-                  ),
+                  style: context.textTheme.titleMedium!
+                      .copyWith(color: Colors.white),
                 ),
               ),
             ],
@@ -116,7 +100,7 @@ class SchooLifeContainer extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
             child: Text(
               item.content,
-              style: context.textTheme.bodyText2,
+              style: context.textTheme.bodyMedium,
             ),
           ),
         ],
@@ -135,23 +119,16 @@ class SchooLifeContainer extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  item.header,
-                  style: const TextStyle(
-                    fontFamily: "Montserrat",
-                    fontWeight: FontWeight.w800,
-                    fontSize: 25,
-                  ),
-                ),
+                Text(item.header, style: context.textTheme.titleMedium),
                 Icon(
                   Icons.campaign_outlined,
-                  color: context.textTheme.headline2!.color!.withOpacity(0.7),
+                  color: context.theme.colorScheme.onSecondary,
                 ),
               ],
             ),
           ),
           Divider(
-            color: context.textTheme.bodyText2!.color,
+            color: context.theme.colorScheme.onTertiary,
             indent: 20,
             endIndent: 20,
             height: 20,
@@ -160,7 +137,7 @@ class SchooLifeContainer extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
             child: Text(
               item.content,
-              style: context.textTheme.bodyText2,
+              style: context.textTheme.bodyMedium,
             ),
           ),
         ],
@@ -209,7 +186,7 @@ class SchoolLifeBaseContainer extends StatelessWidget {
               blurRadius: 1,
             ),
           ],
-          color: context.theme.cardColor,
+          color: context.theme.colorScheme.tertiary,
         ),
         child: Column(
           children: [
@@ -220,15 +197,11 @@ class SchoolLifeBaseContainer extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 child: Text(
                   "home/read_more".tr,
-                  style: const TextStyle(
-                      color: Colors.grey,
-                      fontFamily: "Montserrat",
-                      fontStyle: FontStyle.italic,
-                      fontSize: 14),
+                  style: context.textTheme.labelSmall,
                 ),
               ),
             Divider(
-              color: context.textTheme.bodyText2!.color,
+              color: context.theme.colorScheme.onTertiary,
               indent: 15,
               endIndent: 15,
               height: 20,
@@ -240,13 +213,13 @@ class SchoolLifeBaseContainer extends StatelessWidget {
                 children: [
                   Text(
                     ("home/" + stringFromType(item.type)).tr,
-                    style: Get.textTheme.bodyText1!
+                    style: Get.textTheme.bodySmall!
                         .copyWith(fontWeight: FontWeight.w300),
                   ),
                   Text(
                     DateFormat.yMMMMEEEEd(Get.locale.toString())
                         .format(item.datetime),
-                    style: Get.textTheme.bodyText1!
+                    style: Get.textTheme.bodySmall!
                         .copyWith(fontWeight: FontWeight.w300),
                   ),
                 ],

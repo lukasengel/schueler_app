@@ -11,6 +11,23 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final style1 = TextStyle(
+      color: Get.theme.colorScheme.onTertiary,
+      fontSize: 16,
+      fontFamily: "Montserrat",
+      letterSpacing: 1,
+    );
+
+    final style2 = TextStyle(
+      color: Get.theme.colorScheme.onTertiary,
+      fontSize: 20,
+      fontFamily: "Montserrat",
+      letterSpacing: 1,
+    );
+
+    const spacer1 = SizedBox(height: 5);
+    const spacer2 = SizedBox(height: 10);
+
     Get.put(SettingsPageController());
     return Scaffold(
       appBar: AppBar(
@@ -68,61 +85,42 @@ class SettingsPage extends StatelessWidget {
 // ###################################################################################
 // #                               COPYRIGHT NOTICE                                  #
 // ###################################################################################
-              Builder(builder: (context) {
-                const style1 = TextStyle(
-                  color: Colors.grey,
-                  fontSize: 16,
-                  fontFamily: "Montserrat",
-                  letterSpacing: 1,
-                );
-
-                const style2 = TextStyle(
-                  color: Colors.grey,
-                  fontSize: 20,
-                  fontFamily: "Montserrat",
-                  letterSpacing: 1,
-                );
-
-                const spacer1 = SizedBox(height: 5);
-                const spacer2 = SizedBox(height: 10);
-
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: Column(
-                    children: [
-                      Text(
-                        "settings/copyright/logo_artist".tr,
-                        style: style1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      spacer1,
-                      Text(
-                        "settings/copyright/nika".tr.tr.toUpperCase(),
-                        style: style2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      spacer2,
-                      Text(
-                        "settings/copyright/developer".tr,
-                        style: style1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      spacer1,
-                      Text(
-                        "settings/copyright/lukas".tr.toUpperCase(),
-                        style: style2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      const SizedBox(height: 40),
-                      Text(
-                        "settings/copyright/license".tr.toUpperCase(),
-                        style: style1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
-                  ),
-                );
-              }),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: Column(
+                  children: [
+                    Text(
+                      "settings/copyright/logo_artist".tr,
+                      style: style1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    spacer1,
+                    Text(
+                      "settings/copyright/nika".tr.tr.toUpperCase(),
+                      style: style2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    spacer2,
+                    Text(
+                      "settings/copyright/developer".tr,
+                      style: style1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    spacer1,
+                    Text(
+                      "settings/copyright/lukas".tr.toUpperCase(),
+                      style: style2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 40),
+                    Text(
+                      "settings/copyright/license".tr.toUpperCase(),
+                      style: style1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
             ],
           );
         }),

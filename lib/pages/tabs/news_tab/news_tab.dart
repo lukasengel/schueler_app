@@ -27,7 +27,7 @@ class NewsTab extends StatelessWidget {
     return GetBuilder<WebData>(builder: (controller) {
       return EasyRefresh.builder(
         onRefresh: () => Get.find<HomePageController>().onRefresh(context),
-        header: BallPulseHeader(color: Get.theme.primaryColor),
+        header: BallPulseHeader(color: Get.theme.colorScheme.primary),
         builder: (context, index, header, footer) {
           return CustomScrollView(
             physics: const BouncingScrollPhysics(
@@ -74,8 +74,10 @@ class NewsTab extends StatelessWidget {
                         AssetImage("assets/images/lucky_cat.png"),
                         size: 100,
                       ),
-                      Text("home/no_news".tr,
-                          style: context.textTheme.bodyText1),
+                      Text(
+                        "home/no_news".tr,
+                        style: context.textTheme.bodyMedium,
+                      ),
                     ],
                   ),
                 )

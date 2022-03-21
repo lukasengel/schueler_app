@@ -9,6 +9,8 @@ import './routes.dart' as routes;
 
 import './controllers/local_data.dart';
 import './controllers/authentication.dart';
+import './controllers/notifications.dart';
+import './controllers/web_data.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,9 +18,12 @@ void main() async {
 
   final localData = Get.put(LocalData());
   final auth = Get.put(Authentication());
+  Get.put(WebData());
+  Get.put(Notifications());
+
   await localData.initialize();
   await auth.login();
-  
+
   runApp(MyApp());
 }
 

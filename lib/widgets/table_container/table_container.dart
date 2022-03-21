@@ -20,7 +20,7 @@ class TableContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final webData = Get.find<WebData>();
     final table = webData.substitutionTables[index];
-    
+
 //########################################################################
 //#                               Logic                                  #
 //########################################################################
@@ -95,12 +95,12 @@ class TableContainer extends StatelessWidget {
             ),
             Text(
               DateFormat.yMMMMEEEEd(Get.locale.toString()).format(table.date),
-              style: context.textTheme.headline4,
+              style: context.textTheme.headlineSmall,
             ),
             const SizedBox(height: 10),
             Text(
               "home/no_data".tr,
-              style: context.textTheme.bodyText1,
+              style: context.textTheme.bodyMedium,
             ),
             const SizedBox(height: 10),
             Text(
@@ -108,7 +108,7 @@ class TableContainer extends StatelessWidget {
                   DateFormat.yMd(Get.locale.toString())
                       .add_jms()
                       .format(webData.latestUpdate),
-              style: Get.textTheme.bodyText1,
+              style: Get.textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
           ],
@@ -130,7 +130,7 @@ class TableContainer extends StatelessWidget {
                               bottom: Radius.circular(8),
                             )
                           : null,
-                      color:context.theme.selectedRowColor,
+                      color: context.theme.selectedRowColor,
                     )
                   : null,
               child: Column(
@@ -170,7 +170,7 @@ class TableContainer extends StatelessWidget {
                           blurRadius: 1,
                         )
                       ],
-                      color: context.theme.cardColor,
+                      color: context.theme.colorScheme.tertiary,
                       borderRadius: BorderRadius.circular(11),
                     ),
                     padding: const EdgeInsets.only(top: 10),
@@ -179,10 +179,10 @@ class TableContainer extends StatelessWidget {
                         Text(
                           DateFormat.yMMMMEEEEd(Get.locale.toString())
                               .format(table.date),
-                          style: context.textTheme.headline4,
+                          style: context.textTheme.headlineSmall,
                         ),
-                        const Divider(
-                          color: Colors.grey,
+                        Divider(
+                          color: context.theme.colorScheme.onTertiary,
                           indent: 20,
                           endIndent: 20,
                         ),
@@ -196,7 +196,7 @@ class TableContainer extends StatelessWidget {
                     DateFormat.yMd(Get.locale.toString())
                         .add_jms()
                         .format(webData.latestUpdate),
-                style: context.textTheme.bodyText1,
+                style: context.textTheme.bodyMedium,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 30),

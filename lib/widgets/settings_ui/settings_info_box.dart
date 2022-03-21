@@ -11,23 +11,23 @@ class SettingsInfoBox extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: Colors.grey,
+          color: Theme.of(context).colorScheme.onTertiary,
         ),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Row(
         children: [
-          const Icon(
+          Icon(
             Icons.live_help_rounded,
-            color: Colors.grey,
+            color: Theme.of(context).colorScheme.onTertiary,
             size: 30,
           ),
           const SizedBox(width: 10),
           Expanded(
             child: Text(
               message,
-              style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                    color: Colors.grey,
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onTertiary,
                   ),
               textAlign: TextAlign.center,
             ),

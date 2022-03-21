@@ -10,11 +10,11 @@ class SettingsText extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Row(
         children: [
-          Text(text.toUpperCase(), style: Theme.of(context).textTheme.caption),
+          Text(text.toUpperCase(), style: Theme.of(context).textTheme.titleSmall),
           Expanded(
             child: Divider(
               indent: 10,
-              color: Theme.of(context).textTheme.caption!.color,
+              color: Theme.of(context).textTheme.titleSmall!.color,
             ),
           ),
         ],

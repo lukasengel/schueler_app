@@ -49,11 +49,12 @@ class _SettingsSwitchTileState extends State<SettingsSwitchTile> {
           Expanded(
             child: Text(
               widget.label,
+              style: Theme.of(context).textTheme.bodyLarge,
               overflow: TextOverflow.ellipsis,
             ),
           ),
           Switch.adaptive(
-            activeColor: Theme.of(context).primaryColor,
+            activeColor: Theme.of(context).colorScheme.primary,
             value: value,
             onChanged: onChanged,
           ),

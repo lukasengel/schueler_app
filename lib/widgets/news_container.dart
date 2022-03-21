@@ -46,19 +46,19 @@ class NewsContainer extends StatelessWidget {
             blurRadius: 1,
           ),
         ],
-        color: Get.theme.cardColor,
+        color: Get.theme.colorScheme.tertiary,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             formatDate(item.headline),
-            style: Theme.of(context).textTheme.headline4,
+            style: Theme.of(context).textTheme.headlineSmall,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
           Divider(
-            color: Get.textTheme.bodyText2!.color,
+            color: Get.theme.colorScheme.onTertiary,
             indent: 30,
             endIndent: 30,
           ),
@@ -69,7 +69,7 @@ class NewsContainer extends StatelessWidget {
               child: Text(
                 item.subheadline,
                 textAlign: TextAlign.left,
-                style: Get.textTheme.bodyText2,
+                style: Get.textTheme.bodyLarge,
               ),
             ),
           if (item.content.isNotEmpty)
@@ -78,7 +78,7 @@ class NewsContainer extends StatelessWidget {
               child: Text(
                 item.content,
                 textAlign: TextAlign.left,
-                style: Get.textTheme.bodyText2,
+                style: Get.textTheme.bodyMedium,
               ),
             ),
         ],
