@@ -5,8 +5,6 @@ import 'package:get/get.dart';
 
 import './login_page_controller.dart';
 
-//TODO: Click Action
-
 class LoginPage extends StatelessWidget {
   static const route = "/login";
   const LoginPage({Key? key}) : super(key: key);

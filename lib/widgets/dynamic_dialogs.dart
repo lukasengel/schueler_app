@@ -32,7 +32,7 @@ Future<void> showDynamicMessageDialog({
               content: content,
               actions: [
                 CupertinoDialogAction(
-                  child: const Text("OK"),
+                  child: Text("general/ok".tr),
                   onPressed: Navigator.of(context).pop,
                 ),
               ],
@@ -48,7 +48,7 @@ Future<void> showDynamicMessageDialog({
               content: content,
               actions: [
                 TextButton(
-                  child: const Text("OK"),
+                  child: Text("general/ok".tr.toUpperCase()),
                   onPressed: Navigator.of(context).pop,
                 ),
               ],

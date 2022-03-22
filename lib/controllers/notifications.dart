@@ -3,15 +3,16 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import './local_data.dart';
+import '../pages/home_page/home_page_controller.dart';
 
 import '../models/subscribe_operation.dart';
 
 class Notifications extends GetxController {
   final _messaging = FirebaseMessaging.instance;
-  final localData = Get.find<LocalData>();
-  bool blocked = false;
+  final _localData = Get.find<LocalData>();
+  bool _blocked = false;
 
-  Future<void> initialize() async {
+  Future<String?> initialize() async {
     await _messaging.requestPermission(
       alert: true,
       announcement: false,
@@ -35,60 +36,73 @@ class Notifications extends GetxController {
             AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
 
-    localData.enqueuedOperations.listen((operations) {
-      if (!blocked) {
+    _localData.enqueuedOperations.listen((operations) {
+      if (!_blocked) {
         manageSubscription();
       }
     });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      final page = message.data["page"];
+      if (Get.isRegistered<HomePageController>()) {
+        Get.find<HomePageController>().switchTabs(page == "smv" ? 2 : 0);
+        if (page != null) {
+          Get.until((route) => route.settings.name == "/home");
+        }
+      }
+    });
+
+    final initialMessage = await _messaging.getInitialMessage();
+    return initialMessage?.data["page"];
   }
 
   void toggleDailyNotifications(OperationMode mode) {
-    for (var i = 0; i < localData.settings.notifications.length; i++) {
-      final topic = localData.settings.notifications[i];
+    for (var i = 0; i < _localData.settings.notifications.length; i++) {
+      final topic = _localData.settings.notifications[i];
       enqueueSubscription(topic, mode);
     }
   }
 
   void enqueueSubscription(String topic, OperationMode mode) {
     final operation = SubscribeOperation(topic, mode);
-    final isAlreadyEnqueued = localData.enqueuedOperations
+    final isAlreadyEnqueued = _localData.enqueuedOperations
             .where((item) => item.topic == topic)
             .isNotEmpty &&
-        !blocked;
+        !_blocked;
 
     if (isAlreadyEnqueued) {
-      localData.enqueuedOperations.removeWhere((item) => item.topic == topic);
+      _localData.enqueuedOperations.removeWhere((item) => item.topic == topic);
     } else {
-      localData.enqueuedOperations.add(operation);
+      _localData.enqueuedOperations.add(operation);
     }
   }
 
   Future<void> manageSubscription() async {
-    blocked = true;
+    _blocked = true;
     List<SubscribeOperation> list = [];
-    for (var i = 0; i < localData.enqueuedOperations.length; i++) {
-      final operation = localData.enqueuedOperations[i];
+    for (var i = 0; i < _localData.enqueuedOperations.length; i++) {
+      final operation = _localData.enqueuedOperations[i];
       final success = await _setSubscription(operation);
       if (success) {
         list.add(operation);
       }
     }
     list.reversed.forEach((element) {
-      localData.enqueuedOperations.remove(element);
+      _localData.enqueuedOperations.remove(element);
     });
-    blocked = false;
+    _blocked = false;
   }
 
   Future<bool> _setSubscription(SubscribeOperation operation) async {
     final inSettings =
-        localData.settings.notifications.contains(operation.topic);
+        _localData.settings.notifications.contains(operation.topic);
     try {
       if (operation.mode == OperationMode.SUBSCRIBE ||
-          (inSettings && localData.settings.dailyNotifications)) {
+          (inSettings && _localData.settings.dailyNotifications)) {
         await _messaging.subscribeToTopic(operation.topic);
       } else {
         if (!inSettings) {
-          localData.settings.notifications.remove(operation.topic);
+          _localData.settings.notifications.remove(operation.topic);
         }
         await _messaging.unsubscribeFromTopic(operation.topic);
       }

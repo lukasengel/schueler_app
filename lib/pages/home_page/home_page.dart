@@ -26,7 +26,6 @@ class HomePage extends StatelessWidget {
     ];
     const tabs = [SubstitutionTab(), NewsTab(), SmvTab()];
     Get.put(HomePageController());
-
     return GetBuilder<HomePageController>(builder: (controller) {
       initializeDateFormatting(Get.locale.toString(), null);
       return Scaffold(

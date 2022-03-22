@@ -10,6 +10,7 @@ import '../models/exceptions/auth_data_exception.dart';
 enum AuthState { LOGGED_IN, LOGGED_OFF }
 
 class Authentication extends GetxController {
+  String? initialPage;
   Rx<AuthState> authState = AuthState.LOGGED_OFF.obs;
   late Rx<User?> firebaseUser;
 
@@ -39,7 +40,7 @@ class Authentication extends GetxController {
         email: localData.settings.username + "@example.com",
         password: localData.settings.password,
       );
-      await notifications.initialize();
+      initialPage = await notifications.initialize();
       await webData.fetchData();
       authState.value = AuthState.LOGGED_IN;
       notifications.manageSubscription();

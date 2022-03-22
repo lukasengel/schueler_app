@@ -7,6 +7,7 @@
     "general/settings": "Einstellungen",
     "general/error":"Fehler",
     "general/cancel": "Abbrechen",
+    "general/ok":"OK",
 
     "login/username": "Benutzername",
     "login/password": "Passwort",

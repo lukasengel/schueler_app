@@ -4,13 +4,26 @@ import 'package:get/get.dart';
 import '../../routes.dart' as routes;
 import '../../controllers/local_data.dart';
 import '../../controllers/web_data.dart';
+import '../../controllers/authentication.dart';
 
 import '../../widgets/snackbar.dart';
 
 class HomePageController extends GetxController {
   final localData = Get.find<LocalData>();
   final webData = Get.find<WebData>();
-  int selectedTab = 0;
+  late int selectedTab;
+
+  @override
+  void onInit() {
+    switch (Get.find<Authentication>().initialPage) {
+      case "smv":
+        selectedTab = 2;
+        break;
+      default:
+        selectedTab = 0;
+    }
+    super.onInit();
+  }
 
   void switchTabs(int index) {
     selectedTab = index;
