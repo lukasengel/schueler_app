@@ -16,7 +16,8 @@
     "login/credentials_button": "Which credentials do I need?",
     "login/help_dialog/header": "Help Signing In",
     "login/help_dialog/message": "Please enter the login data of the online substitition plan (Online-Vertretungsplan) which you received in a letter to the parents at the beginning of the term.",
-  
+    "login/error/empty_credentials": "Please enter username and password.",
+    
     "home/no_data": "No entries for this day (yet).",
     "home/no_news": "No news (yet).",
     "home/no_information":"No information",
