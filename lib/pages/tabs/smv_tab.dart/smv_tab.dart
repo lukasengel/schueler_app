@@ -55,6 +55,7 @@ class SmvTab extends StatelessWidget {
                             Text(
                               "home/no_news".tr,
                               style: context.textTheme.bodyMedium,
+                              textAlign: TextAlign.center,
                             ),
                           ],
                         ),

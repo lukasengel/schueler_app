@@ -128,6 +128,13 @@ class LocalData extends GetxController {
     }
   }
 
+  Future<void> setAllFilters(bool enabled) async {
+    settings.filters.forEach((key, value) {
+      settings.filters[key] = enabled;
+    });
+    await writeSettings();
+  }
+
   Future<void> clearSettings() async {
     try {
       final prefs = await SharedPreferences.getInstance();

@@ -45,6 +45,7 @@ class HomePage extends StatelessWidget {
         floatingActionButton: controller.selectedTab > 0
             ? GetBuilder<LocalData>(builder: (localData) {
                 return FloatingActionButton.extended(
+                  tooltip: "tooltips/invert_sorting".tr,
                   label: Text(
                     controller.selectedTab == 1 &&
                                 !localData.settings.reversedNews ||

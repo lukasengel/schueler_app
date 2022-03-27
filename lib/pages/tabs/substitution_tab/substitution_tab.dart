@@ -27,7 +27,10 @@ class SubstitutionTab extends StatelessWidget {
                     AssetImage("assets/images/lucky_cat.png"),
                     size: 100,
                   ),
-                  Text("home/no_information".tr),
+                  Text(
+                    "home/no_information".tr,
+                    textAlign: TextAlign.center,
+                  ),
                 ],
               ),
             )

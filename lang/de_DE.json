@@ -9,6 +9,11 @@
     "general/cancel": "Abbrechen",
     "general/ok":"OK",
 
+    "tooltips/invert_sorting":"Sortierung umkehren",
+    "tooltips/enable_all":"Alle ein",
+    "tooltips/disable_all":"Alle aus",
+    "tooltips/add":"Richtlinie hinzufügen",
+
     "login/username": "Benutzername",
     "login/password": "Passwort",
     "login/login_header": "Anmeldung",
@@ -16,7 +21,8 @@
     "login/credentials_button": "Welche Nutzerdaten brauche ich?",
     "login/help_dialog/header": "Hilfe bei der Anmeldung",
     "login/help_dialog/message": "Bitte geben Sie die Anmeldedaten des Online-Vertretungsplanes ein. Diese haben Sie Anfang des Schuljahres in einem Elternbrief erhalten.",
-  
+    "login/error/empty_credentials":"Bitte Benutzernamen und Passwort eingeben.",
+    
     "home/no_data": "(Noch) Keine Einträge für diesen Tag vorhanden.",
     "home/no_news": "(Noch) Keine Nachrichten verfügbar.",
     "home/no_information":"Keine Daten",

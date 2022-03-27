@@ -101,6 +101,7 @@ class TableContainer extends StatelessWidget {
             Text(
               "home/no_data".tr,
               style: context.textTheme.bodyMedium,
+                 textAlign: TextAlign.center,
             ),
             const SizedBox(height: 10),
             Text(

@@ -21,6 +21,7 @@ class NotificationsPage extends StatelessWidget {
         title: Text("settings/notifications".tr),
       ),
       floatingActionButton: FloatingActionButton(
+        tooltip: "tooltips/add".tr,
         child: const Icon(Icons.add),
         onPressed: controller.addCourse,
       ),

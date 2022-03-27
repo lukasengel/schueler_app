@@ -83,40 +83,33 @@ class AppTheme {
         color: Colors.black,
         letterSpacing: 0.8,
       ),
-      //LABEL-SMALL: Schulleben-Container Mehr Lesen
       labelSmall: const TextStyle(
         fontSize: 15,
         letterSpacing: 0,
         color: Colors.grey,
         fontStyle: FontStyle.italic,
       ),
-      //TITLE-SMALL: SettingsText
       titleSmall: TextStyle(
         fontWeight: FontWeight.w400,
         color: Colors.grey.shade800,
         fontSize: 16,
         // fontSize: 25,
       ),
-      //TITLE-MEDIUM: Schulleben-Container Headline
       titleMedium: const TextStyle(
         fontWeight: FontWeight.w800,
         fontSize: 25,
       ),
-      //TITLE-LARGE: App-Bar
       titleLarge: const TextStyle(
         fontSize: 25,
         fontWeight: FontWeight.w400,
       ),
-      //BODY-LARGE: News-Ticker, News-Item Subheader
       bodyLarge: const TextStyle(
         fontWeight: FontWeight.normal,
         fontSize: 18,
       ),
-      //BODY-MEDIUM: News-Item-Content, Schulleben-Container Content, leere Seiten
       bodyMedium: const TextStyle(
         fontSize: 16,
       ),
-      //BODY-SMALL: Vertretungsplan-Daten
       bodySmall: const TextStyle(
         color: Colors.black,
         fontSize: 15,
