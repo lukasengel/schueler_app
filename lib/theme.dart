@@ -9,6 +9,7 @@ ON SECONDARY:       Icons (SchoolLifeContainer), CupertinoPicker (CoursePicker)
 TERTIARY:           Replacement for CardColor
 ON TERTIARY:        Inactive Buttons, SettingsInfoBox, Chevron (SettingsTile), Divider, SuffixIcons
 TERTIARY CONTAINER: Search field (Abbreviations Page)
+ON TERTIARY CONTAINER: Login-Screen Text Field Fill Color
 INDICATOR COLOR:    Disabled dots of Page Indicator (SubstitutionTab)
 
 HEADLINE LARGE:     App Title (LoginScreen)
@@ -34,6 +35,7 @@ class AppTheme {
       tertiary: Colors.white,
       onTertiary: Colors.grey,
       tertiaryContainer: Colors.grey.shade300,
+      onTertiaryContainer: Colors.grey.shade200,
     ),
     indicatorColor: Colors.grey.shade800,
     appBarTheme: const AppBarTheme(

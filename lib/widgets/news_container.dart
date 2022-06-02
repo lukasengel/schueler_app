@@ -65,7 +65,7 @@ class NewsContainer extends StatelessWidget {
           const SizedBox(height: 10),
           if (item.subheadline.isNotEmpty)
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40.0),
+              padding: const EdgeInsets.symmetric(horizontal: 30.0),
               child: Text(
                 item.subheadline,
                 textAlign: TextAlign.left,
@@ -74,7 +74,7 @@ class NewsContainer extends StatelessWidget {
             ),
           if (item.content.isNotEmpty)
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40.0),
+              padding: const EdgeInsets.symmetric(horizontal: 30.0),
               child: Text(
                 item.content,
                 textAlign: TextAlign.left,

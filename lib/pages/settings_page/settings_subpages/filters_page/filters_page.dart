@@ -100,13 +100,15 @@ class _FiltersPageState extends State<FiltersPage> {
         mainAxisSize: MainAxisSize.min,
         children: [
           FloatingActionButton(
+            heroTag: 1,
             tooltip: "tooltips/disable_all".tr,
             onPressed: () => toggleAll(false),
             child: const Icon(Icons.clear_all),
           ),
           const SizedBox(height: 10),
           FloatingActionButton(
-                        tooltip: "tooltips/enable_all".tr,
+            heroTag: 2,
+            tooltip: "tooltips/enable_all".tr,
             onPressed: () => toggleAll(true),
             child: const Icon(Icons.done_all),
           ),

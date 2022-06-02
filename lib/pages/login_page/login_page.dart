@@ -75,22 +75,22 @@ class LoginPage extends StatelessWidget {
                   child: SingleChildScrollView(
                     physics: const ClampingScrollPhysics(),
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 20,
+                      horizontal: 10,
+                      vertical: 10,
                     ),
                     child: Material(
                       color: Colors.transparent,
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Align(
+                          Container(
+                            padding: const EdgeInsets.fromLTRB(8, 3, 0, 10),
                             alignment: Alignment.centerLeft,
                             child: Text(
                               "login/login_header".tr,
                               style: Get.textTheme.headlineMedium,
                             ),
                           ),
-                          const SizedBox(height: 15),
                           // ###################################################################################
                           // #                              ERROR MESSSAGE                                     #
                           // ###################################################################################
@@ -126,23 +126,40 @@ class LoginPage extends StatelessWidget {
                                   autocorrect: false,
                                   style: context.textTheme.bodyMedium,
                                   decoration: InputDecoration(
+                                    filled: true,
+                                    fillColor: context
+                                        .theme.colorScheme.onTertiaryContainer,
+                                    contentPadding: const EdgeInsets.symmetric(
+                                      vertical: 0,
+                                      horizontal: 10,
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
                                     hintText: "login/username".tr,
                                   ),
                                   autofillHints: const [AutofillHints.username],
                                   controller: controller.usernameController,
                                   textInputAction: TextInputAction.next,
                                 ),
-                                Divider(
-                                  height: 3,
-                                  indent: 25,
-                                  color: Get.theme.colorScheme.onTertiary,
-                                ),
+                                const SizedBox(height: 8),
                                 Obx(
                                   () => TextField(
                                     enableSuggestions: false,
                                     autocorrect: false,
                                     style: context.textTheme.bodyMedium,
                                     decoration: InputDecoration(
+                                      fillColor: context.theme.colorScheme
+                                          .onTertiaryContainer,
+                                      filled: true,
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                        vertical: 0,
+                                        horizontal: 10,
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
                                       hintText: "login/password".tr,
                                       suffixIcon: IconButton(
                                         splashRadius: 20,
@@ -166,8 +183,8 @@ class LoginPage extends StatelessWidget {
                                     onSubmitted: controller.onSubmitted,
                                   ),
                                 ),
-                                const SizedBox(height: 20),
-                                Align(
+                                Container(
+                                  padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
                                   alignment: Alignment.centerRight,
                                   child: Obx(
                                     () => SizedBox(
@@ -188,7 +205,6 @@ class LoginPage extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(height: 10),
                                 TextButton.icon(
                                   onPressed: controller.onPressedHelp,
                                   icon: const Icon(Icons.help_outline),
