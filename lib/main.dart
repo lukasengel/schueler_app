@@ -3,27 +3,18 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:schueler_app/controllers/bindings.dart';
 
 import './theme.dart';
 import './routes.dart' as routes;
 
 import './controllers/local_data.dart';
 import './controllers/authentication.dart';
-import './controllers/notifications.dart';
-import './controllers/web_data.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
-  final localData = Get.put(LocalData());
-  final auth = Get.put(Authentication());
-  Get.put(WebData());
-  Get.put(Notifications());
-
-  await localData.initialize();
-  await auth.login();
-
+  await AppBindings().dependencies();
   runApp(MyApp());
 }
 
