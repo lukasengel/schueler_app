@@ -28,9 +28,9 @@
     "home/no_information":"Keine Daten",
     "home/asc": "A-Z",
     "home/desc": "Z-A",
-    "home/event": "Veranstaltung",
-    "home/article": "Beitrag",
-    "home/announcement": "Mitteilung",
+    "home/ItemType.EVENT": "Veranstaltung",
+    "home/ItemType.ARTICLE": "Beitrag",
+    "home/ItemType.ANNOUNCEMENT": "Mitteilung",
     "home/read_more": "Tippen, um mehr zu lesen",
     "home/unknown_teacher": "Unbekannter Lehrer",
     "home/no_teacher":"Keine Vertretung",
@@ -95,5 +95,8 @@
     "settings/copyright/nika": "Nika Peskova",
     "settings/copyright/developer": "Entwicklung",
     "settings/copyright/lukas": "Lukas Engel",
-    "settings/copyright/license": "2022, Quelloffen: MIT-Lizenz"
+    "settings/copyright/license": "2022, Quelloffen: MIT-Lizenz",
+
+    "articles/photo":"Photo: ",
+    "articles/open_external_content":"Externe Inhalte öffnen"
 }

@@ -14,11 +14,12 @@ INDICATOR COLOR:    Disabled dots of Page Indicator (SubstitutionTab)
 
 HEADLINE LARGE:     App Title (LoginScreen)
 HEADLINE MEDIUM:    Header (LoginScreen)
-HEADLINE SMALL:     Header (TableContainer, NewsItem)
+HEADLINE SMALL:     Header (TableContainer, NewsItem), ArticleHeader
 TITLE LARGE:        AppBar
 TITLE MEDIUM:       Header (SchoolLifeContainer)
 TITLE SMALL:        SettingsText
-LABEL SMALL:        "Tap to read more" (SchoolLifeContainer)
+LABEL SMALL:        "Tap to read more" (SchoolLifeContainer), Copyright Notice (ArticleImage & ArticleLeadingImage)
+LABEL MEDIUM:       ArticleSubheader, Description (ArticleImage)
 BODY LARGE:         Subheader (NewsItem), NewsTicker, SettingsTile
 BODY MEDIUM:        Content (NewsItem, SchoolLifeContainer), Empty Pages
 BODY SMALL:         TableRows (TableContainer)
@@ -90,6 +91,11 @@ class AppTheme {
         letterSpacing: 0,
         color: Colors.grey,
         fontStyle: FontStyle.italic,
+      ),
+      labelMedium: const TextStyle(
+        fontSize: 16,
+        letterSpacing: 0,
+        color: Colors.grey,
       ),
       titleSmall: TextStyle(
         fontWeight: FontWeight.w400,
@@ -189,6 +195,11 @@ class AppTheme {
         letterSpacing: 0,
         color: Colors.grey,
         fontStyle: FontStyle.italic,
+      ),
+      labelMedium: TextStyle(
+        fontSize: 16,
+        letterSpacing: 0,
+        color: Colors.grey,
       ),
       titleSmall: TextStyle(
         fontWeight: FontWeight.w400,

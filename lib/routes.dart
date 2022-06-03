@@ -8,6 +8,7 @@ import './pages/settings_page/settings_subpages/personalizations_page/personaliz
 import './pages/settings_page/settings_subpages/report_a_bug_page/report_bug_page.dart';
 import './pages/settings_page/settings_subpages/abbreviations_page/abbreviations_page.dart';
 import './pages/settings_page/settings_subpages/notifications_page/notifications_page.dart';
+import './pages/article_page/article_page.dart';
 
 const home = HomePage.route;
 const login = LoginPage.route;
@@ -17,6 +18,7 @@ const personalization = PersonalizationPage.route;
 const report_bug = ReportBugPage.route;
 const abbreviations = AbbreviationsPage.route;
 const notifications = NotificationsPage.route;
+const article = ArticlePage.route;
 
 final getPages = [
   GetPage(name: home, page: () => const HomePage()),
@@ -27,4 +29,5 @@ final getPages = [
   GetPage(name: report_bug, page: () => const ReportBugPage()),
   GetPage(name: abbreviations, page: () => const AbbreviationsPage()),
   GetPage(name: notifications, page: () => const NotificationsPage()),
+  GetPage(name: article, page: () => const ArticlePage()),
 ];

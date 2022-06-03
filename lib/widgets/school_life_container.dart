@@ -16,14 +16,17 @@ class SchooLifeContainer extends StatelessWidget {
     return SchoolLifeBaseContainer(
       item: item,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 10),
-            child: Text(
-              DateFormat.yMMMMEEEEd(Get.locale.toString())
-                  .format(item.eventTime),
-              style: Get.textTheme.bodySmall!
-                  .copyWith(fontWeight: FontWeight.w300, fontSize: 18),
+            child: Center(
+              child: Text(
+                DateFormat.yMMMMEEEEd(Get.locale.toString())
+                    .format(item.eventTime),
+                style: Get.textTheme.bodySmall!
+                    .copyWith(fontWeight: FontWeight.w300, fontSize: 18),
+              ),
             ),
           ),
           Padding(
@@ -38,12 +41,12 @@ class SchooLifeContainer extends StatelessWidget {
           ),
           Divider(
             color: context.theme.colorScheme.onTertiary,
-            indent: 20,
-            endIndent: 20,
+            indent: 15,
+            endIndent: 15,
             height: 20,
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Text(item.content, style: context.textTheme.bodySmall),
           ),
         ],
@@ -55,7 +58,7 @@ class SchooLifeContainer extends StatelessWidget {
     return SchoolLifeBaseContainer(
       item: item,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Stack(
             alignment: Alignment.bottomLeft,
@@ -84,9 +87,8 @@ class SchooLifeContainer extends StatelessWidget {
               ),
               Container(
                 padding: const EdgeInsets.all(10),
-                color: item.dark
-                    ? Colors.black.withOpacity(0.4)
-                    : Colors.white.withOpacity(0.4),
+                color:
+                    (item.dark ? Colors.black : Colors.white).withOpacity(0.4),
                 child: Text(
                   item.header.toUpperCase(),
                   maxLines: 3,
@@ -97,7 +99,7 @@ class SchooLifeContainer extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+            padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
             child: Text(
               item.content,
               style: context.textTheme.bodyMedium,
@@ -129,12 +131,12 @@ class SchooLifeContainer extends StatelessWidget {
           ),
           Divider(
             color: context.theme.colorScheme.onTertiary,
-            indent: 20,
-            endIndent: 20,
+            indent: 15,
+            endIndent: 15,
             height: 20,
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Text(
               item.content,
               style: context.textTheme.bodyMedium,
@@ -165,15 +167,21 @@ class SchoolLifeBaseContainer extends StatelessWidget {
       {required this.item, required this.child, Key? key})
       : super(key: key);
 
-  void openUrl() async {
-    await url_launcher.launch(item.hyperlink);
+  void onPressedItem() async {
+    if (item.articleElements.isNotEmpty) {
+      Get.toNamed("/articles", arguments: item);
+    } else {
+      await url_launcher.launch(item.hyperlink);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
       padding: EdgeInsets.zero,
-      onPressed: item.hyperlink.isNotEmpty ? openUrl : null,
+      onPressed: item.hyperlink.isNotEmpty || item.articleElements.isNotEmpty
+          ? onPressedItem
+          : null,
       child: Container(
         constraints: const BoxConstraints(maxWidth: 500),
         margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
@@ -212,7 +220,7 @@ class SchoolLifeBaseContainer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    ("home/" + stringFromType(item.type)).tr,
+                    ("home/" + item.type.toString()).tr,
                     style: Get.textTheme.bodySmall!
                         .copyWith(fontWeight: FontWeight.w300),
                   ),

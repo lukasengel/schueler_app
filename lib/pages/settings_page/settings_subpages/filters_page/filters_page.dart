@@ -47,7 +47,7 @@ class _FiltersPageState extends State<FiltersPage> {
       body: SafeArea(
         bottom: false,
         child: ListView(
-          padding: const EdgeInsets.fromLTRB(0, 5, 0, 60),
+          padding: const EdgeInsets.fromLTRB(0, 5, 0, 150),
           children: [
             SettingsText(text: "settings/filters/grade".tr),
             SettingsContainer(
