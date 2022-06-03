@@ -33,7 +33,7 @@ class ArticlePage extends StatelessWidget {
             if (item.imageUrl.isNotEmpty)
               ArticleLeadingImage(
                 url: item.imageUrl,
-                author: item.imageCopyright,
+                imageCopyright: item.imageCopyright,
                 dark: item.dark,
               ),
             ArticleSubheader(

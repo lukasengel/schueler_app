@@ -5,11 +5,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 class ArticleLeadingImage extends StatelessWidget {
   final String url;
-  final String author;
+  final String imageCopyright;
   final bool dark;
   const ArticleLeadingImage({
     required this.url,
-    required this.author,
+    required this.imageCopyright,
     required this.dark,
     Key? key,
   }) : super(key: key);
@@ -44,7 +44,7 @@ class ArticleLeadingImage extends StatelessWidget {
               ),
             ),
           ),
-          if (author.isNotEmpty)
+          if (imageCopyright.isNotEmpty)
             Align(
               alignment: Alignment.bottomRight,
               child: Container(
@@ -54,7 +54,7 @@ class ArticleLeadingImage extends StatelessWidget {
                   vertical: 5,
                 ),
                 child: Text(
-                  "articles/photo".tr + author,
+                  "articles/photo".tr + imageCopyright,
                   style:
                       Get.textTheme.labelSmall!.copyWith(color: Colors.white),
                 ),

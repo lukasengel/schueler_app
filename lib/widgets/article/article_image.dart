@@ -41,7 +41,7 @@ class ArticleImage extends StatelessWidget {
                   ),
                 ),
               ),
-              if (element.author.isNotEmpty)
+              if (element.imageCopyright.isNotEmpty)
                 Align(
                   alignment: Alignment.bottomRight,
                   child: Container(
@@ -52,7 +52,7 @@ class ArticleImage extends StatelessWidget {
                       vertical: 5,
                     ),
                     child: Text(
-                      "articles/photo".tr + element.author,
+                      "articles/photo".tr + element.imageCopyright,
                       style: Get.textTheme.labelSmall!
                           .copyWith(color: Colors.white),
                     ),
