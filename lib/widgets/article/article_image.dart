@@ -61,11 +61,11 @@ class ArticleImage extends StatelessWidget {
             ],
           ),
         ),
-        if (element.optionalData.isNotEmpty)
+        if (element.description.isNotEmpty)
           Container(
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.fromLTRB(15, 0, 15, 5),
-            child: Text(element.optionalData, style: Get.textTheme.labelMedium),
+            child: Text(element.description, style: Get.textTheme.labelMedium),
           ),
       ],
     );

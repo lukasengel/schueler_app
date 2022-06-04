@@ -1,15 +1,19 @@
 import './article.dart';
 
-enum ItemType { EVENT, ARTICLE, ANNOUNCEMENT }
+enum ItemType {
+  EVENT,
+  ARTICLE,
+  ANNOUNCEMENT;
 
-ItemType stringToType(String string) {
-  switch (string) {
-    case "event":
-      return ItemType.EVENT;
-    case "article":
-      return ItemType.ARTICLE;
-    default:
-      return ItemType.ANNOUNCEMENT;
+  factory ItemType.fromString(String data) {
+    switch (data) {
+      case "event":
+        return ItemType.EVENT;
+      case "article":
+        return ItemType.ARTICLE;
+      default:
+        return ItemType.ANNOUNCEMENT;
+    }
   }
 }
 
@@ -59,7 +63,7 @@ class SchoolLifeItem {
           json.containsKey("hyperlink") ? json["hyperlink"] as String : "",
       imageUrl: json.containsKey("imageUrl") ? json["imageUrl"] as String : "",
       dark: json.containsKey("dark") ? json["dark"] as bool : false,
-      type: stringToType(json["type"] as String),
+      type: ItemType.fromString(json["type"] as String),
       datetime: DateTime.parse(json["datetime"]),
       eventTime: json.containsKey("eventTime")
           ? DateTime.parse(json["eventTime"])
