@@ -21,8 +21,7 @@ Verfügbar im Play Store unter: https://play.google.com/store/apps/details?id=de
 
 ## Mitwirkende
 - Logo-Gestaltung:  Nika Peskova
-- Entwicklung:  Lukas Engel, Jacob Drew
-- Person, die sich beim Schulleiter für die App einsetzt: Lars Seth
+- Entwicklung:  Lukas Engel
 
 ## Lizenz
 Der Quellcode steht unter der MIT-Lizenz öffentlich zur Verfügung. Weitere Informationen unter license.txt.
