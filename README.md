@@ -16,8 +16,8 @@ Verfügbar im Play Store unter: https://play.google.com/store/apps/details?id=de
 - [x] Feedback/Bug-Meldung
 - [x] Lehrerkürzel-Übersicht
 - [x] Benachrichtigungen (entfallene Stunden, Neuigkeiten, Rundnachrichten)
+- [x] Integration von Artikeln in die App
 - [ ] APNs Integration
-- [ ] Integration von Artikeln in die App
 
 ## Mitwirkende
 - Logo-Gestaltung:  Nika Peskova
