@@ -1,7 +1,7 @@
 <img alt="Logo" src=".github/logo_app.png" height="200">
 
 # GG Schüler-App
-Schüler-App des Gnadenthal-Gymnasium Ingolstadt.
+Schüler-App für das Gnadenthal-Gymnasium Ingolstadt.
 
 Ermöglicht den Zugriff auf den aktuellen Vertretungsplan, die Nachrichten der Schulleitung und ein schwarzes Brett mit Neuigkeiten im Schulleben (z.B. Veranstaltungen, Ankündigungen, Beiträge).
 Optional können auch Benachrichtigungen z.B. bei neuen Vertretungen, Neuigkeiten oder Rundnachrichten aktiviert werden.
