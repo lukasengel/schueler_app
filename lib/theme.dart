@@ -40,6 +40,7 @@ class AppTheme {
     ),
     indicatorColor: Colors.grey.shade800,
     appBarTheme: const AppBarTheme(
+      centerTitle: false,
       elevation: 1,
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -139,6 +140,7 @@ class AppTheme {
     selectedRowColor: Colors.grey.shade800,
     indicatorColor: Colors.white,
     appBarTheme: const AppBarTheme(
+      centerTitle: false,
       color: Color(0xff1c1c1e),
       foregroundColor: primaryColor,
       elevation: 1,
