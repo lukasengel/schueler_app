@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 import '../../routes.dart' as routes;
@@ -49,6 +50,14 @@ class HomePageController extends GetxController {
   Future<void> onRefresh(BuildContext context) async {
     try {
       await webData.fetchData();
+    } on FirebaseException catch (e) {
+      showSnackBar(
+        context: context,
+        snackbar: SnackBar(
+          content: Text("general/error".tr.toUpperCase() + ": " + e.message!),
+          duration: const Duration(seconds: 5),
+        ),
+      );
     } catch (e) {
       showSnackBar(
         context: context,
