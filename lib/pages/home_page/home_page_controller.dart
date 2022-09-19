@@ -53,7 +53,11 @@ class HomePageController extends GetxController {
       showSnackBar(
         context: context,
         snackbar: SnackBar(
-          content: Text("general/error".tr.toUpperCase() + ": " + e.toString()),
+          content: Text(
+            "general/error".tr.toUpperCase() + ": " + e.toString(),
+            maxLines: 5,
+            overflow: TextOverflow.ellipsis,
+          ),
           duration: const Duration(seconds: 5),
         ),
       );
