@@ -1,9 +1,9 @@
 name: schueler_app
-description: Schüler-App des Gnadenthal-Gymnasiums
+description: Schüler-App für das Gnadenthal-Gymnasium
 
 publish_to: 'none'
 
-version: 0.3.0+3
+version: 1.0.0+4
 
 environment:
   sdk: ">=2.17.0 <3.0.0"
