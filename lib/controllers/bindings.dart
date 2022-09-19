@@ -4,6 +4,7 @@ import './local_data.dart';
 import './authentication.dart';
 import './notifications.dart';
 import './web_data.dart';
+import './lifecycle.dart';
 
 class AppBindings implements Bindings {
   @override
@@ -12,6 +13,7 @@ class AppBindings implements Bindings {
     final auth = Get.put(Authentication());
     Get.put(WebData());
     Get.put(Notifications());
+    Get.put(Lifecycle());
     await localData.initialize();
     await auth.login();
   }

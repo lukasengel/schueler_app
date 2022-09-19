@@ -41,6 +41,8 @@ class SubstitutionTab extends StatelessWidget {
                   controller: controller.pageController,
                   itemBuilder: (context, index) {
                     return EasyRefresh.custom(
+                      controller:
+                          Get.find<HomePageController>().refreshController,
                       onRefresh: () =>
                           Get.find<HomePageController>().onRefresh(context),
                       header: BallPulseHeader(

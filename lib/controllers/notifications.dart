@@ -47,7 +47,6 @@ class Notifications extends GetxController {
       if (Get.isRegistered<HomePageController>()) {
         final homePageController = Get.find<HomePageController>();
         homePageController.switchTabs(page == "smv" ? 2 : 0);
-        homePageController.onRefresh(Get.context!);
         if (page != null && page != "") {
           Get.until((route) => route.settings.name == "/home");
         }

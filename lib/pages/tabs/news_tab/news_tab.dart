@@ -26,6 +26,7 @@ class NewsTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<WebData>(builder: (controller) {
       return EasyRefresh.builder(
+        controller: Get.find<HomePageController>().refreshController,
         onRefresh: () => Get.find<HomePageController>().onRefresh(context),
         header: BallPulseHeader(color: Get.theme.colorScheme.primary),
         builder: (context, index, header, footer) {

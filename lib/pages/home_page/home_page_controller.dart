@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 import '../../routes.dart' as routes;
 import '../../controllers/local_data.dart';
@@ -9,6 +10,7 @@ import '../../controllers/authentication.dart';
 import '../../widgets/snackbar.dart';
 
 class HomePageController extends GetxController {
+  final refreshController = EasyRefreshController();
   final localData = Get.find<LocalData>();
   final webData = Get.find<WebData>();
   late int selectedTab;
@@ -56,5 +58,6 @@ class HomePageController extends GetxController {
         ),
       );
     }
+    refreshController.finishRefresh();
   }
 }

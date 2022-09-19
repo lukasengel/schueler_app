@@ -35,7 +35,7 @@ class HomePage extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.settings_outlined),
               onPressed: controller.onPressedSettings,
-            )
+            ),
           ],
         ),
         body: IndexedStack(
