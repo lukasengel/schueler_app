@@ -156,7 +156,7 @@ class AppTheme {
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         textStyle: const TextStyle(fontSize: 25, fontFamily: "Montserrat"),
-        onPrimary: Colors.white,
+        foregroundColor: Colors.white,
       ),
     ),
     textButtonTheme: TextButtonThemeData(

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
 class SettingsInfoBox extends StatelessWidget {
+  final EdgeInsetsGeometry? margin;
   final String message;
-  const SettingsInfoBox(this.message, {Key? key}) : super(key: key);
+  const SettingsInfoBox(this.message, {this.margin, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: margin,
       constraints: const BoxConstraints(maxWidth: 500),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),

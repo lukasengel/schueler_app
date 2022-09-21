@@ -1,15 +1,18 @@
-enum ColorMode {LIGHT, SYSTEM, DARK}
+enum ColorMode { LIGHT, SYSTEM, DARK }
 
 class Settings {
-  String username, password;
+  String username;
+  String password;
   Map<String, dynamic> filters;
   List<String> notifications;
-  bool reversedNews,
-      reversedSmv,
-      dailyNotifications,
-      smvNotifications,
-      broadcastNotifications,
-      forceGerman;
+  bool reversedNews;
+  bool reversedSmv;
+  bool dailyNotifications;
+  bool smvNotifications;
+  bool broadcastNotifications;
+  bool forceGerman;
+  bool jumpToNextDay;
+  bool androidAlternativeTransition;
   ColorMode selectedTheme;
 
   Settings({
@@ -23,6 +26,8 @@ class Settings {
     required this.smvNotifications,
     required this.broadcastNotifications,
     required this.forceGerman,
+    required this.jumpToNextDay,
+    required this.androidAlternativeTransition,
     required this.selectedTheme,
   });
 }

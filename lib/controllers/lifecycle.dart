@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 
-import '../pages/home_page/home_page_controller.dart';
+import '../controllers/web_data.dart';
+
+import '../widgets/snackbar.dart';
 
 class Lifecycle extends SuperController {
   @override
@@ -13,11 +15,11 @@ class Lifecycle extends SuperController {
   void onPaused() {}
 
   @override
-  void onResumed() {
-    if (Get.isRegistered<HomePageController>()) {
-      Future.delayed(Duration.zero).then((_) {
-        Get.find<HomePageController>().refreshController.callRefresh();
-      });
+  void onResumed() async {
+    try {
+      await Get.find<WebData>().fetchData();
+    } catch (e) {
+      showErrorSnackbar(e);
     }
   }
 }

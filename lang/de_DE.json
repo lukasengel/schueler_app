@@ -50,6 +50,11 @@
     "settings/personalization/light": "Hell",
     "settings/personalization/dark": "Dunkel",
     "settings/personalization/system": "System",
+    "settings/personalization/usability":"Nutzerfreundlichkeit",
+    "settings/personalization/jump_to_next_day": "Automatisch nächster Tag",
+    "settings/personalization/info_jump_to_next_day":"Falls ausgewählt, wechselt der Vertretungsplan ab 16.00 Uhr beim Start automatisch zum nächsten Tag.",
+    "settings/personalization/android_alternative_transition": "Alternativer Seitenübergang",
+    "settings/personalization/info_android_alternative_transition":"Für Android-Geräte: Aktiviert alternative Seitenübergangsanimation. Empfohlen bei Problemen mit dem Standardübergang. Hinweis: Änderungen werden erst nach einem Neustart der App wirksam.",
     "settings/personalization/gender_neutral_language": "Gendergerechte Sprache",
 
     "settings/filters/choose_grade": "Jahrgangsstufen",

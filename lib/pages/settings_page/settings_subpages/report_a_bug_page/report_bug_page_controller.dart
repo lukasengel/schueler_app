@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 import '../../../../controllers/web_data.dart';
 import '../../../../widgets/dynamic_dialogs.dart';
@@ -45,23 +44,8 @@ class ReportBugPageController extends GetxController {
           email: emailController.text.trim(),
           message: messageController.text.trim(),
         ));
-      } on FirebaseException catch (e) {
-        showSnackBar(
-          context: Get.context!,
-          snackbar: SnackBar(
-            content: Text("general/error".tr.toUpperCase() + ": " + e.message!),
-            duration: const Duration(seconds: 5),
-          ),
-        );
       } catch (e) {
-        showSnackBar(
-          context: Get.context!,
-          snackbar: SnackBar(
-            content:
-                Text("general/error".tr.toUpperCase() + ": " + e.toString()),
-            duration: const Duration(seconds: 5),
-          ),
-        );
+        showErrorSnackbar(e);
       }
       Get.back();
     }

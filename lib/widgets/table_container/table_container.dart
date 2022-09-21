@@ -43,14 +43,11 @@ class TableContainer extends StatelessWidget {
       }
 
       showSnackBar(
-        context: Get.context!,
-        snackbar: SnackBar(
-          content: one.isEmpty ? Text(two) : Text(one + ": " + two),
-          duration: const Duration(seconds: 5),
-          action: SnackBarAction(
-            label: "home/show_all".tr,
-            onPressed: () => Get.toNamed(routes.abbreviations),
-          ),
+        content: one.isEmpty ? Text(two) : Text(one + ": " + two),
+        duration: const Duration(seconds: 5),
+        action: SnackBarAction(
+          label: "home/show_all".tr,
+          onPressed: () => Get.toNamed(routes.abbreviations),
         ),
       );
     }
@@ -101,7 +98,7 @@ class TableContainer extends StatelessWidget {
             Text(
               "home/no_data".tr,
               style: context.textTheme.bodyMedium,
-                 textAlign: TextAlign.center,
+              textAlign: TextAlign.center,
             ),
             const SizedBox(height: 10),
             Text(
@@ -181,6 +178,8 @@ class TableContainer extends StatelessWidget {
                           DateFormat.yMMMMEEEEd(Get.locale.toString())
                               .format(table.date),
                           style: context.textTheme.headlineSmall,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                         Divider(
                           color: context.theme.colorScheme.onTertiary,

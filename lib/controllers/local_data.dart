@@ -63,6 +63,9 @@ class LocalData extends GetxController {
         broadcastNotifications:
             prefs.getBool("broadcastNotifications") ?? false,
         forceGerman: prefs.getBool("forceGerman") ?? false,
+        jumpToNextDay: prefs.getBool("jumpToNextDay") ?? true,
+        androidAlternativeTransition:
+            prefs.getBool("androidAlternativeTransition") ?? false,
         selectedTheme: ColorMode.values[prefs.getInt("selectedTheme") ?? 1],
       );
     } catch (e) {
@@ -84,6 +87,9 @@ class LocalData extends GetxController {
       await prefs.setBool(
           "broadcastNotifications", settings.broadcastNotifications);
       await prefs.setBool("forceGerman", settings.forceGerman);
+      await prefs.setBool("jumpToNextDay", settings.jumpToNextDay);
+      await prefs.setBool("androidAlternativeTransition",
+          settings.androidAlternativeTransition);
       await prefs.setInt("selectedTheme", settings.selectedTheme.index);
     } catch (e) {
       throw LocalDataException.settingsWriteError(e.toString());

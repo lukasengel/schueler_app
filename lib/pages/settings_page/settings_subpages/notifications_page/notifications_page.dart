@@ -51,13 +51,11 @@ class NotificationsPage extends StatelessWidget {
                   ),
                   SettingsText(text: "settings/notifications/relevant".tr),
                   if (notifications.isEmpty)
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
+                    SettingsInfoBox(
+                      "settings/notifications/add_courses_here".tr,
+                      margin: const EdgeInsets.symmetric(
                         horizontal: 20,
                         vertical: 10,
-                      ),
-                      child: SettingsInfoBox(
-                        "settings/notifications/add_courses_here".tr,
                       ),
                     ),
                   if (notifications.isNotEmpty)

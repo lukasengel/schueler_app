@@ -85,37 +85,37 @@ class FloatingSearchBar extends StatelessWidget {
       delegate: _PersistentHeader(
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          padding: const EdgeInsets.only(left: 10),
           decoration: BoxDecoration(
-            color: Get.theme.colorScheme.tertiaryContainer,
+            color: context.theme.colorScheme.tertiaryContainer,
             borderRadius: BorderRadius.circular(8),
           ),
           child: Material(
             color: Colors.transparent,
-            child: Row(
-              children: [
-                const Icon(Icons.search, size: 28),
-                Expanded(
-                  child: TextField(
-                    controller: controller.searchController,
-                    onChanged: controller.onSearchInput,
-                    style: Get.textTheme.bodyLarge,
-                    decoration: InputDecoration(
-                      hintText: "settings/abbreviations/search".tr,
-                      hintStyle: Get.textTheme.bodyLarge,
-                    ),
-                    autocorrect: false,
-                    enableSuggestions: false,
-                  ),
+            child: TextField(
+              controller: controller.searchController,
+              onChanged: controller.onSearchInput,
+              style: Get.textTheme.bodyLarge,
+              decoration: InputDecoration(
+                hintText: "settings/abbreviations/search".tr,
+                hintStyle: Get.textTheme.bodyLarge,
+                contentPadding: const EdgeInsets.only(top: 6),
+                focusColor: Colors.blue,
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: Get.theme.iconTheme.color,
                 ),
-                IconButton(
+                suffixIcon: IconButton(
                   padding: EdgeInsets.zero,
-                  icon: const Icon(Icons.clear),
+                  icon: Icon(
+                    Icons.clear,
+                    color: Get.theme.iconTheme.color,
+                  ),
                   onPressed: controller.clearInput,
                   splashRadius: 20,
-                  iconSize: 28,
                 ),
-              ],
+              ),
+              autocorrect: false,
+              enableSuggestions: false,
             ),
           ),
         ),

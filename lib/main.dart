@@ -34,8 +34,11 @@ class MyApp extends StatelessWidget {
       locale: const Locale("de", "DE"),
       title: "Schüler-App",
       getPages: routes.getPages,
-      defaultTransition:
-          Platform.isIOS ? Transition.cupertino : Transition.topLevel,
+      defaultTransition: Platform.isIOS
+          ? Transition.cupertino
+          : localData.settings.androidAlternativeTransition
+              ? Transition.fade
+              : Transition.topLevel,
       initialRoute:
           authState.value == AuthState.LOGGED_IN ? routes.home : routes.login,
     );

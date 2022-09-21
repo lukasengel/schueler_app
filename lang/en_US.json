@@ -43,7 +43,7 @@
     "settings/filters": "Filter Table",
     "settings/notifications": "Notifications",
     "settings/abbreviations":"Abbreviations",
-    "settings/report_a_bug": "Report a bug/Feedback",
+    "settings/report_a_bug": "Report a Bug/Feedback",
     "settings/github": "GitHub",
     "settings/logout": "Sign Out",
 
@@ -51,6 +51,11 @@
     "settings/personalization/light": "Light",
     "settings/personalization/dark": "Dark",
     "settings/personalization/system": "System",
+    "settings/personalization/usability":"Usability",
+    "settings/personalization/jump_to_next_day": "Jump to Next Day",
+    "settings/personalization/info_jump_to_next_day":"If enabled, after 4 PM the substitution plan automatically jumps to the next day when the app is launched.",
+    "settings/personalization/android_alternative_transition": "Alternative Page Transition",
+    "settings/personalization/info_android_alternative_transition":"For Android devices: Enables alternative page transition. Recommended if you're experiencing trouble with the default. Please note: Requires a restart of the app to take effect.",
     "settings/personalization/gender_neutral_language": "Gender-neutral Language",
 
     "settings/filters/choose_grade": "Grades",

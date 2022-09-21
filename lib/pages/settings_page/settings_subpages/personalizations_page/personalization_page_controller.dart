@@ -18,6 +18,21 @@ class PersonalizationPageController extends GetxController {
     super.onInit();
   }
 
+  Future<bool> jumpToNexDay() async {
+    final settings = localData.settings;
+    settings.jumpToNextDay = !settings.jumpToNextDay;
+    await localData.writeSettings();
+    return settings.jumpToNextDay;
+  }
+
+  Future<bool> androidAlternativeTransition() async {
+    final settings = localData.settings;
+    settings.androidAlternativeTransition =
+        !settings.androidAlternativeTransition;
+    await localData.writeSettings();
+    return settings.androidAlternativeTransition;
+  }
+
   Future<bool> genderLanguage() async {
     await showDynamicMessageDialog(
       content: Image.asset("assets/images/lindner.gif"),
