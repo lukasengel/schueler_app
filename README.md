@@ -23,6 +23,9 @@ Verfügbar im Play Store unter: https://play.google.com/store/apps/details?id=de
 - Logo-Gestaltung:  Nika Peskova
 - Entwicklung:  Lukas Engel
 
+## Support
+Bei Problemen, Bugs, Fragen, Kritik oder Anregungen bitte entweder das Feedback-Formular in den Einstellungen ausfüllen oder eine E-Mail an lukas.engel@protonmail.com schreiben.
+
 ## Lizenz
 Der Quellcode steht unter der MIT-Lizenz öffentlich zur Verfügung. Weitere Informationen unter license.txt.
 
