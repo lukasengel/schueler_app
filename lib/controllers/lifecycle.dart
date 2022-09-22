@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
 import '../controllers/web_data.dart';
+import '../controllers/authentication.dart';
 
 import '../widgets/snackbar.dart';
 
@@ -16,10 +17,12 @@ class Lifecycle extends SuperController {
 
   @override
   void onResumed() async {
-    try {
-      await Get.find<WebData>().fetchData();
-    } catch (e) {
-      showErrorSnackbar(e);
+    if (Get.find<Authentication>().authState.value == AuthState.LOGGED_IN) {
+      try {
+        await Get.find<WebData>().fetchData();
+      } catch (e) {
+        showErrorSnackbar(e);
+      }
     }
   }
 }
