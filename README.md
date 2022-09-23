@@ -8,8 +8,7 @@ Optional können auch Benachrichtigungen z.B. bei neuen Vertretungen, Neuigkeite
 
 Verfügbar für Android und iOS:
 
-[<img alt="Get_it_on_Google_Play_Badge" width="40px" src=".github/google_play_badge.png" width="150"/>](https://play.google.com/store/apps/details?id=de.gnadenthalgymnasium.schueler_app)
-[<img alt="Download_on_the_App_Store_Badge" width="40px" src=".github/app_store_badge.png" width="150"/>](https://apps.apple.com/us/app/id6443437309)
+[<img alt="Get_it_on_Google_Play_Badge" src=".github/google_play_badge.png" width="200"/>](https://play.google.com/store/apps/details?id=de.gnadenthalgymnasium.schueler_app) [<img alt="Download_on_the_App_Store_Badge" src=".github/app_store_badge.png" width="200"/>](https://apps.apple.com/us/app/id6443437309)
 
 ## Funktionen
 - [x] Vertretungsplan, Nachrichten der Schulleitung, Schulleben-Seite
