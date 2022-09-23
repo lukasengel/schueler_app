@@ -6,7 +6,9 @@ Schüler-App für das Gnadenthal-Gymnasium Ingolstadt.
 Ermöglicht den Zugriff auf den aktuellen Vertretungsplan, die Nachrichten der Schulleitung und ein schwarzes Brett mit Neuigkeiten im Schulleben (z.B. Veranstaltungen, Ankündigungen, Beiträge).
 Optional können auch Benachrichtigungen z.B. bei neuen Vertretungen, Neuigkeiten oder Rundnachrichten aktiviert werden.
 
-Verfügbar im Play Store unter: https://play.google.com/store/apps/details?id=de.gnadenthalgymnasium.schueler_app
+Verfügbar für Android und iOS:
+[<img alt="Get_it_on_Google_Play_Badge" width="40px" src=".github/play_store_badge.png" />](https://play.google.com/store/apps/details?id=de.gnadenthalgymnasium.schueler_app)
+[<img alt="Download_on_the_App_Store_Badge" width="40px" src=".github/app_store_badge.png" />](https://apps.apple.com/us/app/id6443437309)
 
 ## Funktionen
 - [x] Vertretungsplan, Nachrichten der Schulleitung, Schulleben-Seite
