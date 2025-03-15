@@ -1,0 +1,14 @@
+name: sa_common
+description: Contains shared code between all packages and applications.
+version: 1.0.0
+
+environment:
+  sdk: '>=3.6.0 <4.0.0'
+
+dependencies:
+  dartz: ^0.10.1
+  logger: ^2.5.0
+
+dev_dependencies:
+  test: ^1.25.15
+  very_good_analysis: ^7.0.0
