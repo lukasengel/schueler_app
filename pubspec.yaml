@@ -1,0 +1,9 @@
+name: schueler_app
+
+environment:
+  sdk: '>=3.6.0 <4.0.0'
+
+dev_dependencies:
+  melos: ^6.3.2
+  very_good_analysis: ^7.0.0
+  

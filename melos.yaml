@@ -1,0 +1,12 @@
+name: schueler_app
+
+packages:
+  - apps/**
+  - packages/**
+
+scripts:
+  setup:
+    description: Copy the `analysis_options.yaml` file to the root of every package.
+    exec: |
+      cp $MELOS_ROOT_PATH/analysis_options.yaml .
+  
