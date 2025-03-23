@@ -5,9 +5,11 @@
 *.swp
 .DS_Store
 .atom/
+.build/
 .buildlog/
 .history
 .svn/
+.swiftpm/
 migrate_working_dir/
 
 # IntelliJ related
@@ -23,7 +25,7 @@ migrate_working_dir/
 
 # Flutter/Dart/Pub related
 # Application packages should commit pubspec.lock, according to https://dart.dev/tools/pub/private-files#pubspec-lock.
-**/pubspec.lock
+pubspec.lock
 !/apps/**/pubspec.lock
 **/build/
 **/doc/api/
@@ -34,9 +36,20 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+**/android/app/debug
+**/android/app/profile
+**/android/app/release
+
 # Melos
 pubspec_overrides.yaml
-**/analysis_options.yaml
+analysis_options.yaml
 !/analysis_options.yaml
 
 # Generated files

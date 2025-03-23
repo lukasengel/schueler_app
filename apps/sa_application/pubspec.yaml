@@ -1,0 +1,34 @@
+name: sa_application
+description: Contains the main application package for GG Schüler-App.
+
+publish_to: 'none'
+
+version: 2.0.0+1
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  dartz: ^0.10.1
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  flutter_riverpod: ^2.6.1
+  forui: ^0.10.0+1
+  intl: any
+  locale_names: ^1.1.1
+  sa_common: 1.0.0
+  sa_data: 1.0.0
+  toastification: ^3.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  very_good_analysis: ^7.0.0
+
+flutter:
+  uses-material-design: false
+  generate: true
+  assets:
+    - assets/images/

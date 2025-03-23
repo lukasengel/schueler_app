@@ -1,0 +1,6 @@
+arb-dir: lang/
+template-arb-file: app_en.arb
+output-localization-file: app_localizations.dart
+output-class: SAppLocalizations
+output-dir: lib/l10n
+synthetic-package: false
