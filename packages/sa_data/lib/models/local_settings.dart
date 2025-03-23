@@ -9,9 +9,14 @@ part 'local_settings.g.dart';
 class SLocalSettings with _$SLocalSettings {
   /// Create a new [SLocalSettings].
   const factory SLocalSettings({
+    /// The user's username.
+    required String username,
+
+    /// The user's password.
+    required String password,
+
     /// The user's preferred locale.
-    @SLocaleConverter() //
-    required Locale locale,
+    @SLocaleConverter() required Locale locale,
 
     /// The user's preferred theme mode.
     required ThemeMode themeMode,
@@ -27,6 +32,9 @@ class SLocalSettings with _$SLocalSettings {
 
     /// The courses that should be excluded from the substitution plan.
     required Set<String> excludedCourses,
+
+    /// The courses that the user has manually excluded from the substitution plan.
+    required Set<String> customExclusions,
   }) = _SLocalSettings;
 
   /// Create a new [SLocalSettings] from a JSON object.
@@ -35,12 +43,15 @@ class SLocalSettings with _$SLocalSettings {
   /// Create a new [SLocalSettings] with default values.
   factory SLocalSettings.defaults() {
     return const SLocalSettings(
+      username: '',
+      password: '',
       locale: Locale('en'),
       themeMode: ThemeMode.system,
       shownDays: 5,
       autoNextDay: true,
       developerMode: false,
       excludedCourses: {},
+      customExclusions: {},
     );
   }
 }

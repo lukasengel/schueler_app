@@ -33,28 +33,28 @@ void main() {
     final saveResult1 = await SPersistenceRepository.instance.saveTeacher(teacher1);
 
     saveResult1.fold(
-      (l) => fail('Error saving teacher1: ${l.message}'),
+      (l) => fail('Error saving teacher1: ${l.description}'),
       (r) => null,
     );
 
     final saveResult2 = await SPersistenceRepository.instance.saveTeacher(teacher2);
 
     saveResult2.fold(
-      (l) => fail('Error saving teacher2: ${l.message}'),
+      (l) => fail('Error saving teacher2: ${l.description}'),
       (r) => null,
     );
 
     final saveResult3 = await SPersistenceRepository.instance.saveTeacher(teacher3);
 
     saveResult3.fold(
-      (l) => fail('Error saving teacher2: ${l.message}'),
+      (l) => fail('Error saving teacher2: ${l.description}'),
       (r) => null,
     );
 
     final loadResult = await SPersistenceRepository.instance.loadTeachers();
 
     loadResult.fold(
-      (l) => fail('Error loading teachers: ${l.message}'),
+      (l) => fail('Error loading teachers: ${l.description}'),
       (r) => expect(r, containsAll([teacher1, teacher2, teacher3])),
     );
   });
@@ -63,21 +63,21 @@ void main() {
     final deleteResult1 = await SPersistenceRepository.instance.deleteTeacher(teacher1);
 
     deleteResult1.fold(
-      (l) => fail('Error deleting teacher1: ${l.message}'),
+      (l) => fail('Error deleting teacher1: ${l.description}'),
       (r) => null,
     );
 
     final deleteResult2 = await SPersistenceRepository.instance.deleteTeacher(teacher2);
 
     deleteResult2.fold(
-      (l) => fail('Error deleting teacher2: ${l.message}'),
+      (l) => fail('Error deleting teacher2: ${l.description}'),
       (r) => null,
     );
 
     final loadResult = await SPersistenceRepository.instance.loadTeachers();
 
     loadResult.fold(
-      (l) => fail('Error loading teachers: ${l.message}'),
+      (l) => fail('Error loading teachers: ${l.description}'),
       (r) => expect(r, containsAll([teacher3])),
     );
   });

@@ -1,3 +1,8 @@
+// We want to catch any exceptions or errors that occur while loading, saving or deleting,
+// regardless of whether they happen during a read/write operation or while parsing.
+//
+// ignore_for_file: avoid_catches_without_on_clauses
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:sa_data/sa_data.dart';
@@ -68,12 +73,12 @@ class SFirebasePersistenceRepository extends SPersistenceRepository {
       }).toList();
 
       return right(items);
-    } on Exception catch (e) {
+    } catch (e) {
       // Return an exception if loading failed.
       return left(
         SDataException(
-          type: SDataExceptionType.fromException(e),
-          message: 'Failed to load items from collection "$collection."',
+          type: e is Exception ? SDataExceptionType.fromException(e) : SDataExceptionType.OTHER,
+          description: 'Failed to load items from collection "$collection."',
           details: e,
         ),
       );
@@ -89,12 +94,12 @@ class SFirebasePersistenceRepository extends SPersistenceRepository {
       // Save the item to Firestore.
       await firestore.collection(collection).doc(id).set(data);
       return right(unit);
-    } on Exception catch (e) {
+    } catch (e) {
       // Return an exception if saving failed.
       return left(
         SDataException(
-          type: SDataExceptionType.fromException(e),
-          message: 'Failed to save item with ID "$id" to collection "$collection."',
+          type: e is Exception ? SDataExceptionType.fromException(e) : SDataExceptionType.OTHER,
+          description: 'Failed to save item with ID "$id" to collection "$collection."',
           details: e,
         ),
       );
@@ -107,12 +112,12 @@ class SFirebasePersistenceRepository extends SPersistenceRepository {
       // Delete the item from Firestore.
       await firestore.collection(collection).doc(id).delete();
       return right(unit);
-    } on Exception catch (e) {
+    } catch (e) {
       // Return an exception if deleting failed.
       return left(
         SDataException(
-          type: SDataExceptionType.fromException(e),
-          message: 'Failed to delete item with ID "$id" from collection "$collection."',
+          type: e is Exception ? SDataExceptionType.fromException(e) : SDataExceptionType.OTHER,
+          description: 'Failed to delete item with ID "$id" from collection "$collection."',
           details: e,
         ),
       );

@@ -1,3 +1,8 @@
+// We want to catch any exceptions or errors that occur while loading or saving,
+// regardless of whether they happen during a read/write operation or while parsing.
+//
+// ignore_for_file: avoid_catches_without_on_clauses
+
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
@@ -27,11 +32,11 @@ class SSharedPrefsLocalSettingsRepository implements SLocalSettingsRepository {
 
       // If no record is found, return `null`.
       return right(null);
-    } on Exception catch (e) {
+    } catch (e) {
       return left(
         SDataException(
           type: SDataExceptionType.LOCAL_STORAGE_FAILURE,
-          message: 'Failed to load local settings from storage using shared preferences.',
+          description: 'Failed to load local settings from shared preferences.',
           details: e,
         ),
       );
@@ -49,11 +54,11 @@ class SSharedPrefsLocalSettingsRepository implements SLocalSettingsRepository {
       );
 
       return right(unit);
-    } on Exception catch (e) {
+    } catch (e) {
       return left(
         SDataException(
           type: SDataExceptionType.LOCAL_STORAGE_FAILURE,
-          message: 'Failed to save local settings to storage using shared preferences.',
+          description: 'Failed to save local settings to shared preferences.',
           details: e,
         ),
       );
