@@ -13,6 +13,7 @@ import 'package:toastification/toastification.dart';
 
 // TODO: Display pre-load exceptions.
 // TODO: Disable offline persistence for the Firebase Firestore instance.
+// TODO: Scrollbars, especially for the teacher abbreviations screen.
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
