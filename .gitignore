@@ -59,3 +59,6 @@ analysis_options.yaml
 
 # Firebase
 **/firebase_options.dart
+firebase.json
+GoogleService-Info.plist
+google-services.json

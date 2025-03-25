@@ -9,7 +9,9 @@ environment:
   sdk: ^3.6.0
 
 dependencies:
+  collection: ^1.19.1
   dartz: ^0.10.1
+  firebase_core: ^3.12.1
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -21,6 +23,7 @@ dependencies:
   sa_common: 1.0.0
   sa_data: 1.0.0
   toastification: ^3.0.2
+  uuid: ^4.5.1
 
 dev_dependencies:
   flutter_test:

@@ -9,9 +9,6 @@ import 'package:sa_application/util/_util.dart';
 /// Show a platform-specific message dialog with the given title, content and an OK button.
 ///
 /// Shows a [CupertinoAlertDialog] on macOS and iOS and an [FDialog] on other platforms.
-///
-/// Notes for non-Cupertino platforms:
-/// - [sDefaultMaxDialogContentWidth] is used as the maximum width constraint for the content.
 Future<void> sShowPlatformMessageDialog({required BuildContext context, Widget? title, Widget? content}) {
   // Determine whether to show a Cupertino dialog.
   if (Platform.isIOS || Platform.isMacOS) {
@@ -30,7 +27,7 @@ Future<void> sShowPlatformMessageDialog({required BuildContext context, Widget? 
   );
 }
 
-/// Show a Cupertino message dialog with the given title, content and an OK button.
+/// Show a [CupertinoAlertDialog] with the given title, content and an OK button.
 Future<void> sShowCupertinoMessageDialog({required BuildContext context, Widget? title, Widget? content}) {
   return showCupertinoDialog(
     context: context,
@@ -52,7 +49,9 @@ Future<void> sShowCupertinoMessageDialog({required BuildContext context, Widget?
   );
 }
 
-/// Show a Forui message dialog with the given title, content and an OK button.
+/// Show an [FDialog] with the given title, content and an OK button.
+///
+/// The value of [sDefaultMaxDialogContentWidth] is used as the maximum width constraint for the content.
 Future<void> sShowForuiMessageDialog({required BuildContext context, Widget? title, Widget? content}) {
   return showDialog(
     context: context,

@@ -26,6 +26,7 @@ class SDataException implements Exception {
 
   @override
   String toString() {
+    // TODO: Prettify the output, if needed.
     return jsonEncode({
       'type': type.name,
       'description': description,

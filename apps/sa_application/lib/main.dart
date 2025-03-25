@@ -1,7 +1,9 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
+import 'package:sa_application/firebase_options.dart';
 import 'package:sa_application/init.dart';
 import 'package:sa_application/l10n/app_localizations.dart';
 import 'package:sa_application/providers/_providers.dart';
@@ -10,9 +12,15 @@ import 'package:sa_application/util/_util.dart';
 import 'package:toastification/toastification.dart';
 
 // TODO: Display pre-load exceptions.
+// TODO: Disable offline persistence for the Firebase Firestore instance.
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Firebase.
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   // Pre-load the application state.
   final preloadResult = await preloadState();

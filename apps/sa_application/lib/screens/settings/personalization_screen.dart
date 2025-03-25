@@ -91,8 +91,10 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
     return FScaffold(
       header: SHeaderWrapper(
         child: FHeader.nested(
-          title: Text(
-            SAppLocalizations.of(context)!.personalization,
+          title: SHeaderTitleWrapper(
+            child: Text(
+              SAppLocalizations.of(context)!.personalization,
+            ),
           ),
           prefixActions: [
             FHeaderAction.back(
@@ -105,9 +107,6 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
         child: ListView(
           padding: sDefaultListViewPadding,
           children: [
-            const SizedBox(
-              height: sDefaultListTileSpacing,
-            ),
             Consumer(
               builder: (context, ref, child) {
                 final themeMode = ref.watch(sLocalSettingsProvider.select((localSettings) => localSettings.themeMode));
@@ -214,8 +213,7 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
             ),
             Consumer(
               builder: (context, ref, child) {
-                final developerMode =
-                    ref.watch(sLocalSettingsProvider.select((localSettings) => localSettings.developerMode));
+                final isDev = ref.watch(sLocalSettingsProvider.select((localSettings) => localSettings.developerMode));
                 final locale = ref.watch(sLocalSettingsProvider.select((localSettings) => localSettings.locale));
 
                 return FTileGroup(
@@ -229,7 +227,7 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
                   ),
                   children: [
                     // Only show inclusive language tile in developer mode.
-                    if (developerMode)
+                    if (isDev)
                       FTile(
                         prefixIcon: FIcon(FAssets.icons.squareAsterisk),
                         title: Text(SAppLocalizations.of(context)!.inclusiveLanguage),

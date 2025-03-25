@@ -30,12 +30,14 @@ class _SHomeScreenState extends State<SHomeScreen> {
     return FScaffold(
       header: SHeaderWrapper(
         child: FHeader.nested(
-          title: Text(
-            [
-              SAppLocalizations.of(context)!.substitutions,
-              SAppLocalizations.of(context)!.news,
-              SAppLocalizations.of(context)!.schoolLife,
-            ][_index],
+          title: SHeaderTitleWrapper(
+            child: Text(
+              [
+                SAppLocalizations.of(context)!.substitutions,
+                SAppLocalizations.of(context)!.news,
+                SAppLocalizations.of(context)!.schoolLife,
+              ][_index],
+            ),
           ),
           suffixActions: [
             FHeaderAction(

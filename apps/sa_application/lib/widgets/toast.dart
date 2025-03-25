@@ -93,6 +93,13 @@ void _showThemedToast({
     description: description,
     autoCloseDuration: duration,
     type: type,
+    closeButton: ToastCloseButton(
+      buttonBuilder: (context, onClose) => FButton.icon(
+        onPress: onClose,
+        style: FButtonStyle.ghost,
+        child: FIcon(FAssets.icons.x),
+      ),
+    ),
     alignment: Alignment.bottomCenter,
     backgroundColor: FTheme.of(context).colorScheme.background,
     foregroundColor: FTheme.of(context).colorScheme.foreground,

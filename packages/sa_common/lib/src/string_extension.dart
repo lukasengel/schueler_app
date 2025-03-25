@@ -10,6 +10,9 @@ extension SStringExtension on String {
   /// A string is considered not blank if it is not empty and contains at least one non-whitespace character.
   bool get isNotBlank => !isBlank;
 
+  /// Whether this string contains the other string, ignoring the case.
+  bool containsIgnoreCase(String other) => toLowerCase().contains(other.toLowerCase());
+
   /// Capitalize this string by converting the first character to uppercase.
   String capitalize() => '${this[0].toUpperCase()}${substring(1)}';
 

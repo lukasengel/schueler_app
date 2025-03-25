@@ -84,13 +84,23 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const tileSpacing = 8.0;
+    final smallCaptionStyle = FTheme.of(context).typography.sm.copyWith(
+          color: FTheme.of(context).colorScheme.mutedForeground,
+          letterSpacing: 1,
+        );
+
+    final mediumCaptionStyle = FTheme.of(context).typography.base.copyWith(
+          color: FTheme.of(context).colorScheme.mutedForeground,
+          letterSpacing: 1.5,
+        );
 
     return FScaffold(
       header: SHeaderWrapper(
         child: FHeader.nested(
-          title: Text(
-            SAppLocalizations.of(context)!.settings,
+          title: SHeaderTitleWrapper(
+            child: Text(
+              SAppLocalizations.of(context)!.settings,
+            ),
           ),
           prefixActions: [
             FHeaderAction.back(
@@ -103,9 +113,6 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
         child: ListView(
           padding: sDefaultListViewPadding,
           children: [
-            const SizedBox(
-              height: tileSpacing,
-            ),
             FTile(
               prefixIcon: FIcon(FAssets.icons.pen),
               title: Text(SAppLocalizations.of(context)!.personalization),
@@ -113,7 +120,7 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
               onPress: _onPressedPersonalization,
             ),
             const SizedBox(
-              height: tileSpacing,
+              height: sDefaultListTileSpacing,
             ),
             FTile(
               prefixIcon: FIcon(FAssets.icons.listFilter),
@@ -122,7 +129,7 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
               onPress: _onPressedFilterTable,
             ),
             const SizedBox(
-              height: tileSpacing,
+              height: sDefaultListTileSpacing,
             ),
             FTile(
               prefixIcon: FIcon(FAssets.icons.signature),
@@ -131,7 +138,7 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
               onPress: _onPressedTeacherAbbreviations,
             ),
             const SizedBox(
-              height: tileSpacing,
+              height: sDefaultListTileSpacing,
             ),
             FTile(
               prefixIcon: FIcon(FAssets.icons.messageSquareWarning),
@@ -140,7 +147,7 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
               onPress: _onPressedReportBugs,
             ),
             const SizedBox(
-              height: tileSpacing,
+              height: sDefaultListTileSpacing,
             ),
             FTile(
               prefixIcon: FIcon(FAssets.icons.github),
@@ -150,11 +157,11 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
               onLongPress: _onLongPressedGitHub,
             ),
             const SizedBox(
-              height: tileSpacing,
+              height: 1.5 * sDefaultListTileSpacing,
             ),
             Center(
               child: SizedBox(
-                width: 180,
+                width: 220,
                 child: FButton(
                   prefix: FIcon(FAssets.icons.logOut),
                   label: Text(SAppLocalizations.of(context)!.logOut),
@@ -162,41 +169,41 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
                 ),
               ),
             ),
+            const SizedBox(
+              height: 1.5 * sDefaultListTileSpacing,
+            ),
             Center(
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: 2 * tileSpacing,
-                  ),
                   Text(
                     SAppLocalizations.of(context)!.logoArtist.toUpperCase(),
-                    style: FTheme.of(context).typography.sm,
+                    style: smallCaptionStyle,
                   ),
                   Text(
                     sLogoArtist.toUpperCase(),
-                    style: FTheme.of(context).typography.base,
+                    style: mediumCaptionStyle,
                   ),
                   const SizedBox(
-                    height: tileSpacing,
+                    height: sDefaultListTileSpacing,
                   ),
                   Text(
                     SAppLocalizations.of(context)!.developer.toUpperCase(),
-                    style: FTheme.of(context).typography.sm,
+                    style: smallCaptionStyle,
                   ),
                   Text(
                     sDeveloper.toUpperCase(),
-                    style: FTheme.of(context).typography.base,
+                    style: mediumCaptionStyle,
                   ),
                   const SizedBox(
-                    height: 2 * tileSpacing,
+                    height: 2 * sDefaultListTileSpacing,
                   ),
                   Text(
                     SAppLocalizations.of(context)!.version(sVersion).toUpperCase(),
-                    style: FTheme.of(context).typography.sm,
+                    style: smallCaptionStyle,
                   ),
                   Text(
                     DateFormat.yMMMM(Localizations.localeOf(context).toString()).format(sReleaseMonth).toUpperCase(),
-                    style: FTheme.of(context).typography.sm,
+                    style: smallCaptionStyle,
                   ),
                 ],
               ),

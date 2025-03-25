@@ -18,8 +18,10 @@ class _SReportBugsScreenState extends State<SReportBugsScreen> {
     return FScaffold(
       header: SHeaderWrapper(
         child: FHeader.nested(
-          title: Text(
-            SAppLocalizations.of(context)!.reportBugs,
+          title: SHeaderTitleWrapper(
+            child: Text(
+              SAppLocalizations.of(context)!.reportBugs,
+            ),
           ),
           prefixActions: [
             FHeaderAction.back(
