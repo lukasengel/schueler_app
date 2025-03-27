@@ -23,6 +23,7 @@ dependencies:
   sa_common: 1.0.0
   sa_data: 1.0.0
   toastification: ^3.0.2
+  url_launcher: ^6.3.1
   uuid: ^4.5.1
 
 dev_dependencies:

@@ -196,14 +196,10 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
                   final autoNextDay =
                       ref.watch(sLocalSettingsProvider.select((localSettings) => localSettings.autoNextDay));
 
-                  return FTile(
+                  return SCheckboxTile(
                     title: Text(SAppLocalizations.of(context)!.autoNextDay),
-                    prefixIcon: FIcon(FAssets.icons.fastForward),
-                    onPress: () => _onPressedAutoNextDay(!autoNextDay),
-                    suffixIcon: FCheckbox(
-                      onChange: _onPressedAutoNextDay,
-                      value: autoNextDay,
-                    ),
+                    onChanged: _onPressedAutoNextDay,
+                    value: autoNextDay,
                   );
                 },
               ),

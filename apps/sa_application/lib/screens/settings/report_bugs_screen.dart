@@ -22,8 +22,17 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
   final _emailController = TextEditingController();
   final _messageController = TextEditingController();
 
+  /// Callback for when the privacy note button is pressed.
+  void _onPressedPrivacyNote() {
+    sShowPlatformMessageDialog(
+      context: context,
+      title: Text(SAppLocalizations.of(context)!.privacyNote),
+      content: Text(SAppLocalizations.of(context)!.privacyInfo),
+    );
+  }
+
   /// Callback for when the cancel button is pressed.
-  Future<void> _onCancel() async {
+  Future<void> _onPressedCancel() async {
     // Extract the inputs from the text controllers.
     final inputs = [
       _nameController.text,
@@ -55,7 +64,7 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
   }
 
   /// Callback for when the submit button is pressed.
-  Future<void> _onSubmit() async {
+  Future<void> _onPressedSubmit() async {
     // Validate form.
     if (!_formKey.currentState!.validate()) {
       return;
@@ -78,7 +87,7 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
             email: _emailController.text,
           );
 
-      // Show a snackbar if an error occurred.
+      // Show a toast if an error occurred.
       result.fold(
         (l) => sShowDataExceptionToast(
           context: context,
@@ -120,13 +129,13 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
           ),
           prefixActions: [
             FHeaderAction.back(
-              onPress: _onCancel,
+              onPress: _onPressedCancel,
             ),
           ],
           suffixActions: [
             FHeaderAction(
               icon: FIcon(FAssets.icons.send),
-              onPress: _onSubmit,
+              onPress: _onPressedSubmit,
             ),
           ],
         ),
@@ -142,6 +151,7 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
                 label: Text(SAppLocalizations.of(context)!.contactDetails),
                 hint: SAppLocalizations.of(context)!.nameOptional,
                 keyboardType: TextInputType.name,
+                autocorrect: false,
                 maxLines: 1,
               ),
               const SizedBox(
@@ -151,28 +161,30 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
                 controller: _emailController,
                 hint: SAppLocalizations.of(context)!.emailOptional,
                 keyboardType: TextInputType.emailAddress,
+                autocorrect: false,
                 maxLines: 1,
               ),
               const SizedBox(
                 height: sDefaultListTileSpacing,
               ),
-              FLabel(
-                axis: Axis.vertical,
-                description: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 5,
-                  ),
+              FTextField(
+                controller: _messageController,
+                label: Text(SAppLocalizations.of(context)!.message),
+                hint: SAppLocalizations.of(context)!.description,
+                keyboardType: TextInputType.multiline,
+                maxLines: 10,
+                validator: _onValidate,
+              ),
+              const SizedBox(
+                height: sDefaultListTileSpacing,
+              ),
+              Center(
+                child: FTappable.animated(
+                  onPress: _onPressedPrivacyNote,
                   child: Text(
-                    SAppLocalizations.of(context)!.privacyInfo,
+                    SAppLocalizations.of(context)!.privacyNote,
+                    style: FTheme.of(context).typography.sm,
                   ),
-                ),
-                child: FTextField(
-                  controller: _messageController,
-                  label: Text(SAppLocalizations.of(context)!.message),
-                  hint: SAppLocalizations.of(context)!.description,
-                  keyboardType: TextInputType.multiline,
-                  maxLines: 10,
-                  validator: _onValidate,
                 ),
               ),
             ],

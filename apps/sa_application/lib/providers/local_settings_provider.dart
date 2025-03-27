@@ -10,19 +10,27 @@ class SLocalSettingsNotifier extends StateNotifier<SLocalSettings> {
 
   /// Update local settings with the given values.
   Future<Either<SDataException, Unit>> updateWith({
+    String? username,
+    String? password,
     Locale? locale,
     ThemeMode? themeMode,
     int? shownDays,
     bool? autoNextDay,
     bool? developerMode,
+    Set<String>? excludedCourses,
+    Set<String>? customExclusions,
   }) async {
     // Create a instance with the updated values.
     final newState = state.copyWith(
+      username: username ?? state.username,
+      password: password ?? state.password,
       locale: locale ?? state.locale,
       themeMode: themeMode ?? state.themeMode,
       shownDays: shownDays ?? state.shownDays,
       autoNextDay: autoNextDay ?? state.autoNextDay,
       developerMode: developerMode ?? state.developerMode,
+      excludedCourses: excludedCourses ?? state.excludedCourses,
+      customExclusions: customExclusions ?? state.customExclusions,
     );
 
     // Write changes to storage.

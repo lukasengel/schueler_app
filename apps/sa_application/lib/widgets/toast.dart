@@ -31,7 +31,7 @@ void sShowErrorToast({
   _showThemedToast(
     context: context,
     type: ToastificationType.error,
-    title: Text(SAppLocalizations.of(context)!.error + message),
+    title: Text('${SAppLocalizations.of(context)!.error} $message'),
     description: details != null
         ? FTappable.animated(
             child: Text(SAppLocalizations.of(context)!.tapToCopyDetails),

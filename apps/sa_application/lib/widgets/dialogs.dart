@@ -121,8 +121,6 @@ Future<bool> sShowPlatformConfirmDialog({
 
 /// Show a [CupertinoActionSheet] with the given title, content and cancel and confirm buttons.
 ///
-/// The value of [sDefaultMaxDialogWidth] is used as the maximum width constraint for the action sheet.
-///
 /// Returns `true` or `false` depending on the user's choice.
 Future<bool> sShowCupertinoConfirmDialog({
   required BuildContext context,
@@ -138,7 +136,7 @@ Future<bool> sShowCupertinoConfirmDialog({
       ),
       child: ConstrainedBox(
         constraints: const BoxConstraints(
-          maxWidth: sDefaultMaxDialogWidth,
+          maxWidth: 550,
         ),
         child: CupertinoActionSheet(
           title: Text(title),

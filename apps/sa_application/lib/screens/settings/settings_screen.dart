@@ -7,6 +7,7 @@ import 'package:sa_application/providers/_providers.dart';
 import 'package:sa_application/screens/_screens.dart';
 import 'package:sa_application/util/_util.dart';
 import 'package:sa_application/widgets/_widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 /// The settings root screen.
 class SSettingsScreen extends ConsumerStatefulWidget {
@@ -55,8 +56,41 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
   }
 
   /// Callback for when the GitHub tile is pressed.
-  void _onPressedGitHub() {
-    // TODO: Implement, once global settings are available.
+  Future<void> _onPressedGitHub() async {
+    final url = ref.read(sGlobalSettingsProvider)?.githubUrl;
+
+    if (url != null) {
+      final uri = Uri.parse(url);
+      final canLaunch = await canLaunchUrl(uri);
+
+      if (canLaunch) {
+        // Attempt to launch the URL.
+        try {
+          final success = await launchUrl(uri);
+
+          if (success) {
+            return;
+          }
+        }
+        // If any error occurs, show an error toast.
+        catch (_) {
+          if (mounted) {
+            sShowErrorToast(
+              context: context,
+              message: SAppLocalizations.of(context)!.failedLaunchingUrl,
+            );
+          }
+        }
+      }
+    }
+
+    // Show error toast if global settings are not available or URL could not be launched.
+    if (mounted) {
+      sShowErrorToast(
+        context: context,
+        message: SAppLocalizations.of(context)!.noData,
+      );
+    }
   }
 
   /// Callback for when the GitHub tile is long pressed.

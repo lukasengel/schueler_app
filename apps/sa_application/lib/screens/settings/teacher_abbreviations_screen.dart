@@ -17,6 +17,7 @@ class STeacherAbbreviationsScreen extends ConsumerStatefulWidget {
 }
 
 class _STeacherAbbreviationsScreenState extends ConsumerState<STeacherAbbreviationsScreen> {
+  final _scrollController = ScrollController();
   String? _searchQuery;
 
   /// Callback for when the user types in the search field.
@@ -27,8 +28,15 @@ class _STeacherAbbreviationsScreenState extends ConsumerState<STeacherAbbreviati
   }
 
   @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final teachers = ref.watch(sTeachersProvider);
+    final hasData = teachers != null;
 
     // Filter the teachers based on the search query.
     final filtered = teachers?.where((element) {
@@ -62,32 +70,30 @@ class _STeacherAbbreviationsScreenState extends ConsumerState<STeacherAbbreviati
       content: SContentWrapper(
         child: filtered != null && filtered.isNotEmpty
             // Show a tile for each teacher.
-            ? ListView.separated(
-                padding: sDefaultListViewPadding,
-                itemCount: filtered.length,
-                itemBuilder: (context, index) {
-                  final teacher = filtered[index];
+            ? Scrollbar(
+                interactive: true,
+                controller: _scrollController,
+                child: ListView.separated(
+                  controller: _scrollController,
+                  padding: sDefaultListViewPadding,
+                  itemCount: filtered.length,
+                  itemBuilder: (context, index) {
+                    final teacher = filtered[index];
 
-                  return FTile(
-                    subtitle: Text(teacher.name),
-                    title: Text(teacher.abbreviation),
-                  );
-                },
-                separatorBuilder: (context, index) => const SizedBox(
-                  height: sDefaultListTileSpacing,
+                    return FTile(
+                      subtitle: Text(teacher.name),
+                      title: Text(teacher.abbreviation),
+                    );
+                  },
+                  separatorBuilder: (context, index) => const SizedBox(
+                    height: sDefaultListTileSpacing,
+                  ),
                 ),
               )
             // If there are no teachers to display, show an icon.
-            : Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    bottom: 36,
-                  ),
-                  child: FIcon(
-                    teachers != null && teachers.isNotEmpty ? FAssets.icons.ban : FAssets.icons.triangleAlert,
-                    size: 36,
-                  ),
-                ),
+            : SNoDataPlaceholder(
+                message: hasData ? SAppLocalizations.of(context)!.noResults : SAppLocalizations.of(context)!.noData,
+                iconSvg: hasData ? FAssets.icons.searchX : FAssets.icons.triangleAlert,
               ),
       ),
     );

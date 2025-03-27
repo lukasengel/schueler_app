@@ -45,7 +45,7 @@ class _SSearchHeaderState extends State<SSearchHeader> {
 
     return AnimatedContainer(
       duration: const Duration(
-        milliseconds: 250,
+        milliseconds: 150,
       ),
       decoration: BoxDecoration(
         border: Border(
@@ -59,7 +59,7 @@ class _SSearchHeaderState extends State<SSearchHeader> {
       height: (_showSearch ? 73 : 57) + safePadding.top,
       child: AnimatedSwitcher(
         duration: const Duration(
-          milliseconds: 200,
+          milliseconds: 100,
         ),
         transitionBuilder: (child, animation) => FadeTransition(
           opacity: animation,
