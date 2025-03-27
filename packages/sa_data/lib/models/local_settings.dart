@@ -45,7 +45,7 @@ class SLocalSettings with _$SLocalSettings {
     return const SLocalSettings(
       username: '',
       password: '',
-      locale: Locale('en'),
+      locale: Locale('de'),
       themeMode: ThemeMode.system,
       shownDays: 5,
       autoNextDay: true,
