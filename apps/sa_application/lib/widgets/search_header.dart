@@ -105,6 +105,7 @@ class _SSearchHeaderState extends State<SSearchHeader> {
               clearable: (value) => value.text.isNotEmpty,
               onChange: widget.onSearch,
               focusNode: _focusNode,
+              autocorrect: false,
               maxLines: 1,
             ),
           ),

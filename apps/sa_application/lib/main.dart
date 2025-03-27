@@ -13,9 +13,7 @@ import 'package:toastification/toastification.dart';
 
 // TODO: Display pre-load exceptions.
 // TODO: Disable offline persistence for the Firebase Firestore instance when loading external data.
-// TODO: Haptic feedback on toasts.
 // TODO: Reduce number of ignored linter rules.
-// TODO: Padding for scaffold content.
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

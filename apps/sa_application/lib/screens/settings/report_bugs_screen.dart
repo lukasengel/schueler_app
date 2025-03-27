@@ -119,75 +119,78 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return FScaffold(
-      header: SHeaderWrapper(
-        child: FHeader.nested(
-          title: SHeaderTitleWrapper(
-            child: Text(
-              SAppLocalizations.of(context)!.reportBugs,
+    return GestureDetector(
+      onTap: FocusScope.of(context).unfocus,
+      child: FScaffold(
+        header: SHeaderWrapper(
+          child: FHeader.nested(
+            title: SHeaderTitleWrapper(
+              child: Text(
+                SAppLocalizations.of(context)!.reportBugs,
+              ),
             ),
-          ),
-          prefixActions: [
-            FHeaderAction.back(
-              onPress: _onPressedCancel,
-            ),
-          ],
-          suffixActions: [
-            FHeaderAction(
-              icon: FIcon(FAssets.icons.send),
-              onPress: _onPressedSubmit,
-            ),
-          ],
-        ),
-      ),
-      content: SContentWrapper(
-        child: Form(
-          key: _formKey,
-          child: ListView(
-            padding: sDefaultListViewPadding,
-            children: [
-              FTextField(
-                controller: _nameController,
-                label: Text(SAppLocalizations.of(context)!.contactDetails),
-                hint: SAppLocalizations.of(context)!.nameOptional,
-                keyboardType: TextInputType.name,
-                autocorrect: false,
-                maxLines: 1,
-              ),
-              const SizedBox(
-                height: sDefaultListTileSpacing,
-              ),
-              FTextField(
-                controller: _emailController,
-                hint: SAppLocalizations.of(context)!.emailOptional,
-                keyboardType: TextInputType.emailAddress,
-                autocorrect: false,
-                maxLines: 1,
-              ),
-              const SizedBox(
-                height: sDefaultListTileSpacing,
-              ),
-              FTextField(
-                controller: _messageController,
-                label: Text(SAppLocalizations.of(context)!.message),
-                hint: SAppLocalizations.of(context)!.description,
-                keyboardType: TextInputType.multiline,
-                maxLines: 10,
-                validator: _onValidate,
-              ),
-              const SizedBox(
-                height: sDefaultListTileSpacing,
-              ),
-              Center(
-                child: FTappable.animated(
-                  onPress: _onPressedPrivacyNote,
-                  child: Text(
-                    SAppLocalizations.of(context)!.privacyNote,
-                    style: FTheme.of(context).typography.sm,
-                  ),
-                ),
+            prefixActions: [
+              FHeaderAction.back(
+                onPress: _onPressedCancel,
               ),
             ],
+            suffixActions: [
+              FHeaderAction(
+                icon: FIcon(FAssets.icons.send),
+                onPress: _onPressedSubmit,
+              ),
+            ],
+          ),
+        ),
+        content: SContentWrapper(
+          child: Form(
+            key: _formKey,
+            child: ListView(
+              padding: sDefaultListViewPadding,
+              children: [
+                FTextField(
+                  controller: _nameController,
+                  label: Text(SAppLocalizations.of(context)!.contactDetails),
+                  hint: SAppLocalizations.of(context)!.nameOptional,
+                  keyboardType: TextInputType.name,
+                  autocorrect: false,
+                  maxLines: 1,
+                ),
+                const SizedBox(
+                  height: sDefaultListTileSpacing,
+                ),
+                FTextField(
+                  controller: _emailController,
+                  hint: SAppLocalizations.of(context)!.emailOptional,
+                  keyboardType: TextInputType.emailAddress,
+                  autocorrect: false,
+                  maxLines: 1,
+                ),
+                const SizedBox(
+                  height: sDefaultListTileSpacing,
+                ),
+                FTextField(
+                  controller: _messageController,
+                  label: Text(SAppLocalizations.of(context)!.message),
+                  hint: SAppLocalizations.of(context)!.description,
+                  keyboardType: TextInputType.multiline,
+                  maxLines: 10,
+                  validator: _onValidate,
+                ),
+                const SizedBox(
+                  height: sDefaultListTileSpacing,
+                ),
+                Center(
+                  child: FTappable.animated(
+                    onPress: _onPressedPrivacyNote,
+                    child: Text(
+                      SAppLocalizations.of(context)!.privacyNote,
+                      style: FTheme.of(context).typography.sm,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -36,6 +36,31 @@ class _SFilterTableScreenState extends ConsumerState<SFilterTableScreen> {
     );
   }
 
+  /// Callback for when the "Select/Deselect all" button is tapped.
+  Future<void> _onPressedSelectAll(bool value) async {
+    // Determine the set of IDs for all exclusion options.
+    final exclusionIds = ref.read(sGlobalSettingsProvider)?.exclusionOptions.map((e) => e.id).toSet();
+
+    if (exclusionIds != null) {
+      // Determine the new set of excluded courses.
+      final newExclusions = Set<String>.from(ref.read(sLocalSettingsProvider).excludedCourses);
+      value ? newExclusions.removeAll(exclusionIds) : newExclusions.addAll(exclusionIds);
+
+      // Update local settings.
+      final result = await ref.read(sLocalSettingsProvider.notifier).updateWith(excludedCourses: newExclusions);
+
+      // Show a toast if an error occurred.
+      result.fold(
+        (l) => sShowDataExceptionToast(
+          context: context,
+          exception: l,
+          message: SAppLocalizations.of(context)!.failedSavingSettings,
+        ),
+        (r) => null,
+      );
+    }
+  }
+
   /// Callback for when the "How does this work?" button is tapped.
   void _onPressedHowDoesThisWork() {
     sShowPlatformMessageDialog(
@@ -62,6 +87,22 @@ class _SFilterTableScreenState extends ConsumerState<SFilterTableScreen> {
             FHeaderAction.back(
               onPress: Navigator.of(context).pop,
             ),
+          ],
+          suffixActions: [
+            if (globalSettings != null && globalSettings.exclusionOptions.isNotEmpty)
+              Builder(
+                builder: (context) {
+                  // Determine if any course is excluded.
+                  final isAnyExcluded = globalSettings.exclusionOptions.any(
+                    (e) => localSettings.excludedCourses.contains(e.id),
+                  );
+
+                  return FHeaderAction(
+                    icon: FIcon(isAnyExcluded ? FAssets.icons.squareCheck : FAssets.icons.squareX),
+                    onPress: () => _onPressedSelectAll(isAnyExcluded),
+                  );
+                },
+              ),
           ],
         ),
       ),

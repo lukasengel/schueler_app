@@ -1,5 +1,5 @@
 /// The application name.
-const sAppName = 'GG Schüler-App';
+const sAppName = 'Schüler-App';
 
 /// The version of the app.
 const sVersion = '2.0.0';

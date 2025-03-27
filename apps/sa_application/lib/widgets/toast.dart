@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:forui/forui.dart';
@@ -87,6 +89,11 @@ void _showThemedToast({
   Widget? description,
   Duration? duration,
 }) {
+  // Provide haptic feedback on mobile platforms.
+  if (Platform.isIOS || Platform.isAndroid) {
+    HapticFeedback.mediumImpact();
+  }
+
   toastification.show(
     context: context,
     title: title,

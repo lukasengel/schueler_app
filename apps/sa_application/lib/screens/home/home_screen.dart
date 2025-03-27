@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
 import 'package:sa_application/l10n/app_localizations.dart';
+import 'package:sa_application/providers/_providers.dart';
 import 'package:sa_application/widgets/_widgets.dart';
 
 /// The home screen of the application, providing three tabs.
-class SHomeScreen extends StatefulWidget {
+class SHomeScreen extends ConsumerStatefulWidget {
   /// Create a new [SHomeScreen].
   const SHomeScreen({super.key});
 
   @override
-  State<SHomeScreen> createState() => _SHomeScreenState();
+  ConsumerState<SHomeScreen> createState() => _SHomeScreenState();
 }
 
-class _SHomeScreenState extends State<SHomeScreen> {
+class _SHomeScreenState extends ConsumerState<SHomeScreen> {
   var _index = 0;
 
   /// Callback for when the settings button is pressed.
@@ -39,6 +41,16 @@ class _SHomeScreenState extends State<SHomeScreen> {
               ][_index],
             ),
           ),
+          prefixActions: [
+            // TODO: Remove once proper authentication has been implemented.
+            FHeaderAction(
+              icon: FIcon(FAssets.icons.hardDriveDownload),
+              onPress: () {
+                ref.read(sTeachersProvider.notifier).load();
+                ref.read(sGlobalSettingsProvider.notifier).load();
+              },
+            ),
+          ],
           suffixActions: [
             FHeaderAction(
               icon: FIcon(FAssets.icons.settings),
