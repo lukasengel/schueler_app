@@ -3,6 +3,8 @@ include: package:very_good_analysis/analysis_options.yaml
 # These linter rules are only my personal preference.
 linter:
   rules:
+    avoid_positional_boolean_parameters: false
+    avoid_catches_without_on_clauses: false
     constant_identifier_names: false
     lines_longer_than_80_chars: false
     sort_constructors_first: false

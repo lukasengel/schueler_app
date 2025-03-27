@@ -14,4 +14,10 @@ scripts:
     description: Run build runner in the specified package(s).
     exec: dart run build_runner build --delete-conflicting-outputs
     packageFilters:
-      fileExists: pubspec.yaml
+      fileExists: build.yaml
+
+  localize:
+    description: Generate localization files for the specified package(s).
+    exec: flutter gen-l10n
+    packageFilters:
+      fileExists: l10n.yaml

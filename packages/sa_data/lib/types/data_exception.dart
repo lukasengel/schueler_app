@@ -1,5 +1,28 @@
 import 'dart:convert';
 
+/// An enumeration of possible types of exceptions thrown by the data layer.
+///
+/// Used to determine the error message shown to the user.
+enum SDataExceptionType {
+  /// No internet connection.
+  NO_CONNECTION,
+
+  /// The requested resource was not found.
+  NOT_FOUND,
+
+  /// The user is not authorized to access the requested resource.
+  UNAUTHORIZED,
+
+  /// Failed to parse the response from the server.
+  PARSING_FAILED,
+
+  /// Failed to read or write data from or to local storage.
+  LOCAL_STORAGE_FAILURE,
+
+  /// Any other type of error.
+  OTHER,
+}
+
 /// A custom [Exception] class thrown by the data layer.
 class SDataException implements Exception {
   /// The type of the exception.
@@ -24,44 +47,40 @@ class SDataException implements Exception {
     this.details,
   });
 
+  /// Create a new [SDataException] from a caught [Object].
+  factory SDataException.fromCaughtObject({required Object caughtObject, required String description}) {
+    // If the caught object is an internal exception, determine the error type.
+    if (caughtObject is SInternalDataException) {
+      return switch (caughtObject) {
+        SInternalDataException.NOT_FOUND => SDataException(
+            type: SDataExceptionType.NOT_FOUND,
+            description: description,
+          ),
+      };
+    }
+
+    // If the caught object is of a different type, we cannot determine the error type.
+    return SDataException(
+      type: SDataExceptionType.OTHER,
+      description: description,
+      details: caughtObject,
+    );
+  }
+
   @override
   String toString() {
-    // TODO: Prettify the output, if needed.
     return jsonEncode({
       'type': type.name,
       'description': description,
-      'details': details,
+      if (details != null) 'details': details.toString(),
     });
   }
 }
 
-/// An enumeration of possible types of exceptions thrown by the data layer.
+/// An exception that is thrown inside of the data layer to simplify error handling, but should reach the user.
 ///
-/// Used to determine the error message shown to the user.
-enum SDataExceptionType {
-  /// No internet connection.
-  NO_CONNECTION,
-
+/// Can be used in combination with [SDataException.fromCaughtObject] to determine the exception type and details.
+enum SInternalDataException implements Exception {
   /// The requested resource was not found.
   NOT_FOUND,
-
-  /// The user is not authorized to access the requested resource.
-  UNAUTHORIZED,
-
-  /// Failed to parse the response from the server.
-  PARSING_FAILED,
-
-  /// Failed to read or write data from or to local storage.
-  LOCAL_STORAGE_FAILURE,
-
-  /// Any other type of error.
-  OTHER;
-
-  /// Determines the [SDataExceptionType] of error basd on an [Exception] object.
-  ///
-  /// If the exception provides useful details, the method will determine the exception type.
-  static SDataExceptionType fromException(Exception e) {
-    // TODO: Implement after all firebase functionality is implemented.
-    return SDataExceptionType.OTHER;
-  }
 }

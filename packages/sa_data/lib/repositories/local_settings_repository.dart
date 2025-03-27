@@ -22,5 +22,5 @@ abstract class SLocalSettingsRepository {
   /// Save local settings to storage.
   ///
   /// Returns a [SDataException] upon failure.
-  Future<Either<SDataException, Unit>> saveLocalSettings(SLocalSettings settings);
+  Future<Either<SDataException, Unit>> saveLocalSettings(SLocalSettings localSettings);
 }

@@ -45,4 +45,14 @@ abstract class SPersistenceRepository {
   ///
   /// Returns a [SDataException] upon failure.
   Future<Either<SDataException, Unit>> deleteFeedback(SFeedbackItem feedback);
+
+  /// Load global settings from the database.
+  ///
+  /// Returns a [SDataException] upon failure.
+  Future<Either<SDataException, SGlobalSettings>> loadGlobalSettings();
+
+  /// Save global settings to the database.
+  ///
+  /// Returns a [SDataException] upon failure.
+  Future<Either<SDataException, Unit>> saveGlobalSettings(SGlobalSettings settings);
 }

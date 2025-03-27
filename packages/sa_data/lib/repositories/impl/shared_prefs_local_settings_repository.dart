@@ -1,8 +1,3 @@
-// We want to catch any exceptions or errors that occur while loading or saving,
-// regardless of whether they happen during a read/write operation or while parsing.
-//
-// ignore_for_file: avoid_catches_without_on_clauses
-
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
@@ -44,13 +39,13 @@ class SSharedPrefsLocalSettingsRepository implements SLocalSettingsRepository {
   }
 
   @override
-  Future<Either<SDataException, Unit>> saveLocalSettings(SLocalSettings settings) async {
+  Future<Either<SDataException, Unit>> saveLocalSettings(SLocalSettings localSettings) async {
     try {
       // Save settings to disk.
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString(
         'localSettings',
-        jsonEncode(settings.toJson()),
+        jsonEncode(localSettings.toJson()),
       );
 
       return right(unit);

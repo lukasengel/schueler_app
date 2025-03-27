@@ -1,8 +1,3 @@
-// We want to catch any exceptions or errors that occur while loading, saving or deleting,
-// regardless of whether they happen during a read/write operation or while parsing.
-//
-// ignore_for_file: avoid_catches_without_on_clauses
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:sa_data/sa_data.dart';
@@ -56,7 +51,17 @@ class SFirebasePersistenceRepository extends SPersistenceRepository {
     return _deleteItem('feedback', feedback.id);
   }
 
-  /// Helper function to load all items from a collection.
+  @override
+  Future<Either<SDataException, SGlobalSettings>> loadGlobalSettings() {
+    return _loadItem('config', 'globalSettings', SGlobalSettings.fromJson);
+  }
+
+  @override
+  Future<Either<SDataException, Unit>> saveGlobalSettings(SGlobalSettings globalSettings) {
+    return _saveItem('config', globalSettings.toJson());
+  }
+
+  /// Helper method to load all items from a collection.
   Future<Either<SDataException, List<T>>> _loadItems<T>(
     String collection,
     T Function(Map<String, dynamic> data) fromJson,
@@ -76,10 +81,39 @@ class SFirebasePersistenceRepository extends SPersistenceRepository {
     } catch (e) {
       // Return an exception if loading failed.
       return left(
-        SDataException(
-          type: e is Exception ? SDataExceptionType.fromException(e) : SDataExceptionType.OTHER,
-          description: 'Failed to load items from collection "$collection."',
-          details: e,
+        SDataException.fromCaughtObject(
+          caughtObject: e,
+          description: "Failed to load items from collection '$collection.'",
+        ),
+      );
+    }
+  }
+
+  /// Helper method to load an item from a collection.
+  Future<Either<SDataException, T>> _loadItem<T>(
+    String collection,
+    String id,
+    T Function(Map<String, dynamic> data) fromJson,
+  ) async {
+    try {
+      // Load the item from Firestore.
+      final doc = await firestore.collection(collection).doc(id).get();
+      final data = doc.data();
+
+      // Convert the item to the desired type.
+      if (data != null) {
+        data['id'] = doc.id;
+        return right(fromJson(data));
+      }
+
+      // If the item was not found, throw an internal exception.
+      throw SInternalDataException.NOT_FOUND;
+    } catch (e) {
+      // Return an exception if loading failed.
+      return left(
+        SDataException.fromCaughtObject(
+          caughtObject: e,
+          description: "Failed to load item with ID '$id' from collection '$collection.'",
         ),
       );
     }
@@ -97,10 +131,9 @@ class SFirebasePersistenceRepository extends SPersistenceRepository {
     } catch (e) {
       // Return an exception if saving failed.
       return left(
-        SDataException(
-          type: e is Exception ? SDataExceptionType.fromException(e) : SDataExceptionType.OTHER,
-          description: 'Failed to save item with ID "$id" to collection "$collection."',
-          details: e,
+        SDataException.fromCaughtObject(
+          caughtObject: e,
+          description: "Failed to save item with ID '$id' to collection '$collection.'",
         ),
       );
     }
@@ -115,10 +148,9 @@ class SFirebasePersistenceRepository extends SPersistenceRepository {
     } catch (e) {
       // Return an exception if deleting failed.
       return left(
-        SDataException(
-          type: e is Exception ? SDataExceptionType.fromException(e) : SDataExceptionType.OTHER,
-          description: 'Failed to delete item with ID "$id" from collection "$collection."',
-          details: e,
+        SDataException.fromCaughtObject(
+          caughtObject: e,
+          description: "Failed to delete item with ID '$id' from collection '$collection.'",
         ),
       );
     }

@@ -25,6 +25,58 @@ void main() {
     abbreviation: 'jdo',
   );
 
+  const globalSettings = SGlobalSettings(
+    id: 'globalSettings',
+    githubUrl: 'https://www.example.com/project',
+    exclusionOptions: [
+      SExclusionOption(
+        id: '5',
+        name: '5. Klasse',
+        regex: '5',
+      ),
+      SExclusionOption(
+        id: '6',
+        name: '6. Klasse',
+        regex: '6',
+      ),
+      SExclusionOption(
+        id: '7',
+        name: '7. Klasse',
+        regex: '7',
+      ),
+      SExclusionOption(
+        id: '8',
+        name: '8. Klasse',
+        regex: '8',
+      ),
+      SExclusionOption(
+        id: '9',
+        name: '9. Klasse',
+        regex: '9',
+      ),
+      SExclusionOption(
+        id: '10',
+        name: '10. Klasse',
+        regex: '10',
+      ),
+      SExclusionOption(
+        id: '11',
+        name: '11. Klasse',
+        regex: '11',
+      ),
+      SExclusionOption(
+        id: '12',
+        name: '12. Klasse',
+        regex: '12',
+      ),
+      SExclusionOption(
+        id: '13',
+        name: '13. Klasse',
+        regex: '13',
+      ),
+    ],
+  );
+
   setUpAll(() {
     SFirebasePersistenceRepository.instance.firestore = fakeFirestore;
   });
@@ -79,6 +131,22 @@ void main() {
     loadResult.fold(
       (l) => fail('Error loading teachers: ${l.description}'),
       (r) => expect(r, containsAll([teacher3])),
+    );
+  });
+
+  test('Save Global Settings', () async {
+    final saveResult = await SPersistenceRepository.instance.saveGlobalSettings(globalSettings);
+
+    saveResult.fold(
+      (l) => fail('Error saving global settings: ${l.description}'),
+      (r) => null,
+    );
+
+    final loadResult = await SPersistenceRepository.instance.loadGlobalSettings();
+
+    loadResult.fold(
+      (l) => fail('Error loading global settings: ${l.description}'),
+      (r) => expect(r, globalSettings),
     );
   });
 }
