@@ -1,11 +1,19 @@
 import 'dart:convert';
 
+import 'package:firebase_auth/firebase_auth.dart';
+
 /// An enumeration of possible types of exceptions thrown by the data layer.
 ///
 /// Used to determine the error message shown to the user.
 enum SDataExceptionType {
   /// No internet connection.
   NO_CONNECTION,
+
+  /// Could not authenticate the user due to invalid credentials.
+  INVALID_CREDENTIALS,
+
+  /// The server rejected the authentication request because too many requests were made in a short period of time.
+  TOO_MANY_REQUESTS,
 
   /// The requested resource was not found.
   NOT_FOUND,
@@ -57,6 +65,28 @@ class SDataException implements Exception {
             description: description,
           ),
       };
+    }
+
+    // If the caught object is a FirebaseAuthException, map the error code to a SDataExceptionType.
+    if (caughtObject is FirebaseAuthException) {
+      final type = switch (caughtObject.code) {
+        'invalid-email' ||
+        'user-disabled' ||
+        'user-not-found' ||
+        'wrong-password' ||
+        'invalid-credential' ||
+        'INVALID_LOGIN_CREDENTIALS' =>
+          SDataExceptionType.INVALID_CREDENTIALS,
+        'too-many-requests' => SDataExceptionType.TOO_MANY_REQUESTS,
+        'network-request-failed' => SDataExceptionType.NO_CONNECTION,
+        String() => SDataExceptionType.OTHER,
+      };
+
+      return SDataException(
+        type: type,
+        description: description,
+        details: caughtObject,
+      );
     }
 
     // If the caught object is of a different type, we cannot determine the error type.

@@ -30,7 +30,7 @@ class SLocalSettings with _$SLocalSettings {
     /// Whether the developer mode is enabled.
     required bool developerMode,
 
-    /// The courses that should be excluded from the substitution plan.
+    /// The IDs of the exclusion options that should be excluded from the substitution plan.
     required Set<String> excludedCourses,
 
     /// The courses that the user has manually excluded from the substitution plan.

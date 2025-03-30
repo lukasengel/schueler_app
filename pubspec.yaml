@@ -1,4 +1,4 @@
-name: schueler_app
+name: sa_root
 
 environment:
   sdk: '>=3.6.0 <4.0.0'

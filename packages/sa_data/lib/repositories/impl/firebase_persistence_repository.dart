@@ -61,6 +61,27 @@ class SFirebasePersistenceRepository extends SPersistenceRepository {
     return _saveItem('config', globalSettings.toJson());
   }
 
+  /// Load the privileges of a user by their UID.
+  ///
+  /// Only elevated privileges need to be stored in the database.
+  /// If no entry is found for the user, `null` is returned.
+  ///
+  /// Used by [SFirebaseAuthRepository].
+  Future<Either<SDataException, SUserPrivileges?>> loadUserPrivileges(String uid) async {
+    final result = await _loadItem('config', 'privileges', Map<String, String>.from);
+
+    return result.fold(
+      left,
+      (r) {
+        final rawPrivileges = r[uid];
+
+        return right(
+          rawPrivileges != null ? SUserPrivileges.values.byName(rawPrivileges) : null,
+        );
+      },
+    );
+  }
+
   /// Helper method to load all items from a collection.
   Future<Either<SDataException, List<T>>> _loadItems<T>(
     String collection,
