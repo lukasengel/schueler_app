@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:firebase_auth/firebase_auth.dart';
 
 /// An enumeration of possible types of exceptions thrown by the data layer.
@@ -67,8 +65,8 @@ class SDataException implements Exception {
       };
     }
 
-    // If the caught object is a FirebaseAuthException, map the error code to a SDataExceptionType.
-    if (caughtObject is FirebaseAuthException) {
+    // If the caught object is a FirebaseException, map the error code to an SDataExceptionType.
+    if (caughtObject is FirebaseException) {
       final type = switch (caughtObject.code) {
         'invalid-email' ||
         'user-disabled' ||
@@ -79,6 +77,9 @@ class SDataException implements Exception {
           SDataExceptionType.INVALID_CREDENTIALS,
         'too-many-requests' => SDataExceptionType.TOO_MANY_REQUESTS,
         'network-request-failed' => SDataExceptionType.NO_CONNECTION,
+        'not-found' => SDataExceptionType.NOT_FOUND,
+        'permission-denied' => SDataExceptionType.UNAUTHORIZED,
+        'unavailable' => SDataExceptionType.NO_CONNECTION,
         String() => SDataExceptionType.OTHER,
       };
 
@@ -99,11 +100,7 @@ class SDataException implements Exception {
 
   @override
   String toString() {
-    return jsonEncode({
-      'type': type.name,
-      'description': description,
-      if (details != null) 'details': details.toString(),
-    });
+    return '[SDataException]\nType: ${type.name}\nDescription: $description\nDetails: $details';
   }
 }
 

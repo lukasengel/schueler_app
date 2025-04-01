@@ -20,21 +20,19 @@ class SFirebaseAuthRepository extends SAuthRepository {
         // If an error occurred, log it.
         final privileges = result.fold(
           (l) {
-            SAppLogger.error('Failed to load user privileges for ${user.uid}.');
+            SLogger.error('Failed to load user privileges for ${user.uid}.\n\n$l');
             return null;
           },
           (r) => r,
         );
 
         // If no privileges are available, either due to an error or because there is no entry for this user, they are considered a student.
-        _controller.add(
+        return _controller.add(
           SUser(
             displayName: user.displayName ?? user.uid,
             privileges: privileges ?? SUserPrivileges.STUDENT,
           ),
         );
-
-        return;
       }
 
       _controller.add(null);
@@ -76,7 +74,7 @@ class SFirebaseAuthRepository extends SAuthRepository {
         password: password,
       );
 
-      SAppLogger.debug("Logged in as '$username.'");
+      SLogger.debug("Logged in as '$username.'");
       return right(unit);
     } catch (e) {
       return left(
@@ -93,7 +91,7 @@ class SFirebaseAuthRepository extends SAuthRepository {
     try {
       await firebaseAuth.signOut();
       _controller.add(null);
-      SAppLogger.debug('Logged out.');
+      SLogger.debug('Logged out.');
       return right(unit);
     } catch (e) {
       return left(

@@ -23,7 +23,7 @@ class SFirebasePersistenceRepository extends SPersistenceRepository {
 
   @override
   Future<Either<SDataException, List<STeacherItem>>> loadTeachers() {
-    return _loadItems('teachers', STeacherItem.fromJson);
+    return _loadItems('teachers', STeacherItem.fromJson, true);
   }
 
   @override
@@ -38,7 +38,7 @@ class SFirebasePersistenceRepository extends SPersistenceRepository {
 
   @override
   Future<Either<SDataException, List<SFeedbackItem>>> loadFeedback() {
-    return _loadItems('feedback', SFeedbackItem.fromJson);
+    return _loadItems('feedback', SFeedbackItem.fromJson, true);
   }
 
   @override
@@ -53,7 +53,7 @@ class SFirebasePersistenceRepository extends SPersistenceRepository {
 
   @override
   Future<Either<SDataException, SGlobalSettings>> loadGlobalSettings() {
-    return _loadItem('config', 'globalSettings', SGlobalSettings.fromJson);
+    return _loadItem('config', 'globalSettings', SGlobalSettings.fromJson, true);
   }
 
   @override
@@ -68,7 +68,7 @@ class SFirebasePersistenceRepository extends SPersistenceRepository {
   ///
   /// Used by [SFirebaseAuthRepository].
   Future<Either<SDataException, SUserPrivileges?>> loadUserPrivileges(String uid) async {
-    final result = await _loadItem('config', 'privileges', Map<String, String>.from);
+    final result = await _loadItem('config', 'privileges', Map<String, String>.from, true);
 
     return result.fold(
       left,
@@ -85,11 +85,16 @@ class SFirebasePersistenceRepository extends SPersistenceRepository {
   /// Helper method to load all items from a collection.
   Future<Either<SDataException, List<T>>> _loadItems<T>(
     String collection,
-    T Function(Map<String, dynamic> data) fromJson,
-  ) async {
+    T Function(Map<String, dynamic> data) fromJson, [
+    bool allowCache = false,
+  ]) async {
     try {
       // Load the items from Firestore.
-      final snapshot = await firestore.collection(collection).get();
+      final snapshot = await firestore.collection(collection).get(
+            GetOptions(
+              source: allowCache ? Source.serverAndCache : Source.server,
+            ),
+          );
 
       // Convert the items to the desired type.
       final items = snapshot.docs.map((doc) {
@@ -111,14 +116,22 @@ class SFirebasePersistenceRepository extends SPersistenceRepository {
   }
 
   /// Helper method to load an item from a collection.
+  ///
+  /// If [allowCache] is set to `true`, the method will fall back to the cache if the server is not reachable, instead of returning an exception.
   Future<Either<SDataException, T>> _loadItem<T>(
     String collection,
     String id,
-    T Function(Map<String, dynamic> data) fromJson,
-  ) async {
+    T Function(Map<String, dynamic> data) fromJson, [
+    bool allowCache = false,
+  ]) async {
     try {
       // Load the item from Firestore.
-      final doc = await firestore.collection(collection).doc(id).get();
+      final doc = await firestore.collection(collection).doc(id).get(
+            GetOptions(
+              source: allowCache ? Source.serverAndCache : Source.server,
+            ),
+          );
+
       final data = doc.data();
 
       // Convert the item to the desired type.
