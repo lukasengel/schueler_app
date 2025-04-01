@@ -4,9 +4,9 @@ import 'package:logger/logger.dart';
 ///
 /// The technical implementation of the logger is abstracted away so the logging
 /// configuration may be changed without affecting the rest of the application.
-sealed class SAppLogger {
+sealed class SLogger {
   // Make class non-instantiable.
-  SAppLogger._();
+  SLogger._();
 
   /// The single instance of [Logger] used.
   static final _instance = Logger();
