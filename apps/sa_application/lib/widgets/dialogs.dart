@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
-import 'package:sa_application/l10n/app_localizations.dart';
+import 'package:sa_application/l10n/l10n.dart';
 import 'package:sa_application/util/_util.dart';
 
 /// Show a platform-specific message dialog with the given title, content and an OK button.
@@ -29,7 +29,7 @@ Future<void> sShowPlatformMessageDialog({required BuildContext context, Widget? 
 
 /// Show a [CupertinoAlertDialog] with the given title, content and an OK button.
 ///
-/// The value of [sDefaultMaxDialogWidth] is ignored, since Cupertino dialogs have a defazult width.
+/// The value of [SStyles.defaultMaxDialogWidth] is ignored, since Cupertino dialogs have a defazult width.
 Future<void> sShowCupertinoMessageDialog({required BuildContext context, Widget? title, Widget? content}) {
   return showCupertinoDialog(
     context: context,
@@ -43,7 +43,7 @@ Future<void> sShowCupertinoMessageDialog({required BuildContext context, Widget?
         actions: [
           CupertinoDialogAction(
             onPressed: Navigator.of(context).pop,
-            child: Text(SAppLocalizations.of(context)!.ok),
+            child: Text(SLocalizations.of(context)!.ok),
           ),
         ],
       ),
@@ -53,13 +53,13 @@ Future<void> sShowCupertinoMessageDialog({required BuildContext context, Widget?
 
 /// Show an [FDialog] with the given title, content and an OK button.
 ///
-/// The value of [sDefaultMaxDialogWidth] is used as the maximum width constraint for the dialog.
+/// The value of [SStyles.defaultMaxDialogWidth] is used as the maximum width constraint for the dialog.
 Future<void> sShowForuiMessageDialog({required BuildContext context, Widget? title, Widget? content}) {
   return showDialog(
     context: context,
     builder: (context) => ConstrainedBox(
       constraints: const BoxConstraints(
-        maxWidth: sDefaultMaxDialogWidth,
+        maxWidth: SStyles.defaultMaxContentWidth,
       ),
       child: FDialog.adaptive(
         title: title != null
@@ -81,7 +81,7 @@ Future<void> sShowForuiMessageDialog({required BuildContext context, Widget? tit
         actions: [
           FButton(
             onPress: Navigator.of(context).pop,
-            label: Text(SAppLocalizations.of(context)!.ok),
+            label: Text(SLocalizations.of(context)!.ok),
           ),
         ],
       ),
@@ -151,7 +151,7 @@ Future<bool> sShowCupertinoConfirmDialog({
           cancelButton: CupertinoActionSheetAction(
             isDefaultAction: true,
             onPressed: Navigator.of(context).pop,
-            child: Text(SAppLocalizations.of(context)!.cancel),
+            child: Text(SLocalizations.of(context)!.cancel),
           ),
         ),
       ),
@@ -164,7 +164,7 @@ Future<bool> sShowCupertinoConfirmDialog({
 
 /// Show an [FDialog] with the given title, content and cancel and confirm buttons.
 ///
-/// The value of [sDefaultMaxDialogWidth] is used as the maximum width constraint for the dialog.
+/// The value of [SStyles.defaultMaxDialogWidth] is used as the maximum width constraint for the dialog.
 ///
 /// Returns `true` or `false` depending on the user's choice.
 Future<bool> sShowForuiConfirmDialog({
@@ -177,7 +177,7 @@ Future<bool> sShowForuiConfirmDialog({
     context: context,
     builder: (context) => ConstrainedBox(
       constraints: const BoxConstraints(
-        maxWidth: sDefaultMaxDialogWidth,
+        maxWidth: SStyles.defaultListTileSpacing,
       ),
       child: FDialog.adaptive(
         title: Padding(
@@ -200,7 +200,7 @@ Future<bool> sShowForuiConfirmDialog({
           ),
           FButton(
             onPress: Navigator.of(context).pop,
-            label: Text(SAppLocalizations.of(context)!.cancel),
+            label: Text(SLocalizations.of(context)!.cancel),
           ),
         ],
       ),

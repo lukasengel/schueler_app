@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
-/// The default maximum width for content in the app.
-const sDefaultMaxContentWidth = 600.0;
+/// Class to namespace styling values.
+abstract final class SStyles {
+  /// The default maximum width for content in the app.
+  static const defaultMaxContentWidth = 600.0;
 
-/// The default maximum width for a dialog in the app.
-const sDefaultMaxDialogWidth = 400.0;
+  /// The default maximum width for a dialog in the app.
+  static const defaultMaxDialogWidth = 400.0;
 
-/// The default padding for list views in the app.
-const sDefaultListViewPadding = EdgeInsets.fromLTRB(0, 12, 0, 24);
+  /// The default padding for list views in the app.
+  static const defaultListViewPadding = EdgeInsets.fromLTRB(0, 12, 0, 24);
 
-/// The default spacing between tiles in a list view.
-const sDefaultListTileSpacing = 10.0;
+  /// The default spacing between tiles in a list view.
+  static const defaultListTileSpacing = 10.0;
+}

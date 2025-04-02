@@ -65,7 +65,7 @@ class SContentWrapper extends StatelessWidget {
   const SContentWrapper({
     required this.child,
     super.key,
-    this.maxWidth = sDefaultMaxContentWidth,
+    this.maxWidth = SStyles.defaultMaxContentWidth,
   });
 
   @override
@@ -77,6 +77,27 @@ class SContentWrapper extends StatelessWidget {
         ),
         child: child,
       ),
+    );
+  }
+}
+
+/// Wrapper for [FButton] widgets to give them a fixed width.
+/// Otherwise, the button will expand to the full width of the screen.
+class SButtonWrapper extends StatelessWidget {
+  /// The widget to wrap.
+  final FButton child;
+
+  /// Create a new [SButtonWrapper].
+  const SButtonWrapper({
+    required this.child,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 250,
+      child: child,
     );
   }
 }

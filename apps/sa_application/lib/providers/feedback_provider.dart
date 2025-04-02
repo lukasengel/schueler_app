@@ -27,6 +27,13 @@ class SFeedbackNotifier extends StateNotifier<List<SFeedbackItem>?> {
       ),
     );
   }
+
+  /// Clear state.
+  ///
+  /// This method is used when the user logs out.
+  void clear() {
+    state = null;
+  }
 }
 
 /// Provider for feedback.

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
-import 'package:sa_application/l10n/app_localizations.dart';
+import 'package:sa_application/l10n/l10n.dart';
 import 'package:sa_application/providers/_providers.dart';
 import 'package:sa_application/util/_util.dart';
 import 'package:sa_application/widgets/_widgets.dart';
@@ -22,9 +22,7 @@ class _STeacherAbbreviationsScreenState extends ConsumerState<STeacherAbbreviati
 
   /// Callback for when the user types in the search field.
   void _onSearch(String? inputQuery) {
-    setState(() {
-      _searchQuery = inputQuery;
-    });
+    setState(() => _searchQuery = inputQuery?.trimOrNull());
   }
 
   @override
@@ -57,7 +55,7 @@ class _STeacherAbbreviationsScreenState extends ConsumerState<STeacherAbbreviati
           ],
           title: SHeaderTitleWrapper(
             child: Text(
-              SAppLocalizations.of(context)!.teacherAbbreviations,
+              SLocalizations.of(context)!.teacherAbbreviations,
             ),
           ),
           suffixActions: [
@@ -75,7 +73,7 @@ class _STeacherAbbreviationsScreenState extends ConsumerState<STeacherAbbreviati
                 controller: _scrollController,
                 child: ListView.separated(
                   controller: _scrollController,
-                  padding: sDefaultListViewPadding,
+                  padding: SStyles.defaultListViewPadding,
                   itemCount: filtered.length,
                   itemBuilder: (context, index) {
                     final teacher = filtered[index];
@@ -86,14 +84,14 @@ class _STeacherAbbreviationsScreenState extends ConsumerState<STeacherAbbreviati
                     );
                   },
                   separatorBuilder: (context, index) => const SizedBox(
-                    height: sDefaultListTileSpacing,
+                    height: SStyles.defaultListTileSpacing,
                   ),
                 ),
               )
             // If there are no teachers to display, show an icon.
             : SNoDataPlaceholder(
-                message: hasData ? SAppLocalizations.of(context)!.noResults : SAppLocalizations.of(context)!.noData,
-                iconSvg: hasData ? FAssets.icons.searchX : FAssets.icons.triangleAlert,
+                message: hasData ? SLocalizations.of(context)!.noResults : SLocalizations.of(context)!.noData,
+                iconSvg: hasData ? FAssets.icons.searchX : FAssets.icons.ban,
               ),
       ),
     );

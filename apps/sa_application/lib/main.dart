@@ -3,17 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sa_application/firebase_options.dart';
 import 'package:sa_application/init.dart';
-import 'package:sa_application/l10n/app_localizations.dart';
+import 'package:sa_application/l10n/l10n.dart';
 import 'package:sa_application/providers/_providers.dart';
 import 'package:sa_application/screens/_screens.dart';
 import 'package:sa_application/util/_util.dart';
+import 'package:sa_common/sa_common.dart';
 import 'package:toastification/toastification.dart';
-
-// TODO: Display pre-load exceptions.
-// TODO: Disable offline persistence for the Firebase Firestore instance when loading external data.
-// TODO: Reduce number of ignored linter rules.
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,12 +21,16 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // Pre-load the application state.
-  final preloadResult = await preloadState();
+  // Attempt to load local settings and restore the user session.
+  final overrides = await Future.wait([
+    loadLocalSettings(),
+    restoreSession(),
+  ]);
 
   runApp(
     ProviderScope(
-      overrides: preloadResult.$1,
+      // Add all non-null overrides to the provider scope.
+      overrides: overrides.nonNulls.toList(),
       child: const MyApp(),
     ),
   );
@@ -44,35 +46,97 @@ class MyApp extends ConsumerStatefulWidget {
 }
 
 class _MyAppState extends ConsumerState<MyApp> {
+  GoRouter? router;
+
   @override
   Widget build(BuildContext context) {
+    SLogger.debug('Rebuilding MaterialApp.');
     final locale = ref.watch(sLocalSettingsProvider.select((localSettings) => localSettings.locale));
     final themeMode = ref.watch(sLocalSettingsProvider.select((localSettings) => localSettings.themeMode));
 
+    // Refresh the router when the authentication state changes.
+    ref.listen(sAuthProvider, (previous, next) {
+      if (previous != next) {
+        router?.refresh();
+      }
+    });
+
     return ToastificationWrapper(
-      child: MaterialApp(
-        title: sAppName,
+      child: MaterialApp.router(
+        title: SConstants.appName,
         debugShowCheckedModeBanner: false,
         builder: (context, child) => FTheme(
-          data: SAppTheme.adaptive(context, themeMode),
+          data: STheme.foruiAdaptive(context, themeMode),
           child: child!,
         ),
         themeMode: themeMode,
-        theme: SAppTheme.light,
-        darkTheme: SAppTheme.dark,
+        theme: STheme.materialLight,
+        darkTheme: STheme.materialDark,
         locale: locale,
-        supportedLocales: SAppLocalizations.supportedLocales,
+        supportedLocales: SLocalizations.supportedLocales,
         localizationsDelegates: const [
-          SAppLocalizations.delegate,
+          SLocalizations.delegate,
           FLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        routes: {
-          '/': (context) => const SHomeScreen(),
-          '/settings': (context) => const SSettingsScreen(),
-        },
+        routerConfig: router ??= GoRouter(
+          initialLocation: '/login',
+          redirect: (context, state) {
+            SLogger.debug("Navigating to '${state.fullPath}.'");
+            final authState = ref.read(sAuthProvider);
+
+            // 1. LOGIN PAGE
+            if (!authState.isAuthenticated) {
+              return '/login';
+            }
+
+            // // If user is on the login page and authenticated, redirect to the home page.
+            if (state.fullPath == '/login' && authState.isAuthenticated) {
+              return '/home';
+            }
+
+            // No redirect.
+            return null;
+          },
+          routes: [
+            GoRoute(
+              path: '/login',
+              builder: (context, state) => const SLoginScreen(),
+            ),
+            GoRoute(
+              path: '/home',
+              builder: (context, state) => const SHomeScreen(),
+            ),
+            GoRoute(
+              path: '/home',
+              builder: (context, state) => const SSettingsScreen(),
+            ),
+            GoRoute(
+              path: '/settings',
+              builder: (context, state) => const SSettingsScreen(),
+              routes: [
+                GoRoute(
+                  path: '/personalization',
+                  builder: (context, state) => const SPersonalizationScreen(),
+                ),
+                GoRoute(
+                  path: '/filter-table',
+                  builder: (context, state) => const SFilterTableScreen(),
+                ),
+                GoRoute(
+                  path: '/teacher-abbreviations',
+                  builder: (context, state) => const STeacherAbbreviationsScreen(),
+                ),
+                GoRoute(
+                  path: '/report-bugs',
+                  builder: (context, state) => const SReportBugsScreen(),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

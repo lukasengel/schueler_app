@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
-import 'package:sa_application/l10n/app_localizations.dart';
+import 'package:sa_application/l10n/l10n.dart';
 
 /// A widget that provides the option to smoothly switch between a normal [FHeader] and a header with a search bar.
 class SSearchHeader extends StatefulWidget {
@@ -101,7 +101,7 @@ class _SSearchHeaderState extends State<SSearchHeader> {
         children: [
           Expanded(
             child: FTextField(
-              hint: SAppLocalizations.of(context)!.search,
+              hint: SLocalizations.of(context)!.search,
               clearable: (value) => value.text.isNotEmpty,
               onChange: widget.onSearch,
               focusNode: _focusNode,
@@ -114,7 +114,7 @@ class _SSearchHeaderState extends State<SSearchHeader> {
           ),
           FButton(
             onPress: () => _toggleSearchBar(false),
-            label: Text(SAppLocalizations.of(context)!.cancel),
+            label: Text(SLocalizations.of(context)!.cancel),
             style: FButtonStyle.secondary,
           ),
         ],

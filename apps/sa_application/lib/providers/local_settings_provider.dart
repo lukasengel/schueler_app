@@ -19,21 +19,32 @@ class SLocalSettingsNotifier extends StateNotifier<SLocalSettings> {
     bool? developerMode,
     Set<String>? excludedCourses,
     Set<String>? customExclusions,
-  }) async {
-    // Create a instance with the updated values.
-    final newState = state.copyWith(
-      username: username ?? state.username,
-      password: password ?? state.password,
-      locale: locale ?? state.locale,
-      themeMode: themeMode ?? state.themeMode,
-      shownDays: shownDays ?? state.shownDays,
-      autoNextDay: autoNextDay ?? state.autoNextDay,
-      developerMode: developerMode ?? state.developerMode,
-      excludedCourses: excludedCourses ?? state.excludedCourses,
-      customExclusions: customExclusions ?? state.customExclusions,
+  }) {
+    return _update(
+      state.copyWith(
+        username: username ?? state.username,
+        password: password ?? state.password,
+        locale: locale ?? state.locale,
+        themeMode: themeMode ?? state.themeMode,
+        shownDays: shownDays ?? state.shownDays,
+        autoNextDay: autoNextDay ?? state.autoNextDay,
+        developerMode: developerMode ?? state.developerMode,
+        excludedCourses: excludedCourses ?? state.excludedCourses,
+        customExclusions: customExclusions ?? state.customExclusions,
+      ),
     );
+  }
 
-    // Write changes to storage.
+  /// Reset local settings, i.e. restore the defaults.
+  ///
+  /// This method is used when the user logs out.
+  Future<Either<SDataException, Unit>> reset() async {
+    return _update(SLocalSettings.defaults());
+  }
+
+  /// Helper method to save the local settings and update the state, if successful.
+  Future<Either<SDataException, Unit>> _update(SLocalSettings newState) async {
+    // Save the settings to storage.
     final result = await SLocalSettingsRepository.instance.saveLocalSettings(
       newState,
     );

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
 import 'package:locale_names/locale_names.dart';
-import 'package:sa_application/l10n/app_localizations.dart';
+import 'package:sa_application/l10n/l10n.dart';
 import 'package:sa_application/providers/_providers.dart';
 import 'package:sa_application/util/_util.dart';
 import 'package:sa_application/widgets/_widgets.dart';
@@ -72,7 +72,7 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
       (l) => sShowDataExceptionToast(
         context: context,
         exception: l,
-        message: SAppLocalizations.of(context)!.failedSavingSettings,
+        message: SLocalizations.of(context)!.failedSavingSettings,
       ),
       (r) => null,
     );
@@ -93,7 +93,7 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
         child: FHeader.nested(
           title: SHeaderTitleWrapper(
             child: Text(
-              SAppLocalizations.of(context)!.personalization,
+              SLocalizations.of(context)!.personalization,
             ),
           ),
           prefixActions: [
@@ -105,7 +105,7 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
       ),
       content: SContentWrapper(
         child: ListView(
-          padding: sDefaultListViewPadding,
+          padding: SStyles.defaultListViewPadding,
           children: [
             Consumer(
               builder: (context, ref, child) {
@@ -124,25 +124,25 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
                       ThemeMode.dark => FAssets.icons.moon,
                     },
                   ),
-                  title: Text(SAppLocalizations.of(context)!.appearance),
+                  title: Text(SLocalizations.of(context)!.appearance),
                   details: Text(
                     switch (themeMode) {
-                      ThemeMode.light => SAppLocalizations.of(context)!.light,
-                      ThemeMode.system => SAppLocalizations.of(context)!.system,
-                      ThemeMode.dark => SAppLocalizations.of(context)!.dark,
+                      ThemeMode.light => SLocalizations.of(context)!.light,
+                      ThemeMode.system => SLocalizations.of(context)!.system,
+                      ThemeMode.dark => SLocalizations.of(context)!.dark,
                     },
                   ),
                   menu: [
                     FSelectTile(
-                      title: Text(SAppLocalizations.of(context)!.light),
+                      title: Text(SLocalizations.of(context)!.light),
                       value: ThemeMode.light,
                     ),
                     FSelectTile(
-                      title: Text(SAppLocalizations.of(context)!.system),
+                      title: Text(SLocalizations.of(context)!.system),
                       value: ThemeMode.system,
                     ),
                     FSelectTile(
-                      title: Text(SAppLocalizations.of(context)!.dark),
+                      title: Text(SLocalizations.of(context)!.dark),
                       value: ThemeMode.dark,
                     ),
                   ],
@@ -150,7 +150,7 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
               },
             ),
             const SizedBox(
-              height: sDefaultListTileSpacing,
+              height: SStyles.defaultListTileSpacing,
             ),
             Consumer(
               builder: (context, ref, child) {
@@ -163,12 +163,12 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
                     value: shownDays,
                   ),
                   prefixIcon: FIcon(FAssets.icons.calendarCog),
-                  title: Text(SAppLocalizations.of(context)!.shownDays),
+                  title: Text(SLocalizations.of(context)!.shownDays),
                   description: Padding(
                     padding: const EdgeInsets.only(
                       left: 5,
                     ),
-                    child: Text(SAppLocalizations.of(context)!.shownDaysInfo),
+                    child: Text(SLocalizations.of(context)!.shownDaysInfo),
                   ),
                   details: Text('$shownDays'),
                   count: 4,
@@ -180,7 +180,7 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
               },
             ),
             const SizedBox(
-              height: sDefaultListTileSpacing,
+              height: SStyles.defaultListTileSpacing,
             ),
             FLabel(
               axis: Axis.vertical,
@@ -189,7 +189,7 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
                 padding: const EdgeInsets.only(
                   left: 5,
                 ),
-                child: Text(SAppLocalizations.of(context)!.autoNextDayInfo),
+                child: Text(SLocalizations.of(context)!.autoNextDayInfo),
               ),
               child: Consumer(
                 builder: (context, ref, child) {
@@ -197,7 +197,7 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
                       ref.watch(sLocalSettingsProvider.select((localSettings) => localSettings.autoNextDay));
 
                   return SCheckboxTile(
-                    title: Text(SAppLocalizations.of(context)!.autoNextDay),
+                    title: Text(SLocalizations.of(context)!.autoNextDay),
                     onChanged: _onPressedAutoNextDay,
                     value: autoNextDay,
                   );
@@ -205,7 +205,7 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
               ),
             ),
             const SizedBox(
-              height: sDefaultListTileSpacing,
+              height: SStyles.defaultListTileSpacing,
             ),
             Consumer(
               builder: (context, ref, child) {
@@ -217,16 +217,14 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
                     padding: const EdgeInsets.only(
                       left: 5,
                     ),
-                    child: Text(
-                      SAppLocalizations.of(context)!.languageInfo,
-                    ),
+                    child: Text(SLocalizations.of(context)!.languageInfo),
                   ),
                   children: [
                     // Only show inclusive language tile in developer mode.
                     if (isDev)
                       FTile(
                         prefixIcon: FIcon(FAssets.icons.squareAsterisk),
-                        title: Text(SAppLocalizations.of(context)!.inclusiveLanguage),
+                        title: Text(SLocalizations.of(context)!.inclusiveLanguage),
                         suffixIcon: FCheckbox(
                           onChange: (_) => _onPressedInclusiveLanguage(),
                         ),
@@ -239,11 +237,11 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
                         value: locale,
                       ),
                       prefixIcon: FIcon(FAssets.icons.languages),
-                      title: Text(SAppLocalizations.of(context)!.language),
+                      title: Text(SLocalizations.of(context)!.language),
                       details: Text(locale.nativeDisplayLanguage.capitalize()),
-                      count: SAppLocalizations.supportedLocales.length,
+                      count: SLocalizations.supportedLocales.length,
                       menuTileBuilder: (context, index) {
-                        final locale = SAppLocalizations.supportedLocales[index];
+                        final locale = SLocalizations.supportedLocales[index];
 
                         return FSelectTile(
                           title: Text(locale.nativeDisplayLanguage.capitalize()),

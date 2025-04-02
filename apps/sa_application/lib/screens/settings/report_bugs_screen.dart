@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
-import 'package:sa_application/l10n/app_localizations.dart';
+import 'package:sa_application/l10n/l10n.dart';
 import 'package:sa_application/providers/_providers.dart';
 import 'package:sa_application/util/_util.dart';
 import 'package:sa_application/widgets/_widgets.dart';
@@ -26,8 +26,8 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
   void _onPressedPrivacyNote() {
     sShowPlatformMessageDialog(
       context: context,
-      title: Text(SAppLocalizations.of(context)!.privacyNote),
-      content: Text(SAppLocalizations.of(context)!.privacyInfo),
+      title: Text(SLocalizations.of(context)!.privacyNote),
+      content: Text(SLocalizations.of(context)!.privacyInfo),
     );
   }
 
@@ -47,9 +47,9 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
     if (notEmpty) {
       final input = await sShowPlatformConfirmDialog(
         context: context,
-        title: SAppLocalizations.of(context)!.discardFeedback,
-        content: SAppLocalizations.of(context)!.discardFeedbackMsg,
-        confirmLabel: SAppLocalizations.of(context)!.discard,
+        title: SLocalizations.of(context)!.discardFeedback,
+        content: SLocalizations.of(context)!.discardFeedbackMsg,
+        confirmLabel: SLocalizations.of(context)!.discard,
       );
 
       if (input == false) {
@@ -73,18 +73,18 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
     // Ask for confirmation.
     final input = await sShowPlatformConfirmDialog(
       context: context,
-      title: SAppLocalizations.of(context)!.submitFeedback,
-      content: SAppLocalizations.of(context)!.submitFeedbackMsg,
-      confirmLabel: SAppLocalizations.of(context)!.submit,
+      title: SLocalizations.of(context)!.submitFeedback,
+      content: SLocalizations.of(context)!.submitFeedbackMsg,
+      confirmLabel: SLocalizations.of(context)!.submit,
     );
 
     // If the user confirms, send the feedback.
     if (input) {
       // Send feedback.
       final result = await ref.read(sFeedbackProvider.notifier).submitFeedback(
-            message: _messageController.text,
-            name: _nameController.text,
-            email: _emailController.text,
+            message: _messageController.text.trim(),
+            name: _nameController.text.trimOrNull(),
+            email: _emailController.text.trimOrNull(),
           );
 
       // Show a toast if an error occurred.
@@ -92,7 +92,7 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
         (l) => sShowDataExceptionToast(
           context: context,
           exception: l,
-          message: SAppLocalizations.of(context)!.failedSavingSettings,
+          message: SLocalizations.of(context)!.failedSavingSettings,
         ),
         (r) => null,
       );
@@ -106,7 +106,7 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
 
   /// Callback to validate the message field.
   String? _onValidate(String? input) {
-    return input.hasNoContent ? SAppLocalizations.of(context)!.enterMessage : null;
+    return input.hasNoContent ? SLocalizations.of(context)!.enterMessage : null;
   }
 
   @override
@@ -126,7 +126,7 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
           child: FHeader.nested(
             title: SHeaderTitleWrapper(
               child: Text(
-                SAppLocalizations.of(context)!.reportBugs,
+                SLocalizations.of(context)!.reportBugs,
               ),
             ),
             prefixActions: [
@@ -146,45 +146,47 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
           child: Form(
             key: _formKey,
             child: ListView(
-              padding: sDefaultListViewPadding,
+              padding: SStyles.defaultListViewPadding,
               children: [
                 FTextField(
                   controller: _nameController,
-                  label: Text(SAppLocalizations.of(context)!.contactDetails),
-                  hint: SAppLocalizations.of(context)!.nameOptional,
+                  label: Text(SLocalizations.of(context)!.contactDetails),
+                  hint: SLocalizations.of(context)!.nameOptional,
                   keyboardType: TextInputType.name,
+                  textInputAction: TextInputAction.next,
                   autocorrect: false,
                   maxLines: 1,
                 ),
                 const SizedBox(
-                  height: sDefaultListTileSpacing,
+                  height: SStyles.defaultListTileSpacing,
                 ),
                 FTextField(
                   controller: _emailController,
-                  hint: SAppLocalizations.of(context)!.emailOptional,
+                  hint: SLocalizations.of(context)!.emailOptional,
                   keyboardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.next,
                   autocorrect: false,
                   maxLines: 1,
                 ),
                 const SizedBox(
-                  height: sDefaultListTileSpacing,
+                  height: SStyles.defaultListTileSpacing,
                 ),
                 FTextField(
                   controller: _messageController,
-                  label: Text(SAppLocalizations.of(context)!.message),
-                  hint: SAppLocalizations.of(context)!.description,
+                  label: Text(SLocalizations.of(context)!.message),
+                  hint: SLocalizations.of(context)!.description,
                   keyboardType: TextInputType.multiline,
                   maxLines: 10,
                   validator: _onValidate,
                 ),
                 const SizedBox(
-                  height: sDefaultListTileSpacing,
+                  height: SStyles.defaultListTileSpacing,
                 ),
                 Center(
                   child: FTappable.animated(
                     onPress: _onPressedPrivacyNote,
                     child: Text(
-                      SAppLocalizations.of(context)!.privacyNote,
+                      SLocalizations.of(context)!.privacyNote,
                       style: FTheme.of(context).typography.sm,
                     ),
                   ),

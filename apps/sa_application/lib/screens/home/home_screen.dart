@@ -1,9 +1,12 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
-import 'package:sa_application/l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sa_application/l10n/l10n.dart';
 import 'package:sa_application/providers/_providers.dart';
 import 'package:sa_application/widgets/_widgets.dart';
+import 'package:sa_data/types/data_exception.dart';
 
 /// The home screen of the application, providing three tabs.
 class SHomeScreen extends ConsumerStatefulWidget {
@@ -19,7 +22,39 @@ class _SHomeScreenState extends ConsumerState<SHomeScreen> {
 
   /// Callback for when the settings button is pressed.
   void _onPressedSettings() {
-    Navigator.of(context).pushNamed('/settings');
+    GoRouter.of(context).push('/settings');
+  }
+
+  /// Callback for when the refresh button is pressed.
+  Future<void> _onPressedRefresh() async {
+    final result = await ref.read(sLoadingProvider.notifier).load();
+
+    // If an error occurred, show a toast for each type of exception.
+    result.fold(
+      (l) {
+        // If, let's suppose, there is no internet connection, we don't want to show five toasts all saying the same thing.
+        // Therefore, group all exception by their type and combine their descriptions and details.
+        final groupedExceptions = l.groupListsBy((exception) => exception.type).entries.map((entry) {
+          final descriptions = entry.value.map((e) => e.description);
+          final details = entry.value.map((e) => e.details).nonNulls;
+
+          return SDataException(
+            type: entry.key,
+            description: descriptions.map((e) => '\n- $e').join(),
+            details: details.map((e) => '\n- $e').join(),
+          );
+        });
+
+        // Show a toast for each grouped exception.
+        for (final e in groupedExceptions) {
+          sShowDataExceptionToast(
+            context: context,
+            exception: e,
+          );
+        }
+      },
+      (r) => null,
+    );
   }
 
   /// Callback for switching the tab.
@@ -35,20 +70,16 @@ class _SHomeScreenState extends ConsumerState<SHomeScreen> {
           title: SHeaderTitleWrapper(
             child: Text(
               [
-                SAppLocalizations.of(context)!.substitutions,
-                SAppLocalizations.of(context)!.news,
-                SAppLocalizations.of(context)!.schoolLife,
+                SLocalizations.of(context)!.substitutions,
+                SLocalizations.of(context)!.news,
+                SLocalizations.of(context)!.schoolLife,
               ][_index],
             ),
           ),
           prefixActions: [
-            // TODO: Remove once proper authentication has been implemented.
             FHeaderAction(
-              icon: FIcon(FAssets.icons.hardDriveDownload),
-              onPress: () {
-                ref.read(sTeachersProvider.notifier).load();
-                ref.read(sGlobalSettingsProvider.notifier).load();
-              },
+              icon: FIcon(FAssets.icons.refreshCw),
+              onPress: _onPressedRefresh,
             ),
           ],
           suffixActions: [
@@ -70,15 +101,15 @@ class _SHomeScreenState extends ConsumerState<SHomeScreen> {
         children: [
           FBottomNavigationBarItem(
             icon: FIcon(FAssets.icons.calendarSync),
-            label: Text(SAppLocalizations.of(context)!.substitutions),
+            label: Text(SLocalizations.of(context)!.substitutions),
           ),
           FBottomNavigationBarItem(
             icon: FIcon(FAssets.icons.megaphone),
-            label: Text(SAppLocalizations.of(context)!.news),
+            label: Text(SLocalizations.of(context)!.news),
           ),
           FBottomNavigationBarItem(
             icon: FIcon(FAssets.icons.users),
-            label: Text(SAppLocalizations.of(context)!.schoolLife),
+            label: Text(SLocalizations.of(context)!.schoolLife),
           ),
         ],
       ),

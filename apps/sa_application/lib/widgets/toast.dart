@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:forui/forui.dart';
-import 'package:sa_application/l10n/app_localizations.dart';
+import 'package:sa_application/l10n/l10n.dart';
 import 'package:sa_data/sa_data.dart';
 import 'package:toastification/toastification.dart';
 
@@ -33,10 +33,10 @@ void sShowErrorToast({
   _showThemedToast(
     context: context,
     type: ToastificationType.error,
-    title: Text('${SAppLocalizations.of(context)!.error} $message'),
+    title: Text('${SLocalizations.of(context)!.error} $message'),
     description: details != null
         ? FTappable.animated(
-            child: Text(SAppLocalizations.of(context)!.tapToCopyDetails),
+            child: Text(SLocalizations.of(context)!.tapToCopyDetails),
             onPress: () => _copyToClipboard(context, details),
           )
         : null,
@@ -59,12 +59,14 @@ void sShowDataExceptionToast({
   // If no message is provided, determine it based on the exception type.
   if (message == null) {
     resultingMessage = switch (exception.type) {
-      SDataExceptionType.NO_CONNECTION => SAppLocalizations.of(context)!.dataExceptionType_noConnection,
-      SDataExceptionType.NOT_FOUND => SAppLocalizations.of(context)!.dataExceptionType_notFound,
-      SDataExceptionType.UNAUTHORIZED => SAppLocalizations.of(context)!.dataExceptionType_unauthorized,
-      SDataExceptionType.PARSING_FAILED => SAppLocalizations.of(context)!.dataExceptionType_parsingFailed,
-      SDataExceptionType.LOCAL_STORAGE_FAILURE => SAppLocalizations.of(context)!.dataExceptionType_localStorageFailure,
-      SDataExceptionType.OTHER => SAppLocalizations.of(context)!.dataExceptionType_other,
+      SDataExceptionType.NO_CONNECTION => SLocalizations.of(context)!.dataExceptionType_noConnection,
+      SDataExceptionType.INVALID_CREDENTIALS => SLocalizations.of(context)!.dataExceptionType_invalidCredentials,
+      SDataExceptionType.TOO_MANY_REQUESTS => SLocalizations.of(context)!.dataExceptionType_tooManyRequests,
+      SDataExceptionType.NOT_FOUND => SLocalizations.of(context)!.dataExceptionType_notFound,
+      SDataExceptionType.UNAUTHORIZED => SLocalizations.of(context)!.dataExceptionType_unauthorized,
+      SDataExceptionType.PARSING_FAILED => SLocalizations.of(context)!.dataExceptionType_parsingFailed,
+      SDataExceptionType.LOCAL_STORAGE_FAILURE => SLocalizations.of(context)!.dataExceptionType_localStorageFailure,
+      SDataExceptionType.OTHER => SLocalizations.of(context)!.dataExceptionType_other,
     };
   }
   // Otherwise, use the provided message.
@@ -130,7 +132,7 @@ Future<void> _copyToClipboard(BuildContext context, String text) async {
   if (context.mounted) {
     sShowInfoToast(
       context: context,
-      message: SAppLocalizations.of(context)!.copiedDetails,
+      message: SLocalizations.of(context)!.copiedDetails,
     );
   }
 }
