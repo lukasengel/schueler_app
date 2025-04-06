@@ -88,173 +88,167 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
 
   @override
   Widget build(BuildContext context) {
-    return FScaffold(
-      header: SHeaderWrapper(
-        child: FHeader.nested(
-          title: SHeaderTitleWrapper(
-            child: Text(
-              SLocalizations.of(context)!.personalization,
+    return SScaffold.constrained(
+      header: SHeader(
+        title: Text(
+          SLocalizations.of(context)!.personalization,
+        ),
+        prefixActions: [
+          FHeaderAction.back(
+            onPress: Navigator.of(context).pop,
+          ),
+        ],
+      ),
+      content: ListView(
+        padding: SStyles.defaultListViewPadding,
+        children: [
+          Consumer(
+            builder: (context, ref, child) {
+              final themeMode = ref.watch(sLocalSettingsProvider.select((localSettings) => localSettings.themeMode));
+
+              return FSelectMenuTile(
+                autoHide: true,
+                groupController: _themeModeController ??= FRadioSelectGroupController(
+                  onUpdate: _onSelectThemeMode,
+                  value: themeMode,
+                ),
+                prefixIcon: FIcon(
+                  switch (themeMode) {
+                    ThemeMode.light => FAssets.icons.sun,
+                    ThemeMode.system => FAssets.icons.sunMoon,
+                    ThemeMode.dark => FAssets.icons.moon,
+                  },
+                ),
+                title: Text(SLocalizations.of(context)!.appearance),
+                details: Text(
+                  switch (themeMode) {
+                    ThemeMode.light => SLocalizations.of(context)!.light,
+                    ThemeMode.system => SLocalizations.of(context)!.system,
+                    ThemeMode.dark => SLocalizations.of(context)!.dark,
+                  },
+                ),
+                menu: [
+                  FSelectTile(
+                    title: Text(SLocalizations.of(context)!.light),
+                    value: ThemeMode.light,
+                  ),
+                  FSelectTile(
+                    title: Text(SLocalizations.of(context)!.system),
+                    value: ThemeMode.system,
+                  ),
+                  FSelectTile(
+                    title: Text(SLocalizations.of(context)!.dark),
+                    value: ThemeMode.dark,
+                  ),
+                ],
+              );
+            },
+          ),
+          const SizedBox(
+            height: SStyles.defaultListTileSpacing,
+          ),
+          Consumer(
+            builder: (context, ref, child) {
+              final shownDays = ref.watch(sLocalSettingsProvider.select((localSettings) => localSettings.shownDays));
+
+              return FSelectMenuTile.builder(
+                autoHide: true,
+                groupController: _daysController ??= FRadioSelectGroupController(
+                  onUpdate: _onSelectShownDays,
+                  value: shownDays,
+                ),
+                prefixIcon: FIcon(FAssets.icons.calendarCog),
+                title: Text(SLocalizations.of(context)!.shownDays),
+                description: Padding(
+                  padding: const EdgeInsets.only(
+                    left: 5,
+                  ),
+                  child: Text(SLocalizations.of(context)!.shownDaysInfo),
+                ),
+                details: Text('$shownDays'),
+                count: 4,
+                menuTileBuilder: (context, index) => FSelectTile(
+                  title: Text('${index + 2}'),
+                  value: index + 2,
+                ),
+              );
+            },
+          ),
+          const SizedBox(
+            height: SStyles.defaultListTileSpacing,
+          ),
+          FLabel(
+            axis: Axis.vertical,
+            style: context.theme.selectMenuTileStyle.labelStyle,
+            description: Padding(
+              padding: const EdgeInsets.only(
+                left: 5,
+              ),
+              child: Text(SLocalizations.of(context)!.autoNextDayInfo),
+            ),
+            child: Consumer(
+              builder: (context, ref, child) {
+                final autoNextDay =
+                    ref.watch(sLocalSettingsProvider.select((localSettings) => localSettings.autoNextDay));
+
+                return SCheckboxTile(
+                  title: Text(SLocalizations.of(context)!.autoNextDay),
+                  onChanged: _onPressedAutoNextDay,
+                  value: autoNextDay,
+                );
+              },
             ),
           ),
-          prefixActions: [
-            FHeaderAction.back(
-              onPress: Navigator.of(context).pop,
-            ),
-          ],
-        ),
-      ),
-      content: SContentWrapper(
-        child: ListView(
-          padding: SStyles.defaultListViewPadding,
-          children: [
-            Consumer(
-              builder: (context, ref, child) {
-                final themeMode = ref.watch(sLocalSettingsProvider.select((localSettings) => localSettings.themeMode));
+          const SizedBox(
+            height: SStyles.defaultListTileSpacing,
+          ),
+          Consumer(
+            builder: (context, ref, child) {
+              final isDev = ref.watch(sLocalSettingsProvider.select((localSettings) => localSettings.developerMode));
+              final locale = ref.watch(sLocalSettingsProvider.select((localSettings) => localSettings.locale));
 
-                return FSelectMenuTile(
-                  autoHide: true,
-                  groupController: _themeModeController ??= FRadioSelectGroupController(
-                    onUpdate: _onSelectThemeMode,
-                    value: themeMode,
+              return FTileGroup(
+                description: Padding(
+                  padding: const EdgeInsets.only(
+                    left: 5,
                   ),
-                  prefixIcon: FIcon(
-                    switch (themeMode) {
-                      ThemeMode.light => FAssets.icons.sun,
-                      ThemeMode.system => FAssets.icons.sunMoon,
-                      ThemeMode.dark => FAssets.icons.moon,
-                    },
-                  ),
-                  title: Text(SLocalizations.of(context)!.appearance),
-                  details: Text(
-                    switch (themeMode) {
-                      ThemeMode.light => SLocalizations.of(context)!.light,
-                      ThemeMode.system => SLocalizations.of(context)!.system,
-                      ThemeMode.dark => SLocalizations.of(context)!.dark,
-                    },
-                  ),
-                  menu: [
-                    FSelectTile(
-                      title: Text(SLocalizations.of(context)!.light),
-                      value: ThemeMode.light,
-                    ),
-                    FSelectTile(
-                      title: Text(SLocalizations.of(context)!.system),
-                      value: ThemeMode.system,
-                    ),
-                    FSelectTile(
-                      title: Text(SLocalizations.of(context)!.dark),
-                      value: ThemeMode.dark,
-                    ),
-                  ],
-                );
-              },
-            ),
-            const SizedBox(
-              height: SStyles.defaultListTileSpacing,
-            ),
-            Consumer(
-              builder: (context, ref, child) {
-                final shownDays = ref.watch(sLocalSettingsProvider.select((localSettings) => localSettings.shownDays));
-
-                return FSelectMenuTile.builder(
-                  autoHide: true,
-                  groupController: _daysController ??= FRadioSelectGroupController(
-                    onUpdate: _onSelectShownDays,
-                    value: shownDays,
-                  ),
-                  prefixIcon: FIcon(FAssets.icons.calendarCog),
-                  title: Text(SLocalizations.of(context)!.shownDays),
-                  description: Padding(
-                    padding: const EdgeInsets.only(
-                      left: 5,
-                    ),
-                    child: Text(SLocalizations.of(context)!.shownDaysInfo),
-                  ),
-                  details: Text('$shownDays'),
-                  count: 4,
-                  menuTileBuilder: (context, index) => FSelectTile(
-                    title: Text('${index + 2}'),
-                    value: index + 2,
-                  ),
-                );
-              },
-            ),
-            const SizedBox(
-              height: SStyles.defaultListTileSpacing,
-            ),
-            FLabel(
-              axis: Axis.vertical,
-              style: context.theme.selectMenuTileStyle.labelStyle,
-              description: Padding(
-                padding: const EdgeInsets.only(
-                  left: 5,
+                  child: Text(SLocalizations.of(context)!.languageInfo),
                 ),
-                child: Text(SLocalizations.of(context)!.autoNextDayInfo),
-              ),
-              child: Consumer(
-                builder: (context, ref, child) {
-                  final autoNextDay =
-                      ref.watch(sLocalSettingsProvider.select((localSettings) => localSettings.autoNextDay));
-
-                  return SCheckboxTile(
-                    title: Text(SLocalizations.of(context)!.autoNextDay),
-                    onChanged: _onPressedAutoNextDay,
-                    value: autoNextDay,
-                  );
-                },
-              ),
-            ),
-            const SizedBox(
-              height: SStyles.defaultListTileSpacing,
-            ),
-            Consumer(
-              builder: (context, ref, child) {
-                final isDev = ref.watch(sLocalSettingsProvider.select((localSettings) => localSettings.developerMode));
-                final locale = ref.watch(sLocalSettingsProvider.select((localSettings) => localSettings.locale));
-
-                return FTileGroup(
-                  description: Padding(
-                    padding: const EdgeInsets.only(
-                      left: 5,
-                    ),
-                    child: Text(SLocalizations.of(context)!.languageInfo),
-                  ),
-                  children: [
-                    // Only show inclusive language tile in developer mode.
-                    if (isDev)
-                      FTile(
-                        prefixIcon: FIcon(FAssets.icons.squareAsterisk),
-                        title: Text(SLocalizations.of(context)!.inclusiveLanguage),
-                        suffixIcon: FCheckbox(
-                          onChange: (_) => _onPressedInclusiveLanguage(),
-                        ),
-                        onPress: _onPressedInclusiveLanguage,
+                children: [
+                  // Only show inclusive language tile in developer mode.
+                  if (isDev)
+                    FTile(
+                      prefixIcon: FIcon(FAssets.icons.squareAsterisk),
+                      title: Text(SLocalizations.of(context)!.inclusiveLanguage),
+                      suffixIcon: FCheckbox(
+                        onChange: (_) => _onPressedInclusiveLanguage(),
                       ),
-                    FSelectMenuTile.builder(
-                      autoHide: true,
-                      groupController: _languageController ??= FRadioSelectGroupController(
-                        onUpdate: _onSelectLocale,
+                      onPress: _onPressedInclusiveLanguage,
+                    ),
+                  FSelectMenuTile.builder(
+                    autoHide: true,
+                    groupController: _languageController ??= FRadioSelectGroupController(
+                      onUpdate: _onSelectLocale,
+                      value: locale,
+                    ),
+                    prefixIcon: FIcon(FAssets.icons.languages),
+                    title: Text(SLocalizations.of(context)!.language),
+                    details: Text(locale.nativeDisplayLanguage.capitalize()),
+                    count: SLocalizations.supportedLocales.length,
+                    menuTileBuilder: (context, index) {
+                      final locale = SLocalizations.supportedLocales[index];
+
+                      return FSelectTile(
+                        title: Text(locale.nativeDisplayLanguage.capitalize()),
                         value: locale,
-                      ),
-                      prefixIcon: FIcon(FAssets.icons.languages),
-                      title: Text(SLocalizations.of(context)!.language),
-                      details: Text(locale.nativeDisplayLanguage.capitalize()),
-                      count: SLocalizations.supportedLocales.length,
-                      menuTileBuilder: (context, index) {
-                        final locale = SLocalizations.supportedLocales[index];
-
-                        return FSelectTile(
-                          title: Text(locale.nativeDisplayLanguage.capitalize()),
-                          value: locale,
-                        );
-                      },
-                    ),
-                  ],
-                );
-              },
-            ),
-          ],
-        ),
+                      );
+                    },
+                  ),
+                ],
+              );
+            },
+          ),
+        ],
       ),
     );
   }

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
 import 'package:sa_application/l10n/l10n.dart';
@@ -45,55 +45,46 @@ class _STeacherAbbreviationsScreenState extends ConsumerState<STeacherAbbreviati
           element.name.containsIgnoreCase(_searchQuery!);
     }).toList();
 
-    return FScaffold(
+    return SScaffold.scrollable(
+      controller: _scrollController,
       header: SSearchHeader(
-        buildHeader: (context, searchButton) => FHeader.nested(
-          prefixActions: [
-            FHeaderAction.back(
-              onPress: Navigator.of(context).pop,
-            ),
-          ],
-          title: SHeaderTitleWrapper(
-            child: Text(
-              SLocalizations.of(context)!.teacherAbbreviations,
-            ),
-          ),
-          suffixActions: [
-            // Only show the search button if there are teachers to search.
-            if (teachers != null && teachers.isNotEmpty) searchButton,
-          ],
+        title: Text(
+          SLocalizations.of(context)!.teacherAbbreviations,
         ),
+        prefixActions: [
+          FHeaderAction.back(
+            onPress: Navigator.of(context).pop,
+          ),
+        ],
+        suffixActionsBuilder: (context, searchActionButton) => [
+          // Only show the search action button if there are teachers.
+          if (teachers != null && teachers.isNotEmpty) searchActionButton,
+        ],
         onSearch: _onSearch,
       ),
-      content: SContentWrapper(
-        child: filtered != null && filtered.isNotEmpty
-            // Show a tile for each teacher.
-            ? Scrollbar(
-                interactive: true,
-                controller: _scrollController,
-                child: ListView.separated(
-                  controller: _scrollController,
-                  padding: SStyles.defaultListViewPadding,
-                  itemCount: filtered.length,
-                  itemBuilder: (context, index) {
-                    final teacher = filtered[index];
+      content: filtered != null && filtered.isNotEmpty
+          // Show a tile for each teacher.
+          ? ListView.separated(
+              controller: _scrollController,
+              padding: SStyles.defaultListViewPadding,
+              itemCount: filtered.length,
+              itemBuilder: (context, index) {
+                final teacher = filtered[index];
 
-                    return FTile(
-                      subtitle: Text(teacher.name),
-                      title: Text(teacher.abbreviation),
-                    );
-                  },
-                  separatorBuilder: (context, index) => const SizedBox(
-                    height: SStyles.defaultListTileSpacing,
-                  ),
-                ),
-              )
-            // If there are no teachers to display, show an icon.
-            : SNoDataPlaceholder(
-                message: hasData ? SLocalizations.of(context)!.noResults : SLocalizations.of(context)!.noData,
-                iconSvg: hasData ? FAssets.icons.searchX : FAssets.icons.ban,
+                return FTile(
+                  subtitle: Text(teacher.name),
+                  title: Text(teacher.abbreviation),
+                );
+              },
+              separatorBuilder: (context, index) => const SizedBox(
+                height: SStyles.defaultListTileSpacing,
               ),
-      ),
+            )
+          // If there are no teachers to display, show an icon.
+          : SIconPlaceholder(
+              message: hasData ? SLocalizations.of(context)!.noResults : SLocalizations.of(context)!.noData,
+              iconSvg: hasData ? FAssets.icons.searchX : FAssets.icons.ban,
+            ),
     );
   }
 }

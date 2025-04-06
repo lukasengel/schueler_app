@@ -8,22 +8,49 @@ import 'package:sa_application/providers/_providers.dart';
 import 'package:sa_application/screens/_screens.dart';
 import 'package:sa_application/widgets/_widgets.dart';
 
-/// The home screen of the application, providing three tabs.
-class SHomeScreen extends ConsumerStatefulWidget {
-  /// Create a new [SHomeScreen].
-  const SHomeScreen({super.key});
+/// The management screen of the application, providing two to four tabs, depending on the user's privileges.
+class SManagementScreen extends ConsumerStatefulWidget {
+  /// Create a new [SManagementScreen].
+  const SManagementScreen({super.key});
 
   @override
-  ConsumerState<SHomeScreen> createState() => _SHomeScreenState();
+  ConsumerState<SManagementScreen> createState() => _SManagementScreenState();
 }
 
-class _SHomeScreenState extends ConsumerState<SHomeScreen> {
+class _SManagementScreenState extends ConsumerState<SManagementScreen> with SingleTickerProviderStateMixin {
   var _initial = true;
   var _index = 0;
 
   /// Callback for when the settings button is pressed.
   void _onPressedSettings() {
     GoRouter.of(context).push('/settings');
+  }
+
+  /// Callback for when the add school life item button is pressed.
+  void _onPressedAddSchoolLifeItem() {
+    // TODO: Implement.
+  }
+
+  /// Callback for when the add teacher button is pressed.
+  Future<void> _onPressedAddTeacher() async {
+    // Show a dialog to create a new teacher.
+    final input = await sShowPlatformTeacherDialog(
+      context: context,
+    );
+
+    if (input != null) {
+      // Save the new teacher to the database.
+      final res = await ref.read(sTeachersProvider.notifier).add(input);
+
+      // Show a toast if an error occurred.
+      res.fold(
+        (l) => sShowDataExceptionToast(
+          context: context,
+          exception: l,
+        ),
+        (r) => null,
+      );
+    }
   }
 
   /// Callback for refreshing the content.
@@ -53,7 +80,7 @@ class _SHomeScreenState extends ConsumerState<SHomeScreen> {
 
   @override
   void initState() {
-    // Load data as soon as the screen is built.
+    // Refresh the content as soon as the screen is built.
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       // Wait for at least 300 milliseconds.
       // If the loading goes too fast, it seems like the app is flickering.
@@ -70,15 +97,29 @@ class _SHomeScreenState extends ConsumerState<SHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authState = ref.read(sAuthProvider);
+
     return SScaffold.constrained(
       header: SHeader(
         title: Text(
           [
-            SLocalizations.of(context)!.substitutions,
-            SLocalizations.of(context)!.news,
             SLocalizations.of(context)!.schoolLife,
+            SLocalizations.of(context)!.teacherAbbreviations,
+            SLocalizations.of(context)!.feedback,
+            SLocalizations.of(context)!.administration,
           ][_index],
         ),
+        prefixActions: [
+          // Only show the add button on the first two tabs.
+          if (_index < 2)
+            FHeaderAction(
+              icon: FIcon(FAssets.icons.plus),
+              onPress: [
+                _onPressedAddSchoolLifeItem,
+                _onPressedAddTeacher,
+              ][_index],
+            ),
+        ],
         suffixActions: [
           FHeaderAction(
             icon: FIcon(FAssets.icons.settings),
@@ -98,13 +139,16 @@ class _SHomeScreenState extends ConsumerState<SHomeScreen> {
           : IndexedStack(
               index: _index,
               children: [
-                SSubstitutionsTab(
+                SSchoolLifeManagementTab(
                   onRefresh: _onRefresh,
                 ),
-                SNewsTab(
+                STeachersManagementTab(
                   onRefresh: _onRefresh,
                 ),
-                SSchoolLifeTab(
+                SFeedbackManagementTab(
+                  onRefresh: _onRefresh,
+                ),
+                SAdminManagementTab(
                   onRefresh: _onRefresh,
                 ),
               ],
@@ -114,17 +158,23 @@ class _SHomeScreenState extends ConsumerState<SHomeScreen> {
         onChange: _onSwitchTab,
         children: [
           FBottomNavigationBarItem(
-            icon: FIcon(FAssets.icons.calendarSync),
-            label: Text(SLocalizations.of(context)!.substitutions),
-          ),
-          FBottomNavigationBarItem(
-            icon: FIcon(FAssets.icons.megaphone),
-            label: Text(SLocalizations.of(context)!.news),
-          ),
-          FBottomNavigationBarItem(
             icon: FIcon(FAssets.icons.users),
             label: Text(SLocalizations.of(context)!.schoolLife),
           ),
+          FBottomNavigationBarItem(
+            icon: FIcon(FAssets.icons.signature),
+            label: Text(SLocalizations.of(context)!.teacherAbbreviations),
+          ),
+          if (authState.isAdmin) ...[
+            FBottomNavigationBarItem(
+              icon: FIcon(FAssets.icons.messageSquareWarning),
+              label: Text(SLocalizations.of(context)!.feedback),
+            ),
+            FBottomNavigationBarItem(
+              icon: FIcon(FAssets.icons.slidersHorizontal),
+              label: Text(SLocalizations.of(context)!.administration),
+            ),
+          ],
         ],
       ),
     );

@@ -27,6 +27,64 @@ class STeachersNotifier extends StateNotifier<List<STeacherItem>?> {
     );
   }
 
+  /// Add a teacher, that means create a new teacher item in the database.
+  Future<Either<SDataException, Unit>> add(STeacherItem newTeacher) async {
+    // Save teacher item to database.
+    final result = await SPersistenceRepository.instance.saveTeacher(newTeacher);
+
+    // Check if the operation was successful.
+    return result.fold(
+      left,
+      (r) {
+        // Add teacher to the state and sort alphabetically.
+        final newState = [if (state != null) ...state!, newTeacher]
+          ..sort((a, b) => a.abbreviation.compareTo(b.abbreviation));
+
+        state = newState;
+        return right(unit);
+      },
+    );
+  }
+
+  /// Update a teacher, that means update a teacher item in the database.
+  Future<Either<SDataException, Unit>> update(STeacherItem updatedTeacher) async {
+    // Update teacher item in database.
+    final result = await SPersistenceRepository.instance.saveTeacher(updatedTeacher);
+
+    // Check if the operation was successful.
+    return result.fold(
+      left,
+      (r) {
+        // Update teacher in the state and sort alphabetically.
+        final newState = [if (state != null) ...state!]
+          ..removeWhere((e) => e.id == updatedTeacher.id)
+          ..add(updatedTeacher)
+          ..sort((a, b) => a.abbreviation.compareTo(b.abbreviation));
+
+        state = newState;
+        return right(unit);
+      },
+    );
+  }
+
+  /// Delete a teacher, that means remove a teacher item from the database.
+  Future<Either<SDataException, Unit>> delete(STeacherItem teacher) async {
+    // Delete teacher item from database.
+    final result = await SPersistenceRepository.instance.deleteTeacher(teacher);
+
+    // Check if the operation was successful.
+    return result.fold(
+      left,
+      (r) {
+        // Remove teacher from the state.
+        final newState = [if (state != null) ...state!]..remove(teacher);
+
+        state = newState;
+        return right(unit);
+      },
+    );
+  }
+
   /// Clear state.
   ///
   /// This method is used when the user logs out.

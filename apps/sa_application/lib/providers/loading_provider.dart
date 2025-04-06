@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sa_application/providers/_providers.dart';
@@ -27,8 +28,21 @@ class SLoadingNotifier extends StateNotifier<bool> {
     // Check if any exceptions occurred.
     final exceptions = results.where((e) => e.isLeft()).map((e) => e.forceLeft()).toList();
 
+    // If, let's suppose, there is no internet connection, we don't want to show five toasts all saying the same thing.
+    // Therefore, group all exception by their type and combine their descriptions and details.
+    final groupedExceptions = exceptions.groupListsBy((exception) => exception.type).entries.map((entry) {
+      final descriptions = entry.value.map((e) => e.description);
+      final details = entry.value.map((e) => e.details).nonNulls;
+
+      return SDataException(
+        type: entry.key,
+        description: descriptions.map((e) => '\n- $e').join(),
+        details: details.map((e) => '\n- $e').join(),
+      );
+    }).toList();
+
     // Return the exceptions, if any.
-    return exceptions.isNotEmpty ? left(exceptions) : right(unit);
+    return groupedExceptions.isNotEmpty ? left(groupedExceptions) : right(unit);
   }
 
   /// Clear the entire application state and reset the local settings.

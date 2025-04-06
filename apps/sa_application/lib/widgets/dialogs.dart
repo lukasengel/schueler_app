@@ -65,7 +65,7 @@ Future<void> sShowForuiMessageDialog({required BuildContext context, Widget? tit
         title: title != null
             ? Padding(
                 padding: const EdgeInsets.only(
-                  bottom: 12,
+                  bottom: SStyles.defaultDialogElementSpacing,
                 ),
                 child: title,
               )
@@ -73,7 +73,7 @@ Future<void> sShowForuiMessageDialog({required BuildContext context, Widget? tit
         body: content != null
             ? Padding(
                 padding: const EdgeInsets.only(
-                  bottom: 12,
+                  bottom: SStyles.defaultDialogElementSpacing,
                 ),
                 child: content,
               )
@@ -182,13 +182,13 @@ Future<bool> sShowForuiConfirmDialog({
       child: FDialog.adaptive(
         title: Padding(
           padding: const EdgeInsets.only(
-            bottom: 12,
+            bottom: SStyles.defaultDialogElementSpacing,
           ),
           child: Text(title),
         ),
         body: Padding(
           padding: const EdgeInsets.only(
-            bottom: 12,
+            bottom: SStyles.defaultDialogElementSpacing,
           ),
           child: Text(content),
         ),

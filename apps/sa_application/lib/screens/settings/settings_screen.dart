@@ -124,123 +124,115 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return FScaffold(
-      header: SHeaderWrapper(
-        child: FHeader.nested(
-          title: SHeaderTitleWrapper(
-            child: Text(
-              SLocalizations.of(context)!.settings,
+    return SScaffold.constrained(
+      header: SHeader(
+        title: Text(
+          SLocalizations.of(context)!.settings,
+        ),
+        prefixActions: [
+          FHeaderAction.back(
+            onPress: Navigator.of(context).pop,
+          ),
+        ],
+      ),
+      content: ListView(
+        padding: SStyles.defaultListViewPadding,
+        children: [
+          FTile(
+            prefixIcon: FIcon(FAssets.icons.pen),
+            title: Text(SLocalizations.of(context)!.personalization),
+            suffixIcon: FIcon(FAssets.icons.chevronRight),
+            onPress: _onPressedPersonalization,
+          ),
+          const SizedBox(
+            height: SStyles.defaultListTileSpacing,
+          ),
+          FTile(
+            prefixIcon: FIcon(FAssets.icons.listFilter),
+            title: Text(SLocalizations.of(context)!.filterTable),
+            suffixIcon: FIcon(FAssets.icons.chevronRight),
+            onPress: _onPressedFilterTable,
+          ),
+          const SizedBox(
+            height: SStyles.defaultListTileSpacing,
+          ),
+          FTile(
+            prefixIcon: FIcon(FAssets.icons.signature),
+            title: Text(SLocalizations.of(context)!.teacherAbbreviations),
+            suffixIcon: FIcon(FAssets.icons.chevronRight),
+            onPress: _onPressedTeacherAbbreviations,
+          ),
+          const SizedBox(
+            height: SStyles.defaultListTileSpacing,
+          ),
+          FTile(
+            prefixIcon: FIcon(FAssets.icons.messageSquareWarning),
+            title: Text(SLocalizations.of(context)!.reportBugs),
+            suffixIcon: FIcon(FAssets.icons.chevronRight),
+            onPress: _onPressedReportBugs,
+          ),
+          const SizedBox(
+            height: SStyles.defaultListTileSpacing,
+          ),
+          FTile(
+            prefixIcon: FIcon(FAssets.icons.github),
+            title: Text(SLocalizations.of(context)!.github),
+            suffixIcon: FIcon(FAssets.icons.chevronRight),
+            onPress: _onPressedGitHub,
+            onLongPress: _onLongPressedGitHub,
+          ),
+          const SizedBox(
+            height: 1.5 * SStyles.defaultListTileSpacing,
+          ),
+          Center(
+            child: SButton(
+              prefix: FIcon(FAssets.icons.logOut),
+              label: Text(SLocalizations.of(context)!.logOut),
+              onPressed: _onPressedLogOut,
             ),
           ),
-          prefixActions: [
-            FHeaderAction.back(
-              onPress: Navigator.of(context).pop,
-            ),
-          ],
-        ),
-      ),
-      content: SContentWrapper(
-        child: ListView(
-          padding: SStyles.defaultListViewPadding,
-          children: [
-            FTile(
-              prefixIcon: FIcon(FAssets.icons.pen),
-              title: Text(SLocalizations.of(context)!.personalization),
-              suffixIcon: FIcon(FAssets.icons.chevronRight),
-              onPress: _onPressedPersonalization,
-            ),
-            const SizedBox(
-              height: SStyles.defaultListTileSpacing,
-            ),
-            FTile(
-              prefixIcon: FIcon(FAssets.icons.listFilter),
-              title: Text(SLocalizations.of(context)!.filterTable),
-              suffixIcon: FIcon(FAssets.icons.chevronRight),
-              onPress: _onPressedFilterTable,
-            ),
-            const SizedBox(
-              height: SStyles.defaultListTileSpacing,
-            ),
-            FTile(
-              prefixIcon: FIcon(FAssets.icons.signature),
-              title: Text(SLocalizations.of(context)!.teacherAbbreviations),
-              suffixIcon: FIcon(FAssets.icons.chevronRight),
-              onPress: _onPressedTeacherAbbreviations,
-            ),
-            const SizedBox(
-              height: SStyles.defaultListTileSpacing,
-            ),
-            FTile(
-              prefixIcon: FIcon(FAssets.icons.messageSquareWarning),
-              title: Text(SLocalizations.of(context)!.reportBugs),
-              suffixIcon: FIcon(FAssets.icons.chevronRight),
-              onPress: _onPressedReportBugs,
-            ),
-            const SizedBox(
-              height: SStyles.defaultListTileSpacing,
-            ),
-            FTile(
-              prefixIcon: FIcon(FAssets.icons.github),
-              title: Text(SLocalizations.of(context)!.github),
-              suffixIcon: FIcon(FAssets.icons.chevronRight),
-              onPress: _onPressedGitHub,
-              onLongPress: _onLongPressedGitHub,
-            ),
-            const SizedBox(
-              height: 1.5 * SStyles.defaultListTileSpacing,
-            ),
-            Center(
-              child: SButtonWrapper(
-                child: FButton(
-                  prefix: FIcon(FAssets.icons.logOut),
-                  label: Text(SLocalizations.of(context)!.logOut),
-                  onPress: _onPressedLogOut,
+          const SizedBox(
+            height: 1.5 * SStyles.defaultListTileSpacing,
+          ),
+          Center(
+            child: Column(
+              children: [
+                Text(
+                  SLocalizations.of(context)!.logoArtist.toUpperCase(),
+                  style: STheme.smallCaptionStyle(context),
                 ),
-              ),
+                Text(
+                  SConstants.logoArtist.toUpperCase(),
+                  style: STheme.mediumCaptionStyle(context),
+                ),
+                const SizedBox(
+                  height: SStyles.defaultListTileSpacing,
+                ),
+                Text(
+                  SLocalizations.of(context)!.developer.toUpperCase(),
+                  style: STheme.mediumCaptionStyle(context),
+                ),
+                Text(
+                  SConstants.developer.toUpperCase(),
+                  style: STheme.smallCaptionStyle(context),
+                ),
+                const SizedBox(
+                  height: 2 * SStyles.defaultListTileSpacing,
+                ),
+                Text(
+                  SLocalizations.of(context)!.version(SConstants.version).toUpperCase(),
+                  style: STheme.smallCaptionStyle(context),
+                ),
+                Text(
+                  DateFormat.yMMMM(Localizations.localeOf(context).toString())
+                      .format(SConstants.releaseMonth)
+                      .toUpperCase(),
+                  style: STheme.smallCaptionStyle(context),
+                ),
+              ],
             ),
-            const SizedBox(
-              height: 1.5 * SStyles.defaultListTileSpacing,
-            ),
-            Center(
-              child: Column(
-                children: [
-                  Text(
-                    SLocalizations.of(context)!.logoArtist.toUpperCase(),
-                    style: STheme.smallCaptionStyle(context),
-                  ),
-                  Text(
-                    SConstants.logoArtist.toUpperCase(),
-                    style: STheme.mediumCaptionStyle(context),
-                  ),
-                  const SizedBox(
-                    height: SStyles.defaultListTileSpacing,
-                  ),
-                  Text(
-                    SLocalizations.of(context)!.developer.toUpperCase(),
-                    style: STheme.mediumCaptionStyle(context),
-                  ),
-                  Text(
-                    SConstants.developer.toUpperCase(),
-                    style: STheme.smallCaptionStyle(context),
-                  ),
-                  const SizedBox(
-                    height: 2 * SStyles.defaultListTileSpacing,
-                  ),
-                  Text(
-                    SLocalizations.of(context)!.version(SConstants.version).toUpperCase(),
-                    style: STheme.smallCaptionStyle(context),
-                  ),
-                  Text(
-                    DateFormat.yMMMM(Localizations.localeOf(context).toString())
-                        .format(SConstants.releaseMonth)
-                        .toUpperCase(),
-                    style: STheme.smallCaptionStyle(context),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

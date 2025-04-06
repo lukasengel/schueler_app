@@ -13,6 +13,10 @@ import 'package:sa_application/util/_util.dart';
 import 'package:sa_common/sa_common.dart';
 import 'package:toastification/toastification.dart';
 
+// TODO: Disable save cache.
+// TODO: Find better toast position.
+// TODO: Consistent dialogs.
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -36,7 +40,7 @@ void main() async {
   );
 }
 
-/// Main application widget of the application.
+/// Main application widget.
 class MyApp extends ConsumerStatefulWidget {
   /// Create a new [MyApp].
   const MyApp({super.key});
@@ -92,9 +96,10 @@ class _MyAppState extends ConsumerState<MyApp> {
               return '/login';
             }
 
-            // // If user is on the login page and authenticated, redirect to the home page.
-            if (state.fullPath == '/login' && authState.isAuthenticated) {
-              return '/home';
+            // If user is on the login page and authenticated, redirect them.
+            if (state.fullPath == '/login') {
+              // If the user has manager privileges, redirect to the management page. Otherwise, redirect to the home page.
+              return authState.isManager ? '/management' : '/home';
             }
 
             // No redirect.
@@ -110,8 +115,8 @@ class _MyAppState extends ConsumerState<MyApp> {
               builder: (context, state) => const SHomeScreen(),
             ),
             GoRoute(
-              path: '/home',
-              builder: (context, state) => const SSettingsScreen(),
+              path: '/management',
+              builder: (context, state) => const SManagementScreen(),
             ),
             GoRoute(
               path: '/settings',

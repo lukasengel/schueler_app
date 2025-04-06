@@ -1,16 +1,16 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
-/// A placeholder widget to display when there is no data, either because of an empty list or an error.
-class SNoDataPlaceholder extends StatelessWidget {
+/// A general-purpose placeholder widget to display, for example when no data is available.
+class SIconPlaceholder extends StatelessWidget {
   /// The message to display.
   final String message;
 
   /// The icon to display as an SVG asset.
   final SvgAsset iconSvg;
 
-  /// Create a new [SNoDataPlaceholder].
-  const SNoDataPlaceholder({
+  /// Create a new [SIconPlaceholder].
+  const SIconPlaceholder({
     required this.message,
     required this.iconSvg,
     super.key,

@@ -1,6 +1,15 @@
 export 'home/home_screen.dart';
+export 'home/tabs/news_tab.dart';
+export 'home/tabs/school_life_tab.dart';
+export 'home/tabs/substitutions_tab.dart';
 export 'login/login_form.dart';
 export 'login/login_screen.dart';
+export 'management/management_screen.dart';
+export 'management/tabs/admin_management_tab.dart';
+export 'management/tabs/feedback_management_tab.dart';
+export 'management/tabs/school_life_management_tab.dart';
+export 'management/tabs/teachers_management_tab.dart';
+export 'management/teacher_dialog.dart';
 export 'settings/filter_table_screen.dart';
 export 'settings/personalization_screen.dart';
 export 'settings/report_bugs_screen.dart';

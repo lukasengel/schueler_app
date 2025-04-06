@@ -9,7 +9,7 @@ class SFeedbackNotifier extends StateNotifier<List<SFeedbackItem>?> {
   SFeedbackNotifier(super.state);
 
   /// Submit feedback, that means create a new feedback item in the database.
-  Future<Either<SDataException, Unit>> submitFeedback({
+  Future<Either<SDataException, Unit>> submit({
     required String message,
     String? name,
     String? email,
@@ -17,7 +17,7 @@ class SFeedbackNotifier extends StateNotifier<List<SFeedbackItem>?> {
     // Save feedback item to database.
     return SPersistenceRepository.instance.saveFeedback(
       SFeedbackItem(
-        // Create a new uuid to create a new feedback item.
+        // Generate a new uuid to create a new feedback item.
         id: const Uuid().v4(),
         name: name,
         email: email,

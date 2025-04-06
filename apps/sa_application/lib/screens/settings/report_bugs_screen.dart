@@ -81,7 +81,7 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
     // If the user confirms, send the feedback.
     if (input) {
       // Send feedback.
-      final result = await ref.read(sFeedbackProvider.notifier).submitFeedback(
+      final result = await ref.read(sFeedbackProvider.notifier).submit(
             message: _messageController.text.trim(),
             name: _nameController.text.trimOrNull(),
             email: _emailController.text.trimOrNull(),
@@ -106,7 +106,7 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
 
   /// Callback to validate the message field.
   String? _onValidate(String? input) {
-    return input.hasNoContent ? SLocalizations.of(context)!.enterMessage : null;
+    return input.hasNoContent ? SLocalizations.of(context)!.requiredField : null;
   }
 
   @override
@@ -121,78 +121,72 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: FocusScope.of(context).unfocus,
-      child: FScaffold(
-        header: SHeaderWrapper(
-          child: FHeader.nested(
-            title: SHeaderTitleWrapper(
-              child: Text(
-                SLocalizations.of(context)!.reportBugs,
-              ),
-            ),
-            prefixActions: [
-              FHeaderAction.back(
-                onPress: _onPressedCancel,
-              ),
-            ],
-            suffixActions: [
-              FHeaderAction(
-                icon: FIcon(FAssets.icons.send),
-                onPress: _onPressedSubmit,
-              ),
-            ],
+      child: SScaffold.constrained(
+        header: SHeader(
+          title: Text(
+            SLocalizations.of(context)!.reportBugs,
           ),
+          prefixActions: [
+            FHeaderAction.back(
+              onPress: _onPressedCancel,
+            ),
+          ],
+          suffixActions: [
+            FHeaderAction(
+              icon: FIcon(FAssets.icons.send),
+              onPress: _onPressedSubmit,
+            ),
+          ],
         ),
-        content: SContentWrapper(
-          child: Form(
-            key: _formKey,
-            child: ListView(
-              padding: SStyles.defaultListViewPadding,
-              children: [
-                FTextField(
-                  controller: _nameController,
-                  label: Text(SLocalizations.of(context)!.contactDetails),
-                  hint: SLocalizations.of(context)!.nameOptional,
-                  keyboardType: TextInputType.name,
-                  textInputAction: TextInputAction.next,
-                  autocorrect: false,
-                  maxLines: 1,
-                ),
-                const SizedBox(
-                  height: SStyles.defaultListTileSpacing,
-                ),
-                FTextField(
-                  controller: _emailController,
-                  hint: SLocalizations.of(context)!.emailOptional,
-                  keyboardType: TextInputType.emailAddress,
-                  textInputAction: TextInputAction.next,
-                  autocorrect: false,
-                  maxLines: 1,
-                ),
-                const SizedBox(
-                  height: SStyles.defaultListTileSpacing,
-                ),
-                FTextField(
-                  controller: _messageController,
-                  label: Text(SLocalizations.of(context)!.message),
-                  hint: SLocalizations.of(context)!.description,
-                  keyboardType: TextInputType.multiline,
-                  maxLines: 10,
-                  validator: _onValidate,
-                ),
-                const SizedBox(
-                  height: SStyles.defaultListTileSpacing,
-                ),
-                Center(
-                  child: FTappable.animated(
-                    onPress: _onPressedPrivacyNote,
-                    child: Text(
-                      SLocalizations.of(context)!.privacyNote,
-                      style: FTheme.of(context).typography.sm,
-                    ),
+        content: Form(
+          key: _formKey,
+          child: ListView(
+            padding: SStyles.defaultListViewPadding,
+            children: [
+              FTextField(
+                controller: _nameController,
+                label: Text(SLocalizations.of(context)!.contactDetails),
+                hint: SLocalizations.of(context)!.nameOptional,
+                keyboardType: TextInputType.name,
+                textInputAction: TextInputAction.next,
+                autocorrect: false,
+                maxLines: 1,
+              ),
+              const SizedBox(
+                height: SStyles.defaultListTileSpacing,
+              ),
+              FTextField(
+                controller: _emailController,
+                hint: SLocalizations.of(context)!.emailOptional,
+                keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
+                autocorrect: false,
+                maxLines: 1,
+              ),
+              const SizedBox(
+                height: SStyles.defaultListTileSpacing,
+              ),
+              FTextField(
+                controller: _messageController,
+                label: Text(SLocalizations.of(context)!.message),
+                hint: SLocalizations.of(context)!.description,
+                keyboardType: TextInputType.multiline,
+                maxLines: 10,
+                validator: _onValidate,
+              ),
+              const SizedBox(
+                height: SStyles.defaultListTileSpacing,
+              ),
+              Center(
+                child: FTappable.animated(
+                  onPress: _onPressedPrivacyNote,
+                  child: Text(
+                    SLocalizations.of(context)!.privacyNote,
+                    style: FTheme.of(context).typography.sm,
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

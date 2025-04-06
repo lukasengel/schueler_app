@@ -77,86 +77,80 @@ class _SFilterTableScreenState extends ConsumerState<SFilterTableScreen> {
     final globalSettings = ref.watch(sGlobalSettingsProvider);
     final localSettings = ref.watch(sLocalSettingsProvider);
 
-    return FScaffold(
-      header: SHeaderWrapper(
-        child: FHeader.nested(
-          title: SHeaderTitleWrapper(
-            child: Text(SLocalizations.of(context)!.filterTable),
-          ),
-          prefixActions: [
-            FHeaderAction.back(
-              onPress: Navigator.of(context).pop,
-            ),
-          ],
+    return SScaffold.constrained(
+      header: SHeader(
+        title: Text(
+          SLocalizations.of(context)!.filterTable,
         ),
+        prefixActions: [
+          FHeaderAction.back(
+            onPress: Navigator.of(context).pop,
+          ),
+        ],
       ),
-      content: SContentWrapper(
-        child: globalSettings != null && globalSettings.exclusionOptions.isNotEmpty
-            // If global settings are available, show a checkbox tile for each exclusion option.
-            ? ListView(
-                padding: SStyles.defaultListViewPadding,
-                children: [
-                  FTileGroup.builder(
-                    count: globalSettings.exclusionOptions.length,
-                    tileBuilder: (context, index) {
-                      // Determine if the course is excluded.
-                      final exclusionOption = globalSettings.exclusionOptions[index];
-                      final isExcluded = localSettings.excludedCourses.contains(exclusionOption.id);
+      content: globalSettings != null && globalSettings.exclusionOptions.isNotEmpty
+          // If global settings are available, show a checkbox tile for each exclusion option.
+          ? ListView(
+              padding: SStyles.defaultListViewPadding,
+              children: [
+                FTileGroup.builder(
+                  count: globalSettings.exclusionOptions.length,
+                  tileBuilder: (context, index) {
+                    // Determine if the course is excluded.
+                    final exclusionOption = globalSettings.exclusionOptions[index];
+                    final isExcluded = localSettings.excludedCourses.contains(exclusionOption.id);
 
-                      return SCheckboxTile(
-                        title: Text(exclusionOption.name),
-                        onChanged: (value) => _onChangeExclusion(exclusionOption.id, !value),
-                        value: !isExcluded,
-                      );
-                    },
-                  ),
-                  Center(
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: SStyles.defaultListTileSpacing,
-                        ),
-                        Builder(
-                          builder: (context) {
-                            // Determine if any course is excluded.
-                            final isAnyExcluded = globalSettings.exclusionOptions.any(
-                              (e) => localSettings.excludedCourses.contains(e.id),
-                            );
+                    return SCheckboxTile(
+                      title: Text(exclusionOption.name),
+                      onChanged: (value) => _onChangeExclusion(exclusionOption.id, !value),
+                      value: !isExcluded,
+                    );
+                  },
+                ),
+                Center(
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: SStyles.defaultListTileSpacing,
+                      ),
+                      Builder(
+                        builder: (context) {
+                          // Determine if any course is excluded.
+                          final isAnyExcluded = globalSettings.exclusionOptions.any(
+                            (e) => localSettings.excludedCourses.contains(e.id),
+                          );
 
-                            return SButtonWrapper(
-                              child: FButton(
-                                label: Text(
-                                  isAnyExcluded
-                                      ? SLocalizations.of(context)!.selectAll
-                                      : SLocalizations.of(context)!.deselectAll,
-                                ),
-                                style: FButtonStyle.secondary,
-                                onPress: () => _onPressedSelectAll(isAnyExcluded),
-                              ),
-                            );
-                          },
+                          return SButton(
+                            label: Text(
+                              isAnyExcluded
+                                  ? SLocalizations.of(context)!.selectAll
+                                  : SLocalizations.of(context)!.deselectAll,
+                            ),
+                            style: FButtonStyle.secondary,
+                            onPressed: () => _onPressedSelectAll(isAnyExcluded),
+                          );
+                        },
+                      ),
+                      const SizedBox(
+                        height: SStyles.defaultListTileSpacing,
+                      ),
+                      FTappable.animated(
+                        onPress: _onPressedHowDoesThisWork,
+                        child: Text(
+                          SLocalizations.of(context)!.howDoesThisWork,
+                          style: FTheme.of(context).typography.sm,
                         ),
-                        const SizedBox(
-                          height: SStyles.defaultListTileSpacing,
-                        ),
-                        FTappable.animated(
-                          onPress: _onPressedHowDoesThisWork,
-                          child: Text(
-                            SLocalizations.of(context)!.howDoesThisWork,
-                            style: FTheme.of(context).typography.sm,
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              )
-            // Otherwise, show a placeholder.
-            : SNoDataPlaceholder(
-                message: SLocalizations.of(context)!.noData,
-                iconSvg: FAssets.icons.ban,
-              ),
-      ),
+                ),
+              ],
+            )
+          // Otherwise, show a placeholder.
+          : SIconPlaceholder(
+              message: SLocalizations.of(context)!.noData,
+              iconSvg: FAssets.icons.ban,
+            ),
     );
   }
 }

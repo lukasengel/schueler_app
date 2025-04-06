@@ -4,10 +4,20 @@ import 'package:forui/forui.dart';
 /// Class to namespace theme values.
 abstract final class STheme {
   /// Get the Material [ThemeData] for the light theme.
-  static ThemeData get materialLight => _foruiLight.toApproximateMaterialTheme();
+  static ThemeData get materialLight => _foruiLight.toApproximateMaterialTheme().copyWith(
+        scrollbarTheme: ScrollbarThemeData(
+          // Make scrollbars invisible by default, so they're also hidden on desktop platforms.
+          thickness: WidgetStateProperty.all(0),
+        ),
+      );
 
   /// Get the Material [ThemeData] for the dark theme.
-  static ThemeData get materialDark => _foruiDark.toApproximateMaterialTheme();
+  static ThemeData get materialDark => _foruiDark.toApproximateMaterialTheme().copyWith(
+        scrollbarTheme: ScrollbarThemeData(
+          // Make scrollbars invisible by default, so they're also hidden on desktop platforms.
+          thickness: WidgetStateProperty.all(0),
+        ),
+      );
 
   /// Get the [FThemeData] depending on the current theme mode setting and platform brightness.
   static FThemeData foruiAdaptive(BuildContext context, ThemeMode mode) {

@@ -1,18 +1,26 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:sa_application/l10n/l10n.dart';
 
 /// A widget that provides the option to smoothly switch between a normal [FHeader] and a header with a search bar.
 class SSearchHeader extends StatefulWidget {
-  /// Builder for the normal header.
-  final FHeader Function(BuildContext, FHeaderAction) buildHeader;
+  /// The title of the header.
+  final Widget title;
+
+  /// The prefix actions of the header.
+  final List<Widget>? prefixActions;
+
+  /// Builder for the suffix actions of the header.
+  final List<Widget>? Function(BuildContext, FHeaderAction) suffixActionsBuilder;
 
   /// Callback for whenever the user types in the search field.
   final void Function(String?) onSearch;
 
   /// Create a new [SSearchHeader].
   const SSearchHeader({
-    required this.buildHeader,
+    required this.title,
+    required this.prefixActions,
+    required this.suffixActionsBuilder,
     required this.onSearch,
     super.key,
   });
@@ -77,12 +85,17 @@ class _SSearchHeaderState extends State<SSearchHeader> {
       padding: const EdgeInsets.only(
         top: 8,
       ),
-      child: widget.buildHeader(
-        context,
-        FHeaderAction(
-          icon: FIcon(FAssets.icons.search),
-          onPress: () => _toggleSearchBar(true),
-        ),
+      child: FHeader.nested(
+        title: widget.title,
+        prefixActions: widget.prefixActions ?? [],
+        suffixActions: widget.suffixActionsBuilder(
+              context,
+              FHeaderAction(
+                icon: FIcon(FAssets.icons.search),
+                onPress: () => _toggleSearchBar(true),
+              ),
+            ) ??
+            [],
       ),
     );
   }

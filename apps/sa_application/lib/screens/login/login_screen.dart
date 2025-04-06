@@ -67,35 +67,35 @@ class _SLoginScreenState extends ConsumerState<SLoginScreen> {
               0.9,
               0.1,
             ),
-            color: const Color.fromARGB(255, 251, 0, 46),
+            color: isDarkMode ? const Color.fromARGB(255, 251, 0, 46) : const Color.fromARGB(255, 251, 0, 46),
           ),
           MeshGradientPoint(
             position: const Offset(
               0.1,
               0.3,
             ),
-            color: const Color.fromARGB(255, 69, 18, 255),
+            color: isDarkMode ? const Color.fromARGB(255, 5, 0, 106) : const Color.fromARGB(255, 69, 18, 255),
           ),
           MeshGradientPoint(
             position: const Offset(
               0.7,
               0.3,
             ),
-            color: isDarkMode ? const Color.fromARGB(255, 0, 32, 105) : const Color.fromARGB(255, 0, 255, 198),
+            color: isDarkMode ? const Color.fromARGB(160, 0, 37, 123) : const Color.fromARGB(255, 0, 255, 198),
           ),
           MeshGradientPoint(
             position: const Offset(
               0.4,
               0.8,
             ),
-            color: isDarkMode ? const Color.fromARGB(255, 57, 0, 147) : const Color.fromARGB(255, 140, 0, 255),
+            color: isDarkMode ? const Color.fromARGB(255, 41, 0, 111) : const Color.fromARGB(255, 140, 0, 255),
           ),
           MeshGradientPoint(
             position: const Offset(
               0.2,
               0.8,
             ),
-            color: const Color.fromARGB(255, 251, 0, 46),
+            color: isDarkMode ? const Color.fromARGB(255, 149, 0, 27) : const Color.fromARGB(255, 251, 0, 46),
           ),
         ],
         child: FScaffold(
@@ -124,7 +124,6 @@ class _SLoginScreenState extends ConsumerState<SLoginScreen> {
   /// Build the welcome message and a button to open the login form.
   Widget buildWelcomeMessage(BuildContext context) {
     return SimpleShadow(
-      opacity: 0.3,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -148,11 +147,9 @@ class _SLoginScreenState extends ConsumerState<SLoginScreen> {
           const SizedBox(
             height: 20,
           ),
-          SButtonWrapper(
-            child: FButton(
-              label: Text(SLocalizations.of(context)!.logIn),
-              onPress: _onPressedToLogin,
-            ),
+          SButton(
+            label: Text(SLocalizations.of(context)!.logIn),
+            onPressed: _onPressedToLogin,
           ),
         ],
       ),
