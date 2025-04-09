@@ -13,10 +13,6 @@ import 'package:sa_application/util/_util.dart';
 import 'package:sa_common/sa_common.dart';
 import 'package:toastification/toastification.dart';
 
-// TODO: Disable save cache.
-// TODO: Find better toast position.
-// TODO: Consistent dialogs.
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 

@@ -51,7 +51,7 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
 
   /// Callback for when the inclusive language tile is pressed.
   void _onPressedInclusiveLanguage() {
-    sShowPlatformMessageDialog(
+    sShowCustomDialog<void>(
       context: context,
       content: Container(
         height: 230,
@@ -63,6 +63,12 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
           ),
         ),
       ),
+      actions: [
+        FButton(
+          onPress: Navigator.of(context).pop,
+          label: Text(SLocalizations.of(context)!.ok),
+        ),
+      ],
     );
   }
 

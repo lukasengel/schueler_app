@@ -7,6 +7,7 @@ import 'package:sa_application/l10n/l10n.dart';
 import 'package:sa_application/providers/_providers.dart';
 import 'package:sa_application/screens/_screens.dart';
 import 'package:sa_application/widgets/_widgets.dart';
+import 'package:sa_data/sa_data.dart';
 
 /// The management screen of the application, providing two to four tabs, depending on the user's privileges.
 class SManagementScreen extends ConsumerStatefulWidget {
@@ -34,8 +35,9 @@ class _SManagementScreenState extends ConsumerState<SManagementScreen> with Sing
   /// Callback for when the add teacher button is pressed.
   Future<void> _onPressedAddTeacher() async {
     // Show a dialog to create a new teacher.
-    final input = await sShowPlatformTeacherDialog(
+    final input = await sShowAdaptiveDialog<STeacherItem?>(
       context: context,
+      builder: (context) => const STeacherDialog(),
     );
 
     if (input != null) {

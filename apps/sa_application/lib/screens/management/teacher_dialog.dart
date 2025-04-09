@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
@@ -10,26 +7,6 @@ import 'package:sa_application/util/_util.dart';
 import 'package:sa_common/sa_common.dart';
 import 'package:sa_data/sa_data.dart';
 import 'package:uuid/uuid.dart';
-
-/// Show an [STeacherDialog] to create or edit a teacher, with a platform-specific animation.
-Future<STeacherItem?> sShowPlatformTeacherDialog({required BuildContext context, STeacherItem? initial}) {
-  if (Platform.isIOS) {
-    return showCupertinoDialog(
-      context: context,
-      builder: (context) => STeacherDialog(
-        initial: initial,
-      ),
-    );
-  }
-
-  return showDialog<STeacherItem?>(
-    context: context,
-    barrierDismissible: false,
-    builder: (context) => STeacherDialog(
-      initial: initial,
-    ),
-  );
-}
 
 /// The dialog for creating or editing a teacher.
 class STeacherDialog extends ConsumerStatefulWidget {
@@ -104,59 +81,57 @@ class _STeacherDialogState extends ConsumerState<STeacherDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return FDialog.adaptive(
-      title: Padding(
-        padding: const EdgeInsets.only(
-          bottom: SStyles.defaultDialogElementSpacing,
+    return ConstrainedBox(
+      constraints: SStyles.dialogConstraints,
+      child: FDialog.adaptive(
+        title: Padding(
+          padding: SStyles.dialogElementPadding,
+          child: Text(
+            // Show "Add" or "Edit" depending on whether the initial item is null or not.
+            widget.initial == null ? SLocalizations.of(context)!.addTeacher : SLocalizations.of(context)!.editTeacher,
+          ),
         ),
-        child: Text(
-          // Show "Add" or "Edit" depending on whether the initial item is null or not.
-          widget.initial == null ? SLocalizations.of(context)!.addTeacher : SLocalizations.of(context)!.editTeacher,
-        ),
-      ),
-      body: Container(
-        width: 300,
-        padding: const EdgeInsets.only(
-          bottom: SStyles.defaultDialogElementSpacing,
-        ),
-        child: Form(
+        body: Form(
           key: _formKey,
           child: Column(
             children: [
-              FTextField(
-                hint: SLocalizations.of(context)!.abbreviation,
-                textInputAction: TextInputAction.next,
-                controller: _abbreviationController,
-                validator: _onValidateAbbreviation,
-                autocorrect: false,
-                maxLines: 1,
+              Padding(
+                padding: SStyles.dialogElementPadding,
+                child: FTextField(
+                  hint: SLocalizations.of(context)!.abbreviation,
+                  textInputAction: TextInputAction.next,
+                  controller: _abbreviationController,
+                  validator: _onValidateAbbreviation,
+                  autocorrect: false,
+                  maxLines: 1,
+                ),
               ),
-              const SizedBox(
-                height: SStyles.defaultDialogElementSpacing,
-              ),
-              FTextField(
-                hint: SLocalizations.of(context)!.name,
-                textInputAction: TextInputAction.send,
-                onSubmit: (_) => _onPressedSave(),
-                controller: _nameController,
-                validator: _onValidateName,
-                maxLines: 1,
+              Padding(
+                padding: SStyles.dialogElementPadding,
+                child: FTextField(
+                  hint: SLocalizations.of(context)!.name,
+                  textInputAction: TextInputAction.send,
+                  onSubmit: (_) => _onPressedSave(),
+                  controller: _nameController,
+                  validator: _onValidateName,
+                  maxLines: 1,
+                ),
               ),
             ],
           ),
         ),
+        actions: [
+          FButton(
+            label: Text(SLocalizations.of(context)!.cancel),
+            onPress: Navigator.of(context).pop,
+            style: FButtonStyle.secondary,
+          ),
+          FButton(
+            label: Text(SLocalizations.of(context)!.save),
+            onPress: _onPressedSave,
+          ),
+        ],
       ),
-      actions: [
-        FButton(
-          label: Text(SLocalizations.of(context)!.cancel),
-          onPress: Navigator.of(context).pop,
-          style: FButtonStyle.secondary,
-        ),
-        FButton(
-          label: Text(SLocalizations.of(context)!.save),
-          onPress: _onPressedSave,
-        ),
-      ],
     );
   }
 }

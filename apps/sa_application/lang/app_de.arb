@@ -74,7 +74,7 @@
   "alreadyTaken": "Dieses Kürzel ist bereits vergeben.",
   "confirmDelete": "Element löschen?",
   "confirmDeleteMsg": "Dies kann nicht rückgängig gemacht werden.",
-  "confirm": "Bestätigen",
+  "delete": "Löschen",
   "feedback": "Feedback",
   "administration": "Administration",
   "pullToRefresh": "Ziehen zum Aktualisieren",

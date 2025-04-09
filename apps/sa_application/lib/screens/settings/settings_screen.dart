@@ -50,11 +50,7 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
       if (canLaunch) {
         // Attempt to launch the URL.
         try {
-          final success = await launchUrl(uri);
-
-          if (success) {
-            return;
-          }
+          await launchUrl(uri);
         }
         // If any error occurs, show an error toast.
         catch (_) {
@@ -63,10 +59,10 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
               context: context,
               message: SLocalizations.of(context)!.failedLaunchingUrl,
             );
-
-            return;
           }
         }
+
+        return;
       }
     }
 
@@ -185,10 +181,12 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
             height: 1.5 * SStyles.defaultListTileSpacing,
           ),
           Center(
-            child: SButton(
-              prefix: FIcon(FAssets.icons.logOut),
-              label: Text(SLocalizations.of(context)!.logOut),
-              onPressed: _onPressedLogOut,
+            child: IntrinsicWidth(
+              child: FButton(
+                prefix: FIcon(FAssets.icons.logOut),
+                label: Text(SLocalizations.of(context)!.logOut),
+                onPress: _onPressedLogOut,
+              ),
             ),
           ),
           const SizedBox(

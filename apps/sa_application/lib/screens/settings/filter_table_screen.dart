@@ -47,8 +47,8 @@ class _SFilterTableScreenState extends ConsumerState<SFilterTableScreen> {
   void _onPressedHowDoesThisWork() {
     sShowPlatformMessageDialog(
       context: context,
-      title: Text(SLocalizations.of(context)!.howDoesThisWork),
-      content: Text(SLocalizations.of(context)!.filterInfo),
+      title: SLocalizations.of(context)!.howDoesThisWork,
+      content: SLocalizations.of(context)!.filterInfo,
     );
   }
 
@@ -120,14 +120,16 @@ class _SFilterTableScreenState extends ConsumerState<SFilterTableScreen> {
                             (e) => localSettings.excludedCourses.contains(e.id),
                           );
 
-                          return SButton(
-                            label: Text(
-                              isAnyExcluded
-                                  ? SLocalizations.of(context)!.selectAll
-                                  : SLocalizations.of(context)!.deselectAll,
+                          return IntrinsicWidth(
+                            child: FButton(
+                              label: Text(
+                                isAnyExcluded
+                                    ? SLocalizations.of(context)!.selectAll
+                                    : SLocalizations.of(context)!.deselectAll,
+                              ),
+                              style: FButtonStyle.secondary,
+                              onPress: () => _onPressedSelectAll(isAnyExcluded),
                             ),
-                            style: FButtonStyle.secondary,
-                            onPressed: () => _onPressedSelectAll(isAnyExcluded),
                           );
                         },
                       ),

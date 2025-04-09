@@ -147,9 +147,11 @@ class _SLoginScreenState extends ConsumerState<SLoginScreen> {
           const SizedBox(
             height: 20,
           ),
-          SButton(
-            label: Text(SLocalizations.of(context)!.logIn),
-            onPressed: _onPressedToLogin,
+          IntrinsicWidth(
+            child: FButton(
+              label: Text(SLocalizations.of(context)!.logIn),
+              onPress: _onPressedToLogin,
+            ),
           ),
         ],
       ),

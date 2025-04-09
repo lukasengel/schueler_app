@@ -64,8 +64,8 @@ class _SLoginFormState extends State<SLoginForm> {
   Future<void> _onPressedWhichCredentials() {
     return sShowPlatformMessageDialog(
       context: context,
-      title: Text(SLocalizations.of(context)!.whichCredentials),
-      content: Text(SLocalizations.of(context)!.whichCredentialsMsg),
+      title: SLocalizations.of(context)!.whichCredentials,
+      content: SLocalizations.of(context)!.whichCredentialsMsg,
     );
   }
 

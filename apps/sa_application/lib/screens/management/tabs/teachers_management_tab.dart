@@ -28,9 +28,11 @@ class _STeachersManagementTabState extends ConsumerState<STeachersManagementTab>
   /// Callback for when a teacher tile is pressed.
   Future<void> _onEditTeacher(STeacherItem teacher) async {
     // Show a dialog to edit the teacher.
-    final input = await sShowPlatformTeacherDialog(
+    final input = await sShowAdaptiveDialog<STeacherItem>(
       context: context,
-      initial: teacher,
+      builder: (context) => STeacherDialog(
+        initial: teacher,
+      ),
     );
 
     if (input != null) {
@@ -55,7 +57,7 @@ class _STeachersManagementTabState extends ConsumerState<STeachersManagementTab>
       context: context,
       title: SLocalizations.of(context)!.confirmDelete,
       content: SLocalizations.of(context)!.confirmDeleteMsg,
-      confirmLabel: SLocalizations.of(context)!.confirm,
+      confirmLabel: SLocalizations.of(context)!.delete,
     );
 
     if (input == true) {

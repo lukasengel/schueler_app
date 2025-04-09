@@ -26,8 +26,8 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
   void _onPressedPrivacyNote() {
     sShowPlatformMessageDialog(
       context: context,
-      title: Text(SLocalizations.of(context)!.privacyNote),
-      content: Text(SLocalizations.of(context)!.privacyInfo),
+      title: SLocalizations.of(context)!.privacyNote,
+      content: SLocalizations.of(context)!.privacyInfo,
     );
   }
 

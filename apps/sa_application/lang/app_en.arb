@@ -74,7 +74,7 @@
   "alreadyTaken": "This abbreviation is already taken.",
   "confirmDelete": "Delete Element?",
   "confirmDeleteMsg": "This cannot be undone.",
-  "confirm": "Confirm",
+  "delete": "Delete",
   "feedback": "Feedback",
   "administration": "Administration",
   "pullToRefresh": "Pull to refresh",
