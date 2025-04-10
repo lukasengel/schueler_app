@@ -1,0 +1,7 @@
+flutter_launcher_icons:
+  # Generic
+  image_path: "assets/branding/app_icon_static.png"
+
+  # iOS
+  ios: true
+  remove_alpha_channel_ios: true

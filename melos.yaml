@@ -10,14 +10,26 @@ scripts:
     exec: |
       cp $MELOS_ROOT_PATH/analysis_options.yaml .
 
-  generate:
+  gen-runner:
     description: Run build runner in the specified package(s).
     exec: dart run build_runner build --delete-conflicting-outputs
     packageFilters:
       fileExists: build.yaml
 
-  localize:
+  gen-l10n:
     description: Generate localization files for the specified package(s).
     exec: flutter gen-l10n
     packageFilters:
       fileExists: l10n.yaml
+
+  gen-native-splash:
+    description: Generate native splash screen for the specified package(s).
+    exec: dart run flutter_native_splash:create
+    packageFilters:
+      fileExists: flutter_native_splash.yaml
+
+  gen-launcher-icons:
+    description: Generate launcher icons for the specified package(s).
+    exec: dart run flutter_launcher_icons:main
+    packageFilters:
+      fileExists: flutter_launcher_icons.yaml

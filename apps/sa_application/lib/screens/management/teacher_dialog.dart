@@ -97,13 +97,16 @@ class _STeacherDialogState extends ConsumerState<STeacherDialog> {
             children: [
               Padding(
                 padding: SStyles.dialogElementPadding,
-                child: FTextField(
-                  hint: SLocalizations.of(context)!.abbreviation,
-                  textInputAction: TextInputAction.next,
-                  controller: _abbreviationController,
-                  validator: _onValidateAbbreviation,
-                  autocorrect: false,
-                  maxLines: 1,
+                child: TapRegion(
+                  onTapOutside: (_) => FocusScope.of(context).unfocus(),
+                  child: FTextField(
+                    hint: SLocalizations.of(context)!.abbreviation,
+                    textInputAction: TextInputAction.next,
+                    controller: _abbreviationController,
+                    validator: _onValidateAbbreviation,
+                    autocorrect: false,
+                    maxLines: 1,
+                  ),
                 ),
               ),
               Padding(

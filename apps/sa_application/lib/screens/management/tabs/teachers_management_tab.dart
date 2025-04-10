@@ -5,7 +5,7 @@ import 'package:forui/forui.dart';
 import 'package:sa_application/l10n/l10n.dart';
 import 'package:sa_application/providers/_providers.dart';
 import 'package:sa_application/screens/_screens.dart';
-import 'package:sa_application/util/styles.dart';
+import 'package:sa_application/util/_util.dart';
 import 'package:sa_application/widgets/_widgets.dart';
 import 'package:sa_data/sa_data.dart';
 
@@ -84,9 +84,18 @@ class _STeachersManagementTabState extends ConsumerState<STeachersManagementTab>
       sliver: teachers != null && teachers.isNotEmpty
           // Show a tile for each teacher.
           ? SliverList.separated(
-              itemCount: teachers.length,
+              itemCount: teachers.length + 1,
               itemBuilder: (context, index) {
-                // Otherwise, return a tile.
+                // Show the number of elements at the end of the list.
+                if (index == teachers.length) {
+                  return Center(
+                    child: Text(
+                      SLocalizations.of(context)!.elements(teachers.length),
+                      style: STheme.smallCaptionStyle(context),
+                    ),
+                  );
+                }
+
                 final teacher = teachers[index];
 
                 return FTile(

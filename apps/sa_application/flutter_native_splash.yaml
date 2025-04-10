@@ -1,0 +1,8 @@
+flutter_native_splash:
+  # Light mode
+  color: "#ff1744"
+  image: "assets/branding/splash_screen_image.png"
+  
+  # Dark mode
+  color_dark: "#000000"
+  image_dark: "assets/branding/splash_screen_image.png"

@@ -106,7 +106,7 @@ class _SManagementScreenState extends ConsumerState<SManagementScreen> with Sing
         title: Text(
           [
             SLocalizations.of(context)!.schoolLife,
-            SLocalizations.of(context)!.teacherAbbreviations,
+            SLocalizations.of(context)!.teachers,
             SLocalizations.of(context)!.feedback,
             SLocalizations.of(context)!.administration,
           ][_index],
@@ -165,7 +165,7 @@ class _SManagementScreenState extends ConsumerState<SManagementScreen> with Sing
           ),
           FBottomNavigationBarItem(
             icon: FIcon(FAssets.icons.signature),
-            label: Text(SLocalizations.of(context)!.teacherAbbreviations),
+            label: Text(SLocalizations.of(context)!.teachers),
           ),
           if (authState.isAdmin) ...[
             FBottomNavigationBarItem(
