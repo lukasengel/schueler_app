@@ -117,6 +117,7 @@ class _STeacherDialogState extends ConsumerState<STeacherDialog> {
                   onSubmit: (_) => _onPressedSave(),
                   controller: _nameController,
                   validator: _onValidateName,
+                  autocorrect: false,
                   maxLines: 1,
                 ),
               ),

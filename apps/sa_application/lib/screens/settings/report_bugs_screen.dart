@@ -119,31 +119,31 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: FocusScope.of(context).unfocus,
-      child: SScaffold.constrained(
-        header: SHeader(
-          title: Text(
-            SLocalizations.of(context)!.reportBugs,
-          ),
-          prefixActions: [
-            FHeaderAction.back(
-              onPress: _onPressedCancel,
-            ),
-          ],
-          suffixActions: [
-            FHeaderAction(
-              icon: FIcon(FAssets.icons.send),
-              onPress: _onPressedSubmit,
-            ),
-          ],
+    return SScaffold.constrained(
+      header: SHeader(
+        title: Text(
+          SLocalizations.of(context)!.reportBugs,
         ),
-        content: Form(
-          key: _formKey,
-          child: ListView(
-            padding: SStyles.defaultListViewPadding,
-            children: [
-              FTextField(
+        prefixActions: [
+          FHeaderAction.back(
+            onPress: _onPressedCancel,
+          ),
+        ],
+        suffixActions: [
+          FHeaderAction(
+            icon: FIcon(FAssets.icons.send),
+            onPress: _onPressedSubmit,
+          ),
+        ],
+      ),
+      content: Form(
+        key: _formKey,
+        child: ListView(
+          padding: SStyles.defaultListViewPadding,
+          children: [
+            TapRegion(
+              onTapOutside: (_) => FocusScope.of(context).unfocus(),
+              child: FTextField(
                 controller: _nameController,
                 label: Text(SLocalizations.of(context)!.contactDetails),
                 hint: SLocalizations.of(context)!.nameOptional,
@@ -152,42 +152,42 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
                 autocorrect: false,
                 maxLines: 1,
               ),
-              const SizedBox(
-                height: SStyles.defaultListTileSpacing,
-              ),
-              FTextField(
-                controller: _emailController,
-                hint: SLocalizations.of(context)!.emailOptional,
-                keyboardType: TextInputType.emailAddress,
-                textInputAction: TextInputAction.next,
-                autocorrect: false,
-                maxLines: 1,
-              ),
-              const SizedBox(
-                height: SStyles.defaultListTileSpacing,
-              ),
-              FTextField(
-                controller: _messageController,
-                label: Text(SLocalizations.of(context)!.message),
-                hint: SLocalizations.of(context)!.description,
-                keyboardType: TextInputType.multiline,
-                maxLines: 10,
-                validator: _onValidate,
-              ),
-              const SizedBox(
-                height: SStyles.defaultListTileSpacing,
-              ),
-              Center(
-                child: FTappable.animated(
-                  onPress: _onPressedPrivacyNote,
-                  child: Text(
-                    SLocalizations.of(context)!.privacyNote,
-                    style: FTheme.of(context).typography.sm,
-                  ),
+            ),
+            const SizedBox(
+              height: SStyles.defaultListTileSpacing,
+            ),
+            FTextField(
+              controller: _emailController,
+              hint: SLocalizations.of(context)!.emailOptional,
+              keyboardType: TextInputType.emailAddress,
+              textInputAction: TextInputAction.next,
+              autocorrect: false,
+              maxLines: 1,
+            ),
+            const SizedBox(
+              height: SStyles.defaultListTileSpacing,
+            ),
+            FTextField(
+              controller: _messageController,
+              label: Text(SLocalizations.of(context)!.message),
+              hint: SLocalizations.of(context)!.description,
+              keyboardType: TextInputType.multiline,
+              maxLines: 10,
+              validator: _onValidate,
+            ),
+            const SizedBox(
+              height: SStyles.defaultListTileSpacing,
+            ),
+            Center(
+              child: FTappable.animated(
+                onPress: _onPressedPrivacyNote,
+                child: Text(
+                  SLocalizations.of(context)!.privacyNote,
+                  style: FTheme.of(context).typography.sm,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

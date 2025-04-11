@@ -55,66 +55,63 @@ class _SLoginScreenState extends ConsumerState<SLoginScreen> {
       _showWelcomeMessage = false;
     }
 
-    return GestureDetector(
-      onTap: FocusScope.of(context).unfocus,
-      child: MeshGradient(
-        options: MeshGradientOptions(
-          noiseIntensity: 0.1,
+    return MeshGradient(
+      options: MeshGradientOptions(
+        noiseIntensity: 0.1,
+      ),
+      points: [
+        MeshGradientPoint(
+          position: const Offset(
+            0.9,
+            0.1,
+          ),
+          color: isDarkMode ? const Color.fromARGB(255, 251, 0, 46) : const Color.fromARGB(255, 251, 0, 46),
         ),
-        points: [
-          MeshGradientPoint(
-            position: const Offset(
-              0.9,
-              0.1,
-            ),
-            color: isDarkMode ? const Color.fromARGB(255, 251, 0, 46) : const Color.fromARGB(255, 251, 0, 46),
+        MeshGradientPoint(
+          position: const Offset(
+            0.1,
+            0.3,
           ),
-          MeshGradientPoint(
-            position: const Offset(
-              0.1,
-              0.3,
-            ),
-            color: isDarkMode ? const Color.fromARGB(255, 5, 0, 106) : const Color.fromARGB(255, 69, 18, 255),
+          color: isDarkMode ? const Color.fromARGB(255, 5, 0, 106) : const Color.fromARGB(255, 69, 18, 255),
+        ),
+        MeshGradientPoint(
+          position: const Offset(
+            0.7,
+            0.3,
           ),
-          MeshGradientPoint(
-            position: const Offset(
-              0.7,
-              0.3,
-            ),
-            color: isDarkMode ? const Color.fromARGB(160, 0, 37, 123) : const Color.fromARGB(255, 0, 255, 198),
+          color: isDarkMode ? const Color.fromARGB(160, 0, 37, 123) : const Color.fromARGB(255, 0, 255, 198),
+        ),
+        MeshGradientPoint(
+          position: const Offset(
+            0.4,
+            0.8,
           ),
-          MeshGradientPoint(
-            position: const Offset(
-              0.4,
-              0.8,
-            ),
-            color: isDarkMode ? const Color.fromARGB(255, 41, 0, 111) : const Color.fromARGB(255, 140, 0, 255),
+          color: isDarkMode ? const Color.fromARGB(255, 41, 0, 111) : const Color.fromARGB(255, 140, 0, 255),
+        ),
+        MeshGradientPoint(
+          position: const Offset(
+            0.2,
+            0.8,
           ),
-          MeshGradientPoint(
-            position: const Offset(
-              0.2,
-              0.8,
+          color: isDarkMode ? const Color.fromARGB(255, 149, 0, 27) : const Color.fromARGB(255, 251, 0, 46),
+        ),
+      ],
+      child: FScaffold(
+        style: FTheme.of(context).scaffoldStyle.copyWith(
+              backgroundColor: Colors.transparent,
             ),
-            color: isDarkMode ? const Color.fromARGB(255, 149, 0, 27) : const Color.fromARGB(255, 251, 0, 46),
-          ),
-        ],
-        child: FScaffold(
-          style: FTheme.of(context).scaffoldStyle.copyWith(
-                backgroundColor: Colors.transparent,
-              ),
-          content: Center(
-            child: AnimatedSwitcherPlus.flipY(
-              duration: const Duration(milliseconds: 300),
-              child: _showWelcomeMessage
-                  ? buildWelcomeMessage(context)
-                  : SingleChildScrollView(
-                      child: SLoginForm(
-                        onSubmit: _onPressedLogin,
-                        initialUsername: initialUsername,
-                        initialPassword: initialPassword,
-                      ),
+        content: Center(
+          child: AnimatedSwitcherPlus.flipY(
+            duration: const Duration(milliseconds: 300),
+            child: _showWelcomeMessage
+                ? buildWelcomeMessage(context)
+                : SingleChildScrollView(
+                    child: SLoginForm(
+                      onSubmit: _onPressedLogin,
+                      initialUsername: initialUsername,
+                      initialPassword: initialPassword,
                     ),
-            ),
+                  ),
           ),
         ),
       ),

@@ -34,7 +34,6 @@ class _STeacherAbbreviationsScreenState extends ConsumerState<STeacherAbbreviati
   @override
   Widget build(BuildContext context) {
     final teachers = ref.watch(sTeachersProvider);
-    final hasData = teachers != null;
 
     // Filter the teachers based on the search query.
     final filtered = teachers?.where((element) {
@@ -81,10 +80,23 @@ class _STeacherAbbreviationsScreenState extends ConsumerState<STeacherAbbreviati
               ),
             )
           // If there are no teachers to display, show an icon.
-          : SIconPlaceholder(
-              message: hasData ? SLocalizations.of(context)!.noResults : SLocalizations.of(context)!.noData,
-              iconSvg: hasData ? FAssets.icons.searchX : FAssets.icons.ban,
-            ),
+          : teachers == null
+              // If the list is null, it means that the data could not be loaded.
+              ? SIconPlaceholder(
+                  message: SLocalizations.of(context)!.noData,
+                  iconSvg: FAssets.icons.ban,
+                )
+              : teachers.isNotEmpty
+                  // If the filtered list is empty but the original list is not, it means that the search query did not match any teachers.
+                  ? SIconPlaceholder(
+                      message: SLocalizations.of(context)!.noResults,
+                      iconSvg: FAssets.icons.searchX,
+                    )
+                  // If the original list is empty, it means that there are no teachers available.
+                  : SIconPlaceholder(
+                      message: SLocalizations.of(context)!.noTeachers,
+                      iconSvg: const SvgAsset(null, 'icon_black', 'assets/images/lucky_cat.svg'),
+                    ),
     );
   }
 }

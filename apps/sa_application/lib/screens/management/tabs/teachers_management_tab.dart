@@ -1,5 +1,5 @@
 import 'package:easy_refresh/easy_refresh.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
 import 'package:sa_application/l10n/l10n.dart';
@@ -98,18 +98,11 @@ class _STeachersManagementTabState extends ConsumerState<STeachersManagementTab>
 
                 final teacher = teachers[index];
 
-                return FTile(
-                  subtitle: Text(teacher.name),
+                return SManagementTile(
                   title: Text(teacher.abbreviation),
-                  onPress: () => _onEditTeacher(teacher),
-                  suffixIcon: FButton.icon(
-                    onPress: () => _onDeleteTeacher(teacher),
-                    style: FButtonStyle.ghost,
-                    child: FIcon(
-                      FAssets.icons.trash2,
-                      color: FTheme.of(context).colorScheme.destructive,
-                    ),
-                  ),
+                  subtitle: Text(teacher.name),
+                  onDelete: () => _onDeleteTeacher(teacher),
+                  onEdit: () => _onEditTeacher(teacher),
                 );
               },
               separatorBuilder: (context, index) => const SizedBox(
@@ -118,10 +111,17 @@ class _STeachersManagementTabState extends ConsumerState<STeachersManagementTab>
             )
           // If there are no teachers to display, show an icon.
           : SliverFillRemaining(
-              child: SIconPlaceholder(
-                message: SLocalizations.of(context)!.noData,
-                iconSvg: FAssets.icons.ban,
-              ),
+              child: teachers == null
+                  // If the list is null, it means that the data could not be loaded.
+                  ? SIconPlaceholder(
+                      message: SLocalizations.of(context)!.noData,
+                      iconSvg: FAssets.icons.ban,
+                    )
+                  // If the list is empty, it means that there are no teachers available.
+                  : SIconPlaceholder(
+                      message: SLocalizations.of(context)!.noTeachers,
+                      iconSvg: const SvgAsset(null, 'icon_black', 'assets/images/lucky_cat.svg'),
+                    ),
             ),
     );
   }

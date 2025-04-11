@@ -28,7 +28,7 @@ class _SHomeScreenState extends ConsumerState<SHomeScreen> {
 
   /// Callback for refreshing the content.
   Future<IndicatorResult> _onRefresh() async {
-    final result = await ref.read(sLoadingProvider.notifier).load();
+    final result = await ref.read(sLoadingProvider.notifier).loadHome();
 
     return result.fold(
       (exceptions) {

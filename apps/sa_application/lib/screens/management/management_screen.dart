@@ -57,7 +57,7 @@ class _SManagementScreenState extends ConsumerState<SManagementScreen> with Sing
 
   /// Callback for refreshing the content.
   Future<IndicatorResult> _onRefresh() async {
-    final result = await ref.read(sLoadingProvider.notifier).load();
+    final result = await ref.read(sLoadingProvider.notifier).loadManagement();
 
     return result.fold(
       (exceptions) {

@@ -1,6 +1,7 @@
 export 'checkbox_tile.dart';
 export 'dialogs.dart';
 export 'header.dart';
+export 'management_tile.dart';
 export 'placeholders.dart';
 export 'refreshable_content_wrapper.dart';
 export 'scaffold.dart';
