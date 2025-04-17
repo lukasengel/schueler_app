@@ -16,11 +16,11 @@ abstract class SLocalSettingsRepository {
   ///
   /// Returns `null` if no record is found.
   ///
-  /// Returns a [SDataException] upon failure.
+  /// Returns an [SDataException] upon failure.
   Future<Either<SDataException, SLocalSettings?>> loadLocalSettings();
 
   /// Save local settings to storage.
   ///
-  /// Returns a [SDataException] upon failure.
+  /// Returns an [SDataException] upon failure.
   Future<Either<SDataException, Unit>> saveLocalSettings(SLocalSettings localSettings);
 }

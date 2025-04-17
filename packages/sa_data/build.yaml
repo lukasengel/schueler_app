@@ -5,3 +5,6 @@ targets:
       json_serializable:
         options:
           explicit_to_json: true
+      freezed:
+        options:
+          union_key: type

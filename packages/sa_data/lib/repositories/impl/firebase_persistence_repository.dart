@@ -1,5 +1,8 @@
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:sa_data/sa_data.dart';
 
 /// An implementation of [SPersistenceRepository] using Firebase Realtime Database.
@@ -19,6 +22,21 @@ class SFirebasePersistenceRepository extends SPersistenceRepository {
   /// Set a custom firestore instance to be used.
   set firestore(FirebaseFirestore firestore) {
     _firestore = firestore;
+  }
+
+  @override
+  Future<Either<SDataException, List<SSchoolLifeItem>>> loadSchoolLifeItems() {
+    return _loadItems('schoolLife', SSchoolLifeItem.fromJson);
+  }
+
+  @override
+  Future<Either<SDataException, Unit>> saveSchoolLifeItem(SSchoolLifeItem item) {
+    return _saveItem('schoolLife', item.toJson());
+  }
+
+  @override
+  Future<Either<SDataException, Unit>> deleteSchoolLifeItem(SSchoolLifeItem item) {
+    return _deleteItem('schoolLife', item.id);
   }
 
   @override
@@ -59,6 +77,36 @@ class SFirebasePersistenceRepository extends SPersistenceRepository {
   @override
   Future<Either<SDataException, Unit>> saveGlobalSettings(SGlobalSettings globalSettings) {
     return _saveItem('config', globalSettings.toJson());
+  }
+
+  @override
+  Future<Either<SDataException, String>> uploadImage(String filename, String dir, Uint8List bytes) async {
+    try {
+      var i = 1;
+      var fullFilename = filename;
+
+      // Generate a unique filename by appending a number if the file already exists.
+      while (await _fileExists('images/$dir', fullFilename)) {
+        fullFilename = '$i-$filename';
+        i++;
+      }
+
+      // Upload to Firebase Storage.
+      final imageRef = FirebaseStorage.instance.ref('images/$dir/$fullFilename');
+      await imageRef.putData(bytes);
+
+      return right(
+        // Return the download URL of the uploaded image.
+        await imageRef.getDownloadURL(),
+      );
+    } catch (e) {
+      return left(
+        SDataException.fromCaughtObject(
+          caughtObject: e,
+          description: "Failed to upload image '$filename' to directory '$dir'.",
+        ),
+      );
+    }
   }
 
   /// Load the privileges of a user by their UID.
@@ -188,5 +236,11 @@ class SFirebasePersistenceRepository extends SPersistenceRepository {
         ),
       );
     }
+  }
+
+  /// Helper method to check if a file exists in Firebase Storage.
+  Future<bool> _fileExists(String dir, String filename) async {
+    final directory = await FirebaseStorage.instance.ref(dir).list();
+    return directory.items.any((element) => element.name == filename);
   }
 }
