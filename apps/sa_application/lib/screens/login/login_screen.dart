@@ -96,22 +96,26 @@ class _SLoginScreenState extends ConsumerState<SLoginScreen> {
           color: isDarkMode ? const Color.fromARGB(255, 149, 0, 27) : const Color.fromARGB(255, 251, 0, 46),
         ),
       ],
-      child: FScaffold(
-        style: FTheme.of(context).scaffoldStyle.copyWith(
-              backgroundColor: Colors.transparent,
-            ),
-        content: Center(
-          child: AnimatedSwitcherPlus.flipY(
-            duration: const Duration(milliseconds: 300),
-            child: _showWelcomeMessage
-                ? buildWelcomeMessage(context)
-                : SingleChildScrollView(
-                    child: SLoginForm(
-                      onSubmit: _onPressedLogin,
-                      initialUsername: initialUsername,
-                      initialPassword: initialPassword,
+      child: GestureDetector(
+        // Unfocus the keyboard when tapping outside of a text field.
+        onTap: FocusScope.of(context).unfocus,
+        child: FScaffold(
+          style: FTheme.of(context).scaffoldStyle.copyWith(
+                backgroundColor: Colors.transparent,
+              ),
+          content: Center(
+            child: AnimatedSwitcherPlus.flipY(
+              duration: const Duration(milliseconds: 300),
+              child: _showWelcomeMessage
+                  ? buildWelcomeMessage(context)
+                  : SingleChildScrollView(
+                      child: SLoginForm(
+                        onSubmit: _onPressedLogin,
+                        initialUsername: initialUsername,
+                        initialPassword: initialPassword,
+                      ),
                     ),
-                  ),
+            ),
           ),
         ),
       ),

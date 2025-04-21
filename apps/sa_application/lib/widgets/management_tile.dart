@@ -8,7 +8,7 @@ class SManagementTile extends StatefulWidget {
   final Widget title;
 
   /// The subtitle of the tile.
-  final Widget? subtitle;
+  final Widget subtitle;
 
   /// The callback for when the edit menu item is pressed.
   final Future<void> Function()? onEdit;
@@ -19,7 +19,7 @@ class SManagementTile extends StatefulWidget {
   /// Create a new [SManagementTile].
   const SManagementTile({
     required this.title,
-    this.subtitle,
+    required this.subtitle,
     this.onEdit,
     this.onDelete,
     super.key,
@@ -30,20 +30,26 @@ class SManagementTile extends StatefulWidget {
 }
 
 class _SSManagementTileState extends State<SManagementTile> with SingleTickerProviderStateMixin {
-  FPopoverController? _popoverController;
+  late FPopoverController _popoverController;
+
+  @override
+  void initState() {
+    super.initState();
+    _popoverController = FPopoverController(
+      vsync: this,
+    );
+  }
 
   @override
   void dispose() {
-    _popoverController?.dispose();
+    _popoverController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return FPopoverMenu.automatic(
-      popoverController: _popoverController ??= FPopoverController(
-        vsync: this,
-      ),
+      popoverController: _popoverController,
       menuAnchor: Alignment.topRight,
       childAnchor: Alignment.bottomRight,
       menu: [
@@ -54,7 +60,7 @@ class _SSManagementTileState extends State<SManagementTile> with SingleTickerPro
                 prefixIcon: FIcon(FAssets.icons.pen),
                 title: Text(SLocalizations.of(context)!.edit),
                 onPress: () {
-                  _popoverController?.hide();
+                  _popoverController.hide();
                   widget.onEdit!();
                 },
               ),
@@ -63,7 +69,7 @@ class _SSManagementTileState extends State<SManagementTile> with SingleTickerPro
                 prefixIcon: FIcon(FAssets.icons.trash2),
                 title: Text(SLocalizations.of(context)!.delete),
                 onPress: () {
-                  _popoverController?.hide();
+                  _popoverController.hide();
                   widget.onDelete!();
                 },
               ),
@@ -73,16 +79,18 @@ class _SSManagementTileState extends State<SManagementTile> with SingleTickerPro
       child: FTile(
         title: widget.title,
         subtitle: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            if (widget.subtitle != null) widget.subtitle!,
-            const Spacer(),
+            Expanded(
+              child: widget.subtitle,
+            ),
             FIcon(
               FAssets.icons.ellipsis,
               size: 13,
             ),
           ],
         ),
-        onPress: _popoverController?.toggle,
+        onPress: _popoverController.toggle,
       ),
     );
   }

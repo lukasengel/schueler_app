@@ -1198,6 +1198,40 @@ PODS:
     - Firebase/Firestore (= 11.10.0)
     - firebase_core
     - Flutter
+  - DKImagePickerController/Core (4.3.9):
+    - DKImagePickerController/ImageDataManager
+    - DKImagePickerController/Resource
+  - DKImagePickerController/ImageDataManager (4.3.9)
+  - DKImagePickerController/PhotoGallery (4.3.9):
+    - DKImagePickerController/Core
+    - DKPhotoGallery
+  - DKImagePickerController/Resource (4.3.9)
+  - DKPhotoGallery (0.0.19):
+    - DKPhotoGallery/Core (= 0.0.19)
+    - DKPhotoGallery/Model (= 0.0.19)
+    - DKPhotoGallery/Preview (= 0.0.19)
+    - DKPhotoGallery/Resource (= 0.0.19)
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Core (0.0.19):
+    - DKPhotoGallery/Model
+    - DKPhotoGallery/Preview
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Model (0.0.19):
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Preview (0.0.19):
+    - DKPhotoGallery/Model
+    - DKPhotoGallery/Resource
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Resource (0.0.19):
+    - SDWebImage
+    - SwiftyGif
+  - file_picker (0.0.1):
+    - DKImagePickerController/PhotoGallery
+    - Flutter
   - Firebase/Auth (11.10.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 11.10.0)
@@ -1206,12 +1240,19 @@ PODS:
   - Firebase/Firestore (11.10.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 11.10.0)
+  - Firebase/Storage (11.10.0):
+    - Firebase/CoreOnly
+    - FirebaseStorage (~> 11.10.0)
   - firebase_auth (5.5.2):
     - Firebase/Auth (= 11.10.0)
     - firebase_core
     - Flutter
   - firebase_core (3.13.0):
     - Firebase/CoreOnly (= 11.10.0)
+    - Flutter
+  - firebase_storage (12.4.5):
+    - Firebase/Storage (= 11.10.0)
+    - firebase_core
     - Flutter
   - FirebaseAppCheckInterop (11.11.0)
   - FirebaseAuth (11.10.0):
@@ -1253,6 +1294,13 @@ PODS:
     - leveldb-library (~> 1.22)
     - nanopb (~> 3.30910.0)
   - FirebaseSharedSwift (11.11.0)
+  - FirebaseStorage (11.10.0):
+    - FirebaseAppCheckInterop (~> 11.0)
+    - FirebaseAuthInterop (~> 11.0)
+    - FirebaseCore (~> 11.10.0)
+    - FirebaseCoreExtension (~> 11.10.0)
+    - GoogleUtilities/Environment (~> 8.0)
+    - GTMSessionFetcher/Core (< 5.0, >= 3.4)
   - Flutter (1.0.0)
   - flutter_native_splash (2.4.3):
     - Flutter
@@ -1382,16 +1430,22 @@ PODS:
     - Flutter
     - FlutterMacOS
   - RecaptchaInterop (101.0.0)
+  - SDWebImage (5.21.0):
+    - SDWebImage/Core (= 5.21.0)
+  - SDWebImage/Core (5.21.0)
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - SwiftyGif (5.4.5)
   - url_launcher_ios (0.0.1):
     - Flutter
 
 DEPENDENCIES:
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
+  - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
+  - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
   - Flutter (from `Flutter`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
   - flutter_platform_alert (from `.symlinks/plugins/flutter_platform_alert/ios`)
@@ -1403,6 +1457,8 @@ SPEC REPOS:
   trunk:
     - abseil
     - BoringSSL-GRPC
+    - DKImagePickerController
+    - DKPhotoGallery
     - Firebase
     - FirebaseAppCheckInterop
     - FirebaseAuth
@@ -1413,6 +1469,7 @@ SPEC REPOS:
     - FirebaseFirestore
     - FirebaseFirestoreInternal
     - FirebaseSharedSwift
+    - FirebaseStorage
     - GoogleUtilities
     - "gRPC-C++"
     - gRPC-Core
@@ -1420,14 +1477,20 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - RecaptchaInterop
+    - SDWebImage
+    - SwiftyGif
 
 EXTERNAL SOURCES:
   cloud_firestore:
     :path: ".symlinks/plugins/cloud_firestore/ios"
+  file_picker:
+    :path: ".symlinks/plugins/file_picker/ios"
   firebase_auth:
     :path: ".symlinks/plugins/firebase_auth/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
+  firebase_storage:
+    :path: ".symlinks/plugins/firebase_storage/ios"
   Flutter:
     :path: Flutter
   flutter_native_splash:
@@ -1445,9 +1508,13 @@ SPEC CHECKSUMS:
   abseil: a05cc83bf02079535e17169a73c5be5ba47f714b
   BoringSSL-GRPC: dded2a44897e45f28f08ae87a55ee4bcd19bc508
   cloud_firestore: 07742f115155e19201e77b4cafb155011892d7b7
+  DKImagePickerController: 946cec48c7873164274ecc4624d19e3da4c1ef3c
+  DKPhotoGallery: b3834fecb755ee09a593d7c9e389d8b5d6deed60
+  file_picker: a0560bc09d61de87f12d246fc47d2119e6ef37be
   Firebase: 1fe1c0a7d9aaea32efe01fbea5f0ebd8d70e53a2
   firebase_auth: 34c515a8fa76a4ef678ac5ad5cfa3bb3120f5ab5
   firebase_core: 2d4534e7b489907dcede540c835b48981d890943
+  firebase_storage: ce9dee18f1cc73129457d861ae3322656ec41a99
   FirebaseAppCheckInterop: f23709c9ce92d810aa53ff4ce12ad3e666a3c7be
   FirebaseAuth: c4146bdfdc87329f9962babd24dae89373f49a32
   FirebaseAuthInterop: ac22ed402c2f4e3a8c63ebd3278af9a06073c1be
@@ -1457,6 +1524,7 @@ SPEC CHECKSUMS:
   FirebaseFirestore: 3f1488ff7739cb3c5d10e572bc4e9fcd8e8cb4ac
   FirebaseFirestoreInternal: 97a2bb5f16951c77753c860d3519379702ab6f8a
   FirebaseSharedSwift: b1d32c3b29a911dc174bcf363f2f70bda9509d2f
+  FirebaseStorage: e83d1b9c8a5318d46ccfb2955f0d98095e0bf598
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_native_splash: c32d145d68aeda5502d5f543ee38c192065986cf
   flutter_platform_alert: bf3b5fcd4ac14bd637e20527e9c471633071afd3
@@ -1468,7 +1536,9 @@ SPEC CHECKSUMS:
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
   path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
   RecaptchaInterop: 11e0b637842dfb48308d242afc3f448062325aba
+  SDWebImage: f84b0feeb08d2d11e6a9b843cb06d75ebf5b8868
   shared_preferences_foundation: 9e1978ff2562383bd5676f64ec4e9aa8fa06a6f7
+  SwiftyGif: 706c60cf65fa2bc5ee0313beece843c8eb8194d4
   url_launcher_ios: 694010445543906933d732453a59da0a173ae33d
 
 PODFILE CHECKSUM: 4305caec6b40dde0ae97be1573c53de1882a07e5

@@ -70,6 +70,9 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
       return;
     }
 
+    // Ensure that the keyboard is properly closed.
+    FocusScope.of(context).unfocus();
+
     // Ask for confirmation.
     final input = await sShowPlatformConfirmDialog(
       context: context,
@@ -139,22 +142,19 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
       content: Form(
         key: _formKey,
         child: ListView(
-          padding: SStyles.defaultListViewPadding,
+          padding: SStyles.listViewPadding,
           children: [
-            TapRegion(
-              onTapOutside: (_) => FocusScope.of(context).unfocus(),
-              child: FTextField(
-                controller: _nameController,
-                label: Text(SLocalizations.of(context)!.contactDetails),
-                hint: SLocalizations.of(context)!.nameOptional,
-                keyboardType: TextInputType.name,
-                textInputAction: TextInputAction.next,
-                autocorrect: false,
-                maxLines: 1,
-              ),
+            FTextField(
+              controller: _nameController,
+              label: Text(SLocalizations.of(context)!.contactDetails),
+              hint: SLocalizations.of(context)!.nameOptional,
+              keyboardType: TextInputType.name,
+              textInputAction: TextInputAction.next,
+              autocorrect: false,
+              maxLines: 1,
             ),
             const SizedBox(
-              height: SStyles.defaultListTileSpacing,
+              height: SStyles.listTileSpacing,
             ),
             FTextField(
               controller: _emailController,
@@ -165,7 +165,7 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
               maxLines: 1,
             ),
             const SizedBox(
-              height: SStyles.defaultListTileSpacing,
+              height: SStyles.listTileSpacing,
             ),
             FTextField(
               controller: _messageController,
@@ -176,7 +176,7 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
               validator: _onValidate,
             ),
             const SizedBox(
-              height: SStyles.defaultListTileSpacing,
+              height: SStyles.listTileSpacing,
             ),
             Center(
               child: FTappable.animated(

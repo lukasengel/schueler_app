@@ -61,32 +61,18 @@ class _STeacherAbbreviationsScreenState extends ConsumerState<STeacherAbbreviati
         ],
         onSearch: _onSearch,
       ),
-      content: filtered != null && filtered.isNotEmpty
-          // Show a tile for each teacher.
-          ? ListView.separated(
-              controller: _scrollController,
-              padding: SStyles.defaultListViewPadding,
-              itemCount: filtered.length,
-              itemBuilder: (context, index) {
-                final teacher = filtered[index];
-
-                return FTile(
-                  subtitle: Text(teacher.name),
-                  title: Text(teacher.abbreviation),
-                );
-              },
-              separatorBuilder: (context, index) => const SizedBox(
-                height: SStyles.defaultListTileSpacing,
+      content: CustomScrollView(
+        controller: _scrollController,
+        slivers: [
+          SliverPadding(
+            padding: SStyles.listViewPadding,
+            sliver: SContentList(
+              items: filtered,
+              tileBuilder: (context, item, _) => FTile(
+                subtitle: Text(item.name),
+                title: Text(item.abbreviation),
               ),
-            )
-          // If there are no teachers to display, show an icon.
-          : teachers == null
-              // If the list is null, it means that the data could not be loaded.
-              ? SIconPlaceholder(
-                  message: SLocalizations.of(context)!.noData,
-                  iconSvg: FAssets.icons.ban,
-                )
-              : teachers.isNotEmpty
+              emptyBuilder: (context) => teachers!.isNotEmpty
                   // If the filtered list is empty but the original list is not, it means that the search query did not match any teachers.
                   ? SIconPlaceholder(
                       message: SLocalizations.of(context)!.noResults,
@@ -97,6 +83,10 @@ class _STeacherAbbreviationsScreenState extends ConsumerState<STeacherAbbreviati
                       message: SLocalizations.of(context)!.noTeachers,
                       iconSvg: const SvgAsset(null, 'icon_black', 'assets/images/lucky_cat.svg'),
                     ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

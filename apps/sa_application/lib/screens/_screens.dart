@@ -5,6 +5,7 @@ export 'home/tabs/substitutions_tab.dart';
 export 'login/login_form.dart';
 export 'login/login_screen.dart';
 export 'management/management_screen.dart';
+export 'management/school_life_dialog.dart';
 export 'management/tabs/admin_management_tab.dart';
 export 'management/tabs/feedback_management_tab.dart';
 export 'management/tabs/school_life_management_tab.dart';

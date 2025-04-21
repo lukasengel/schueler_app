@@ -28,14 +28,32 @@ class _SManagementScreenState extends ConsumerState<SManagementScreen> with Sing
   }
 
   /// Callback for when the add school life item button is pressed.
-  void _onPressedAddSchoolLifeItem() {
-    // TODO: Implement.
+  Future<void> _onPressedAddSchoolLifeItem() async {
+    // Show a dialog to create a new school life item.
+    final input = await sShowAdaptiveDialog<SSchoolLifeItem>(
+      context: context,
+      builder: (context) => const SSchoolLifeDialog(),
+    );
+
+    if (input != null) {
+      // Save the new school life item to the database.
+      final res = await ref.read(sSchoolLifeProvider.notifier).add(input);
+
+      // Show a toast if an error occurred.
+      res.fold(
+        (l) => sShowDataExceptionToast(
+          context: context,
+          exception: l,
+        ),
+        (r) => null,
+      );
+    }
   }
 
   /// Callback for when the add teacher button is pressed.
   Future<void> _onPressedAddTeacher() async {
     // Show a dialog to create a new teacher.
-    final input = await sShowAdaptiveDialog<STeacherItem?>(
+    final input = await sShowAdaptiveDialog<STeacherItem>(
       context: context,
       builder: (context) => const STeacherDialog(),
     );

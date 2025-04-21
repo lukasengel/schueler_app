@@ -80,6 +80,13 @@ class _STeacherDialogState extends ConsumerState<STeacherDialog> {
   }
 
   @override
+  void dispose() {
+    _nameController.dispose();
+    _abbreviationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: SStyles.dialogConstraints,
@@ -97,21 +104,20 @@ class _STeacherDialogState extends ConsumerState<STeacherDialog> {
             children: [
               Padding(
                 padding: SStyles.dialogElementPadding,
-                child: TapRegion(
-                  onTapOutside: (_) => FocusScope.of(context).unfocus(),
-                  child: FTextField(
-                    hint: SLocalizations.of(context)!.abbreviation,
-                    textInputAction: TextInputAction.next,
-                    controller: _abbreviationController,
-                    validator: _onValidateAbbreviation,
-                    autocorrect: false,
-                    maxLines: 1,
-                  ),
+                child: FTextField(
+                  label: Text(SLocalizations.of(context)!.abbreviation),
+                  hint: SLocalizations.of(context)!.abbreviation,
+                  textInputAction: TextInputAction.next,
+                  controller: _abbreviationController,
+                  validator: _onValidateAbbreviation,
+                  autocorrect: false,
+                  maxLines: 1,
                 ),
               ),
               Padding(
                 padding: SStyles.dialogElementPadding,
                 child: FTextField(
+                  label: Text(SLocalizations.of(context)!.name),
                   hint: SLocalizations.of(context)!.name,
                   textInputAction: TextInputAction.send,
                   onSubmit: (_) => _onPressedSave(),

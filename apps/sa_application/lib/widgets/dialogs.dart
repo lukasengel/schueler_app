@@ -127,18 +127,30 @@ Future<T?> sShowAdaptiveDialog<T>({
   required BuildContext context,
   required WidgetBuilder builder,
 }) {
+  /// Wrap the dialog with a [PopScope] and a [GestureDetector] to dismiss the keyboard when tapping outside of a text field.
+  Widget buildWrappedDialog(BuildContext context) {
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) => FocusScope.of(context).unfocus(),
+      child: GestureDetector(
+        onTap: FocusScope.of(context).unfocus,
+        child: builder(context),
+      ),
+    );
+  }
+
   // On iOS, use Cupertino animation.
   if (Platform.isIOS) {
     return showCupertinoDialog<T>(
       context: context,
-      builder: builder,
+      barrierDismissible: true,
+      builder: buildWrappedDialog,
     );
   }
 
   // On other platforms, use Material animation.
   return showDialog<T>(
     context: context,
-    barrierDismissible: false,
-    builder: builder,
+    builder: buildWrappedDialog,
   );
 }

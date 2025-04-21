@@ -106,7 +106,7 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
         ],
       ),
       content: ListView(
-        padding: SStyles.defaultListViewPadding,
+        padding: SStyles.listViewPadding,
         children: [
           Consumer(
             builder: (context, ref, child) {
@@ -151,7 +151,7 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
             },
           ),
           const SizedBox(
-            height: SStyles.defaultListTileSpacing,
+            height: SStyles.listTileSpacing,
           ),
           Consumer(
             builder: (context, ref, child) {
@@ -181,7 +181,7 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
             },
           ),
           const SizedBox(
-            height: SStyles.defaultListTileSpacing,
+            height: SStyles.listTileSpacing,
           ),
           FLabel(
             axis: Axis.vertical,
@@ -206,7 +206,7 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
             ),
           ),
           const SizedBox(
-            height: SStyles.defaultListTileSpacing,
+            height: SStyles.listTileSpacing,
           ),
           Consumer(
             builder: (context, ref, child) {

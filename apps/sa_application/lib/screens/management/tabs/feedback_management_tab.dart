@@ -55,86 +55,57 @@ class _SFeedbackManagementTabState extends ConsumerState<SFeedbackManagementTab>
 
     return SRefreshableContentWrapper(
       onRefresh: widget.onRefresh,
-      sliver: feedbackItems != null && feedbackItems.isNotEmpty
-          // Show a tile for each feedback item.
-          ? SliverList.separated(
-              itemCount: feedbackItems.length + 1,
-              itemBuilder: (context, index) {
-                // Show the number of elements at the end of the list.
-                if (index == feedbackItems.length) {
-                  return Center(
-                    child: Text(
-                      SLocalizations.of(context)!.elements(feedbackItems.length),
-                      style: STheme.smallCaptionStyle(context),
-                    ),
-                  );
-                }
-
-                final feedbackItem = feedbackItems[index];
-
-                return SManagementTile(
-                  title: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      FLabel(
-                        axis: Axis.vertical,
-                        label: Text(SLocalizations.of(context)!.message),
-                        child: Text(
-                          feedbackItem.message,
-                          maxLines: 100,
-                        ),
-                      ),
-                      // Show name, if available.
-                      if (feedbackItem.name != null) ...[
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        FLabel(
-                          axis: Axis.vertical,
-                          label: Text(SLocalizations.of(context)!.name),
-                          child: Text(feedbackItem.name!),
-                        ),
-                      ],
-                      // Show email, if available.
-                      if (feedbackItem.email != null) ...[
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        FLabel(
-                          axis: Axis.vertical,
-                          label: Text(SLocalizations.of(context)!.email),
-                          child: Text(feedbackItem.email!),
-                        ),
-                      ],
-                      const SizedBox(
-                        height: 8,
-                      ),
-                    ],
-                  ),
-                  subtitle: Text(
-                    feedbackItem.datetime.formatLocalized(context),
-                  ),
-                  onDelete: () => _onDeleteFeedback(feedbackItem),
-                );
-              },
-              separatorBuilder: (context, index) => const SizedBox(
-                height: SStyles.defaultListTileSpacing,
+      sliver: SContentList(
+        items: feedbackItems,
+        tileBuilder: (context, item, _) => SManagementTile(
+          onDelete: () => _onDeleteFeedback(item),
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              FLabel(
+                axis: Axis.vertical,
+                label: Text(SLocalizations.of(context)!.message),
+                child: Text(
+                  item.message,
+                  maxLines: 100,
+                ),
               ),
-            )
-          // If there is no feedback to display, show an icon.
-          : SliverFillRemaining(
-              child: feedbackItems == null
-                  // If the list is null, it means that the data could not be loaded.
-                  ? SIconPlaceholder(
-                      message: SLocalizations.of(context)!.noData,
-                      iconSvg: FAssets.icons.ban,
-                    )
-                  // If the list is empty, it means that there is no feedback available.
-                  : SIconPlaceholder(
-                      message: SLocalizations.of(context)!.noFeedback,
-                      iconSvg: const SvgAsset(null, 'icon_black', 'assets/images/lucky_cat.svg'),
-                    ),
-            ),
+              const SizedBox(
+                height: SStyles.managementTileElementSpacing,
+              ),
+              // Show name, if available.
+              if (item.name != null) ...[
+                FLabel(
+                  axis: Axis.vertical,
+                  label: Text(SLocalizations.of(context)!.name),
+                  child: Text(item.name!),
+                ),
+                const SizedBox(
+                  height: SStyles.managementTileElementSpacing,
+                ),
+              ],
+              // Show email, if available.
+              if (item.email != null) ...[
+                FLabel(
+                  axis: Axis.vertical,
+                  label: Text(SLocalizations.of(context)!.email),
+                  child: Text(item.email!),
+                ),
+                const SizedBox(
+                  height: SStyles.managementTileElementSpacing,
+                ),
+              ],
+            ],
+          ),
+          subtitle: Text(
+            item.datetime.formatLocalized(context),
+          ),
+        ),
+        emptyBuilder: (context) => SIconPlaceholder(
+          message: SLocalizations.of(context)!.noFeedback,
+          iconSvg: const SvgAsset(null, 'icon_black', 'assets/images/lucky_cat.svg'),
+        ),
+      ),
     );
   }
 }

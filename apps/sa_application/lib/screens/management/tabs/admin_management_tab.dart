@@ -19,10 +19,9 @@ class SAdminManagementTab extends StatelessWidget {
     return SRefreshableContentWrapper(
       onRefresh: onRefresh,
       sliver: SliverFillRemaining(
-        child: Center(
-          child: FIcon(
-            FAssets.icons.construction,
-          ),
+        child: SIconPlaceholder(
+          iconSvg: FAssets.icons.construction,
+          message: 'Under construction.',
         ),
       ),
     );

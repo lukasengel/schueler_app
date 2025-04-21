@@ -91,7 +91,7 @@ class _SFilterTableScreenState extends ConsumerState<SFilterTableScreen> {
       content: globalSettings != null && globalSettings.exclusionOptions.isNotEmpty
           // If global settings are available, show a checkbox tile for each exclusion option.
           ? ListView(
-              padding: SStyles.defaultListViewPadding,
+              padding: SStyles.listViewPadding,
               children: [
                 FTileGroup.builder(
                   count: globalSettings.exclusionOptions.length,
@@ -111,7 +111,7 @@ class _SFilterTableScreenState extends ConsumerState<SFilterTableScreen> {
                   child: Column(
                     children: [
                       const SizedBox(
-                        height: SStyles.defaultListTileSpacing,
+                        height: SStyles.listTileSpacing,
                       ),
                       Builder(
                         builder: (context) {
@@ -134,7 +134,7 @@ class _SFilterTableScreenState extends ConsumerState<SFilterTableScreen> {
                         },
                       ),
                       const SizedBox(
-                        height: SStyles.defaultListTileSpacing,
+                        height: SStyles.listTileSpacing,
                       ),
                       FTappable.animated(
                         onPress: _onPressedHowDoesThisWork,

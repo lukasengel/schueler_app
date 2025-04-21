@@ -120,18 +120,15 @@ class _SLoginFormState extends State<SLoginForm> {
               const SizedBox(
                 height: 15,
               ),
-              TapRegion(
-                onTapOutside: (event) => FocusScope.of(context).unfocus(),
-                child: FTextField(
-                  controller: _usernameController,
-                  label: Text(SLocalizations.of(context)!.username),
-                  autofillHints: const [AutofillHints.username],
-                  keyboardType: TextInputType.visiblePassword,
-                  textInputAction: TextInputAction.next,
-                  validator: _onValidateInput,
-                  autocorrect: false,
-                  maxLines: 1,
-                ),
+              FTextField(
+                controller: _usernameController,
+                label: Text(SLocalizations.of(context)!.username),
+                autofillHints: const [AutofillHints.username],
+                keyboardType: TextInputType.visiblePassword,
+                textInputAction: TextInputAction.next,
+                validator: _onValidateInput,
+                autocorrect: false,
+                maxLines: 1,
               ),
               const SizedBox(
                 height: 10,

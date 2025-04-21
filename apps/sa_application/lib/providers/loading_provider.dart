@@ -19,6 +19,7 @@ class SLoadingNotifier extends StateNotifier<bool> {
   Future<Either<List<SDataException>, Unit>> loadHome() async {
     final futures = [
       _ref.read(sGlobalSettingsProvider.notifier).load(),
+      _ref.read(sSchoolLifeProvider.notifier).load(),
       _ref.read(sTeachersProvider.notifier).load(),
     ];
 
@@ -49,6 +50,7 @@ class SLoadingNotifier extends StateNotifier<bool> {
   Future<Either<List<SDataException>, Unit>> loadManagement() async {
     final futures = [
       _ref.read(sGlobalSettingsProvider.notifier).load(),
+      _ref.read(sSchoolLifeProvider.notifier).load(),
       _ref.read(sTeachersProvider.notifier).load(),
       _ref.read(sFeedbackProvider.notifier).load(),
     ];
@@ -81,6 +83,7 @@ class SLoadingNotifier extends StateNotifier<bool> {
     _ref.read(sFeedbackProvider.notifier).clear();
     _ref.read(sGlobalSettingsProvider.notifier).clear();
     _ref.read(sTeachersProvider.notifier).clear();
+    _ref.read(sSchoolLifeProvider.notifier).clear();
     return _ref.read(sLocalSettingsProvider.notifier).reset();
   }
 }

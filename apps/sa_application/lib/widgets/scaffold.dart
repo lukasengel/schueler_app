@@ -32,14 +32,15 @@ class SScaffold extends StatelessWidget {
     required Widget content,
     Widget? header,
     Widget? footer,
-    double maxWidth = SStyles.defaultMaxContentWidth,
+    double maxWidth = SStyles.maxContentWidth,
     bool contentPad = true,
   }) {
     return SScaffold(
       header: header,
       footer: footer,
       contentPad: contentPad,
-      content: Center(
+      content: Align(
+        alignment: Alignment.topCenter,
         child: ConstrainedBox(
           constraints: BoxConstraints(
             maxWidth: maxWidth,
@@ -56,7 +57,7 @@ class SScaffold extends StatelessWidget {
     required ScrollController controller,
     Widget? header,
     Widget? footer,
-    double maxWidth = SStyles.defaultMaxContentWidth,
+    double maxWidth = SStyles.maxContentWidth,
     bool contentPad = true,
   }) {
     return SScaffold(
@@ -65,7 +66,8 @@ class SScaffold extends StatelessWidget {
       contentPad: false,
       content: CupertinoScrollbar(
         controller: controller,
-        child: Center(
+        child: Align(
+          alignment: Alignment.topCenter,
           child: ConstrainedBox(
             constraints: BoxConstraints(
               maxWidth: maxWidth,
@@ -85,16 +87,20 @@ class SScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Remove top padding, to prevent weird behavior of Scrollables on mobile platforms.
-    return FScaffold(
-      header: header,
-      content: MediaQuery.removePadding(
-        context: context,
-        removeTop: true,
-        child: content,
+    // Wrap with GestureDetector to unfocus the keyboard when tapping outside of a text field.
+    return GestureDetector(
+      onTap: FocusScope.of(context).unfocus,
+      child: FScaffold(
+        header: header,
+        // Remove top padding, to prevent weird behavior of Scrollables on mobile platforms.
+        content: MediaQuery.removePadding(
+          context: context,
+          removeTop: true,
+          child: content,
+        ),
+        footer: footer,
+        contentPad: contentPad,
       ),
-      footer: footer,
-      contentPad: contentPad,
     );
   }
 }

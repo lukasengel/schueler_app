@@ -132,7 +132,7 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
         ],
       ),
       content: ListView(
-        padding: SStyles.defaultListViewPadding,
+        padding: SStyles.listViewPadding,
         children: [
           FTile(
             prefixIcon: FIcon(FAssets.icons.pen),
@@ -141,7 +141,7 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
             onPress: _onPressedPersonalization,
           ),
           const SizedBox(
-            height: SStyles.defaultListTileSpacing,
+            height: SStyles.listTileSpacing,
           ),
           FTile(
             prefixIcon: FIcon(FAssets.icons.listFilter),
@@ -150,7 +150,7 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
             onPress: _onPressedFilterTable,
           ),
           const SizedBox(
-            height: SStyles.defaultListTileSpacing,
+            height: SStyles.listTileSpacing,
           ),
           FTile(
             prefixIcon: FIcon(FAssets.icons.signature),
@@ -159,7 +159,7 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
             onPress: _onPressedTeacherAbbreviations,
           ),
           const SizedBox(
-            height: SStyles.defaultListTileSpacing,
+            height: SStyles.listTileSpacing,
           ),
           FTile(
             prefixIcon: FIcon(FAssets.icons.messageSquareWarning),
@@ -168,7 +168,7 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
             onPress: _onPressedReportBugs,
           ),
           const SizedBox(
-            height: SStyles.defaultListTileSpacing,
+            height: SStyles.listTileSpacing,
           ),
           FTile(
             prefixIcon: FIcon(FAssets.icons.github),
@@ -178,7 +178,7 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
             onLongPress: _onLongPressedGitHub,
           ),
           const SizedBox(
-            height: 1.5 * SStyles.defaultListTileSpacing,
+            height: 1.5 * SStyles.listTileSpacing,
           ),
           Center(
             child: IntrinsicWidth(
@@ -190,7 +190,7 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
             ),
           ),
           const SizedBox(
-            height: 1.5 * SStyles.defaultListTileSpacing,
+            height: 1.5 * SStyles.listTileSpacing,
           ),
           Center(
             child: Column(
@@ -204,7 +204,7 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
                   style: STheme.mediumCaptionStyle(context),
                 ),
                 const SizedBox(
-                  height: SStyles.defaultListTileSpacing,
+                  height: SStyles.listTileSpacing,
                 ),
                 Text(
                   SLocalizations.of(context)!.developer.toUpperCase(),
@@ -215,7 +215,7 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
                   style: STheme.smallCaptionStyle(context),
                 ),
                 const SizedBox(
-                  height: 2 * SStyles.defaultListTileSpacing,
+                  height: 2 * SStyles.listTileSpacing,
                 ),
                 Text(
                   SLocalizations.of(context)!.version(SConstants.version).toUpperCase(),

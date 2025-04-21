@@ -5,7 +5,6 @@ import 'package:forui/forui.dart';
 import 'package:sa_application/l10n/l10n.dart';
 import 'package:sa_application/providers/_providers.dart';
 import 'package:sa_application/screens/_screens.dart';
-import 'package:sa_application/util/_util.dart';
 import 'package:sa_application/widgets/_widgets.dart';
 import 'package:sa_data/sa_data.dart';
 
@@ -25,7 +24,7 @@ class STeachersManagementTab extends ConsumerStatefulWidget {
 }
 
 class _STeachersManagementTabState extends ConsumerState<STeachersManagementTab> {
-  /// Callback for when a teacher tile is pressed.
+  /// Callback for when the edit button on a teacher tile is pressed.
   Future<void> _onEditTeacher(STeacherItem teacher) async {
     // Show a dialog to edit the teacher.
     final input = await sShowAdaptiveDialog<STeacherItem>(
@@ -81,48 +80,19 @@ class _STeachersManagementTabState extends ConsumerState<STeachersManagementTab>
 
     return SRefreshableContentWrapper(
       onRefresh: widget.onRefresh,
-      sliver: teachers != null && teachers.isNotEmpty
-          // Show a tile for each teacher.
-          ? SliverList.separated(
-              itemCount: teachers.length + 1,
-              itemBuilder: (context, index) {
-                // Show the number of elements at the end of the list.
-                if (index == teachers.length) {
-                  return Center(
-                    child: Text(
-                      SLocalizations.of(context)!.elements(teachers.length),
-                      style: STheme.smallCaptionStyle(context),
-                    ),
-                  );
-                }
-
-                final teacher = teachers[index];
-
-                return SManagementTile(
-                  title: Text(teacher.abbreviation),
-                  subtitle: Text(teacher.name),
-                  onDelete: () => _onDeleteTeacher(teacher),
-                  onEdit: () => _onEditTeacher(teacher),
-                );
-              },
-              separatorBuilder: (context, index) => const SizedBox(
-                height: SStyles.defaultListTileSpacing,
-              ),
-            )
-          // If there are no teachers to display, show an icon.
-          : SliverFillRemaining(
-              child: teachers == null
-                  // If the list is null, it means that the data could not be loaded.
-                  ? SIconPlaceholder(
-                      message: SLocalizations.of(context)!.noData,
-                      iconSvg: FAssets.icons.ban,
-                    )
-                  // If the list is empty, it means that there are no teachers available.
-                  : SIconPlaceholder(
-                      message: SLocalizations.of(context)!.noTeachers,
-                      iconSvg: const SvgAsset(null, 'icon_black', 'assets/images/lucky_cat.svg'),
-                    ),
-            ),
+      sliver: SContentList(
+        items: teachers,
+        tileBuilder: (context, item, _) => SManagementTile(
+          title: Text(item.abbreviation),
+          subtitle: Text(item.name),
+          onDelete: () => _onDeleteTeacher(item),
+          onEdit: () => _onEditTeacher(item),
+        ),
+        emptyBuilder: (context) => SIconPlaceholder(
+          message: SLocalizations.of(context)!.noTeachers,
+          iconSvg: const SvgAsset(null, 'icon_black', 'assets/images/lucky_cat.svg'),
+        ),
+      ),
     );
   }
 }
