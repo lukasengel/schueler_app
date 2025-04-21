@@ -17,9 +17,15 @@ class SHomeScreen extends ConsumerStatefulWidget {
   ConsumerState<SHomeScreen> createState() => _SHomeScreenState();
 }
 
-class _SHomeScreenState extends ConsumerState<SHomeScreen> {
+class _SHomeScreenState extends ConsumerState<SHomeScreen> with SingleTickerProviderStateMixin {
+  late FPopoverController _popoverController;
   var _initial = true;
   var _index = 0;
+
+  /// Callback for when the management view button is pressed.
+  void _onPressedManagementView() {
+    GoRouter.of(context).push('/management');
+  }
 
   /// Callback for when the settings button is pressed.
   void _onPressedSettings() {
@@ -58,18 +64,26 @@ class _SHomeScreenState extends ConsumerState<SHomeScreen> {
       // Wait for at least 300 milliseconds.
       // If the loading goes too fast, it seems like the app is flickering.
       await Future.wait([
-        Future<void>.delayed(const Duration(milliseconds: 300)),
         _onRefresh(),
       ]);
 
       setState(() => _initial = false);
     });
 
+    _popoverController = FPopoverController(vsync: this);
     super.initState();
   }
 
   @override
+  void dispose() {
+    _popoverController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final authState = ref.read(sAuthProvider);
+
     return SScaffold.constrained(
       header: SHeader(
         title: Text(
@@ -80,9 +94,28 @@ class _SHomeScreenState extends ConsumerState<SHomeScreen> {
           ][_index],
         ),
         suffixActions: [
-          FHeaderAction(
-            icon: FIcon(FAssets.icons.settings),
-            onPress: _onPressedSettings,
+          FPopoverMenu(
+            popoverController: _popoverController,
+            menu: [
+              FTileGroup(
+                children: [
+                  FTile(
+                    prefixIcon: FIcon(FAssets.icons.shield),
+                    title: Text(SLocalizations.of(context)!.managementView),
+                    onPress: _onPressedManagementView,
+                  ),
+                  FTile(
+                    prefixIcon: FIcon(FAssets.icons.settings),
+                    title: Text(SLocalizations.of(context)!.settings),
+                    onPress: _onPressedSettings,
+                  ),
+                ],
+              ),
+            ],
+            child: FHeaderAction(
+              icon: FIcon(authState.isManager ? FAssets.icons.ellipsisVertical : FAssets.icons.settings),
+              onPress: authState.isManager ? _popoverController.toggle : _onPressedSettings,
+            ),
           ),
         ],
       ),

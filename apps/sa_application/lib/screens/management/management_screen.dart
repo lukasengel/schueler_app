@@ -19,8 +19,14 @@ class SManagementScreen extends ConsumerStatefulWidget {
 }
 
 class _SManagementScreenState extends ConsumerState<SManagementScreen> with SingleTickerProviderStateMixin {
+  late FPopoverController _popoverController;
   var _initial = true;
   var _index = 0;
+
+  /// Callback for when the student view button is pressed.
+  void _onPressedStudentView() {
+    GoRouter.of(context).push('/home');
+  }
 
   /// Callback for when the settings button is pressed.
   void _onPressedSettings() {
@@ -105,14 +111,20 @@ class _SManagementScreenState extends ConsumerState<SManagementScreen> with Sing
       // Wait for at least 300 milliseconds.
       // If the loading goes too fast, it seems like the app is flickering.
       await Future.wait([
-        Future<void>.delayed(const Duration(milliseconds: 300)),
         _onRefresh(),
       ]);
 
       setState(() => _initial = false);
     });
 
+    _popoverController = FPopoverController(vsync: this);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _popoverController.dispose();
+    super.dispose();
   }
 
   @override
@@ -141,9 +153,28 @@ class _SManagementScreenState extends ConsumerState<SManagementScreen> with Sing
             ),
         ],
         suffixActions: [
-          FHeaderAction(
-            icon: FIcon(FAssets.icons.settings),
-            onPress: _onPressedSettings,
+          FPopoverMenu(
+            popoverController: _popoverController,
+            menu: [
+              FTileGroup(
+                children: [
+                  FTile(
+                    title: Text(SLocalizations.of(context)!.studentView),
+                    prefixIcon: FIcon(FAssets.icons.graduationCap),
+                    onPress: _onPressedStudentView,
+                  ),
+                  FTile(
+                    title: Text(SLocalizations.of(context)!.settings),
+                    prefixIcon: FIcon(FAssets.icons.settings),
+                    onPress: _onPressedSettings,
+                  ),
+                ],
+              ),
+            ],
+            child: FHeaderAction(
+              icon: FIcon(FAssets.icons.ellipsisVertical),
+              onPress: _popoverController.toggle,
+            ),
           ),
         ],
       ),
@@ -187,11 +218,11 @@ class _SManagementScreenState extends ConsumerState<SManagementScreen> with Sing
           ),
           if (authState.isAdmin) ...[
             FBottomNavigationBarItem(
-              icon: FIcon(FAssets.icons.messageSquareWarning),
+              icon: FIcon(FAssets.icons.messageCircleWarning),
               label: Text(SLocalizations.of(context)!.feedback),
             ),
             FBottomNavigationBarItem(
-              icon: FIcon(FAssets.icons.slidersHorizontal),
+              icon: FIcon(FAssets.icons.settings2),
               label: Text(SLocalizations.of(context)!.administration),
             ),
           ],
