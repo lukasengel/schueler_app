@@ -79,7 +79,7 @@ class SSchoolLifeItem with _$SSchoolLifeItem {
 
     /// Article to be opened when the item is clicked.
     @SXmlDocumentConverter() required XmlDocument? article,
-  }) = SArticleSchoolLifeItem;
+  }) = SPostSchoolLifeItem;
 
   /// Create a new [SSchoolLifeItem] from a JSON object.
   factory SSchoolLifeItem.fromJson(Map<String, dynamic> json) => _$SSchoolLifeItemFromJson(json);
