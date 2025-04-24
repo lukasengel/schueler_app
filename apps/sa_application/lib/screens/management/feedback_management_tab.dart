@@ -71,7 +71,7 @@ class _SFeedbackManagementTabState extends ConsumerState<SFeedbackManagementTab>
                 ),
               ),
               const SizedBox(
-                height: SStyles.managementTileElementSpacing,
+                height: SStyles.tileElementSpacing,
               ),
               // Show name, if available.
               if (item.name != null) ...[
@@ -81,7 +81,7 @@ class _SFeedbackManagementTabState extends ConsumerState<SFeedbackManagementTab>
                   child: Text(item.name!),
                 ),
                 const SizedBox(
-                  height: SStyles.managementTileElementSpacing,
+                  height: SStyles.tileElementSpacing,
                 ),
               ],
               // Show email, if available.
@@ -92,13 +92,13 @@ class _SFeedbackManagementTabState extends ConsumerState<SFeedbackManagementTab>
                   child: Text(item.email!),
                 ),
                 const SizedBox(
-                  height: SStyles.managementTileElementSpacing,
+                  height: SStyles.tileElementSpacing,
                 ),
               ],
             ],
           ),
           subtitle: Text(
-            item.datetime.formatLocalized(context),
+            item.datetime.formatDateTimeLocalized(context),
           ),
         ),
         emptyBuilder: (context) => SIconPlaceholder(

@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 import 'package:sa_application/widgets/_widgets.dart';
 
-/// The home screen tab for viewing school life items.
-class SSchoolLifeTab extends StatelessWidget {
+/// The home screen tab for viewing the substitutions plan.
+class SSubstitutionsTab extends StatelessWidget {
   /// Callback for refreshing the content.
   final Future<IndicatorResult> Function() onRefresh;
 
-  /// Create a new [SSchoolLifeTab].
-  const SSchoolLifeTab({
+  /// Create a new [SSubstitutionsTab].
+  const SSubstitutionsTab({
     required this.onRefresh,
     super.key,
   });
@@ -19,10 +19,9 @@ class SSchoolLifeTab extends StatelessWidget {
     return SRefreshableContentWrapper(
       onRefresh: onRefresh,
       sliver: SliverFillRemaining(
-        child: Center(
-          child: FIcon(
-            FAssets.icons.construction,
-          ),
+        child: SIconPlaceholder(
+          iconSvg: FAssets.icons.construction,
+          message: 'Coming soon...',
         ),
       ),
     );

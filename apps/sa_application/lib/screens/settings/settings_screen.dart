@@ -44,29 +44,27 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
     final url = ref.read(sGlobalSettingsProvider)?.githubUrl;
 
     if (url != null) {
-      final uri = Uri.parse(url);
-      final canLaunch = await canLaunchUrl(uri);
-
-      if (canLaunch) {
-        // Attempt to launch the URL.
-        try {
-          await launchUrl(uri);
-        }
-        // If any error occurs, show an error toast.
-        catch (_) {
-          if (mounted) {
-            sShowErrorToast(
-              context: context,
-              message: SLocalizations.of(context)!.failedLaunchingUrl,
-            );
-          }
-        }
-
-        return;
+      // Attempt to launch the URL.
+      try {
+        await launchUrl(
+          Uri.parse(url),
+        );
       }
+      // If any error occurs, show an error toast.
+      catch (e) {
+        if (mounted) {
+          sShowErrorToast(
+            context: context,
+            message: SLocalizations.of(context)!.failedLaunchingUrl,
+            details: e.toString(),
+          );
+        }
+      }
+
+      return;
     }
 
-    // Show error toast if global settings are not available or URL could not be launched.
+    // Show error toast if global settings are not available.
     if (mounted) {
       sShowErrorToast(
         context: context,

@@ -24,7 +24,7 @@ class _SHomeScreenState extends ConsumerState<SHomeScreen> with SingleTickerProv
 
   /// Callback for when the management view button is pressed.
   void _onPressedManagementView() {
-    GoRouter.of(context).push('/management');
+    GoRouter.of(context).pushReplacement('/management');
   }
 
   /// Callback for when the settings button is pressed.
@@ -100,7 +100,7 @@ class _SHomeScreenState extends ConsumerState<SHomeScreen> with SingleTickerProv
               FTileGroup(
                 children: [
                   FTile(
-                    prefixIcon: FIcon(FAssets.icons.shield),
+                    prefixIcon: FIcon(FAssets.icons.arrowLeftRight),
                     title: Text(SLocalizations.of(context)!.managementView),
                     onPress: _onPressedManagementView,
                   ),

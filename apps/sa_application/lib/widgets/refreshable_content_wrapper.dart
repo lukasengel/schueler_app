@@ -59,6 +59,7 @@ class _SRefreshableContentWrapperState extends State<SRefreshableContentWrapper>
         },
       ),
       child: CustomScrollView(
+        cacheExtent: 10000,
         slivers: [
           SliverPadding(
             padding: const EdgeInsets.symmetric(

@@ -111,6 +111,7 @@
   "removeImage": "Bild entfernen",
   "discardChanges": "Änderungen verwerfen?",
   "discardChangesMsg": "Möchten Sie Ihre Änderungen wirklich verwerfen? Alle ungespeicherten Daten gehen verloren.",
+  "tapToReadMore": "Tippen, um mehr zu lesen",
   "dataExceptionType_noConnection": "Keine Internetverbindung.",
   "dataExceptionType_invalidCredentials": "Ungültiger Benutzername oder Passwort.",
   "dataExceptionType_tooManyRequests": "Es wurden innerhalb kurzer Zeit zu viele Anmeldeversuche festgestellt. Bitte versuchen Sie es später erneut.",

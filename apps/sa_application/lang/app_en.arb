@@ -111,6 +111,7 @@
   "removeImage": "Remove Image",
   "discardChanges": "Discard Changes?",
   "discardChangesMsg": "Do you really want to discard your changes? All unsaved data will be lost.",
+  "tapToReadMore": "Tap to read more",
   "dataExceptionType_noConnection": "No internet connection.",
   "dataExceptionType_invalidCredentials": "Invalid username or password.",
   "dataExceptionType_tooManyRequests": "Too many sign-in attempts have been detected within a short period of time. Please try again later.",

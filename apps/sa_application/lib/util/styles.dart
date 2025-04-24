@@ -11,8 +11,8 @@ abstract final class SStyles {
   /// The default spacing between tiles in a list view.
   static const listTileSpacing = 10.0;
 
-  /// The default spacing between elements in a management tile.
-  static const managementTileElementSpacing = 5.0;
+  /// The default spacing between elements in tiles.
+  static const tileElementSpacing = 5.0;
 
   /// The default constraints for a Forui dialog.
   static const dialogConstraints = BoxConstraints(maxWidth: 400);

@@ -21,7 +21,7 @@ class SAdminManagementTab extends StatelessWidget {
       sliver: SliverFillRemaining(
         child: SIconPlaceholder(
           iconSvg: FAssets.icons.construction,
-          message: 'Under construction.',
+          message: 'Coming soon...',
         ),
       ),
     );

@@ -93,7 +93,7 @@ class _SSchoolLifeManagementTabState extends ConsumerState<SSchoolLifeManagement
                 item.headline,
               ),
               const SizedBox(
-                height: SStyles.managementTileElementSpacing,
+                height: SStyles.tileElementSpacing,
               ),
               Text(
                 item.content,
@@ -101,12 +101,12 @@ class _SSchoolLifeManagementTabState extends ConsumerState<SSchoolLifeManagement
                 maxLines: 2,
               ),
               const SizedBox(
-                height: SStyles.managementTileElementSpacing,
+                height: SStyles.tileElementSpacing,
               ),
             ],
           ),
           subtitle: Text(
-            item.datetime.toLocal().formatLocalized(context),
+            item.datetime.toLocal().formatDateTimeLocalized(context),
           ),
         ),
         emptyBuilder: (context) => SIconPlaceholder(

@@ -111,6 +111,7 @@
   "removeImage": "Supprimer l'image",
   "discardChanges": "Abandonner les modifications ?",
   "discardChangesMsg": "Voulez-vous vraiment abandonner vos modifications ? Toutes les données non enregistrées seront perdues.",
+  "tapToReadMore": "Tapez ici pour en lire plus",
   "dataExceptionType_noConnection": "Pas de connexion Internet.",
   "dataExceptionType_invalidCredentials": "Nom d'utilisateur ou mot de passe invalide.",
   "dataExceptionType_tooManyRequests": "Trop de tentatives de connexion ont été détectées en peu de temps. Veuillez réessayer plus tard.",

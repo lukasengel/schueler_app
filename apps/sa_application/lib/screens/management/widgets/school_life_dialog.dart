@@ -54,6 +54,9 @@ class _SSchoolLifeDialogState extends State<SSchoolLifeDialog> with SingleTicker
 
   /// Callback for when the cancel button is pressed.
   Future<void> _onPressedCancel() async {
+    // Dismiss the keyboard.
+    FocusScope.of(context).unfocus();
+
     /// Ask for confirmation before.
     final input = await sShowPlatformConfirmDialog(
       context: context,
@@ -196,26 +199,26 @@ class _SSchoolLifeDialogState extends State<SSchoolLifeDialog> with SingleTicker
       _contentController.text = widget.initial!.content;
       _hyperlinkController.text = widget.initial!.hyperlink ?? '';
 
-      widget.initial!.when(
-        announcement: (id, datetime, headline, content, hyperlink, article) {
+      widget.initial!.map(
+        announcement: (item) {
           _itemType = _SSchoolLifeItemType.ANNOUNCEMENT;
         },
-        event: (id, datetime, headline, content, eventDate, hyperlink, article) {
+        event: (item) {
           _itemType = _SSchoolLifeItemType.EVENT;
-          initialDate = eventDate;
+          initialDate = item.eventDate;
         },
-        post: (id, datetime, headline, content, imageUrl, darkHeadline, hyperlink, article) {
+        post: (item) {
           _itemType = _SSchoolLifeItemType.POST;
-          _darkHeadlineColoring = darkHeadline;
-          _imageUrlController.text = imageUrl;
+          _darkHeadlineColoring = item.darkHeadline;
+          _imageUrlController.text = item.imageUrl;
 
           WidgetsBinding.instance.addPersistentFrameCallback((_) {
-            _imageFieldKey.currentState?.didChange(imageUrl);
+            _imageFieldKey.currentState?.didChange(item.imageUrl);
           });
 
           // If the image is stored in Firebase storage, it has been uploaded by the user.
           _imageSource =
-              imageUrl.contains('firebasestorage.googleapis.com') ? _SImageSource.FILE : _SImageSource.EXTERNAL;
+              item.imageUrl.contains('firebasestorage.googleapis.com') ? _SImageSource.FILE : _SImageSource.EXTERNAL;
         },
       );
     } else {

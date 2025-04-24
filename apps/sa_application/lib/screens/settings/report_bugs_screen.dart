@@ -33,6 +33,9 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
 
   /// Callback for when the cancel button is pressed.
   Future<void> _onPressedCancel() async {
+    // Ensure that the keyboard is properly closed.
+    FocusScope.of(context).unfocus();
+
     // Extract the inputs from the text controllers.
     final inputs = [
       _nameController.text,
@@ -65,13 +68,13 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
 
   /// Callback for when the submit button is pressed.
   Future<void> _onPressedSubmit() async {
+    // Ensure that the keyboard is properly closed.
+    FocusScope.of(context).unfocus();
+
     // Validate form.
     if (!_formKey.currentState!.validate()) {
       return;
     }
-
-    // Ensure that the keyboard is properly closed.
-    FocusScope.of(context).unfocus();
 
     // Ask for confirmation.
     final input = await sShowPlatformConfirmDialog(

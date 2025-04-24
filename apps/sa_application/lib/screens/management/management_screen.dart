@@ -25,7 +25,7 @@ class _SManagementScreenState extends ConsumerState<SManagementScreen> with Sing
 
   /// Callback for when the student view button is pressed.
   void _onPressedStudentView() {
-    GoRouter.of(context).push('/home');
+    GoRouter.of(context).pushReplacement('/home');
   }
 
   /// Callback for when the settings button is pressed.
@@ -160,7 +160,7 @@ class _SManagementScreenState extends ConsumerState<SManagementScreen> with Sing
                 children: [
                   FTile(
                     title: Text(SLocalizations.of(context)!.studentView),
-                    prefixIcon: FIcon(FAssets.icons.graduationCap),
+                    prefixIcon: FIcon(FAssets.icons.arrowLeftRight),
                     onPress: _onPressedStudentView,
                   ),
                   FTile(
@@ -221,10 +221,10 @@ class _SManagementScreenState extends ConsumerState<SManagementScreen> with Sing
               icon: FIcon(FAssets.icons.messageCircleWarning),
               label: Text(SLocalizations.of(context)!.feedback),
             ),
-            FBottomNavigationBarItem(
-              icon: FIcon(FAssets.icons.settings2),
-              label: Text(SLocalizations.of(context)!.administration),
-            ),
+            // FBottomNavigationBarItem(
+            //   icon: FIcon(FAssets.icons.settings2),
+            //   label: Text(SLocalizations.of(context)!.administration),
+            // ),
           ],
         ],
       ),
