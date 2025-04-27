@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:xml/xml.dart';
+import 'package:sa_data/sa_data.dart';
 
 part 'school_life_item.freezed.dart';
 part 'school_life_item.g.dart';
@@ -27,7 +27,7 @@ class SSchoolLifeItem with _$SSchoolLifeItem {
     required String? hyperlink,
 
     /// Article to be opened when the item is clicked.
-    @SXmlDocumentConverter() required XmlDocument? article,
+    @SArticleConverter() required SArticle? article,
   }) = SAnnouncementSchoolLifeItem;
 
   /// Create a new [SSchoolLifeItem] that represents an event.
@@ -51,7 +51,7 @@ class SSchoolLifeItem with _$SSchoolLifeItem {
     required String? hyperlink,
 
     /// Article to be opened when the item is clicked.
-    @SXmlDocumentConverter() required XmlDocument? article,
+    @SArticleConverter() required SArticle? article,
   }) = SEventSchoolLifeItem;
 
   /// Create a new [SSchoolLifeItem] that represents a post.
@@ -78,21 +78,9 @@ class SSchoolLifeItem with _$SSchoolLifeItem {
     required String? hyperlink,
 
     /// Article to be opened when the item is clicked.
-    @SXmlDocumentConverter() required XmlDocument? article,
+    @SArticleConverter() required SArticle? article,
   }) = SPostSchoolLifeItem;
 
   /// Create a new [SSchoolLifeItem] from a JSON object.
   factory SSchoolLifeItem.fromJson(Map<String, dynamic> json) => _$SSchoolLifeItemFromJson(json);
-}
-
-/// JSON converter for [XmlDocument] objects.
-class SXmlDocumentConverter implements JsonConverter<XmlDocument, String> {
-  /// Create a new [SXmlDocumentConverter].
-  const SXmlDocumentConverter();
-
-  @override
-  XmlDocument fromJson(String json) => XmlDocument.parse(json);
-
-  @override
-  String toJson(XmlDocument object) => object.toXmlString(pretty: true, indent: '\t');
 }
