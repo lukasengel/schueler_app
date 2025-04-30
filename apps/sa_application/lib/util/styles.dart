@@ -6,7 +6,7 @@ abstract final class SStyles {
   static const maxContentWidth = 600.0;
 
   /// The default padding for list views.
-  static const listViewPadding = EdgeInsets.fromLTRB(0, 12, 0, 48);
+  static const listViewPadding = EdgeInsets.fromLTRB(10, 12, 10, 60);
 
   /// The default spacing between tiles in a list view.
   static const listTileSpacing = 10.0;

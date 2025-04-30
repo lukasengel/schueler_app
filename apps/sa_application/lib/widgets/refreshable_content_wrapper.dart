@@ -62,9 +62,7 @@ class _SRefreshableContentWrapperState extends State<SRefreshableContentWrapper>
         cacheExtent: 10000,
         slivers: [
           SliverPadding(
-            padding: const EdgeInsets.symmetric(
-              vertical: SStyles.listTileSpacing,
-            ),
+            padding: SStyles.listViewPadding,
             sliver: widget.sliver,
           ),
         ],

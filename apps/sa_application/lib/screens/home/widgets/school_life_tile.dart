@@ -76,7 +76,9 @@ class _SPostSchoolLifeTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final borderRadius = FTheme.of(context).style.borderRadius.resolve(TextDirection.ltr).topRight;
+    final borderRadius = BorderRadius.vertical(
+      top: FTheme.of(context).style.borderRadius.resolve(TextDirection.ltr).topRight,
+    );
 
     return _SSchoolLifeBaseTile(
       key: key,
@@ -86,9 +88,7 @@ class _SPostSchoolLifeTile extends StatelessWidget {
       ),
       child: ClipRRect(
         clipBehavior: Clip.antiAliasWithSaveLayer,
-        borderRadius: BorderRadius.vertical(
-          top: borderRadius,
-        ),
+        borderRadius: borderRadius,
         child: LayoutBuilder(
           builder: (context, constraints) => Stack(
             alignment: Alignment.bottomLeft,
@@ -98,30 +98,28 @@ class _SPostSchoolLifeTile extends StatelessWidget {
                 width: constraints.maxWidth,
                 fit: BoxFit.fill,
                 url: item.imageUrl,
+                gaplessPlayback: true,
               ),
               GlossyContainer(
                 height: 300,
                 width: constraints.maxWidth,
-                borderRadius: BorderRadius.vertical(
-                  top: borderRadius,
-                ),
+                borderRadius: borderRadius,
                 border: Border.all(
-                  color: Theme.of(context).brightness == Brightness.dark ? Colors.white24 : Colors.white60,
+                  color: Theme.of(context).brightness == Brightness.dark ? Colors.white12 : Colors.white38,
                 ),
                 child: Container(
                   // Give the image a padding and clip it's edges, so it does not overlap the border.
                   padding: const EdgeInsets.all(1),
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.vertical(
-                      top: borderRadius + const Radius.circular(3),
-                    ),
+                    borderRadius: borderRadius + const BorderRadius.vertical(top: Radius.circular(3)),
                   ),
                   child: FastCachedImage(
                     width: double.infinity,
                     height: double.infinity,
                     fit: BoxFit.fitHeight,
                     url: item.imageUrl,
+                    gaplessPlayback: true,
                   ),
                 ),
               ),
@@ -176,7 +174,7 @@ class _SSchoolLifeBaseTile extends StatelessWidget {
     // Open the article, if available.
     if (item.article != null) {
       await GoRouter.of(context).push(
-        '/article',
+        '/home/article',
         extra: item,
       );
     }

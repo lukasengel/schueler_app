@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
 import 'package:go_router/go_router.dart';
+import 'package:loading_indicator/loading_indicator.dart' as loading_indicator;
 import 'package:sa_application/l10n/l10n.dart';
 import 'package:sa_application/providers/_providers.dart';
 import 'package:sa_application/screens/_screens.dart';
@@ -17,8 +18,7 @@ class SHomeScreen extends ConsumerStatefulWidget {
   ConsumerState<SHomeScreen> createState() => _SHomeScreenState();
 }
 
-class _SHomeScreenState extends ConsumerState<SHomeScreen> with SingleTickerProviderStateMixin {
-  late FPopoverController _popoverController;
+class _SHomeScreenState extends ConsumerState<SHomeScreen> {
   var _initial = true;
   var _index = 0;
 
@@ -61,23 +61,17 @@ class _SHomeScreenState extends ConsumerState<SHomeScreen> with SingleTickerProv
   void initState() {
     // Load data as soon as the screen is built.
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      // Wait for at least 300 milliseconds.
+      // Wait for at least 500 milliseconds.
       // If the loading goes too fast, it seems like the app is flickering.
       await Future.wait([
+        Future<void>.delayed(const Duration(milliseconds: 500)),
         _onRefresh(),
       ]);
 
       setState(() => _initial = false);
     });
 
-    _popoverController = FPopoverController(vsync: this);
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    _popoverController.dispose();
-    super.dispose();
   }
 
   @override
@@ -93,38 +87,32 @@ class _SHomeScreenState extends ConsumerState<SHomeScreen> with SingleTickerProv
             SLocalizations.of(context)!.schoolLife,
           ][_index],
         ),
-        suffixActions: [
-          FPopoverMenu(
-            popoverController: _popoverController,
-            menu: [
-              FTileGroup(
-                children: [
-                  FTile(
-                    prefixIcon: FIcon(FAssets.icons.arrowLeftRight),
-                    title: Text(SLocalizations.of(context)!.managementView),
-                    onPress: _onPressedManagementView,
-                  ),
-                  FTile(
-                    prefixIcon: FIcon(FAssets.icons.settings),
-                    title: Text(SLocalizations.of(context)!.settings),
-                    onPress: _onPressedSettings,
-                  ),
-                ],
-              ),
-            ],
-            child: FHeaderAction(
-              icon: FIcon(authState.isManager ? FAssets.icons.ellipsisVertical : FAssets.icons.settings),
-              onPress: authState.isManager ? _popoverController.toggle : _onPressedSettings,
+        prefixActions: [
+          // If the user has management privileges, provide a button to switch to the management view.
+          if (authState.isManager)
+            FHeaderAction(
+              icon: FIcon(FAssets.icons.arrowLeftRight),
+              onPress: _onPressedManagementView,
             ),
+        ],
+        suffixActions: [
+          FHeaderAction(
+            icon: FIcon(FAssets.icons.settings),
+            onPress: _onPressedSettings,
           ),
         ],
       ),
       content: _initial
           // If the screen is in initial state, show a loading indicator.
           ? Center(
-              child: SIconPlaceholder(
-                message: SLocalizations.of(context)!.loading,
-                iconSvg: FAssets.icons.hourglass,
+              child: SizedBox(
+                height: 48,
+                child: loading_indicator.LoadingIndicator(
+                  indicatorType: loading_indicator.Indicator.ballSpinFadeLoader,
+                  colors: [
+                    FTheme.of(context).colorScheme.foreground,
+                  ],
+                ),
               ),
             )
           // Otherwise, show the content.

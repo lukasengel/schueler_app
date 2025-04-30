@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
 import 'package:go_router/go_router.dart';
+import 'package:loading_indicator/loading_indicator.dart' as loading_indicator;
 import 'package:sa_application/l10n/l10n.dart';
 import 'package:sa_application/providers/_providers.dart';
 import 'package:sa_application/screens/_screens.dart';
@@ -18,8 +19,7 @@ class SManagementScreen extends ConsumerStatefulWidget {
   ConsumerState<SManagementScreen> createState() => _SManagementScreenState();
 }
 
-class _SManagementScreenState extends ConsumerState<SManagementScreen> with SingleTickerProviderStateMixin {
-  late FPopoverController _popoverController;
+class _SManagementScreenState extends ConsumerState<SManagementScreen> {
   var _initial = true;
   var _index = 0;
 
@@ -108,23 +108,17 @@ class _SManagementScreenState extends ConsumerState<SManagementScreen> with Sing
   void initState() {
     // Refresh the content as soon as the screen is built.
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      // Wait for at least 300 milliseconds.
+      // Wait for at least 500 milliseconds.
       // If the loading goes too fast, it seems like the app is flickering.
       await Future.wait([
+        Future<void>.delayed(const Duration(milliseconds: 500)),
         _onRefresh(),
       ]);
 
       setState(() => _initial = false);
     });
 
-    _popoverController = FPopoverController(vsync: this);
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    _popoverController.dispose();
-    super.dispose();
   }
 
   @override
@@ -142,48 +136,29 @@ class _SManagementScreenState extends ConsumerState<SManagementScreen> with Sing
           ][_index],
         ),
         prefixActions: [
-          // Only show the add button on the first two tabs.
-          if (_index < 2)
-            FHeaderAction(
-              icon: FIcon(FAssets.icons.plus),
-              onPress: [
-                _onPressedAddSchoolLifeItem,
-                _onPressedAddTeacher,
-              ][_index],
-            ),
+          FHeaderAction(
+            icon: FIcon(FAssets.icons.arrowLeftRight),
+            onPress: _onPressedStudentView,
+          ),
         ],
         suffixActions: [
-          FPopoverMenu(
-            popoverController: _popoverController,
-            menu: [
-              FTileGroup(
-                children: [
-                  FTile(
-                    title: Text(SLocalizations.of(context)!.studentView),
-                    prefixIcon: FIcon(FAssets.icons.arrowLeftRight),
-                    onPress: _onPressedStudentView,
-                  ),
-                  FTile(
-                    title: Text(SLocalizations.of(context)!.settings),
-                    prefixIcon: FIcon(FAssets.icons.settings),
-                    onPress: _onPressedSettings,
-                  ),
-                ],
-              ),
-            ],
-            child: FHeaderAction(
-              icon: FIcon(FAssets.icons.ellipsisVertical),
-              onPress: _popoverController.toggle,
-            ),
+          FHeaderAction(
+            icon: FIcon(FAssets.icons.settings),
+            onPress: _onPressedSettings,
           ),
         ],
       ),
       content: _initial
           // If the screen is in initial state, show a loading indicator.
           ? Center(
-              child: SIconPlaceholder(
-                message: SLocalizations.of(context)!.loading,
-                iconSvg: FAssets.icons.hourglass,
+              child: SizedBox(
+                height: 48,
+                child: loading_indicator.LoadingIndicator(
+                  indicatorType: loading_indicator.Indicator.ballSpinFadeLoader,
+                  colors: [
+                    FTheme.of(context).colorScheme.foreground,
+                  ],
+                ),
               ),
             )
           // Otherwise, show the content.
@@ -204,6 +179,24 @@ class _SManagementScreenState extends ConsumerState<SManagementScreen> with Sing
                 ),
               ],
             ),
+      floatingActionButton: !_initial && _index < 2
+          ? [
+              IntrinsicWidth(
+                child: FButton(
+                  onPress: _onPressedAddSchoolLifeItem,
+                  prefix: FIcon(FAssets.icons.plus),
+                  label: Text(SLocalizations.of(context)!.addEntry),
+                ),
+              ),
+              IntrinsicWidth(
+                child: FButton(
+                  onPress: _onPressedAddTeacher,
+                  prefix: FIcon(FAssets.icons.plus),
+                  label: Text(SLocalizations.of(context)!.addTeacher),
+                ),
+              ),
+            ][_index]
+          : null,
       footer: FBottomNavigationBar(
         index: _index,
         onChange: _onSwitchTab,

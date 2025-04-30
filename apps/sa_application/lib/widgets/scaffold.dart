@@ -12,18 +12,18 @@ class SScaffold extends StatelessWidget {
   /// The footer of the scaffold.
   final Widget? footer;
 
+  /// The floating action button of the scaffold.
+  final Widget? floatingActionButton;
+
   /// The content of the scaffold.
   final Widget content;
-
-  /// Whether to apply padding to the content.
-  final bool contentPad;
 
   /// Create a new [SScaffold].
   const SScaffold({
     required this.content,
     this.header,
     this.footer,
-    this.contentPad = true,
+    this.floatingActionButton,
     super.key,
   });
 
@@ -32,13 +32,13 @@ class SScaffold extends StatelessWidget {
     required Widget content,
     Widget? header,
     Widget? footer,
+    Widget? floatingActionButton,
     double maxWidth = SStyles.maxContentWidth,
-    bool contentPad = true,
   }) {
     return SScaffold(
       header: header,
       footer: footer,
-      contentPad: contentPad,
+      floatingActionButton: floatingActionButton,
       content: Align(
         alignment: Alignment.topCenter,
         child: ConstrainedBox(
@@ -57,13 +57,13 @@ class SScaffold extends StatelessWidget {
     required ScrollController controller,
     Widget? header,
     Widget? footer,
+    Widget? floatingActionButton,
     double maxWidth = SStyles.maxContentWidth,
-    bool contentPad = true,
   }) {
     return SScaffold(
       header: header,
       footer: footer,
-      contentPad: false,
+      floatingActionButton: floatingActionButton,
       content: CupertinoScrollbar(
         controller: controller,
         child: Align(
@@ -72,13 +72,7 @@ class SScaffold extends StatelessWidget {
             constraints: BoxConstraints(
               maxWidth: maxWidth,
             ),
-            // Wrap with builder to get the correct context for padding.
-            child: Builder(
-              builder: (context) => Padding(
-                padding: contentPad ? FTheme.of(context).scaffoldStyle.contentPadding : EdgeInsets.zero,
-                child: content,
-              ),
-            ),
+            child: content,
           ),
         ),
       ),
@@ -92,14 +86,23 @@ class SScaffold extends StatelessWidget {
       onTap: FocusScope.of(context).unfocus,
       child: FScaffold(
         header: header,
-        // Remove top padding, to prevent weird behavior of Scrollables on mobile platforms.
-        content: MediaQuery.removePadding(
-          context: context,
-          removeTop: true,
-          child: content,
-        ),
         footer: footer,
-        contentPad: contentPad,
+        contentPad: false,
+        // Remove top padding, to prevent weird behavior of Scrollables on mobile platforms.
+        content: Stack(
+          children: [
+            MediaQuery.removePadding(
+              context: context,
+              removeTop: true,
+              child: content,
+            ),
+            Container(
+              alignment: Alignment.bottomRight,
+              margin: const EdgeInsets.all(8),
+              child: floatingActionButton,
+            ),
+          ],
+        ),
       ),
     );
   }

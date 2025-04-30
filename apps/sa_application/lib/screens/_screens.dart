@@ -1,3 +1,4 @@
+export 'article/article_screen.dart';
 export 'home/home_screen.dart';
 export 'home/news_tab.dart';
 export 'home/school_life_tab.dart';

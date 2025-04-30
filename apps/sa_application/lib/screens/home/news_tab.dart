@@ -20,8 +20,8 @@ class SNewsTab extends StatelessWidget {
       onRefresh: onRefresh,
       sliver: SliverFillRemaining(
         child: SIconPlaceholder(
-          iconSvg: FAssets.icons.construction,
-          message: 'Coming soon...',
+          iconSvg: FAssets.icons.rabbit,
+          message: 'Work in Progress',
         ),
       ),
     );

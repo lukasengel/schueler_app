@@ -113,6 +113,12 @@ class _MyAppState extends ConsumerState<MyApp> {
             GoRoute(
               path: '/home',
               builder: (context, state) => const SHomeScreen(),
+              routes: [
+                GoRoute(
+                  path: '/article',
+                  builder: (context, state) => const SArticleScreen(),
+                ),
+              ],
             ),
             GoRoute(
               path: '/management',
