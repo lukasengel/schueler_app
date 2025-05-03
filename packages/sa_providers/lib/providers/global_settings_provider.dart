@@ -16,7 +16,7 @@ class SGlobalSettingsNotifier extends StateNotifier<SGlobalSettings?> {
     return result.fold(
       left,
       (r) {
-        // Only update the state if the teachers were loaded successfully.
+        // Only update the state if the global settings were loaded successfully.
         state = r;
         return right(unit);
       },

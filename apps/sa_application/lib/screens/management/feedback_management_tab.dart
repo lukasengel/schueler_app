@@ -3,10 +3,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
 import 'package:sa_application/l10n/l10n.dart';
-import 'package:sa_application/providers/_providers.dart';
 import 'package:sa_application/util/_util.dart';
 import 'package:sa_application/widgets/_widgets.dart';
 import 'package:sa_data/sa_data.dart';
+import 'package:sa_providers/sa_providers.dart';
 
 /// The tab of the management screen for reviewing feedback.
 class SFeedbackManagementTab extends ConsumerStatefulWidget {

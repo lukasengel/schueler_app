@@ -5,9 +5,9 @@ import 'package:forui/forui.dart';
 import 'package:go_router/go_router.dart';
 import 'package:loading_indicator/loading_indicator.dart' as loading_indicator;
 import 'package:sa_application/l10n/l10n.dart';
-import 'package:sa_application/providers/_providers.dart';
 import 'package:sa_application/screens/_screens.dart';
 import 'package:sa_application/widgets/_widgets.dart';
+import 'package:sa_providers/sa_providers.dart';
 
 /// The home screen of the application, providing three tabs.
 class SHomeScreen extends ConsumerStatefulWidget {

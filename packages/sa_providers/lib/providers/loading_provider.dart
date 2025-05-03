@@ -1,13 +1,13 @@
 import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sa_application/providers/_providers.dart';
 import 'package:sa_common/sa_common.dart';
 import 'package:sa_data/sa_data.dart';
+import 'package:sa_providers/sa_providers.dart';
 
 /// Notifier for loading data.
 ///
-/// Serves as a central point to load and clear the entire application state.
+/// Serves as a central point to load and clear data for the entire application.
 class SLoadingNotifier extends StateNotifier<bool> {
   // Reference to access other providers.
   final Ref _ref;

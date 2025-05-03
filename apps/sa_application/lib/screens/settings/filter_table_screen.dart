@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
 import 'package:sa_application/l10n/l10n.dart';
-import 'package:sa_application/providers/_providers.dart';
 import 'package:sa_application/util/_util.dart';
 import 'package:sa_application/widgets/_widgets.dart';
+import 'package:sa_providers/sa_providers.dart';
 
 /// The settings screen to manage filters for the substitution table.
 class SFilterTableScreen extends ConsumerStatefulWidget {

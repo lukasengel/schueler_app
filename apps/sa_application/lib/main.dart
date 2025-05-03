@@ -8,10 +8,10 @@ import 'package:go_router/go_router.dart';
 import 'package:sa_application/firebase_options.dart';
 import 'package:sa_application/init.dart';
 import 'package:sa_application/l10n/l10n.dart';
-import 'package:sa_application/providers/_providers.dart';
 import 'package:sa_application/screens/_screens.dart';
 import 'package:sa_application/util/_util.dart';
 import 'package:sa_common/sa_common.dart';
+import 'package:sa_providers/sa_providers.dart';
 import 'package:toastification/toastification.dart';
 
 void main() async {

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
 import 'package:sa_application/l10n/l10n.dart';
-import 'package:sa_application/providers/_providers.dart';
 import 'package:sa_application/util/_util.dart';
 import 'package:sa_common/sa_common.dart';
 import 'package:sa_data/sa_data.dart';
+import 'package:sa_providers/sa_providers.dart';
 import 'package:uuid/uuid.dart';
 
 /// The dialog for creating or editing a teacher.

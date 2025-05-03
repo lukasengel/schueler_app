@@ -4,14 +4,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sa_data/sa_data.dart';
 import 'package:uuid/uuid.dart';
 
-/// Notifier for feedback.
+/// Notifier for feedback items.
 class SFeedbackNotifier extends StateNotifier<List<SFeedbackItem>?> {
   /// Create a new [SFeedbackNotifier] with the given initial state.
   SFeedbackNotifier(super.state);
 
-  /// Load feedback.
+  /// Load feedback items.
   Future<Either<SDataException, Unit>> load() async {
-    // Load feedback from database.
+    // Load feedback item from database.
     final result = await SPersistenceRepository.instance.loadFeedback();
 
     // Check if the operation was successful.
@@ -21,7 +21,7 @@ class SFeedbackNotifier extends StateNotifier<List<SFeedbackItem>?> {
         // Sort by datetime in descending order.
         final sorted = r.sorted((a, b) => b.datetime.compareTo(a.datetime));
 
-        // Only update the state if the feedback was loaded successfully.
+        // Only update the state if the feedback items were loaded successfully.
         state = sorted;
         return right(unit);
       },
@@ -46,7 +46,7 @@ class SFeedbackNotifier extends StateNotifier<List<SFeedbackItem>?> {
     );
   }
 
-  /// Submit feedback, that means create a new feedback item in the database.
+  /// Submit a new feedback item.
   Future<Either<SDataException, Unit>> submit({
     required String message,
     String? name,
@@ -74,7 +74,7 @@ class SFeedbackNotifier extends StateNotifier<List<SFeedbackItem>?> {
   }
 }
 
-/// Provider for feedback.
+/// Provider for feedback items.
 final sFeedbackProvider = StateNotifierProvider<SFeedbackNotifier, List<SFeedbackItem>?>(
   (ref) => SFeedbackNotifier(null),
 );

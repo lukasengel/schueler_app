@@ -53,7 +53,7 @@ class SLocalSettingsNotifier extends StateNotifier<SLocalSettings> {
     return result.fold(
       left,
       (r) {
-        // Only update the state if the settings were saved successfully.
+        // Only update the state if the local settings were saved successfully.
         state = newState;
         return right(unit);
       },

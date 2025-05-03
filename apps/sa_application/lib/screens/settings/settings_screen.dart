@@ -4,9 +4,9 @@ import 'package:forui/forui.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:sa_application/l10n/l10n.dart';
-import 'package:sa_application/providers/_providers.dart';
 import 'package:sa_application/util/_util.dart';
 import 'package:sa_application/widgets/_widgets.dart';
+import 'package:sa_providers/sa_providers.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// The settings root screen.

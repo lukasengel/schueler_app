@@ -810,7 +810,14 @@ packages:
       path: "../../packages/sa_data"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "1.0.0"
+  sa_providers:
+    dependency: "direct main"
+    description:
+      path: "../../packages/sa_providers"
+      relative: true
+    source: path
+    version: "1.0.0"
   shared_preferences:
     dependency: transitive
     description:

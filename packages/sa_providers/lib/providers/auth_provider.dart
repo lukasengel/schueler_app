@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sa_application/providers/_providers.dart';
 import 'package:sa_data/sa_data.dart';
+import 'package:sa_providers/sa_providers.dart';
 
 /// Authentication state of the app. Currently, only a wrapper for the currently logged in user.
 @immutable

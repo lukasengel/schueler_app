@@ -4,9 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
 import 'package:mesh_gradient/mesh_gradient.dart';
 import 'package:sa_application/l10n/l10n.dart';
-import 'package:sa_application/providers/_providers.dart';
 import 'package:sa_application/screens/_screens.dart';
 import 'package:sa_application/widgets/_widgets.dart';
+import 'package:sa_providers/sa_providers.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
 /// The login screen of the application.

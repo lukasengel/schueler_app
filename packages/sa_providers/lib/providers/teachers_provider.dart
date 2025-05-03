@@ -27,7 +27,7 @@ class STeachersNotifier extends StateNotifier<List<STeacherItem>?> {
     );
   }
 
-  /// Add a teacher, that means create a new teacher item in the database.
+  /// Add a teacher.
   Future<Either<SDataException, Unit>> add(STeacherItem newTeacher) async {
     // Save teacher item to database.
     final result = await SPersistenceRepository.instance.saveTeacher(newTeacher);
@@ -46,7 +46,7 @@ class STeachersNotifier extends StateNotifier<List<STeacherItem>?> {
     );
   }
 
-  /// Update a teacher, that means update a teacher item in the database.
+  /// Update a teacher.
   Future<Either<SDataException, Unit>> update(STeacherItem updatedTeacher) async {
     // Update teacher item in database.
     final result = await SPersistenceRepository.instance.saveTeacher(updatedTeacher);
@@ -67,7 +67,7 @@ class STeachersNotifier extends StateNotifier<List<STeacherItem>?> {
     );
   }
 
-  /// Delete a teacher, that means remove a teacher item from the database.
+  /// Delete a teacher.
   Future<Either<SDataException, Unit>> delete(STeacherItem teacher) async {
     // Delete teacher item from database.
     final result = await SPersistenceRepository.instance.deleteTeacher(teacher);

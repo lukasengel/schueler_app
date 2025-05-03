@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sa_application/providers/_providers.dart';
 import 'package:sa_common/sa_common.dart';
 import 'package:sa_data/sa_data.dart';
+import 'package:sa_providers/sa_providers.dart';
 
 /// Attempt to load the local settings from storage, and, if successful, provide an override for the local settings provider.
 Future<Override?> loadLocalSettings() async {
