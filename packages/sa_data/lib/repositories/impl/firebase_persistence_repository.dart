@@ -25,6 +25,11 @@ class SFirebasePersistenceRepository extends SPersistenceRepository {
   }
 
   @override
+  Future<Either<SDataException, SExternalDataSnapshot>> loadExternalData() {
+    return _loadItem('external', 'latest', SExternalDataSnapshot.fromJson);
+  }
+
+  @override
   Future<Either<SDataException, List<SSchoolLifeItem>>> loadSchoolLifeItems() {
     return _loadItems('schoolLife', SSchoolLifeItem.fromJson);
   }

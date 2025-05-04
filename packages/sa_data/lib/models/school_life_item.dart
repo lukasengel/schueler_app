@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:sa_data/converters/article_converter.dart';
 import 'package:sa_data/sa_data.dart';
 
 part 'school_life_item.freezed.dart';

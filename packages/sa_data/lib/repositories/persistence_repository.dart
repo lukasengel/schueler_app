@@ -14,9 +14,14 @@ abstract class SPersistenceRepository {
     return SFirebasePersistenceRepository.instance;
   }
 
+  /// Load the latest snapshot of external data from the database.
+  ///
+  /// Returns an [SDataException] upon failure.
+  Future<Either<SDataException, SExternalDataSnapshot>> loadExternalData();
+
   /// Load all school life items from the database.
   ///
-  /// If an error occurs while retrieving data, an [SDataException] is returned.
+  /// Returns an [SDataException] upon failure.
   Future<Either<SDataException, List<SSchoolLifeItem>>> loadSchoolLifeItems();
 
   /// Save a school life item to the database.
@@ -33,7 +38,7 @@ abstract class SPersistenceRepository {
 
   /// Load all teachers from the database.
   ///
-  /// If an error occurs while retrieving data, an [SDataException] is returned.
+  /// Returns an [SDataException] upon failure.
   Future<Either<SDataException, List<STeacherItem>>> loadTeachers();
 
   /// Save a teacher to the database.
@@ -50,7 +55,7 @@ abstract class SPersistenceRepository {
 
   /// Load all feedback items from the database.
   ///
-  /// If an error occurs while retrieving data, an [SDataException] is returned.
+  /// Returns an [SDataException] upon failure.
   Future<Either<SDataException, List<SFeedbackItem>>> loadFeedback();
 
   /// Save a feedback item to the database.
