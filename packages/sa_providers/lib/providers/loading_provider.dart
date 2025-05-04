@@ -19,6 +19,7 @@ class SLoadingNotifier extends StateNotifier<bool> {
   Future<Either<List<SDataException>, Unit>> loadHome() async {
     final futures = [
       _ref.read(sGlobalSettingsProvider.notifier).load(),
+      _ref.read(sExternalDataProvider.notifier).load(),
       _ref.read(sSchoolLifeProvider.notifier).load(),
       _ref.read(sTeachersProvider.notifier).load(),
     ];
@@ -80,6 +81,7 @@ class SLoadingNotifier extends StateNotifier<bool> {
 
   /// Clear the entire application state and reset the local settings.
   Future<Either<SDataException, Unit>> clear() async {
+    _ref.read(sExternalDataProvider.notifier).clear();
     _ref.read(sFeedbackProvider.notifier).clear();
     _ref.read(sGlobalSettingsProvider.notifier).clear();
     _ref.read(sTeachersProvider.notifier).clear();

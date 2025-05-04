@@ -1,4 +1,5 @@
 export 'auth_provider.dart';
+export 'external_data_provider.dart';
 export 'feedback_provider.dart';
 export 'global_settings_provider.dart';
 export 'loading_provider.dart';
