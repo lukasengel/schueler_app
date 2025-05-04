@@ -78,9 +78,9 @@ class _STeachersManagementTabState extends ConsumerState<STeachersManagementTab>
   Widget build(BuildContext context) {
     final teachers = ref.watch(sTeachersProvider);
 
-    return SRefreshableContentWrapper(
+    return SRefreshableWrapper(
       onRefresh: widget.onRefresh,
-      sliver: SContentList(
+      sliver: STileList(
         items: teachers,
         tileBuilder: (context, item, _) => SManagementTile(
           title: Text(item.abbreviation),

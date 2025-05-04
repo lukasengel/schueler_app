@@ -53,9 +53,9 @@ class _SFeedbackManagementTabState extends ConsumerState<SFeedbackManagementTab>
   Widget build(BuildContext context) {
     final feedbackItems = ref.watch(sFeedbackProvider);
 
-    return SRefreshableContentWrapper(
+    return SRefreshableWrapper(
       onRefresh: widget.onRefresh,
-      sliver: SContentList(
+      sliver: STileList(
         items: feedbackItems,
         tileBuilder: (context, item, _) => SManagementTile(
           onDelete: () => _onDeleteFeedback(item),

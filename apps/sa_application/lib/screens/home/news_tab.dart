@@ -16,7 +16,7 @@ class SNewsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SRefreshableContentWrapper(
+    return SRefreshableWrapper(
       onRefresh: onRefresh,
       sliver: SliverFillRemaining(
         child: SIconPlaceholder(

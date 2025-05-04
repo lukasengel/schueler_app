@@ -49,7 +49,7 @@ class _SSchoolLifeDialogState extends State<SSchoolLifeDialog> with SingleTicker
   late String _uuid;
   var _itemType = _SSchoolLifeItemType.ANNOUNCEMENT;
   var _imageSource = _SImageSource.FILE;
-  var _darkHeadlineColoring = false;
+  var _darkHeadlineColoring = true;
   var _uploading = false;
 
   /// Callback for when the cancel button is pressed.

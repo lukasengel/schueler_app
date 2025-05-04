@@ -5,7 +5,7 @@ import 'package:sa_application/l10n/l10n.dart';
 import 'package:sa_application/util/_util.dart';
 
 /// Wrapper for the content of a screen to make it refreshable using an [EasyRefresh] widget.
-class SRefreshableContentWrapper extends StatefulWidget {
+class SRefreshableWrapper extends StatefulWidget {
   /// Callback for refreshing the content.
   final Future<IndicatorResult> Function() onRefresh;
 
@@ -15,8 +15,8 @@ class SRefreshableContentWrapper extends StatefulWidget {
   /// Child to be wrapped. Must be a sliver.
   final Widget sliver;
 
-  /// Create a new [SRefreshableContentWrapper].
-  const SRefreshableContentWrapper({
+  /// Create a new [SRefreshableWrapper].
+  const SRefreshableWrapper({
     required this.onRefresh,
     required this.sliver,
     this.controller,
@@ -24,10 +24,10 @@ class SRefreshableContentWrapper extends StatefulWidget {
   });
 
   @override
-  State<SRefreshableContentWrapper> createState() => _SRefreshableContentWrapperState();
+  State<SRefreshableWrapper> createState() => _SRefreshableWrapperState();
 }
 
-class _SRefreshableContentWrapperState extends State<SRefreshableContentWrapper> {
+class _SRefreshableWrapperState extends State<SRefreshableWrapper> {
   var _hasDispatchedHapticFeedback = false;
 
   @override

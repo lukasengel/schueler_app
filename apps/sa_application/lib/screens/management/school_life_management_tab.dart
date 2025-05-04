@@ -79,9 +79,9 @@ class _SSchoolLifeManagementTabState extends ConsumerState<SSchoolLifeManagement
   Widget build(BuildContext context) {
     final schoolLifeItems = ref.watch(sSchoolLifeProvider);
 
-    return SRefreshableContentWrapper(
+    return SRefreshableWrapper(
       onRefresh: widget.onRefresh,
-      sliver: SContentList(
+      sliver: STileList(
         items: schoolLifeItems,
         tileBuilder: (context, item, _) => SManagementTile(
           onEdit: () => _onEditSchoolLifeItem(item),
@@ -106,7 +106,7 @@ class _SSchoolLifeManagementTabState extends ConsumerState<SSchoolLifeManagement
             ],
           ),
           subtitle: Text(
-            item.datetime.toLocal().formatDateTimeLocalized(context),
+            item.datetime.toLocal().formatDateLocalized(context),
           ),
         ),
         emptyBuilder: (context) => SIconPlaceholder(

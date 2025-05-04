@@ -66,7 +66,7 @@ class _STeacherAbbreviationsScreenState extends ConsumerState<STeacherAbbreviati
         slivers: [
           SliverPadding(
             padding: SStyles.listViewPadding,
-            sliver: SContentList(
+            sliver: STileList(
               items: filtered,
               tileBuilder: (context, item, _) => FTile(
                 subtitle: Text(item.name),

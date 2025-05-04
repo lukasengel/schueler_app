@@ -22,9 +22,9 @@ class SSchoolLifeTab extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final items = ref.watch(sSchoolLifeProvider);
 
-    return SRefreshableContentWrapper(
+    return SRefreshableWrapper(
       onRefresh: onRefresh,
-      sliver: SContentList(
+      sliver: STileList(
         items: items,
         tileBuilder: (context, item, child) => SSchoolLifeTile(
           key: ValueKey(item),

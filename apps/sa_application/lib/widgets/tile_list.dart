@@ -10,7 +10,7 @@ import 'package:sa_application/widgets/_widgets.dart';
 /// If the list is null, it shows an icon and a message indicating that the data could not be loaded.
 ///
 /// Attention: Returns a sliver, not a box widget.
-class SContentList<T> extends StatelessWidget {
+class STileList<T> extends StatelessWidget {
   /// The list of items to be displayed.
   final List<T>? items;
 
@@ -20,8 +20,8 @@ class SContentList<T> extends StatelessWidget {
   /// A builder function that creates a widget to be displayed when the list is empty.
   final WidgetBuilder emptyBuilder;
 
-  /// Create a new [SContentList].
-  const SContentList({
+  /// Create a new [STileList].
+  const STileList({
     required this.items,
     required this.tileBuilder,
     required this.emptyBuilder,

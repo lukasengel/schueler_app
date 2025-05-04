@@ -1,8 +1,6 @@
-import 'package:fast_cached_network_image/fast_cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
-import 'package:glossy/glossy.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sa_application/l10n/l10n.dart';
 import 'package:sa_application/util/_util.dart';
@@ -76,75 +74,46 @@ class _SPostSchoolLifeTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final borderRadius = BorderRadius.vertical(
-      top: FTheme.of(context).style.borderRadius.resolve(TextDirection.ltr).topRight,
-    );
-
     return _SSchoolLifeBaseTile(
       key: key,
       item: item,
       childPadding: const EdgeInsets.only(
         bottom: 8,
       ),
-      child: ClipRRect(
-        clipBehavior: Clip.antiAliasWithSaveLayer,
-        borderRadius: borderRadius,
-        child: LayoutBuilder(
-          builder: (context, constraints) => Stack(
-            alignment: Alignment.bottomLeft,
-            children: [
-              FastCachedImage(
-                height: 300,
-                width: constraints.maxWidth,
-                fit: BoxFit.fill,
-                url: item.imageUrl,
-                gaplessPlayback: true,
-              ),
-              GlossyContainer(
-                height: 300,
-                width: constraints.maxWidth,
-                borderRadius: borderRadius,
-                border: Border.all(
-                  color: Theme.of(context).brightness == Brightness.dark ? Colors.white12 : Colors.white38,
-                ),
-                child: Container(
-                  // Give the image a padding and clip it's edges, so it does not overlap the border.
-                  padding: const EdgeInsets.all(1),
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                    borderRadius: borderRadius + const BorderRadius.vertical(top: Radius.circular(3)),
-                  ),
-                  child: FastCachedImage(
-                    width: double.infinity,
-                    height: double.infinity,
-                    fit: BoxFit.fitHeight,
-                    url: item.imageUrl,
-                    gaplessPlayback: true,
-                  ),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.all(1),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 15,
-                  vertical: 10,
-                ),
-                color: (item.darkHeadline ? Colors.black : Colors.white).withValues(
-                  alpha: 0.4,
-                ),
-                child: Text(
-                  item.headline.toUpperCase(),
-                  maxLines: 3,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w800,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ],
+      child: Stack(
+        alignment: Alignment.bottomLeft,
+        children: [
+          SBlurredBackgroundImage(
+            url: item.imageUrl,
+            height: 300,
+            width: double.infinity,
+            // Only round the top corners of the image.
+            borderRadius: BorderRadius.vertical(
+              top: FTheme.of(context).style.borderRadius.topRight,
+            ),
           ),
-        ),
+          // Display a container that contains the headline of the post.
+          Container(
+            // Add a margin, so it does not overlap the border of the image.
+            margin: const EdgeInsets.all(1),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 15,
+              vertical: 10,
+            ),
+            color: (item.darkHeadline ? Colors.black : Colors.white).withValues(
+              alpha: 0.4,
+            ),
+            child: Text(
+              item.headline.toUpperCase(),
+              maxLines: 3,
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w800,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -178,7 +147,7 @@ class _SSchoolLifeBaseTile extends StatelessWidget {
         extra: item,
       );
     }
-    // Else open the hyperlink.
+    // Otherwise, open the hyperlink.
     else if (item.hyperlink != null) {
       // Attempt to launch the URL.
       try {
@@ -232,7 +201,7 @@ class _SSchoolLifeBaseTile extends StatelessWidget {
                   if (tappable)
                     Padding(
                       padding: const EdgeInsets.only(
-                        top: 3,
+                        top: 5,
                       ),
                       child: Align(
                         alignment: Alignment.centerRight,
@@ -244,26 +213,28 @@ class _SSchoolLifeBaseTile extends StatelessWidget {
                         ),
                       ),
                     ),
-                  const SizedBox(
-                    height: 10,
-                  ),
                   // Display the creation date and type of the item.
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        item.map(
-                          announcement: (_) => SLocalizations.of(context)!.announcement,
-                          event: (_) => SLocalizations.of(context)!.event,
-                          post: (_) => SLocalizations.of(context)!.post,
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 10,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          item.map(
+                            announcement: (_) => SLocalizations.of(context)!.announcement,
+                            event: (_) => SLocalizations.of(context)!.event,
+                            post: (_) => SLocalizations.of(context)!.post,
+                          ),
+                          style: tileStyle.contentStyle.enabledStyle.subtitleTextStyle,
                         ),
-                        style: tileStyle.contentStyle.enabledStyle.subtitleTextStyle,
-                      ),
-                      Text(
-                        item.datetime.formatDateLocalized(context),
-                        style: tileStyle.contentStyle.enabledStyle.subtitleTextStyle,
-                      ),
-                    ],
+                        Text(
+                          item.datetime.formatDateLocalized(context),
+                          style: tileStyle.contentStyle.enabledStyle.subtitleTextStyle,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
