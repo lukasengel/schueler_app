@@ -1,7 +1,6 @@
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:forui/forui.dart';
 import 'package:sa_application/l10n/l10n.dart';
 import 'package:sa_application/screens/_screens.dart';
 import 'package:sa_application/widgets/_widgets.dart';
@@ -88,9 +87,10 @@ class _STeachersManagementTabState extends ConsumerState<STeachersManagementTab>
           onDelete: () => _onDeleteTeacher(item),
           onEdit: () => _onEditTeacher(item),
         ),
-        emptyBuilder: (context) => SIconPlaceholder(
+        emptyBuilder: (context) => SIconPlaceholder.svg(
+          context: context,
           message: SLocalizations.of(context)!.noTeachers,
-          iconSvg: const SvgAsset(null, 'icon_black', 'assets/images/lucky_cat.svg'),
+          svgAsset: 'assets/images/lucky_cat.svg',
         ),
       ),
     );

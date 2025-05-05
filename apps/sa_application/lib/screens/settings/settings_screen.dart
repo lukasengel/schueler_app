@@ -123,7 +123,7 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
         title: Text(
           SLocalizations.of(context)!.settings,
         ),
-        prefixActions: [
+        prefixes: [
           FHeaderAction.back(
             onPress: Navigator.of(context).pop,
           ),
@@ -133,45 +133,45 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
         padding: SStyles.listViewPadding,
         children: [
           FTile(
-            prefixIcon: FIcon(FAssets.icons.pen),
+            prefixIcon: const Icon(FIcons.pen),
             title: Text(SLocalizations.of(context)!.personalization),
-            suffixIcon: FIcon(FAssets.icons.chevronRight),
+            suffixIcon: const Icon(FIcons.chevronRight),
             onPress: _onPressedPersonalization,
           ),
           const SizedBox(
             height: SStyles.listTileSpacing,
           ),
           FTile(
-            prefixIcon: FIcon(FAssets.icons.listFilter),
+            prefixIcon: const Icon(FIcons.listFilter),
             title: Text(SLocalizations.of(context)!.filterTable),
-            suffixIcon: FIcon(FAssets.icons.chevronRight),
+            suffixIcon: const Icon(FIcons.chevronRight),
             onPress: _onPressedFilterTable,
           ),
           const SizedBox(
             height: SStyles.listTileSpacing,
           ),
           FTile(
-            prefixIcon: FIcon(FAssets.icons.signature),
+            prefixIcon: const Icon(FIcons.signature),
             title: Text(SLocalizations.of(context)!.teacherAbbreviations),
-            suffixIcon: FIcon(FAssets.icons.chevronRight),
+            suffixIcon: const Icon(FIcons.chevronRight),
             onPress: _onPressedTeacherAbbreviations,
           ),
           const SizedBox(
             height: SStyles.listTileSpacing,
           ),
           FTile(
-            prefixIcon: FIcon(FAssets.icons.messageSquareWarning),
+            prefixIcon: const Icon(FIcons.messageSquareWarning),
             title: Text(SLocalizations.of(context)!.reportBugs),
-            suffixIcon: FIcon(FAssets.icons.chevronRight),
+            suffixIcon: const Icon(FIcons.chevronRight),
             onPress: _onPressedReportBugs,
           ),
           const SizedBox(
             height: SStyles.listTileSpacing,
           ),
           FTile(
-            prefixIcon: FIcon(FAssets.icons.github),
+            prefixIcon: const Icon(FIcons.github),
             title: Text(SLocalizations.of(context)!.github),
-            suffixIcon: FIcon(FAssets.icons.chevronRight),
+            suffixIcon: const Icon(FIcons.chevronRight),
             onPress: _onPressedGitHub,
             onLongPress: _onLongPressedGitHub,
           ),
@@ -179,12 +179,11 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
             height: 1.5 * SStyles.listTileSpacing,
           ),
           Center(
-            child: IntrinsicWidth(
-              child: FButton(
-                prefix: FIcon(FAssets.icons.logOut),
-                label: Text(SLocalizations.of(context)!.logOut),
-                onPress: _onPressedLogOut,
-              ),
+            child: FButton(
+              intrinsicWidth: true,
+              prefix: const Icon(FIcons.logOut),
+              onPress: _onPressedLogOut,
+              child: Text(SLocalizations.of(context)!.logOut),
             ),
           ),
           const SizedBox(

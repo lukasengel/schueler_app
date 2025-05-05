@@ -120,7 +120,7 @@ class _SLoginFormState extends State<SLoginForm> {
               const SizedBox(
                 height: 15,
               ),
-              FTextField(
+              FTextFormField(
                 controller: _usernameController,
                 label: Text(SLocalizations.of(context)!.username),
                 autofillHints: const [AutofillHints.username],
@@ -128,12 +128,11 @@ class _SLoginFormState extends State<SLoginForm> {
                 textInputAction: TextInputAction.next,
                 validator: _onValidateInput,
                 autocorrect: false,
-                maxLines: 1,
               ),
               const SizedBox(
                 height: 10,
               ),
-              FTextField(
+              FTextFormField(
                 controller: _passwordController,
                 label: Text(SLocalizations.of(context)!.password),
                 autofillHints: const [AutofillHints.password],
@@ -142,14 +141,13 @@ class _SLoginFormState extends State<SLoginForm> {
                 validator: _onValidateInput,
                 obscureText: _obscureText,
                 autocorrect: false,
-                maxLines: 1,
                 onSubmit: (_) => _onPressedLogin(),
                 suffixBuilder: (context, style, child) => Padding(
                   padding: FTheme.of(context).textFieldStyle.clearButtonPadding,
                   child: FButton.icon(
                     onPress: () => setState(() => _obscureText = !_obscureText),
                     style: FTheme.of(context).textFieldStyle.clearButtonStyle,
-                    child: FIcon(_obscureText ? FAssets.icons.eye : FAssets.icons.eyeOff),
+                    child: Icon(_obscureText ? FIcons.eye : FIcons.eyeOff),
                   ),
                 ),
               ),
@@ -168,12 +166,12 @@ class _SLoginFormState extends State<SLoginForm> {
                         ? LoadingIndicator(
                             indicatorType: Indicator.ballPulseSync,
                             colors: [
-                              FTheme.of(context).buttonStyles.primary.contentStyle.enabledIconColor,
+                              FTheme.of(context).colors.primaryForeground,
                             ],
                           )
                         : Text(
                             SLocalizations.of(context)!.logIn,
-                            style: FTheme.of(context).buttonStyles.primary.contentStyle.enabledTextStyle,
+                            style: FTheme.of(context).buttonStyles.primary.contentStyle.textStyle.maybeResolve({}),
                           ),
                   ),
                 ),
@@ -185,7 +183,7 @@ class _SLoginFormState extends State<SLoginForm> {
                     const SizedBox(
                       height: 15,
                     ),
-                    FTappable.animated(
+                    FTappable(
                       onPress: _onPressedWhichCredentials,
                       child: Text(
                         SLocalizations.of(context)!.whichCredentials,

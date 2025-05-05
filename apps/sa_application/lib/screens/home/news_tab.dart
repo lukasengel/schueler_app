@@ -1,6 +1,5 @@
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
-import 'package:forui/forui.dart';
 import 'package:sa_application/widgets/_widgets.dart';
 
 /// The home screen tab for viewing news from the principal's office.
@@ -19,9 +18,10 @@ class SNewsTab extends StatelessWidget {
     return SRefreshableWrapper(
       onRefresh: onRefresh,
       sliver: SliverFillRemaining(
-        child: SIconPlaceholder(
-          iconSvg: FAssets.icons.rabbit,
+        child: SIconPlaceholder.svg(
+          context: context,
           message: 'Work in Progress',
+          svgAsset: 'assets/images/lucky_cat.svg',
         ),
       ),
     );

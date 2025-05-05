@@ -109,9 +109,10 @@ class _SSchoolLifeManagementTabState extends ConsumerState<SSchoolLifeManagement
             item.datetime.toLocal().formatDateLocalized(context),
           ),
         ),
-        emptyBuilder: (context) => SIconPlaceholder(
+        emptyBuilder: (context) => SIconPlaceholder.svg(
+          context: context,
           message: SLocalizations.of(context)!.noSchoolLifeItems,
-          iconSvg: const SvgAsset(null, 'icon_black', 'assets/images/lucky_cat.svg'),
+          svgAsset: 'assets/images/lucky_cat.svg',
         ),
       ),
     );

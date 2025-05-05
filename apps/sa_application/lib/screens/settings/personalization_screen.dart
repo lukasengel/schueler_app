@@ -21,9 +21,9 @@ class SPersonalizationScreen extends ConsumerStatefulWidget {
 
 class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen> {
   // Controllers for the select menu tiles.
-  FRadioSelectGroupController<ThemeMode>? _themeModeController;
-  FRadioSelectGroupController<Locale>? _languageController;
-  FRadioSelectGroupController<int>? _daysController;
+  FSelectMenuTileController<ThemeMode>? _themeModeController;
+  FSelectMenuTileController<Locale>? _languageController;
+  FSelectMenuTileController<int>? _daysController;
 
   /// Callback for when the theme mode is selected.
   Future<void> _onSelectThemeMode((ThemeMode, bool) selection) async {
@@ -66,7 +66,7 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
       actions: [
         FButton(
           onPress: Navigator.of(context).pop,
-          label: Text(SLocalizations.of(context)!.ok),
+          child: Text(SLocalizations.of(context)!.ok),
         ),
       ],
     );
@@ -99,7 +99,7 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
         title: Text(
           SLocalizations.of(context)!.personalization,
         ),
-        prefixActions: [
+        prefixes: [
           FHeaderAction.back(
             onPress: Navigator.of(context).pop,
           ),
@@ -114,15 +114,15 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
 
               return FSelectMenuTile(
                 autoHide: true,
-                groupController: _themeModeController ??= FRadioSelectGroupController(
-                  onUpdate: _onSelectThemeMode,
+                selectController: _themeModeController ??= FSelectMenuTileController.radio(
                   value: themeMode,
                 ),
-                prefixIcon: FIcon(
+                onSelect: _onSelectThemeMode,
+                prefixIcon: Icon(
                   switch (themeMode) {
-                    ThemeMode.light => FAssets.icons.sun,
-                    ThemeMode.system => FAssets.icons.sunMoon,
-                    ThemeMode.dark => FAssets.icons.moon,
+                    ThemeMode.light => FIcons.sun,
+                    ThemeMode.system => FIcons.sunMoon,
+                    ThemeMode.dark => FIcons.moon,
                   },
                 ),
                 title: Text(SLocalizations.of(context)!.appearance),
@@ -159,11 +159,11 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
 
               return FSelectMenuTile.builder(
                 autoHide: true,
-                groupController: _daysController ??= FRadioSelectGroupController(
-                  onUpdate: _onSelectShownDays,
+                selectController: _daysController ??= FSelectMenuTileController.radio(
                   value: shownDays,
                 ),
-                prefixIcon: FIcon(FAssets.icons.calendarCog),
+                onSelect: _onSelectShownDays,
+                prefixIcon: const Icon(FIcons.calendarCog),
                 title: Text(SLocalizations.of(context)!.shownDays),
                 description: Padding(
                   padding: const EdgeInsets.only(
@@ -173,7 +173,7 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
                 ),
                 details: Text('$shownDays'),
                 count: 4,
-                menuTileBuilder: (context, index) => FSelectTile(
+                menuBuilder: (context, index) => FSelectTile(
                   title: Text('${index + 2}'),
                   value: index + 2,
                 ),
@@ -185,7 +185,7 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
           ),
           FLabel(
             axis: Axis.vertical,
-            style: context.theme.selectMenuTileStyle.labelStyle,
+            style: context.theme.labelStyles.verticalStyle,
             description: Padding(
               padding: const EdgeInsets.only(
                 left: 5,
@@ -224,7 +224,7 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
                   // Only show inclusive language tile in developer mode.
                   if (isDev)
                     FTile(
-                      prefixIcon: FIcon(FAssets.icons.squareAsterisk),
+                      prefixIcon: const Icon(FIcons.squareAsterisk),
                       title: Text(SLocalizations.of(context)!.inclusiveLanguage),
                       suffixIcon: FCheckbox(
                         onChange: (_) => _onPressedInclusiveLanguage(),
@@ -233,15 +233,15 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
                     ),
                   FSelectMenuTile.builder(
                     autoHide: true,
-                    groupController: _languageController ??= FRadioSelectGroupController(
-                      onUpdate: _onSelectLocale,
+                    selectController: _languageController ??= FSelectMenuTileController.radio(
                       value: locale,
                     ),
-                    prefixIcon: FIcon(FAssets.icons.languages),
+                    onSelect: _onSelectLocale,
+                    prefixIcon: const Icon(FIcons.languages),
                     title: Text(SLocalizations.of(context)!.language),
                     details: Text(locale.nativeDisplayLanguage.capitalize()),
                     count: SLocalizations.supportedLocales.length,
-                    menuTileBuilder: (context, index) {
+                    menuBuilder: (context, index) {
                       final locale = SLocalizations.supportedLocales[index];
 
                       return FSelectTile(

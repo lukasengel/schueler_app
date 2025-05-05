@@ -130,14 +130,14 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
         title: Text(
           SLocalizations.of(context)!.reportBugs,
         ),
-        prefixActions: [
+        prefixes: [
           FHeaderAction.back(
             onPress: _onPressedCancel,
           ),
         ],
-        suffixActions: [
+        suffixes: [
           FHeaderAction(
-            icon: FIcon(FAssets.icons.send),
+            icon: const Icon(FIcons.send),
             onPress: _onPressedSubmit,
           ),
         ],
@@ -154,7 +154,6 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
               keyboardType: TextInputType.name,
               textInputAction: TextInputAction.next,
               autocorrect: false,
-              maxLines: 1,
             ),
             const SizedBox(
               height: SStyles.listTileSpacing,
@@ -165,24 +164,23 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
               keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.next,
               autocorrect: false,
-              maxLines: 1,
             ),
             const SizedBox(
               height: SStyles.listTileSpacing,
             ),
-            FTextField(
+            FTextFormField(
               controller: _messageController,
               label: Text(SLocalizations.of(context)!.message),
               hint: SLocalizations.of(context)!.description,
               keyboardType: TextInputType.multiline,
-              maxLines: 10,
               validator: _onValidate,
+              maxLines: 10,
             ),
             const SizedBox(
               height: SStyles.listTileSpacing,
             ),
             Center(
-              child: FTappable.animated(
+              child: FTappable(
                 onPress: _onPressedPrivacyNote,
                 child: Text(
                   SLocalizations.of(context)!.privacyNote,

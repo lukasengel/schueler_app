@@ -194,7 +194,7 @@ class _SSchoolLifeBaseTile extends StatelessWidget {
                 children: [
                   Text(
                     item.content,
-                    style: tileStyle.contentStyle.enabledStyle.titleTextStyle,
+                    style: tileStyle.pressable.contentStyle.titleTextStyle.maybeResolve({}),
                     maxLines: 100,
                   ),
                   // If the tile is tappable, display a hint for the user.
@@ -227,11 +227,11 @@ class _SSchoolLifeBaseTile extends StatelessWidget {
                             event: (_) => SLocalizations.of(context)!.event,
                             post: (_) => SLocalizations.of(context)!.post,
                           ),
-                          style: tileStyle.contentStyle.enabledStyle.subtitleTextStyle,
+                          style: tileStyle.pressable.contentStyle.subtitleTextStyle.maybeResolve({}),
                         ),
                         Text(
                           item.datetime.formatDateLocalized(context),
-                          style: tileStyle.contentStyle.enabledStyle.subtitleTextStyle,
+                          style: tileStyle.pressable.contentStyle.subtitleTextStyle.maybeResolve({}),
                         ),
                       ],
                     ),

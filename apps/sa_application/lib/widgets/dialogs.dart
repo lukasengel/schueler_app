@@ -32,7 +32,7 @@ Future<void> sShowPlatformMessageDialog({
     actions: [
       FButton(
         onPress: Navigator.of(context).pop,
-        label: Text(SLocalizations.of(context)!.ok),
+        child: Text(SLocalizations.of(context)!.ok),
       ),
     ],
   );
@@ -75,12 +75,12 @@ Future<bool> sShowPlatformConfirmDialog({
     actions: [
       FButton(
         onPress: Navigator.of(context).pop,
-        label: Text(SLocalizations.of(context)!.cancel),
         style: FButtonStyle.secondary,
+        child: Text(SLocalizations.of(context)!.cancel),
       ),
       FButton(
         onPress: () => Navigator.of(context).pop(true),
-        label: Text(confirmLabel),
+        child: Text(confirmLabel),
       ),
     ],
   );

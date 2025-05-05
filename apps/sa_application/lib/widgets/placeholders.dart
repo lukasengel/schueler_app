@@ -1,20 +1,41 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:forui/forui.dart';
 
 /// A general-purpose placeholder widget to display, for example when no data is available.
+/// Contains an icon and a message below it.
 class SIconPlaceholder extends StatelessWidget {
   /// The message to display.
   final String message;
 
-  /// The icon to display as an SVG asset.
-  final SvgAsset iconSvg;
+  /// The widget to display as icon.
+  final Widget icon;
 
-  /// Create a new [SIconPlaceholder].
-  const SIconPlaceholder({
+  /// Create a new [SIconPlaceholder] with an icon.
+  SIconPlaceholder.icon({
     required this.message,
-    required this.iconSvg,
+    required IconData icon,
     super.key,
-  });
+  }) : icon = Icon(
+          icon,
+          size: 42,
+        );
+
+  /// Create a new [SIconPlaceholder] with an SVG icon.
+  SIconPlaceholder.svg({
+    required BuildContext context,
+    required this.message,
+    required String svgAsset,
+    super.key,
+  }) : icon = SvgPicture.asset(
+          svgAsset,
+          width: 42,
+          height: 42,
+          colorFilter: ColorFilter.mode(
+            FTheme.of(context).colors.foreground,
+            BlendMode.srcIn,
+          ),
+        );
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +49,7 @@ class SIconPlaceholder extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            FIcon(
-              iconSvg,
-              size: 42,
-            ),
+            icon,
             const SizedBox(
               height: 10,
             ),

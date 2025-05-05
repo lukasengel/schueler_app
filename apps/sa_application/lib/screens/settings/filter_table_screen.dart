@@ -82,7 +82,7 @@ class _SFilterTableScreenState extends ConsumerState<SFilterTableScreen> {
         title: Text(
           SLocalizations.of(context)!.filterTable,
         ),
-        prefixActions: [
+        prefixes: [
           FHeaderAction.back(
             onPress: Navigator.of(context).pop,
           ),
@@ -120,15 +120,14 @@ class _SFilterTableScreenState extends ConsumerState<SFilterTableScreen> {
                             (e) => localSettings.excludedCourses.contains(e.id),
                           );
 
-                          return IntrinsicWidth(
-                            child: FButton(
-                              label: Text(
-                                isAnyExcluded
-                                    ? SLocalizations.of(context)!.selectAll
-                                    : SLocalizations.of(context)!.deselectAll,
-                              ),
-                              style: FButtonStyle.secondary,
-                              onPress: () => _onPressedSelectAll(isAnyExcluded),
+                          return FButton(
+                            intrinsicWidth: true,
+                            style: FButtonStyle.secondary,
+                            onPress: () => _onPressedSelectAll(isAnyExcluded),
+                            child: Text(
+                              isAnyExcluded
+                                  ? SLocalizations.of(context)!.selectAll
+                                  : SLocalizations.of(context)!.deselectAll,
                             ),
                           );
                         },
@@ -136,7 +135,7 @@ class _SFilterTableScreenState extends ConsumerState<SFilterTableScreen> {
                       const SizedBox(
                         height: SStyles.listTileSpacing,
                       ),
-                      FTappable.animated(
+                      FTappable(
                         onPress: _onPressedHowDoesThisWork,
                         child: Text(
                           SLocalizations.of(context)!.howDoesThisWork,
@@ -149,9 +148,9 @@ class _SFilterTableScreenState extends ConsumerState<SFilterTableScreen> {
               ],
             )
           // Otherwise, show a placeholder.
-          : SIconPlaceholder(
+          : SIconPlaceholder.icon(
               message: SLocalizations.of(context)!.noData,
-              iconSvg: FAssets.icons.ban,
+              icon: FIcons.ban,
             ),
     );
   }

@@ -250,14 +250,14 @@ class _SSchoolLifeDialogState extends State<SSchoolLifeDialog> with SingleTicker
           // Show "add" or "edit" depending on whether the initial item is null or not.
           widget.initial == null ? SLocalizations.of(context)!.addEntry : SLocalizations.of(context)!.editEntry,
         ),
-        prefixActions: [
+        prefixes: [
           FHeaderAction.back(
             onPress: _uploading ? null : _onPressedCancel,
           ),
         ],
-        suffixActions: [
+        suffixes: [
           FHeaderAction(
-            icon: FIcon(FAssets.icons.check),
+            icon: const Icon(FIcons.check),
             onPress: _uploading ? null : _onPressedSave,
           ),
         ],
@@ -276,42 +276,32 @@ class _SSchoolLifeDialogState extends State<SSchoolLifeDialog> with SingleTicker
                   constraints: const BoxConstraints(
                     maxWidth: 200,
                   ),
-                  child: SDropdownMenu(
+                  child: FSelect.fromMap(
+                    {
+                      SLocalizations.of(context)!.announcement: _SSchoolLifeItemType.ANNOUNCEMENT,
+                      SLocalizations.of(context)!.event: _SSchoolLifeItemType.EVENT,
+                      SLocalizations.of(context)!.post: _SSchoolLifeItemType.POST,
+                    },
+                    onChange: _onSelectType,
+                    initialValue: _itemType,
                     label: Text(SLocalizations.of(context)!.type),
-                    initialSelection: _itemType,
-                    dropdownMenuEntries: [
-                      DropdownMenuEntry(
-                        label: SLocalizations.of(context)!.announcement,
-                        value: _SSchoolLifeItemType.ANNOUNCEMENT,
-                      ),
-                      DropdownMenuEntry(
-                        label: SLocalizations.of(context)!.event,
-                        value: _SSchoolLifeItemType.EVENT,
-                      ),
-                      DropdownMenuEntry(
-                        label: SLocalizations.of(context)!.post,
-                        value: _SSchoolLifeItemType.POST,
-                      ),
-                    ],
-                    onSelected: _onSelectType,
                   ),
                 ),
               ),
               const SizedBox(
                 height: SStyles.listTileSpacing,
               ),
-              FTextField(
+              FTextFormField(
                 controller: _headlineController,
                 label: Text(SLocalizations.of(context)!.headline),
                 hint: SLocalizations.of(context)!.headline,
                 textInputAction: TextInputAction.done,
                 validator: _onValidateRequired,
-                maxLines: 1,
               ),
               const SizedBox(
                 height: SStyles.listTileSpacing,
               ),
-              FTextField(
+              FTextFormField(
                 controller: _contentController,
                 label: Text(SLocalizations.of(context)!.content),
                 hint: SLocalizations.of(context)!.content,
@@ -326,7 +316,7 @@ class _SSchoolLifeDialogState extends State<SSchoolLifeDialog> with SingleTicker
                 const SizedBox(
                   height: SStyles.listTileSpacing,
                 ),
-                FDateField.input(
+                FDateField.calendar(
                   controller: _eventDateController,
                   label: Text(SLocalizations.of(context)!.eventDate),
                 ),
@@ -340,48 +330,36 @@ class _SSchoolLifeDialogState extends State<SSchoolLifeDialog> with SingleTicker
                 Row(
                   children: [
                     Expanded(
-                      child: SDropdownMenu(
-                        initialSelection: _imageSource,
-                        onSelected: _onSelectImageSource,
+                      child: FSelect.fromMap(
+                        {
+                          SLocalizations.of(context)!.external: _SImageSource.EXTERNAL,
+                          SLocalizations.of(context)!.file: _SImageSource.FILE,
+                        },
+                        onChange: _onSelectImageSource,
+                        initialValue: _imageSource,
                         label: Text(SLocalizations.of(context)!.imageSource),
                         hint: SLocalizations.of(context)!.imageSource,
                         // Disable the dropdown menu if an upload is in progress or if the field is not empty.
                         enabled: !_uploading && _imageUrlController.text.isBlank,
-                        dropdownMenuEntries: [
-                          DropdownMenuEntry(
-                            label: SLocalizations.of(context)!.external,
-                            value: _SImageSource.EXTERNAL,
-                          ),
-                          DropdownMenuEntry(
-                            label: SLocalizations.of(context)!.file,
-                            value: _SImageSource.FILE,
-                          ),
-                        ],
                       ),
                     ),
                     const SizedBox(
                       width: SStyles.listTileSpacing,
                     ),
                     Expanded(
-                      child: SDropdownMenu(
-                        initialSelection: _darkHeadlineColoring,
-                        onSelected: _onSelectHeadlineColoring,
+                      child: FSelect.fromMap(
+                        {
+                          SLocalizations.of(context)!.light: false,
+                          SLocalizations.of(context)!.dark: true,
+                        },
+                        onChange: _onSelectHeadlineColoring,
+                        initialValue: _darkHeadlineColoring,
                         label: Text(
                           SLocalizations.of(context)!.headlineColoring,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                         ),
                         hint: SLocalizations.of(context)!.imageSource,
-                        dropdownMenuEntries: [
-                          DropdownMenuEntry(
-                            label: SLocalizations.of(context)!.light,
-                            value: false,
-                          ),
-                          DropdownMenuEntry(
-                            label: SLocalizations.of(context)!.dark,
-                            value: true,
-                          ),
-                        ],
                       ),
                     ),
                   ],
@@ -397,7 +375,9 @@ class _SSchoolLifeDialogState extends State<SSchoolLifeDialog> with SingleTicker
                     axis: Axis.vertical,
                     label: Text(SLocalizations.of(context)!.image),
                     error: field.errorText != null ? Text(field.errorText!) : null,
-                    state: field.errorText != null ? FLabelState.error : FLabelState.enabled,
+                    states: {
+                      if (field.errorText != null) WidgetState.error,
+                    },
                     child: Row(
                       children: [
                         Expanded(
@@ -408,7 +388,6 @@ class _SSchoolLifeDialogState extends State<SSchoolLifeDialog> with SingleTicker
                             hint: SLocalizations.of(context)!.imageUrl,
                             enabled: _imageSource == _SImageSource.EXTERNAL,
                             clearable: (value) => value.text.isNotEmpty,
-                            maxLines: 1,
                           ),
                         ),
 
@@ -435,13 +414,13 @@ class _SSchoolLifeDialogState extends State<SSchoolLifeDialog> with SingleTicker
                                   ? LoadingIndicator(
                                       indicatorType: Indicator.ballPulseSync,
                                       colors: [
-                                        FTheme.of(context).buttonStyles.secondary.contentStyle.enabledIconColor,
+                                        FTheme.of(context).colors.secondaryForeground,
                                       ],
                                     )
                                   : Row(
                                       children: [
-                                        FIcon(
-                                          _imageUrlController.text.isBlank ? FAssets.icons.upload : FAssets.icons.x,
+                                        Icon(
+                                          _imageUrlController.text.isBlank ? FIcons.upload : FIcons.x,
                                           size: 16,
                                         ),
                                         const SizedBox(
@@ -472,7 +451,6 @@ class _SSchoolLifeDialogState extends State<SSchoolLifeDialog> with SingleTicker
                 label: Text(SLocalizations.of(context)!.hyperlink),
                 hint: SLocalizations.of(context)!.hyperlinkOptional,
                 textInputAction: TextInputAction.done,
-                maxLines: 1,
               ),
             ],
           ),

@@ -34,7 +34,7 @@ abstract final class STheme {
   /// Get the [TextStyle] for a small caption.
   static TextStyle smallCaptionStyle(BuildContext context) {
     return FTheme.of(context).typography.sm.copyWith(
-          color: FTheme.of(context).colorScheme.mutedForeground,
+          color: FTheme.of(context).colors.mutedForeground,
           letterSpacing: 1,
         );
   }
@@ -42,7 +42,7 @@ abstract final class STheme {
   /// Get the [TextStyle] for a medium caption.
   static TextStyle mediumCaptionStyle(BuildContext context) {
     return FTheme.of(context).typography.base.copyWith(
-          color: FTheme.of(context).colorScheme.mutedForeground,
+          color: FTheme.of(context).colors.mutedForeground,
           letterSpacing: 1.5,
         );
   }

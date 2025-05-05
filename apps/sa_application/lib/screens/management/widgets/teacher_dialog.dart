@@ -104,19 +104,18 @@ class _STeacherDialogState extends ConsumerState<STeacherDialog> {
             children: [
               Padding(
                 padding: SStyles.dialogElementPadding,
-                child: FTextField(
+                child: FTextFormField(
                   label: Text(SLocalizations.of(context)!.abbreviation),
                   hint: SLocalizations.of(context)!.abbreviation,
                   textInputAction: TextInputAction.next,
                   controller: _abbreviationController,
                   validator: _onValidateAbbreviation,
                   autocorrect: false,
-                  maxLines: 1,
                 ),
               ),
               Padding(
                 padding: SStyles.dialogElementPadding,
-                child: FTextField(
+                child: FTextFormField(
                   label: Text(SLocalizations.of(context)!.name),
                   hint: SLocalizations.of(context)!.name,
                   textInputAction: TextInputAction.send,
@@ -124,7 +123,6 @@ class _STeacherDialogState extends ConsumerState<STeacherDialog> {
                   controller: _nameController,
                   validator: _onValidateName,
                   autocorrect: false,
-                  maxLines: 1,
                 ),
               ),
             ],
@@ -132,13 +130,13 @@ class _STeacherDialogState extends ConsumerState<STeacherDialog> {
         ),
         actions: [
           FButton(
-            label: Text(SLocalizations.of(context)!.cancel),
             onPress: Navigator.of(context).pop,
             style: FButtonStyle.secondary,
+            child: Text(SLocalizations.of(context)!.cancel),
           ),
           FButton(
-            label: Text(SLocalizations.of(context)!.save),
             onPress: _onPressedSave,
+            child: Text(SLocalizations.of(context)!.save),
           ),
         ],
       ),

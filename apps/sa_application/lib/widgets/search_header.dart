@@ -8,10 +8,10 @@ class SSearchHeader extends StatefulWidget {
   final Widget title;
 
   /// The prefix actions of the header.
-  final List<Widget>? prefixActions;
+  final List<Widget>? prefixes;
 
   /// Builder for the suffix actions of the header.
-  final List<Widget>? Function(BuildContext, FHeaderAction) suffixActionsBuilder;
+  final List<Widget> Function(BuildContext, FHeaderAction) suffixesBuilder;
 
   /// Callback for whenever the user types in the search field.
   final void Function(String?) onSearch;
@@ -19,8 +19,8 @@ class SSearchHeader extends StatefulWidget {
   /// Create a new [SSearchHeader].
   const SSearchHeader({
     required this.title,
-    required this.prefixActions,
-    required this.suffixActionsBuilder,
+    required this.prefixes,
+    required this.suffixesBuilder,
     required this.onSearch,
     super.key,
   });
@@ -58,7 +58,7 @@ class _SSearchHeaderState extends State<SSearchHeader> {
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            color: FTheme.of(context).colorScheme.border,
+            color: FTheme.of(context).colors.border,
           ),
         ),
       ),
@@ -87,15 +87,14 @@ class _SSearchHeaderState extends State<SSearchHeader> {
       ),
       child: FHeader.nested(
         title: widget.title,
-        prefixActions: widget.prefixActions ?? [],
-        suffixActions: widget.suffixActionsBuilder(
-              context,
-              FHeaderAction(
-                icon: FIcon(FAssets.icons.search),
-                onPress: () => _toggleSearchBar(true),
-              ),
-            ) ??
-            [],
+        prefixes: widget.prefixes ?? [],
+        suffixes: widget.suffixesBuilder(
+          context,
+          FHeaderAction(
+            icon: const Icon(FIcons.search),
+            onPress: () => _toggleSearchBar(true),
+          ),
+        ),
       ),
     );
   }
@@ -119,7 +118,6 @@ class _SSearchHeaderState extends State<SSearchHeader> {
               onChange: widget.onSearch,
               focusNode: _focusNode,
               autocorrect: false,
-              maxLines: 1,
             ),
           ),
           const SizedBox(
@@ -127,8 +125,8 @@ class _SSearchHeaderState extends State<SSearchHeader> {
           ),
           FButton(
             onPress: () => _toggleSearchBar(false),
-            label: Text(SLocalizations.of(context)!.cancel),
             style: FButtonStyle.secondary,
+            child: Text(SLocalizations.of(context)!.cancel),
           ),
         ],
       ),

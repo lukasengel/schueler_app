@@ -35,7 +35,7 @@ void sShowErrorToast({
     type: ToastificationType.error,
     title: Text('${SLocalizations.of(context)!.error} $message'),
     description: details != null
-        ? FTappable.animated(
+        ? FTappable(
             child: Text(SLocalizations.of(context)!.tapToCopyDetails),
             onPress: () => _copyToClipboard(context, details),
           )
@@ -103,11 +103,11 @@ void _showThemedToast({
     autoCloseDuration: duration,
     type: type,
     alignment: Alignment.bottomCenter,
-    backgroundColor: FTheme.of(context).colorScheme.background,
-    foregroundColor: FTheme.of(context).colorScheme.foreground,
+    backgroundColor: FTheme.of(context).colors.background,
+    foregroundColor: FTheme.of(context).colors.foreground,
     boxShadow: FTheme.of(context).style.shadow,
     borderSide: BorderSide(
-      color: FTheme.of(context).colorScheme.border,
+      color: FTheme.of(context).colors.border,
       width: FTheme.of(context).style.borderWidth,
     ),
     animationDuration: const Duration(

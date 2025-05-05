@@ -55,9 +55,9 @@ class STileList<T> extends StatelessWidget {
         : SliverFillRemaining(
             child: items == null
                 // If the list is null, it means that the data could not be loaded.
-                ? SIconPlaceholder(
+                ? SIconPlaceholder.icon(
                     message: SLocalizations.of(context)!.noData,
-                    iconSvg: FAssets.icons.ban,
+                    icon: FIcons.ban,
                   )
                 // If the list is empty, it means that there are items available in the database.
                 : emptyBuilder(context),

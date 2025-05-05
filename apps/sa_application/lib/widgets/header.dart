@@ -9,16 +9,16 @@ class SHeader extends StatelessWidget {
   final Widget title;
 
   /// The prefix actions of the header.
-  final List<Widget>? prefixActions;
+  final List<Widget>? prefixes;
 
   /// The suffix actions of the header.
-  final List<Widget>? suffixActions;
+  final List<Widget>? suffixes;
 
   /// Create a new [SHeader].
   const SHeader({
     required this.title,
-    this.prefixActions,
-    this.suffixActions,
+    this.prefixes,
+    this.suffixes,
     super.key,
   });
 
@@ -32,7 +32,7 @@ class SHeader extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            color: FTheme.of(context).colorScheme.border,
+            color: FTheme.of(context).colors.border,
           ),
         ),
       ),
@@ -45,8 +45,8 @@ class SHeader extends StatelessWidget {
           ),
           child: title,
         ),
-        prefixActions: prefixActions ?? [],
-        suffixActions: suffixActions ?? [],
+        prefixes: prefixes ?? [],
+        suffixes: suffixes ?? [],
       ),
     );
   }

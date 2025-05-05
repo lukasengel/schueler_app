@@ -87,17 +87,17 @@ class _SHomeScreenState extends ConsumerState<SHomeScreen> {
             SLocalizations.of(context)!.schoolLife,
           ][_index],
         ),
-        prefixActions: [
+        prefixes: [
           // If the user has management privileges, provide a button to switch to the management view.
           if (authState.isManager)
             FHeaderAction(
-              icon: FIcon(FAssets.icons.arrowLeftRight),
+              icon: const Icon(FIcons.arrowLeftRight),
               onPress: _onPressedManagementView,
             ),
         ],
-        suffixActions: [
+        suffixes: [
           FHeaderAction(
-            icon: FIcon(FAssets.icons.settings),
+            icon: const Icon(FIcons.settings),
             onPress: _onPressedSettings,
           ),
         ],
@@ -110,7 +110,7 @@ class _SHomeScreenState extends ConsumerState<SHomeScreen> {
                 child: loading_indicator.LoadingIndicator(
                   indicatorType: loading_indicator.Indicator.ballSpinFadeLoader,
                   colors: [
-                    FTheme.of(context).colorScheme.foreground,
+                    FTheme.of(context).colors.foreground,
                   ],
                 ),
               ),
@@ -135,15 +135,15 @@ class _SHomeScreenState extends ConsumerState<SHomeScreen> {
         onChange: _onSwitchTab,
         children: [
           FBottomNavigationBarItem(
-            icon: FIcon(FAssets.icons.calendarSync),
+            icon: const Icon(FIcons.calendarSync),
             label: Text(SLocalizations.of(context)!.substitutions),
           ),
           FBottomNavigationBarItem(
-            icon: FIcon(FAssets.icons.megaphone),
+            icon: const Icon(FIcons.megaphone),
             label: Text(SLocalizations.of(context)!.news),
           ),
           FBottomNavigationBarItem(
-            icon: FIcon(FAssets.icons.users),
+            icon: const Icon(FIcons.users),
             label: Text(SLocalizations.of(context)!.schoolLife),
           ),
         ],

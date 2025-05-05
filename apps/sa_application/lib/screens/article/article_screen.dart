@@ -24,7 +24,7 @@ class SArticleScreen extends StatelessWidget {
           title: Text(
             item.headline,
           ),
-          prefixActions: [
+          prefixes: [
             FHeaderAction.back(
               onPress: Navigator.of(context).pop,
             ),
@@ -74,29 +74,30 @@ class SArticleScreen extends StatelessWidget {
                   top: 24,
                 ),
                 alignment: Alignment.center,
-                child: IntrinsicWidth(
-                  child: FButton(
-                    prefix: FIcon(FAssets.icons.link),
-                    label: Text(SLocalizations.of(context)!.externalContent),
-                    style: FButtonStyle.secondary,
-                    onPress: () async {
-                      // Attempt to launch the URL.
-                      try {
-                        await launchUrl(
-                          Uri.parse(item.hyperlink!),
+                child: FButton(
+                  intrinsicWidth: true,
+                  prefix: const Icon(FIcons.link),
+                  style: FButtonStyle.secondary,
+                  onPress: () async {
+                    // Attempt to launch the URL.
+                    try {
+                      await launchUrl(
+                        Uri.parse(item.hyperlink!),
+                      );
+                    }
+                    // If any error occurs, show an error toast.
+                    catch (e) {
+                      if (context.mounted) {
+                        sShowErrorToast(
+                          context: context,
+                          message: SLocalizations.of(context)!.failedLaunchingUrl,
+                          details: e.toString(),
                         );
                       }
-                      // If any error occurs, show an error toast.
-                      catch (e) {
-                        if (context.mounted) {
-                          sShowErrorToast(
-                            context: context,
-                            message: SLocalizations.of(context)!.failedLaunchingUrl,
-                            details: e.toString(),
-                          );
-                        }
-                      }
-                    },
+                    }
+                  },
+                  child: Text(
+                    SLocalizations.of(context)!.externalContent,
                   ),
                 ),
               ),
@@ -110,15 +111,15 @@ class SArticleScreen extends StatelessWidget {
         title: Text(
           SLocalizations.of(context)!.invalidArticle,
         ),
-        prefixActions: [
+        prefixes: [
           FHeaderAction.back(
             onPress: Navigator.of(context).pop,
           ),
         ],
       ),
-      content: SIconPlaceholder(
-        iconSvg: FAssets.icons.ban,
+      content: SIconPlaceholder.icon(
         message: SLocalizations.of(context)!.invalidArticle,
+        icon: FIcons.ban,
       ),
     );
   }

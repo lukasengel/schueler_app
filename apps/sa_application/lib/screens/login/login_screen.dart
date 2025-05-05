@@ -1,6 +1,7 @@
 import 'package:animated_switcher_plus/animated_switcher_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:forui/forui.dart';
 import 'package:mesh_gradient/mesh_gradient.dart';
 import 'package:sa_application/l10n/l10n.dart';
@@ -103,7 +104,7 @@ class _SLoginScreenState extends ConsumerState<SLoginScreen> {
           style: FTheme.of(context).scaffoldStyle.copyWith(
                 backgroundColor: Colors.transparent,
               ),
-          content: Center(
+          child: Center(
             child: AnimatedSwitcherPlus.flipY(
               duration: const Duration(milliseconds: 300),
               child: _showWelcomeMessage
@@ -128,10 +129,10 @@ class _SLoginScreenState extends ConsumerState<SLoginScreen> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const FIcon(
-            SvgAsset(null, 'icon_black', 'assets/images/logo_black.svg'),
-            size: 150,
-            color: Colors.white,
+          SvgPicture.asset(
+            'assets/images/logo_black.svg',
+            width: 150,
+            height: 150,
           ),
           const SizedBox(
             height: 10,
@@ -148,11 +149,10 @@ class _SLoginScreenState extends ConsumerState<SLoginScreen> {
           const SizedBox(
             height: 20,
           ),
-          IntrinsicWidth(
-            child: FButton(
-              label: Text(SLocalizations.of(context)!.logIn),
-              onPress: _onPressedToLogin,
-            ),
+          FButton(
+            intrinsicWidth: true,
+            onPress: _onPressedToLogin,
+            child: Text(SLocalizations.of(context)!.logIn),
           ),
         ],
       ),

@@ -135,15 +135,15 @@ class _SManagementScreenState extends ConsumerState<SManagementScreen> {
             SLocalizations.of(context)!.administration,
           ][_index],
         ),
-        prefixActions: [
+        prefixes: [
           FHeaderAction(
-            icon: FIcon(FAssets.icons.arrowLeftRight),
+            icon: const Icon(FIcons.arrowLeftRight),
             onPress: _onPressedStudentView,
           ),
         ],
-        suffixActions: [
+        suffixes: [
           FHeaderAction(
-            icon: FIcon(FAssets.icons.settings),
+            icon: const Icon(FIcons.settings),
             onPress: _onPressedSettings,
           ),
         ],
@@ -156,7 +156,7 @@ class _SManagementScreenState extends ConsumerState<SManagementScreen> {
                 child: loading_indicator.LoadingIndicator(
                   indicatorType: loading_indicator.Indicator.ballSpinFadeLoader,
                   colors: [
-                    FTheme.of(context).colorScheme.foreground,
+                    FTheme.of(context).colors.foreground,
                   ],
                 ),
               ),
@@ -181,19 +181,17 @@ class _SManagementScreenState extends ConsumerState<SManagementScreen> {
             ),
       floatingActionButton: !_initial && _index < 2
           ? [
-              IntrinsicWidth(
-                child: FButton(
-                  onPress: _onPressedAddSchoolLifeItem,
-                  prefix: FIcon(FAssets.icons.plus),
-                  label: Text(SLocalizations.of(context)!.addEntry),
-                ),
+              FButton(
+                intrinsicWidth: true,
+                onPress: _onPressedAddSchoolLifeItem,
+                prefix: const Icon(FIcons.plus),
+                child: Text(SLocalizations.of(context)!.addEntry),
               ),
-              IntrinsicWidth(
-                child: FButton(
-                  onPress: _onPressedAddTeacher,
-                  prefix: FIcon(FAssets.icons.plus),
-                  label: Text(SLocalizations.of(context)!.addTeacher),
-                ),
+              FButton(
+                intrinsicWidth: true,
+                onPress: _onPressedAddTeacher,
+                prefix: const Icon(FIcons.plus),
+                child: Text(SLocalizations.of(context)!.addTeacher),
               ),
             ][_index]
           : null,
@@ -202,20 +200,20 @@ class _SManagementScreenState extends ConsumerState<SManagementScreen> {
         onChange: _onSwitchTab,
         children: [
           FBottomNavigationBarItem(
-            icon: FIcon(FAssets.icons.users),
+            icon: const Icon(FIcons.users),
             label: Text(SLocalizations.of(context)!.schoolLife),
           ),
           FBottomNavigationBarItem(
-            icon: FIcon(FAssets.icons.signature),
+            icon: const Icon(FIcons.signature),
             label: Text(SLocalizations.of(context)!.teachers),
           ),
           if (authState.isAdmin) ...[
             FBottomNavigationBarItem(
-              icon: FIcon(FAssets.icons.messageCircleWarning),
+              icon: const Icon(FIcons.messageCircleWarning),
               label: Text(SLocalizations.of(context)!.feedback),
             ),
             // FBottomNavigationBarItem(
-            //   icon: FIcon(FAssets.icons.settings2),
+            //   icon: const Icon(FIcons.settings2),
             //   label: Text(SLocalizations.of(context)!.administration),
             // ),
           ],

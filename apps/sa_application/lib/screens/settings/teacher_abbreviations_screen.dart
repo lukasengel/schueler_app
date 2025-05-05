@@ -50,12 +50,12 @@ class _STeacherAbbreviationsScreenState extends ConsumerState<STeacherAbbreviati
         title: Text(
           SLocalizations.of(context)!.teacherAbbreviations,
         ),
-        prefixActions: [
+        prefixes: [
           FHeaderAction.back(
             onPress: Navigator.of(context).pop,
           ),
         ],
-        suffixActionsBuilder: (context, searchActionButton) => [
+        suffixesBuilder: (context, searchActionButton) => [
           // Only show the search action button if there are teachers.
           if (teachers != null && teachers.isNotEmpty) searchActionButton,
         ],
@@ -74,14 +74,15 @@ class _STeacherAbbreviationsScreenState extends ConsumerState<STeacherAbbreviati
               ),
               emptyBuilder: (context) => teachers!.isNotEmpty
                   // If the filtered list is empty but the original list is not, it means that the search query did not match any teachers.
-                  ? SIconPlaceholder(
+                  ? SIconPlaceholder.icon(
                       message: SLocalizations.of(context)!.noResults,
-                      iconSvg: FAssets.icons.searchX,
+                      icon: FIcons.searchX,
                     )
                   // If the original list is empty, it means that there are no teachers available.
-                  : SIconPlaceholder(
+                  : SIconPlaceholder.svg(
+                      context: context,
                       message: SLocalizations.of(context)!.noTeachers,
-                      iconSvg: const SvgAsset(null, 'icon_black', 'assets/images/lucky_cat.svg'),
+                      svgAsset: 'assets/images/lucky_cat.svg',
                     ),
             ),
           ),

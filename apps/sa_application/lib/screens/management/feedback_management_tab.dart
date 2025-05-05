@@ -101,9 +101,10 @@ class _SFeedbackManagementTabState extends ConsumerState<SFeedbackManagementTab>
             item.datetime.formatDateTimeLocalized(context),
           ),
         ),
-        emptyBuilder: (context) => SIconPlaceholder(
+        emptyBuilder: (context) => SIconPlaceholder.svg(
+          context: context,
           message: SLocalizations.of(context)!.noFeedback,
-          iconSvg: const SvgAsset(null, 'icon_black', 'assets/images/lucky_cat.svg'),
+          svgAsset: 'assets/images/lucky_cat.svg',
         ),
       ),
     );

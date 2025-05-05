@@ -87,9 +87,9 @@ class SScaffold extends StatelessWidget {
       child: FScaffold(
         header: header,
         footer: footer,
-        contentPad: false,
+        childPad: false,
         // Remove top padding, to prevent weird behavior of Scrollables on mobile platforms.
-        content: Stack(
+        child: Stack(
           children: [
             MediaQuery.removePadding(
               context: context,

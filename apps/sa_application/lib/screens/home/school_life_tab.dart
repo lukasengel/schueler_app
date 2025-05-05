@@ -1,7 +1,6 @@
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:forui/forui.dart';
 import 'package:sa_application/l10n/l10n.dart';
 import 'package:sa_application/screens/_screens.dart';
 import 'package:sa_application/widgets/_widgets.dart';
@@ -30,9 +29,10 @@ class SSchoolLifeTab extends ConsumerWidget {
           key: ValueKey(item),
           item: item,
         ),
-        emptyBuilder: (context) => SIconPlaceholder(
+        emptyBuilder: (context) => SIconPlaceholder.svg(
+          context: context,
           message: SLocalizations.of(context)!.noSchoolLifeItems,
-          iconSvg: const SvgAsset(null, 'icon_black', 'assets/images/lucky_cat.svg'),
+          svgAsset: 'assets/images/lucky_cat.svg',
         ),
       ),
     );

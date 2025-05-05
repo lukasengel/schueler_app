@@ -57,7 +57,7 @@ class _SSManagementTileState extends State<SManagementTile> with SingleTickerPro
           children: [
             if (widget.onEdit != null)
               FTile(
-                prefixIcon: FIcon(FAssets.icons.pen),
+                prefixIcon: const Icon(FIcons.pen),
                 title: Text(SLocalizations.of(context)!.edit),
                 onPress: () {
                   _popoverController.hide();
@@ -66,7 +66,7 @@ class _SSManagementTileState extends State<SManagementTile> with SingleTickerPro
               ),
             if (widget.onDelete != null)
               FTile(
-                prefixIcon: FIcon(FAssets.icons.trash2),
+                prefixIcon: const Icon(FIcons.trash2),
                 title: Text(SLocalizations.of(context)!.delete),
                 onPress: () {
                   _popoverController.hide();
@@ -84,8 +84,8 @@ class _SSManagementTileState extends State<SManagementTile> with SingleTickerPro
             Expanded(
               child: widget.subtitle,
             ),
-            FIcon(
-              FAssets.icons.ellipsis,
+            const Icon(
+              FIcons.ellipsis,
               size: 13,
             ),
           ],
