@@ -23,14 +23,14 @@ class SSchoolLifeTab extends ConsumerWidget {
 
     return SRefreshableWrapper(
       onRefresh: onRefresh,
-      sliver: STileList(
+      sliver: SContentList(
         items: items,
+        showCount: false,
         tileBuilder: (context, item, child) => SSchoolLifeTile(
           key: ValueKey(item),
           item: item,
         ),
-        emptyBuilder: (context) => SIconPlaceholder.svg(
-          context: context,
+        emptyBuilder: (context) => SSvgPlaceholder(
           message: SLocalizations.of(context)!.noSchoolLifeItems,
           svgAsset: 'assets/images/lucky_cat.svg',
         ),

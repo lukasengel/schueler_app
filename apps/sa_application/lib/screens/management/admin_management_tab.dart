@@ -18,8 +18,8 @@ class SAdminManagementTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return SRefreshableWrapper(
       onRefresh: onRefresh,
-      sliver: SliverFillRemaining(
-        child: SIconPlaceholder.icon(
+      sliver: const SliverFillRemaining(
+        child: SIconPlaceholder(
           message: 'Work in Progress',
           icon: FIcons.rabbit,
         ),

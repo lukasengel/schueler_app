@@ -91,7 +91,7 @@ class _SFilterTableScreenState extends ConsumerState<SFilterTableScreen> {
       content: globalSettings != null && globalSettings.exclusionOptions.isNotEmpty
           // If global settings are available, show a checkbox tile for each exclusion option.
           ? ListView(
-              padding: SStyles.listViewPadding,
+              padding: SStyles.adaptiveContentPadding(context),
               children: [
                 FTileGroup.builder(
                   count: globalSettings.exclusionOptions.length,
@@ -148,7 +148,7 @@ class _SFilterTableScreenState extends ConsumerState<SFilterTableScreen> {
               ],
             )
           // Otherwise, show a placeholder.
-          : SIconPlaceholder.icon(
+          : SIconPlaceholder(
               message: SLocalizations.of(context)!.noData,
               icon: FIcons.ban,
             ),

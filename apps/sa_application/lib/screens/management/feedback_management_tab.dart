@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
 import 'package:sa_application/l10n/l10n.dart';
+import 'package:sa_application/screens/_screens.dart';
 import 'package:sa_application/util/_util.dart';
 import 'package:sa_application/widgets/_widgets.dart';
 import 'package:sa_data/sa_data.dart';
@@ -55,7 +56,7 @@ class _SFeedbackManagementTabState extends ConsumerState<SFeedbackManagementTab>
 
     return SRefreshableWrapper(
       onRefresh: widget.onRefresh,
-      sliver: STileList(
+      sliver: SContentList(
         items: feedbackItems,
         tileBuilder: (context, item, _) => SManagementTile(
           onDelete: () => _onDeleteFeedback(item),
@@ -101,8 +102,7 @@ class _SFeedbackManagementTabState extends ConsumerState<SFeedbackManagementTab>
             item.datetime.formatDateTimeLocalized(context),
           ),
         ),
-        emptyBuilder: (context) => SIconPlaceholder.svg(
-          context: context,
+        emptyBuilder: (context) => SSvgPlaceholder(
           message: SLocalizations.of(context)!.noFeedback,
           svgAsset: 'assets/images/lucky_cat.svg',
         ),

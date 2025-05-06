@@ -31,7 +31,7 @@ class SArticleScreen extends StatelessWidget {
           ],
         ),
         content: ListView(
-          padding: SStyles.listViewPadding,
+          padding: SStyles.adaptiveContentPadding(context),
           children: [
             // If this is a post, display the image at the top.
             if (item is SPostSchoolLifeItem)
@@ -117,7 +117,7 @@ class SArticleScreen extends StatelessWidget {
           ),
         ],
       ),
-      content: SIconPlaceholder.icon(
+      content: SIconPlaceholder(
         message: SLocalizations.of(context)!.invalidArticle,
         icon: FIcons.ban,
       ),

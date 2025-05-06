@@ -12,13 +12,17 @@ class SRefreshableWrapper extends StatefulWidget {
   /// The controller for the [EasyRefresh] widget.
   final EasyRefreshController? controller;
 
-  /// Child to be wrapped. Must be a sliver.
+  /// Children to be wrapped. Must be all slivers.
   final Widget sliver;
+
+  /// The amount of additional padding to be applied to the bottom of the scrollable area.
+  final double bottomPadding;
 
   /// Create a new [SRefreshableWrapper].
   const SRefreshableWrapper({
     required this.onRefresh,
     required this.sliver,
+    this.bottomPadding = 0,
     this.controller,
     super.key,
   });
@@ -62,7 +66,7 @@ class _SRefreshableWrapperState extends State<SRefreshableWrapper> {
         cacheExtent: 10000,
         slivers: [
           SliverPadding(
-            padding: SStyles.listViewPadding,
+            padding: SStyles.contentPadding + EdgeInsets.only(bottom: widget.bottomPadding),
             sliver: widget.sliver,
           ),
         ],

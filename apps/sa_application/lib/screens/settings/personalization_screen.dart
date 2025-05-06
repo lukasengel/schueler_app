@@ -106,7 +106,7 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
         ],
       ),
       content: ListView(
-        padding: SStyles.listViewPadding,
+        padding: SStyles.adaptiveContentPadding(context),
         children: [
           Consumer(
             builder: (context, ref, child) {
@@ -190,7 +190,10 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
               padding: const EdgeInsets.only(
                 left: 5,
               ),
-              child: Text(SLocalizations.of(context)!.autoNextDayInfo),
+              child: Text(
+                SLocalizations.of(context)!.autoNextDayInfo,
+                style: FTheme.of(context).tileGroupStyle.descriptionTextStyle.maybeResolve({}),
+              ),
             ),
             child: Consumer(
               builder: (context, ref, child) {

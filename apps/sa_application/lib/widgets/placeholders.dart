@@ -3,39 +3,21 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:forui/forui.dart';
 
 /// A general-purpose placeholder widget to display, for example when no data is available.
-/// Contains an icon and a message below it.
+///
+/// Consists of an icon and a message below it.
 class SIconPlaceholder extends StatelessWidget {
   /// The message to display.
   final String message;
 
-  /// The widget to display as icon.
-  final Widget icon;
+  /// The icon to display.
+  final IconData icon;
 
-  /// Create a new [SIconPlaceholder] with an icon.
-  SIconPlaceholder.icon({
+  /// Create a new [SIconPlaceholder].
+  const SIconPlaceholder({
     required this.message,
-    required IconData icon,
+    required this.icon,
     super.key,
-  }) : icon = Icon(
-          icon,
-          size: 42,
-        );
-
-  /// Create a new [SIconPlaceholder] with an SVG icon.
-  SIconPlaceholder.svg({
-    required BuildContext context,
-    required this.message,
-    required String svgAsset,
-    super.key,
-  }) : icon = SvgPicture.asset(
-          svgAsset,
-          width: 42,
-          height: 42,
-          colorFilter: ColorFilter.mode(
-            FTheme.of(context).colors.foreground,
-            BlendMode.srcIn,
-          ),
-        );
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +31,63 @@ class SIconPlaceholder extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            icon,
+            Icon(
+              icon,
+              size: 42,
+              color: FTheme.of(context).colors.foreground,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              message,
+              style: FTheme.of(context).typography.sm,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// A general-purpose placeholder widget to display, for example when no data is available.
+///
+/// Consists of an SVG icon and a message below it.
+class SSvgPlaceholder extends StatelessWidget {
+  /// The message to display.
+  final String message;
+
+  /// The SVG asset to display.
+  final String svgAsset;
+
+  /// Create a new [SSvgPlaceholder].
+  const SSvgPlaceholder({
+    required this.message,
+    required this.svgAsset,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final safePadding = MediaQuery.paddingOf(context);
+
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: safePadding.bottom,
+      ),
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SvgPicture.asset(
+              svgAsset,
+              width: 42,
+              height: 42,
+              colorFilter: ColorFilter.mode(
+                FTheme.of(context).colors.foreground,
+                BlendMode.srcIn,
+              ),
+            ),
             const SizedBox(
               height: 10,
             ),

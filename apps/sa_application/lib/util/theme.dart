@@ -23,7 +23,7 @@ abstract final class STheme {
   static FThemeData foruiAdaptive(BuildContext context, ThemeMode mode) {
     switch (mode) {
       case ThemeMode.system:
-        return MediaQuery.of(context).platformBrightness == Brightness.light ? _foruiLight : _foruiDark;
+        return MediaQuery.platformBrightnessOf(context) == Brightness.light ? _foruiLight : _foruiDark;
       case ThemeMode.light:
         return _foruiLight;
       case ThemeMode.dark:

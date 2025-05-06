@@ -130,7 +130,7 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
         ],
       ),
       content: ListView(
-        padding: SStyles.listViewPadding,
+        padding: SStyles.adaptiveContentPadding(context),
         children: [
           FTile(
             prefixIcon: const Icon(FIcons.pen),

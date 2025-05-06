@@ -65,8 +65,8 @@ class _STeacherAbbreviationsScreenState extends ConsumerState<STeacherAbbreviati
         controller: _scrollController,
         slivers: [
           SliverPadding(
-            padding: SStyles.listViewPadding,
-            sliver: STileList(
+            padding: SStyles.adaptiveContentPadding(context),
+            sliver: SContentList(
               items: filtered,
               tileBuilder: (context, item, _) => FTile(
                 subtitle: Text(item.name),
@@ -74,13 +74,12 @@ class _STeacherAbbreviationsScreenState extends ConsumerState<STeacherAbbreviati
               ),
               emptyBuilder: (context) => teachers!.isNotEmpty
                   // If the filtered list is empty but the original list is not, it means that the search query did not match any teachers.
-                  ? SIconPlaceholder.icon(
+                  ? SIconPlaceholder(
                       message: SLocalizations.of(context)!.noResults,
                       icon: FIcons.searchX,
                     )
                   // If the original list is empty, it means that there are no teachers available.
-                  : SIconPlaceholder.svg(
-                      context: context,
+                  : SSvgPlaceholder(
                       message: SLocalizations.of(context)!.noTeachers,
                       svgAsset: 'assets/images/lucky_cat.svg',
                     ),

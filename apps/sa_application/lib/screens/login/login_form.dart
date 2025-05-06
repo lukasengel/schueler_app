@@ -80,8 +80,13 @@ class _SLoginFormState extends State<SLoginForm> {
 
   @override
   void initState() {
-    _usernameController.text = widget.initialUsername ?? '';
-    _passwordController.text = widget.initialPassword ?? '';
+    if (widget.initialUsername != null) {
+      _usernameController.text = widget.initialUsername!;
+    }
+
+    if (widget.initialPassword != null) {
+      _passwordController.text = widget.initialPassword!;
+    }
     super.initState();
   }
 

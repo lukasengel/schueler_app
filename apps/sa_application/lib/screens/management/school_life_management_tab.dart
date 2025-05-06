@@ -81,7 +81,8 @@ class _SSchoolLifeManagementTabState extends ConsumerState<SSchoolLifeManagement
 
     return SRefreshableWrapper(
       onRefresh: widget.onRefresh,
-      sliver: STileList(
+      bottomPadding: 48,
+      sliver: SContentList(
         items: schoolLifeItems,
         tileBuilder: (context, item, _) => SManagementTile(
           onEdit: () => _onEditSchoolLifeItem(item),
@@ -109,8 +110,7 @@ class _SSchoolLifeManagementTabState extends ConsumerState<SSchoolLifeManagement
             item.datetime.toLocal().formatDateLocalized(context),
           ),
         ),
-        emptyBuilder: (context) => SIconPlaceholder.svg(
-          context: context,
+        emptyBuilder: (context) => SSvgPlaceholder(
           message: SLocalizations.of(context)!.noSchoolLifeItems,
           svgAsset: 'assets/images/lucky_cat.svg',
         ),

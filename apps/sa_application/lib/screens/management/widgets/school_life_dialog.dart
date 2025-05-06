@@ -263,7 +263,7 @@ class _SSchoolLifeDialogState extends State<SSchoolLifeDialog> with SingleTicker
         ],
       ),
       content: SingleChildScrollView(
-        padding: SStyles.listViewPadding,
+        padding: SStyles.adaptiveContentPadding(context),
         child: Form(
           key: _formKey,
           child: Column(

@@ -29,6 +29,7 @@ dependencies:
   intl: any
   loading_indicator: ^3.1.1
   locale_names: ^1.1.1
+  marquee: ^2.3.0
   mesh_gradient: ^1.3.8
   sa_common: 1.0.0
   sa_data: 1.0.0

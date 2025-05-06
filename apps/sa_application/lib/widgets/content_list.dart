@@ -10,7 +10,7 @@ import 'package:sa_application/widgets/_widgets.dart';
 /// If the list is null, it shows an icon and a message indicating that the data could not be loaded.
 ///
 /// Attention: Returns a sliver, not a box widget.
-class STileList<T> extends StatelessWidget {
+class SContentList<T> extends StatelessWidget {
   /// The list of items to be displayed.
   final List<T>? items;
 
@@ -20,11 +20,15 @@ class STileList<T> extends StatelessWidget {
   /// A builder function that creates a widget to be displayed when the list is empty.
   final WidgetBuilder emptyBuilder;
 
-  /// Create a new [STileList].
-  const STileList({
+  /// Whether to show the number of elements at the end of the list.
+  final bool showCount;
+
+  /// Create a new [SContentList].
+  const SContentList({
     required this.items,
     required this.tileBuilder,
     required this.emptyBuilder,
+    this.showCount = true,
     super.key,
   });
 
@@ -33,9 +37,9 @@ class STileList<T> extends StatelessWidget {
     return items != null && items!.isNotEmpty
         // Show a tile for each school life item.
         ? SliverList.separated(
-            itemCount: items!.length + 1,
+            itemCount: items!.length + (showCount ? 1 : 0),
             itemBuilder: (context, index) {
-              // Show the number of elements at the end of the list.
+              // Show the number of elements at the end of the list, if applicable.
               if (index == items!.length) {
                 return Center(
                   child: Text(
@@ -55,7 +59,7 @@ class STileList<T> extends StatelessWidget {
         : SliverFillRemaining(
             child: items == null
                 // If the list is null, it means that the data could not be loaded.
-                ? SIconPlaceholder.icon(
+                ? SIconPlaceholder(
                     message: SLocalizations.of(context)!.noData,
                     icon: FIcons.ban,
                   )

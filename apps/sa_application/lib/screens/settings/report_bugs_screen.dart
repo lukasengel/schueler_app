@@ -145,7 +145,7 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
       content: Form(
         key: _formKey,
         child: ListView(
-          padding: SStyles.listViewPadding,
+          padding: SStyles.adaptiveContentPadding(context),
           children: [
             FTextField(
               controller: _nameController,

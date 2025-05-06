@@ -5,8 +5,15 @@ abstract final class SStyles {
   /// The default maximum width for the content of a screen.
   static const maxContentWidth = 600.0;
 
-  /// The default padding for list views.
-  static const listViewPadding = EdgeInsets.fromLTRB(10, 12, 10, 60);
+  /// The default padding for the content of a screen.
+  static const contentPadding = EdgeInsets.fromLTRB(10, 12, 10, 12);
+
+  /// The padding for the content of a screen that does not have a bottom navigation bar.
+  ///
+  /// Respects the bottom view padding, for example for devices with rounded corners.
+  static EdgeInsets adaptiveContentPadding(BuildContext context) {
+    return EdgeInsets.fromLTRB(10, 12, 10, 12 + MediaQuery.viewPaddingOf(context).bottom);
+  }
 
   /// The default spacing between tiles in a list view.
   static const listTileSpacing = 10.0;

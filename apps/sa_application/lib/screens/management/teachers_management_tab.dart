@@ -79,7 +79,8 @@ class _STeachersManagementTabState extends ConsumerState<STeachersManagementTab>
 
     return SRefreshableWrapper(
       onRefresh: widget.onRefresh,
-      sliver: STileList(
+      bottomPadding: 48,
+      sliver: SContentList(
         items: teachers,
         tileBuilder: (context, item, _) => SManagementTile(
           title: Text(item.abbreviation),
@@ -87,8 +88,7 @@ class _STeachersManagementTabState extends ConsumerState<STeachersManagementTab>
           onDelete: () => _onDeleteTeacher(item),
           onEdit: () => _onEditTeacher(item),
         ),
-        emptyBuilder: (context) => SIconPlaceholder.svg(
-          context: context,
+        emptyBuilder: (context) => SSvgPlaceholder(
           message: SLocalizations.of(context)!.noTeachers,
           svgAsset: 'assets/images/lucky_cat.svg',
         ),
