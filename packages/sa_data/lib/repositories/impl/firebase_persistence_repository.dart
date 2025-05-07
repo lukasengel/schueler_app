@@ -1,9 +1,11 @@
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:sa_data/sa_data.dart';
+import 'package:uuid/uuid.dart';
 
 /// An implementation of [SPersistenceRepository] using Firebase Realtime Database.
 class SFirebasePersistenceRepository extends SPersistenceRepository {
@@ -133,6 +135,35 @@ class SFirebasePersistenceRepository extends SPersistenceRepository {
         );
       },
     );
+  }
+
+  /// Registers the client in the analytics database.
+  ///
+  /// This function is used to register a client in the analytics database for anonymous
+  /// and GDPR-compliant usage statistics. It adds a random UUID along with a timestamp
+  /// to the appropriate collection in Firestore, depending on the client's platform.
+  ///
+  /// Note: This function should only be called for Android and iOS clients. Other platforms
+  /// are not supported and will be ignored.
+  ///
+  /// Used by [SFirebaseAuthRepository].
+  Future<void> registerClient() async {
+    // Only Android and iOS clients should be registered.
+    if (Platform.isAndroid || Platform.isIOS) {
+      // ADJUST_VERSION_NUMBER
+      final document = firestore.collection('analytics').doc('clientMetrics-v2.0.0');
+
+      await document.set(
+        {
+          Platform.isAndroid ? 'androidClients' : 'iosClients': {
+            const Uuid().v4(): DateTime.now().toIso8601String(),
+          },
+        },
+        SetOptions(
+          merge: true,
+        ),
+      );
+    }
   }
 
   /// Helper method to load all items from a collection.
