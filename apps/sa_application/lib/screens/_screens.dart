@@ -6,6 +6,7 @@ export 'home/substitutions_tab.dart';
 export 'home/widgets/news_ticker.dart';
 export 'home/widgets/news_tile.dart';
 export 'home/widgets/school_life_tile.dart';
+export 'home/widgets/substitution_table_tile.dart';
 export 'login/login_form.dart';
 export 'login/login_screen.dart';
 export 'management/admin_management_tab.dart';

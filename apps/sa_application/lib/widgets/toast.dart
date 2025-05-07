@@ -13,7 +13,7 @@ void sShowInfoToast({
   required String message,
   Duration duration = const Duration(seconds: 3),
 }) {
-  _showThemedToast(
+  sShowToast(
     context: context,
     type: ToastificationType.info,
     title: Text(message),
@@ -30,7 +30,7 @@ void sShowErrorToast({
   String? details,
   Duration duration = const Duration(seconds: 5),
 }) {
-  _showThemedToast(
+  sShowToast(
     context: context,
     type: ToastificationType.error,
     title: Text('${SLocalizations.of(context)!.error} $message'),
@@ -84,7 +84,7 @@ void sShowDataExceptionToast({
 }
 
 /// Helper function to display a toast with the correct theming.
-void _showThemedToast({
+void sShowToast({
   required BuildContext context,
   required ToastificationType type,
   required Widget title,

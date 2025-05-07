@@ -133,6 +133,10 @@ class _SLoginScreenState extends ConsumerState<SLoginScreen> {
             'assets/images/logo_black.svg',
             width: 150,
             height: 150,
+            colorFilter: const ColorFilter.mode(
+              Colors.white,
+              BlendMode.srcIn,
+            ),
           ),
           const SizedBox(
             height: 10,

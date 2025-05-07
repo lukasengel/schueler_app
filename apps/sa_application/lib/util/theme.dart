@@ -52,4 +52,7 @@ abstract final class STheme {
 
   /// The dark [FThemeData] to be used.
   static FThemeData get _foruiDark => FThemes.zinc.dark;
+
+  /// The accent color of the app.
+  static Color get accentColor => Colors.redAccent.shade400;
 }

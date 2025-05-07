@@ -21,31 +21,22 @@ class SIconPlaceholder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final safePadding = MediaQuery.paddingOf(context);
-
-    return Padding(
-      padding: EdgeInsets.only(
-        bottom: safePadding.bottom,
-      ),
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              icon,
-              size: 42,
-              color: FTheme.of(context).colors.foreground,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              message,
-              style: FTheme.of(context).typography.sm,
-            ),
-          ],
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          icon,
+          size: 42,
+          color: FTheme.of(context).colors.foreground,
         ),
-      ),
+        const SizedBox(
+          height: 10,
+        ),
+        Text(
+          message,
+          style: FTheme.of(context).typography.sm,
+        ),
+      ],
     );
   }
 }
@@ -69,35 +60,26 @@ class SSvgPlaceholder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final safePadding = MediaQuery.paddingOf(context);
-
-    return Padding(
-      padding: EdgeInsets.only(
-        bottom: safePadding.bottom,
-      ),
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SvgPicture.asset(
-              svgAsset,
-              width: 42,
-              height: 42,
-              colorFilter: ColorFilter.mode(
-                FTheme.of(context).colors.foreground,
-                BlendMode.srcIn,
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              message,
-              style: FTheme.of(context).typography.sm,
-            ),
-          ],
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SvgPicture.asset(
+          svgAsset,
+          width: 42,
+          height: 42,
+          colorFilter: ColorFilter.mode(
+            FTheme.of(context).colors.foreground,
+            BlendMode.srcIn,
+          ),
         ),
-      ),
+        const SizedBox(
+          height: 10,
+        ),
+        Text(
+          message,
+          style: FTheme.of(context).typography.sm,
+        ),
+      ],
     );
   }
 }
