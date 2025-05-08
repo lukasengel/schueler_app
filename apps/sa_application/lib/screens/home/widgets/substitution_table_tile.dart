@@ -96,8 +96,7 @@ class SSubstitutionTableTile extends ConsumerWidget {
             child: Container(
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
-                // The inner border radius must be a bit larger to avoid overlapping with the outer border.
-                borderRadius: FTheme.of(context).style.borderRadius + BorderRadius.circular(3),
+                borderRadius: FTheme.of(context).style.borderRadius,
               ),
               padding: const EdgeInsets.only(
                 top: 15,
@@ -195,7 +194,7 @@ class SSubstitutionTableTile extends ConsumerWidget {
   /// Helper method to build a group of substitution table rows.
   Widget _buildGroup(BuildContext context, List<SSubstitutionTableRow> rows, bool even) {
     return ColoredBox(
-      color: even ? FTheme.of(context).colors.background : FTheme.of(context).colors.secondary,
+      color: even ? FTheme.of(context).colors.background : FTheme.of(context).colors.secondary.withValues(alpha: 0.7),
       child: Column(
         children: rows.map((row) => _buildRow(context, row)).toList(),
       ),

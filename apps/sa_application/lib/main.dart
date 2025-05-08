@@ -9,6 +9,7 @@ import 'package:sa_application/firebase_options.dart';
 import 'package:sa_application/init.dart';
 import 'package:sa_application/l10n/l10n.dart';
 import 'package:sa_application/screens/_screens.dart';
+import 'package:sa_application/theme/_theme.dart';
 import 'package:sa_application/util/_util.dart';
 import 'package:sa_common/sa_common.dart';
 import 'package:sa_providers/sa_providers.dart';
@@ -70,12 +71,12 @@ class _MyAppState extends ConsumerState<MyApp> {
         title: SConstants.appName,
         debugShowCheckedModeBanner: false,
         builder: (context, child) => FTheme(
-          data: STheme.foruiAdaptive(context, themeMode),
+          data: SCustomTheme.foruiAdaptive(context, themeMode),
           child: child!,
         ),
         themeMode: themeMode,
-        theme: STheme.materialLight,
-        darkTheme: STheme.materialDark,
+        theme: SCustomTheme.materialLight,
+        darkTheme: SCustomTheme.materialDark,
         locale: locale,
         supportedLocales: SLocalizations.supportedLocales,
         localizationsDelegates: const [

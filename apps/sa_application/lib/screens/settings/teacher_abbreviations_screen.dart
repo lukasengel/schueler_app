@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
 import 'package:sa_application/l10n/l10n.dart';
-import 'package:sa_application/util/_util.dart';
+import 'package:sa_application/theme/_theme.dart';
 import 'package:sa_application/widgets/_widgets.dart';
 import 'package:sa_common/sa_common.dart';
 import 'package:sa_providers/sa_providers.dart';
@@ -65,7 +65,7 @@ class _STeacherAbbreviationsScreenState extends ConsumerState<STeacherAbbreviati
         controller: _scrollController,
         slivers: [
           SliverPadding(
-            padding: SStyles.adaptiveContentPadding(context),
+            padding: SCustomStyles.adaptiveContentPadding(context),
             sliver: SContentList(
               items: filtered,
               tileBuilder: (context, item, _) => FTile(

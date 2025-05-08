@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:forui/forui.dart';
-import 'package:sa_application/util/_util.dart';
+import 'package:sa_application/theme/_theme.dart';
 
 /// A customized [FScaffold] with some small improvements:
 /// - The top padding is removed. Required for [Scrollable]s on mobile platforms.
@@ -33,7 +33,7 @@ class SScaffold extends StatelessWidget {
     Widget? header,
     Widget? footer,
     Widget? floatingActionButton,
-    double maxWidth = SStyles.maxContentWidth,
+    double maxWidth = SCustomStyles.maxContentWidth,
   }) {
     return SScaffold(
       header: header,
@@ -58,7 +58,7 @@ class SScaffold extends StatelessWidget {
     Widget? header,
     Widget? footer,
     Widget? floatingActionButton,
-    double maxWidth = SStyles.maxContentWidth,
+    double maxWidth = SCustomStyles.maxContentWidth,
   }) {
     return SScaffold(
       header: header,

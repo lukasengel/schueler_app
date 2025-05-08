@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
 import 'package:sa_application/l10n/l10n.dart';
-import 'package:sa_application/util/_util.dart';
+import 'package:sa_application/theme/_theme.dart';
 import 'package:sa_common/sa_common.dart';
 import 'package:sa_data/sa_data.dart';
 import 'package:sa_providers/sa_providers.dart';
@@ -89,10 +89,10 @@ class _STeacherDialogState extends ConsumerState<STeacherDialog> {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: SStyles.dialogConstraints,
+      constraints: SCustomStyles.dialogConstraints,
       child: FDialog.adaptive(
         title: Padding(
-          padding: SStyles.dialogElementPadding,
+          padding: SCustomStyles.dialogElementPadding,
           child: Text(
             // Show "Add" or "Edit" depending on whether the initial item is null or not.
             widget.initial == null ? SLocalizations.of(context)!.addTeacher : SLocalizations.of(context)!.editTeacher,
@@ -103,7 +103,7 @@ class _STeacherDialogState extends ConsumerState<STeacherDialog> {
           child: Column(
             children: [
               Padding(
-                padding: SStyles.dialogElementPadding,
+                padding: SCustomStyles.dialogElementPadding,
                 child: FTextFormField(
                   label: Text(SLocalizations.of(context)!.abbreviation),
                   hint: SLocalizations.of(context)!.abbreviation,
@@ -114,7 +114,7 @@ class _STeacherDialogState extends ConsumerState<STeacherDialog> {
                 ),
               ),
               Padding(
-                padding: SStyles.dialogElementPadding,
+                padding: SCustomStyles.dialogElementPadding,
                 child: FTextFormField(
                   label: Text(SLocalizations.of(context)!.name),
                   hint: SLocalizations.of(context)!.name,

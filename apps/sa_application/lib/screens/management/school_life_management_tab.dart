@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
 import 'package:sa_application/l10n/l10n.dart';
 import 'package:sa_application/screens/_screens.dart';
+import 'package:sa_application/theme/_theme.dart';
 import 'package:sa_application/util/_util.dart';
 import 'package:sa_application/widgets/_widgets.dart';
 import 'package:sa_data/sa_data.dart';
@@ -94,7 +95,7 @@ class _SSchoolLifeManagementTabState extends ConsumerState<SSchoolLifeManagement
                 item.headline,
               ),
               const SizedBox(
-                height: SStyles.tileElementSpacing,
+                height: SCustomStyles.tileElementSpacing,
               ),
               Text(
                 item.content,
@@ -102,7 +103,7 @@ class _SSchoolLifeManagementTabState extends ConsumerState<SSchoolLifeManagement
                 maxLines: 2,
               ),
               const SizedBox(
-                height: SStyles.tileElementSpacing,
+                height: SCustomStyles.tileElementSpacing,
               ),
             ],
           ),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:sa_application/l10n/l10n.dart';
-import 'package:sa_application/util/_util.dart';
+import 'package:sa_application/theme/_theme.dart';
 import 'package:sa_application/widgets/_widgets.dart';
 import 'package:sa_common/sa_common.dart';
 import 'package:sa_data/sa_data.dart';
@@ -263,7 +263,7 @@ class _SSchoolLifeDialogState extends State<SSchoolLifeDialog> with SingleTicker
         ],
       ),
       content: SingleChildScrollView(
-        padding: SStyles.adaptiveContentPadding(context),
+        padding: SCustomStyles.adaptiveContentPadding(context),
         child: Form(
           key: _formKey,
           child: Column(
@@ -289,7 +289,7 @@ class _SSchoolLifeDialogState extends State<SSchoolLifeDialog> with SingleTicker
                 ),
               ),
               const SizedBox(
-                height: SStyles.listTileSpacing,
+                height: SCustomStyles.listTileSpacing,
               ),
               FTextFormField(
                 controller: _headlineController,
@@ -299,7 +299,7 @@ class _SSchoolLifeDialogState extends State<SSchoolLifeDialog> with SingleTicker
                 validator: _onValidateRequired,
               ),
               const SizedBox(
-                height: SStyles.listTileSpacing,
+                height: SCustomStyles.listTileSpacing,
               ),
               FTextFormField(
                 controller: _contentController,
@@ -314,7 +314,7 @@ class _SSchoolLifeDialogState extends State<SSchoolLifeDialog> with SingleTicker
               // If the event type is selected, show a date picker.
               if (_itemType == _SSchoolLifeItemType.EVENT) ...[
                 const SizedBox(
-                  height: SStyles.listTileSpacing,
+                  height: SCustomStyles.listTileSpacing,
                 ),
                 FDateField.calendar(
                   controller: _eventDateController,
@@ -325,7 +325,7 @@ class _SSchoolLifeDialogState extends State<SSchoolLifeDialog> with SingleTicker
               // If the post type is selected, show an image picker.
               if (_itemType == _SSchoolLifeItemType.POST) ...[
                 const SizedBox(
-                  height: SStyles.listTileSpacing,
+                  height: SCustomStyles.listTileSpacing,
                 ),
                 Row(
                   children: [
@@ -344,7 +344,7 @@ class _SSchoolLifeDialogState extends State<SSchoolLifeDialog> with SingleTicker
                       ),
                     ),
                     const SizedBox(
-                      width: SStyles.listTileSpacing,
+                      width: SCustomStyles.listTileSpacing,
                     ),
                     Expanded(
                       child: FSelect.fromMap(
@@ -365,7 +365,7 @@ class _SSchoolLifeDialogState extends State<SSchoolLifeDialog> with SingleTicker
                   ],
                 ),
                 const SizedBox(
-                  height: SStyles.listTileSpacing,
+                  height: SCustomStyles.listTileSpacing,
                 ),
                 FormField<String>(
                   key: _imageFieldKey,
@@ -394,7 +394,7 @@ class _SSchoolLifeDialogState extends State<SSchoolLifeDialog> with SingleTicker
                         // If the file image source is selected, show a button to upload an image.
                         if (_imageSource == _SImageSource.FILE) ...[
                           const SizedBox(
-                            width: SStyles.listTileSpacing,
+                            width: SCustomStyles.listTileSpacing,
                           ),
                           FButton.raw(
                             style: FButtonStyle.secondary,
@@ -444,7 +444,7 @@ class _SSchoolLifeDialogState extends State<SSchoolLifeDialog> with SingleTicker
               ],
 
               const SizedBox(
-                height: SStyles.listTileSpacing,
+                height: SCustomStyles.listTileSpacing,
               ),
               FTextField(
                 controller: _hyperlinkController,

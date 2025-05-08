@@ -4,6 +4,7 @@ import 'package:forui/forui.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:sa_application/l10n/l10n.dart';
+import 'package:sa_application/theme/_theme.dart';
 import 'package:sa_application/util/_util.dart';
 import 'package:sa_application/widgets/_widgets.dart';
 import 'package:sa_providers/sa_providers.dart';
@@ -130,7 +131,7 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
         ],
       ),
       content: ListView(
-        padding: SStyles.adaptiveContentPadding(context),
+        padding: SCustomStyles.adaptiveContentPadding(context),
         children: [
           FTile(
             prefixIcon: const Icon(FIcons.pen),
@@ -139,7 +140,7 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
             onPress: _onPressedPersonalization,
           ),
           const SizedBox(
-            height: SStyles.listTileSpacing,
+            height: SCustomStyles.listTileSpacing,
           ),
           FTile(
             prefixIcon: const Icon(FIcons.listFilter),
@@ -148,7 +149,7 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
             onPress: _onPressedFilterTable,
           ),
           const SizedBox(
-            height: SStyles.listTileSpacing,
+            height: SCustomStyles.listTileSpacing,
           ),
           FTile(
             prefixIcon: const Icon(FIcons.signature),
@@ -157,7 +158,7 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
             onPress: _onPressedTeacherAbbreviations,
           ),
           const SizedBox(
-            height: SStyles.listTileSpacing,
+            height: SCustomStyles.listTileSpacing,
           ),
           FTile(
             prefixIcon: const Icon(FIcons.messageSquareWarning),
@@ -166,7 +167,7 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
             onPress: _onPressedReportBugs,
           ),
           const SizedBox(
-            height: SStyles.listTileSpacing,
+            height: SCustomStyles.listTileSpacing,
           ),
           FTile(
             prefixIcon: const Icon(FIcons.github),
@@ -176,7 +177,7 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
             onLongPress: _onLongPressedGitHub,
           ),
           const SizedBox(
-            height: 1.5 * SStyles.listTileSpacing,
+            height: 1.5 * SCustomStyles.listTileSpacing,
           ),
           Center(
             child: FButton(
@@ -187,42 +188,42 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
             ),
           ),
           const SizedBox(
-            height: 1.5 * SStyles.listTileSpacing,
+            height: 1.5 * SCustomStyles.listTileSpacing,
           ),
           Center(
             child: Column(
               children: [
                 Text(
                   SLocalizations.of(context)!.logoArtist.toUpperCase(),
-                  style: STheme.smallCaptionStyle(context),
+                  style: SCustomStyles.smallCaptionStyle(context),
                 ),
                 Text(
                   SConstants.logoArtist.toUpperCase(),
-                  style: STheme.mediumCaptionStyle(context),
+                  style: SCustomStyles.mediumCaptionStyle(context),
                 ),
                 const SizedBox(
-                  height: SStyles.listTileSpacing,
+                  height: SCustomStyles.listTileSpacing,
                 ),
                 Text(
                   SLocalizations.of(context)!.developer.toUpperCase(),
-                  style: STheme.mediumCaptionStyle(context),
+                  style: SCustomStyles.mediumCaptionStyle(context),
                 ),
                 Text(
                   SConstants.developer.toUpperCase(),
-                  style: STheme.smallCaptionStyle(context),
+                  style: SCustomStyles.smallCaptionStyle(context),
                 ),
                 const SizedBox(
-                  height: 2 * SStyles.listTileSpacing,
+                  height: 2 * SCustomStyles.listTileSpacing,
                 ),
                 Text(
                   SLocalizations.of(context)!.version(SConstants.version).toUpperCase(),
-                  style: STheme.smallCaptionStyle(context),
+                  style: SCustomStyles.smallCaptionStyle(context),
                 ),
                 Text(
                   DateFormat.yMMMM(Localizations.localeOf(context).toString())
                       .format(SConstants.releaseMonth)
                       .toUpperCase(),
-                  style: STheme.smallCaptionStyle(context),
+                  style: SCustomStyles.smallCaptionStyle(context),
                 ),
               ],
             ),

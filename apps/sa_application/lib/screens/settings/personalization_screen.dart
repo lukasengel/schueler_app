@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
 import 'package:locale_names/locale_names.dart';
 import 'package:sa_application/l10n/l10n.dart';
-import 'package:sa_application/util/_util.dart';
+import 'package:sa_application/theme/_theme.dart';
 import 'package:sa_application/widgets/_widgets.dart';
 import 'package:sa_common/sa_common.dart';
 import 'package:sa_data/sa_data.dart';
@@ -54,7 +54,7 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
     sShowCustomDialog<void>(
       context: context,
       content: Container(
-        height: 230,
+        height: 250,
         alignment: Alignment.center,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(5),
@@ -106,7 +106,7 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
         ],
       ),
       content: ListView(
-        padding: SStyles.adaptiveContentPadding(context),
+        padding: SCustomStyles.adaptiveContentPadding(context),
         children: [
           Consumer(
             builder: (context, ref, child) {
@@ -151,7 +151,7 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
             },
           ),
           const SizedBox(
-            height: SStyles.listTileSpacing,
+            height: SCustomStyles.listTileSpacing,
           ),
           Consumer(
             builder: (context, ref, child) {
@@ -181,7 +181,7 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
             },
           ),
           const SizedBox(
-            height: SStyles.listTileSpacing,
+            height: SCustomStyles.listTileSpacing,
           ),
           FLabel(
             axis: Axis.vertical,
@@ -209,7 +209,7 @@ class _SPersonalizationScreenState extends ConsumerState<SPersonalizationScreen>
             ),
           ),
           const SizedBox(
-            height: SStyles.listTileSpacing,
+            height: SCustomStyles.listTileSpacing,
           ),
           Consumer(
             builder: (context, ref, child) {

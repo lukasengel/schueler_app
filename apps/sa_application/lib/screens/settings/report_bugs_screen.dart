@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
 import 'package:sa_application/l10n/l10n.dart';
-import 'package:sa_application/util/_util.dart';
+import 'package:sa_application/theme/_theme.dart';
 import 'package:sa_application/widgets/_widgets.dart';
 import 'package:sa_common/sa_common.dart';
 import 'package:sa_providers/sa_providers.dart';
@@ -145,7 +145,7 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
       content: Form(
         key: _formKey,
         child: ListView(
-          padding: SStyles.adaptiveContentPadding(context),
+          padding: SCustomStyles.adaptiveContentPadding(context),
           children: [
             FTextField(
               controller: _nameController,
@@ -156,7 +156,7 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
               autocorrect: false,
             ),
             const SizedBox(
-              height: SStyles.listTileSpacing,
+              height: SCustomStyles.listTileSpacing,
             ),
             FTextField(
               controller: _emailController,
@@ -166,7 +166,7 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
               autocorrect: false,
             ),
             const SizedBox(
-              height: SStyles.listTileSpacing,
+              height: SCustomStyles.listTileSpacing,
             ),
             FTextFormField(
               controller: _messageController,
@@ -177,7 +177,7 @@ class _SReportBugsScreenState extends ConsumerState<SReportBugsScreen> {
               maxLines: 10,
             ),
             const SizedBox(
-              height: SStyles.listTileSpacing,
+              height: SCustomStyles.listTileSpacing,
             ),
             Center(
               child: FTappable(

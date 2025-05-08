@@ -5,10 +5,10 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
+import 'package:glossy/glossy.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sa_application/l10n/l10n.dart';
 import 'package:sa_application/screens/_screens.dart';
-import 'package:sa_application/util/_util.dart';
 import 'package:sa_application/widgets/_widgets.dart';
 import 'package:sa_providers/sa_providers.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -118,21 +118,33 @@ class _SSubstitutionsTabState extends ConsumerState<SSubstitutionsTab> {
               );
             },
           ),
-          Container(
+          Align(
             alignment: Alignment.bottomCenter,
-            margin: const EdgeInsets.only(
-              bottom: 12,
-            ),
-            child: SmoothPageIndicator(
-              count: pageCount,
-              controller: _pageController,
-              onDotClicked: _pageController.jumpToPage,
-              effect: ColorTransitionEffect(
-                spacing: 12,
-                dotWidth: 20,
-                dotHeight: 5,
-                activeDotColor: STheme.accentColor,
-                dotColor: FTheme.of(context).colors.primary,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                bottom: 12,
+              ),
+              child: GlossyContainer(
+                height: 20,
+                width: pageCount * 20 + (pageCount - 1) * 12 + 20,
+                opacity: 0.1,
+                border: const Border(),
+                borderRadius: BorderRadius.circular(8),
+                child: Center(
+                  child: SmoothPageIndicator(
+                    count: pageCount,
+                    controller: _pageController,
+                    onDotClicked: _pageController.jumpToPage,
+                    effect: ColorTransitionEffect(
+                      spacing: 12,
+                      dotWidth: 20,
+                      dotHeight: 5,
+                      radius: 4,
+                      activeDotColor: FTheme.of(context).colors.primary,
+                      dotColor: FTheme.of(context).colors.primary.withValues(alpha: 0.5),
+                    ),
+                  ),
+                ),
               ),
             ),
           ),

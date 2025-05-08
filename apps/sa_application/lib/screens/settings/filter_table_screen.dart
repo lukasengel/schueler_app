@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
 import 'package:sa_application/l10n/l10n.dart';
-import 'package:sa_application/util/_util.dart';
+import 'package:sa_application/theme/_theme.dart';
 import 'package:sa_application/widgets/_widgets.dart';
 import 'package:sa_providers/sa_providers.dart';
 
@@ -91,7 +91,7 @@ class _SFilterTableScreenState extends ConsumerState<SFilterTableScreen> {
       content: globalSettings != null && globalSettings.exclusionOptions.isNotEmpty
           // If global settings are available, show a checkbox tile for each exclusion option.
           ? ListView(
-              padding: SStyles.adaptiveContentPadding(context),
+              padding: SCustomStyles.adaptiveContentPadding(context),
               children: [
                 FTileGroup.builder(
                   count: globalSettings.exclusionOptions.length,
@@ -111,7 +111,7 @@ class _SFilterTableScreenState extends ConsumerState<SFilterTableScreen> {
                   child: Column(
                     children: [
                       const SizedBox(
-                        height: SStyles.listTileSpacing,
+                        height: SCustomStyles.listTileSpacing,
                       ),
                       Builder(
                         builder: (context) {
@@ -133,7 +133,7 @@ class _SFilterTableScreenState extends ConsumerState<SFilterTableScreen> {
                         },
                       ),
                       const SizedBox(
-                        height: SStyles.listTileSpacing,
+                        height: SCustomStyles.listTileSpacing,
                       ),
                       FTappable(
                         onPress: _onPressedHowDoesThisWork,

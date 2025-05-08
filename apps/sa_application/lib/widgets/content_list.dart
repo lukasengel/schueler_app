@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:sa_application/l10n/l10n.dart';
-import 'package:sa_application/util/_util.dart';
+import 'package:sa_application/theme/_theme.dart';
 import 'package:sa_application/widgets/_widgets.dart';
 
 /// A generic widget that takes a list of items and displays them in a list using the provided [tileBuilder].
@@ -44,7 +44,7 @@ class SContentList<T> extends StatelessWidget {
                 return Center(
                   child: Text(
                     SLocalizations.of(context)!.elements(items!.length),
-                    style: STheme.smallCaptionStyle(context),
+                    style: SCustomStyles.smallCaptionStyle(context),
                   ),
                 );
               }
@@ -52,7 +52,7 @@ class SContentList<T> extends StatelessWidget {
               return tileBuilder(context, items![index], null);
             },
             separatorBuilder: (context, index) => const SizedBox(
-              height: SStyles.listTileSpacing,
+              height: SCustomStyles.listTileSpacing,
             ),
           )
         // If there are no items to display, show an icon.

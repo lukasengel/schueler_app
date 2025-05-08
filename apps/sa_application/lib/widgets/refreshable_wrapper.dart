@@ -2,7 +2,7 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sa_application/l10n/l10n.dart';
-import 'package:sa_application/util/_util.dart';
+import 'package:sa_application/theme/_theme.dart';
 
 /// Wrapper for the content of a screen to make it refreshable using an [EasyRefresh] widget.
 class SRefreshableWrapper extends StatefulWidget {
@@ -66,7 +66,7 @@ class _SRefreshableWrapperState extends State<SRefreshableWrapper> {
         cacheExtent: 2000,
         slivers: [
           SliverPadding(
-            padding: SStyles.contentPadding + EdgeInsets.only(bottom: widget.bottomPadding),
+            padding: SCustomStyles.contentPadding + EdgeInsets.only(bottom: widget.bottomPadding),
             sliver: widget.sliver,
           ),
         ],

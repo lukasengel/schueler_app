@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 import 'package:forui/forui.dart';
 import 'package:sa_application/l10n/l10n.dart';
-import 'package:sa_application/util/_util.dart';
+import 'package:sa_application/theme/_theme.dart';
 
 /// Show a platform-specific message dialog with the given title, content and an OK button.
 ///
@@ -100,17 +100,17 @@ Future<T?> sShowCustomDialog<T>({
   return sShowAdaptiveDialog(
     context: context,
     builder: (context) => ConstrainedBox(
-      constraints: SStyles.dialogConstraints,
+      constraints: SCustomStyles.dialogConstraints,
       child: FDialog.adaptive(
         title: title != null
             ? Padding(
-                padding: SStyles.dialogElementPadding,
+                padding: SCustomStyles.dialogElementPadding,
                 child: title,
               )
             : null,
         body: content != null
             ? Padding(
-                padding: SStyles.dialogElementPadding,
+                padding: SCustomStyles.dialogElementPadding,
                 child: content,
               )
             : null,

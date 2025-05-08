@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
 import 'package:sa_application/l10n/l10n.dart';
 import 'package:sa_application/screens/_screens.dart';
+import 'package:sa_application/theme/_theme.dart';
 import 'package:sa_application/util/_util.dart';
 import 'package:sa_application/widgets/_widgets.dart';
 import 'package:sa_data/sa_data.dart';
@@ -72,7 +73,7 @@ class _SFeedbackManagementTabState extends ConsumerState<SFeedbackManagementTab>
                 ),
               ),
               const SizedBox(
-                height: SStyles.tileElementSpacing,
+                height: SCustomStyles.tileElementSpacing,
               ),
               // Show name, if available.
               if (item.name != null) ...[
@@ -82,7 +83,7 @@ class _SFeedbackManagementTabState extends ConsumerState<SFeedbackManagementTab>
                   child: Text(item.name!),
                 ),
                 const SizedBox(
-                  height: SStyles.tileElementSpacing,
+                  height: SCustomStyles.tileElementSpacing,
                 ),
               ],
               // Show email, if available.
@@ -93,7 +94,7 @@ class _SFeedbackManagementTabState extends ConsumerState<SFeedbackManagementTab>
                   child: Text(item.email!),
                 ),
                 const SizedBox(
-                  height: SStyles.tileElementSpacing,
+                  height: SCustomStyles.tileElementSpacing,
                 ),
               ],
             ],

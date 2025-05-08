@@ -25,7 +25,7 @@ class SHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(
+      padding: const EdgeInsets.only(
         top: 8,
       ),
       // Give the header the same border as the FBottomNavigationBar.

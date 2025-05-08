@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:sa_application/l10n/l10n.dart';
+import 'package:sa_application/theme/_theme.dart';
 import 'package:sa_application/util/_util.dart';
 import 'package:sa_application/widgets/_widgets.dart';
 
@@ -201,7 +202,7 @@ class _SLoginFormState extends State<SLoginForm> {
                     ),
                     Text(
                       SConstants.schoolName.toUpperCase(),
-                      style: STheme.smallCaptionStyle(context),
+                      style: SCustomStyles.smallCaptionStyle(context),
                       textAlign: TextAlign.center,
                     ),
                   ],
