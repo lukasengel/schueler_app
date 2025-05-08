@@ -256,7 +256,9 @@ class SSubstitutionTableTile extends ConsumerWidget {
         onPress: () => onLookupTeacher(row.substitute),
         child: Text(
           // If there is info in parantheses after the substitute, add a line break inbetween.
-          RegExp(r'^[^(]+ \(\w+\)$').hasMatch(row.substitute) ? row.substitute.replaceAll(' (', '\n(') : row.substitute,
+          RegExp(r'^[^-].*\([^)]+\)|\([^)]+\)$').hasMatch(row.substitute)
+              ? row.substitute.replaceAll(RegExp(r'\s\('), '\n(')
+              : row.substitute,
           style: _regularStyle(context),
         ),
       ),

@@ -40,6 +40,7 @@ class SBlurredBackgroundImage extends StatelessWidget {
           FastCachedImage(
             url: url,
             height: height,
+            cacheHeight: 300,
             width: width,
             fit: BoxFit.fill,
             gaplessPlayback: true,

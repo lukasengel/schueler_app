@@ -63,7 +63,7 @@ class _SRefreshableWrapperState extends State<SRefreshableWrapper> {
         },
       ),
       child: CustomScrollView(
-        cacheExtent: 10000,
+        cacheExtent: 2000,
         slivers: [
           SliverPadding(
             padding: SStyles.contentPadding + EdgeInsets.only(bottom: widget.bottomPadding),

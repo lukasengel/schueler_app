@@ -30,7 +30,6 @@ class SSubstitutionsTab extends ConsumerStatefulWidget {
 }
 
 class _SSubstitutionsTabState extends ConsumerState<SSubstitutionsTab> {
-  final _refreshController = EasyRefreshController();
   final _pageController = PageController();
 
   /// Callback for looking up a teacher by abbreviation.
@@ -86,7 +85,6 @@ class _SSubstitutionsTabState extends ConsumerState<SSubstitutionsTab> {
 
   @override
   void dispose() {
-    _refreshController.dispose();
     _pageController.dispose();
     super.dispose();
   }

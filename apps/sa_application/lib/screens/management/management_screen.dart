@@ -19,7 +19,8 @@ class SManagementScreen extends ConsumerStatefulWidget {
   ConsumerState<SManagementScreen> createState() => _SManagementScreenState();
 }
 
-class _SManagementScreenState extends ConsumerState<SManagementScreen> {
+class _SManagementScreenState extends ConsumerState<SManagementScreen> with WidgetsBindingObserver {
+  DateTime? _latestRefresh;
   var _initial = true;
   var _index = 0;
 
@@ -95,7 +96,10 @@ class _SManagementScreenState extends ConsumerState<SManagementScreen> {
 
         return IndicatorResult.fail;
       },
-      (r) => IndicatorResult.success,
+      (r) {
+        _latestRefresh = DateTime.now();
+        return IndicatorResult.success;
+      },
     );
   }
 
@@ -107,18 +111,41 @@ class _SManagementScreenState extends ConsumerState<SManagementScreen> {
   @override
   void initState() {
     // Refresh the content as soon as the screen is built.
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      // Wait for at least 500 milliseconds.
-      // If the loading goes too fast, it seems like the app is flickering.
-      await Future.wait([
-        Future<void>.delayed(const Duration(milliseconds: 500)),
-        _onRefresh(),
-      ]);
-
-      setState(() => _initial = false);
-    });
-
+    WidgetsBinding.instance.addPostFrameCallback((_) => _initialRefresh());
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
+  }
+
+  /// Refresh method to be called when the screen is built or when the app is resumed.
+  Future<void> _initialRefresh([bool long = true]) async {
+    setState(() => _initial = true);
+
+    // Wait for at least 500 milliseconds.
+    // If the loading goes too fast, it seems like the app is flickering.
+    await Future.wait([
+      Future<void>.delayed(Duration(milliseconds: long ? 500 : 200)),
+      _onRefresh(),
+    ]);
+
+    setState(() => _initial = false);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+
+    // Refresh the content when the app is resumed and the last refresh was more than 5 minutes ago.
+    if (state == AppLifecycleState.resumed) {
+      if (_latestRefresh == null || DateTime.now().difference(_latestRefresh!).inMinutes > 5) {
+        _initialRefresh(false);
+      }
+    }
   }
 
   @override
@@ -162,23 +189,20 @@ class _SManagementScreenState extends ConsumerState<SManagementScreen> {
               ),
             )
           // Otherwise, show the content.
-          : IndexedStack(
-              index: _index,
-              children: [
-                SSchoolLifeManagementTab(
-                  onRefresh: _onRefresh,
-                ),
-                STeachersManagementTab(
-                  onRefresh: _onRefresh,
-                ),
-                SFeedbackManagementTab(
-                  onRefresh: _onRefresh,
-                ),
-                SAdminManagementTab(
-                  onRefresh: _onRefresh,
-                ),
-              ],
-            ),
+          : [
+              SSchoolLifeManagementTab(
+                onRefresh: _onRefresh,
+              ),
+              STeachersManagementTab(
+                onRefresh: _onRefresh,
+              ),
+              SFeedbackManagementTab(
+                onRefresh: _onRefresh,
+              ),
+              SAdminManagementTab(
+                onRefresh: _onRefresh,
+              ),
+            ][_index],
       floatingActionButton: !_initial && _index < 2
           ? [
               FButton(
