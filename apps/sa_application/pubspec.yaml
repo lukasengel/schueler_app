@@ -1,9 +1,9 @@
 name: sa_application
-description: Main Schüler-App application package.
+description: Main application package.
 
 publish_to: 'none'
 
-version: 2.0.0+1
+version: 2.0.0+13
 
 environment:
   sdk: ^3.6.0
