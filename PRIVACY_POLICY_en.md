@@ -13,7 +13,7 @@ The person responsible for data protection is Lukas Engel. E-mail: app-support@l
 ### For Regular Users (Students):
 All user-specific data (access data and settings) are stored locally on the device and are not transmitted to us. During the use of the App, no personal data is collected or transmitted unless the user uses the feedback function.
 
-### Für Benutzer mit Adminrechten (Schulleiter):
+### For Users with Admin Rights (Principal):
 Users with administrative rights can post content such as articles (which may also include graphics) and teacher abbreviations in the app. This content is stored on Firebase Cloud Firestore and Firebase Storage. Firebase Cloud Firestore offers a secure and scalable database solution operated by Google. The data is stored in data centers in Europe and the United States and is compliant to the strict data protection regulations of the European Union (GDPR). Additionally, the data is protected by modern encryption technologies to ensure the confidentiality and integrity of the information.
 
 The developer of the App is not responsible for the data protection of the posted content. The responsibility for the data protection of the posted content lies with the school and is handled according to their privacy policies.

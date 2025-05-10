@@ -15,26 +15,27 @@ Available for Android and iOS:
 Note: This application is not an official service by the school, but was developed and published in accordance with the principal.
 
 ## Features 🚀
-#### Substitution Plan
-- Filter the substitution plan by year group or course to see only the information relevant to you.
-- Look up teacher abbreviations by simply tapping on them.
-- Adjust the desired number of days displayed.
-- Read the latest news from the principal's office.
+✅ **Substitution Plan:**
+Access to the current substitution plan and news from the principal's office, just like on the website. Provides additional features:
 
-#### School Life Blog
-Keep up to date with the latest posts, events and announcements from school life.
+- Filtering the substitution plan by grade or course
+- Looking up teacher abbreviations by tapping on them
+- Adjustment of the number of days displayed (2-5)
 
-#### Teacher Abbreviations Overview
-Easy access to a complete overview of all teacher abbreviations.
+✅ **School Life Blog:**
+News page with with posts, events and announcements from school life.
 
-#### Light and Dark Mode
-Choose between light and dark mode for a pleasant reading experience at any time of day.
+✅ **Teacher Abbreviations Overview:**
+Complete overview of all teacher abbreviations.
 
-#### Feedback or Bug Report 
-Do you have feedback or have you discovered a bug? Report it to us directly via the app.
+✅ **Light and Dark Mode:**
+Choice between light and dark mode for a pleasant user experience at any time of day.
 
-#### Available Languages
-The user interface is available in German (default), English and French.
+✅ **Feedback or Bug Report :**
+Possibility to submit feedback or bug reports directly via the app.
+
+✅ **Available Languages:**
+User interface available in German (default), English and French.
 
 ## Support 🚩
 If you encounter any problems, bugs, questions, criticism or suggestions, please send an e-mail to app-support@lukasengel.net or fill in the feedback form in the settings.

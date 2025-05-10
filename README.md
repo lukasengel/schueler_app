@@ -15,26 +15,27 @@ Verfügbar für Android und iOS:
 Hinweis: Diese Anwendung ist kein offizielles Angebot der Schule, wurde aber in Absprache mit der Schulleitung entwickelt und veröffentlicht.
 
 ## Funktionen 🚀
-#### Vertretungsplan
-- Filtern Sie den Vertretungsplan nach Jahrgangsstufe oder Kurs, um nur die für Sie relevanten Informationen zu sehen.
-- Schlagen Sie Lehrerkürzel durch einfaches Antippen nach.
-- Passen Sie die Anzahl der angezeigten Tage nach Belieben an.
-- Lesen Sie die aktuellen Nachrichten der Schulleitung.
+✅ **Vertretungsplan:**
+Zugriff auf den aktuellen Vertretungsplans und die Nachrichten der Schulleitung, wie auf der Webseite. Erweitert um folgende Funktionen:
 
-#### Schulleben-Blog
-Bleiben Sie auf dem Laufenden mit den neuesten Beiträgen, Veranstaltungen und Ankündigungen aus dem Schulleben.
+- Filterung des Vertretungsplans nach Jahrgangsstufe oder Kurs
+- Nachschlagen von Lehrerkürzeln durch einfaches Antippen
+- Anpassung der Anzahl der angezeigten Tage (2-5)
 
-#### Lehrerkürzel-Übersicht
-Einfacher Zugriff auf eine vollständige Übersicht aller Lehrerkürzel.
+✅ **Schulleben-Blog:**
+Nachrichtenseite mit Beiträgen, Veranstaltungen und Ankündigungen aus dem Schulleben.
 
-#### Heller und dunkler Modus
-Wählen Sie zwischen hellem und dunklem Modus für ein angenehmes Leseerlebnis zu jeder Tageszeit.
+✅ **Lehrerkürzel-Übersicht:**
+Vollständige Übersicht aller Lehrerkürzel.
 
-#### Feedback und Bug-Meldung
-Haben Sie Feedback oder haben einen Bug entdeckt? Melden Sie es uns direkt über die App.
+✅ **Heller und dunkler Modus:**
+Auswahl zwischen hellem und dunklem Modus für eine angenehme Benutzererfahrung zu jeder Tageszeit.
 
-#### Verfügbare Sprachen
-Die Benutzeroberfläche ist auf Deutsch (Standard), Englisch und Französisch verfügbar.
+✅ **Feedback und Bug-Meldung:**
+Möglichkeit zur Übermittlung von Feedback oder Bug-Meldungen direkt über die App.
+
+✅ **Verfügbare Sprachen:**
+Benutzeroberfläche verfügbar in Deutsch (Standard), Englisch und Französisch.
 
 ## Support 🚩
 Bei Problemen, Bugs, Fragen, Kritik oder Anregungen bitte entweder eine E-Mail an app-support@lukasengel.net schreiben oder das Feedback-Formular in den Einstellungen ausfüllen.
