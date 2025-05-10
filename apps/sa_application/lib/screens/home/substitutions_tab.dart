@@ -125,9 +125,9 @@ class _SSubstitutionsTabState extends ConsumerState<SSubstitutionsTab> {
                 bottom: 12,
               ),
               child: GlossyContainer(
-                height: 20,
-                width: pageCount * 20 + (pageCount - 1) * 12 + 20,
-                opacity: 0.1,
+                height: 15,
+                width: pageCount * 20 + (pageCount - 1) * 12 + 10,
+                opacity: 0.05,
                 border: const Border(),
                 borderRadius: BorderRadius.circular(8),
                 child: Center(

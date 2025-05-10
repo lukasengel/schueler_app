@@ -130,7 +130,7 @@ class _SLoginScreenState extends ConsumerState<SLoginScreen> {
         mainAxisSize: MainAxisSize.min,
         children: [
           SvgPicture.asset(
-            'assets/images/logo_black.svg',
+            'assets/images/logo.svg',
             width: 150,
             height: 150,
             colorFilter: const ColorFilter.mode(
