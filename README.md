@@ -37,6 +37,9 @@ Möglichkeit zur Übermittlung von Feedback oder Bug-Meldungen direkt über die 
 ✅ **Verfügbare Sprachen:**
 Benutzeroberfläche verfügbar in Deutsch (Standard), Englisch und Französisch.
 
+## Screenshots 📸
+<img alt="Screenshot" src=".github/github_screenshot.gif" height="600">
+
 ## Support 🚩
 Bei Problemen, Bugs, Fragen, Kritik oder Anregungen bitte entweder eine E-Mail an app-support@lukasengel.net schreiben oder das Feedback-Formular in den Einstellungen ausfüllen.
 

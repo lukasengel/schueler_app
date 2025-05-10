@@ -37,6 +37,9 @@ Possibility to submit feedback or bug reports directly via the app.
 ✅ **Available Languages:**
 User interface available in German (default), English and French.
 
+## Screenshots 📸
+<img alt="Screenshot" src=".github/github_screenshot.gif" height="600">
+
 ## Support 🚩
 If you encounter any problems, bugs, questions, criticism or suggestions, please send an e-mail to app-support@lukasengel.net or fill in the feedback form in the settings.
 
