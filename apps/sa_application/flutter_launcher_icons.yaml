@@ -2,6 +2,12 @@ flutter_launcher_icons:
   # Generic
   image_path: "assets/branding/app_icon_static.png"
 
+  # Android
+  android: true
+  min_sdk_version: 24
+  adaptive_icon_background: "#ff1744"
+  adaptive_icon_foreground: "assets/branding/app_icon_adaptive.png"
+  
   # iOS
   ios: true
   remove_alpha_channel_ios: true

@@ -3,7 +3,7 @@ description: Main application package.
 
 publish_to: 'none'
 
-version: 2.0.0+13
+version: 2.0.0+12
 
 environment:
   sdk: ^3.6.0
