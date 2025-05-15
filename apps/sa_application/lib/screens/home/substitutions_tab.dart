@@ -122,11 +122,11 @@ class _SSubstitutionsTabState extends ConsumerState<SSubstitutionsTab> {
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.only(
-                bottom: 12,
+                bottom: 10,
               ),
               child: GlossyContainer(
-                height: 15,
-                width: pageCount * 20 + (pageCount - 1) * 12 + 10,
+                height: 12,
+                width: pageCount * 20 + (pageCount - 1) * 12 + 7,
                 opacity: 0.05,
                 border: const Border(),
                 borderRadius: BorderRadius.circular(8),

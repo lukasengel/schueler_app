@@ -237,7 +237,8 @@ class SSubstitutionTableTile extends ConsumerWidget {
     return _buildRawRow(
       minHeight: 45,
       course: Text(
-        row.course,
+        // Sometime, there are multiple course names in the same cell. If so, add a line break inbetween.
+        row.course.replaceAll(' ', '\n'),
         style: _boldStyle(context),
       ),
       period: Text(

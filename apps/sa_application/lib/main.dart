@@ -5,6 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sa_application/android_system_overlay_styles.dart';
 import 'package:sa_application/firebase_options.dart';
 import 'package:sa_application/init.dart';
 import 'package:sa_application/l10n/l10n.dart';
@@ -25,6 +26,9 @@ void main() async {
 
   // Initialize cache for images.
   await FastCachedImageConfig.init();
+
+  // Set the system UI mode to edge-to-edge for Android 10 or higher.
+  await sInitAndroidSystemOverlayStyles();
 
   // Attempt to load local settings and restore the user session.
   final overrides = await Future.wait([
@@ -66,12 +70,22 @@ class _MyAppState extends ConsumerState<MyApp> {
       }
     });
 
+    // Determine the theme brighthness based on the theme mode.
+    final themeBrightness = switch (themeMode) {
+      ThemeMode.system => MediaQuery.platformBrightnessOf(context),
+      ThemeMode.light => Brightness.light,
+      ThemeMode.dark => Brightness.dark,
+    };
+
+    // Update the Android system overlay styles for Android 10 or higher based on the theme brightness.
+    sUpdateAndroidSystemOverlayStyles(themeBrightness);
+
     return ToastificationWrapper(
       child: MaterialApp.router(
         title: SConstants.appName,
         debugShowCheckedModeBanner: false,
         builder: (context, child) => FTheme(
-          data: SCustomTheme.foruiAdaptive(context, themeMode),
+          data: themeBrightness == Brightness.light ? zincLight : zincDark,
           child: child!,
         ),
         themeMode: themeMode,

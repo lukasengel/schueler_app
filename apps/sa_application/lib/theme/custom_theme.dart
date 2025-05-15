@@ -19,16 +19,4 @@ abstract final class SCustomTheme {
           thickness: WidgetStateProperty.all(0),
         ),
       );
-
-  /// Get the [FThemeData] depending on the current theme mode setting and platform brightness.
-  static FThemeData foruiAdaptive(BuildContext context, ThemeMode mode) {
-    switch (mode) {
-      case ThemeMode.system:
-        return MediaQuery.platformBrightnessOf(context) == Brightness.light ? zincLight : zincDark;
-      case ThemeMode.light:
-        return zincLight;
-      case ThemeMode.dark:
-        return zincDark;
-    }
-  }
 }

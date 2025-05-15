@@ -3,13 +3,14 @@ description: Main application package.
 
 publish_to: 'none'
 
-version: 2.0.0+12
+version: 2.0.1+13
 
 environment:
   sdk: ^3.6.0
 
 dependencies:
   animated_switcher_plus: ^1.1.1
+  client_information: ^2.2.0
   collection: ^1.19.1
   dartz: ^0.10.1
   easy_refresh: ^3.4.0
