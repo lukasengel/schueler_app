@@ -1,5 +1,6 @@
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
 import 'package:go_router/go_router.dart';
@@ -19,7 +20,7 @@ class SHomeScreen extends ConsumerStatefulWidget {
 }
 
 class _SHomeScreenState extends ConsumerState<SHomeScreen> with WidgetsBindingObserver {
-  DateTime? _latestRefresh;
+  DateTime? _pauseTime;
   var _initial = true;
   var _index = 0;
 
@@ -49,10 +50,7 @@ class _SHomeScreenState extends ConsumerState<SHomeScreen> with WidgetsBindingOb
 
         return IndicatorResult.fail;
       },
-      (r) {
-        _latestRefresh = DateTime.now();
-        return IndicatorResult.success;
-      },
+      (r) => IndicatorResult.success,
     );
   }
 
@@ -64,7 +62,16 @@ class _SHomeScreenState extends ConsumerState<SHomeScreen> with WidgetsBindingOb
   @override
   void initState() {
     // Load data as soon as the screen is built.
-    WidgetsBinding.instance.addPostFrameCallback((_) => _initialRefresh());
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      // Wait for at least 500 milliseconds.
+      // If the loading goes too fast, it seems like the app is flickering.
+      await Future.wait([
+        Future<void>.delayed(const Duration(milliseconds: 500)),
+        _onRefresh(),
+      ]);
+
+      setState(() => _initial = false);
+    });
     WidgetsBinding.instance.addObserver(this);
     super.initState();
   }
@@ -75,28 +82,20 @@ class _SHomeScreenState extends ConsumerState<SHomeScreen> with WidgetsBindingOb
     super.dispose();
   }
 
-  /// Refresh method to be called when the screen is built or when the app is resumed.
-  Future<void> _initialRefresh([bool long = true]) async {
-    setState(() => _initial = true);
-
-    // Wait for at least 500 milliseconds.
-    // If the loading goes too fast, it seems like the app is flickering.
-    await Future.wait([
-      Future<void>.delayed(Duration(milliseconds: long ? 500 : 200)),
-      _onRefresh(),
-    ]);
-
-    setState(() => _initial = false);
-  }
-
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
 
-    // Refresh the content when the app is resumed and the last refresh was more than 5 minutes ago.
-    if (state == AppLifecycleState.resumed) {
-      if (_latestRefresh == null || DateTime.now().difference(_latestRefresh!).inMinutes > 5) {
-        _initialRefresh(false);
+    // If the app is paused, store the pause time.
+    if (state == AppLifecycleState.paused) {
+      _pauseTime = DateTime.now();
+    }
+
+    // Restart the entire application if the app is resumed after being paused for more than 15 minutes.
+    // This is done to avoid any outdated data to be displayed.
+    else if (state == AppLifecycleState.resumed) {
+      if (_pauseTime != null && DateTime.now().difference(_pauseTime!).inMinutes > 5) {
+        Phoenix.rebirth(context);
       }
     }
   }

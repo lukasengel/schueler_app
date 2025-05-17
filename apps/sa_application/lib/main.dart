@@ -2,6 +2,7 @@ import 'package:fast_cached_network_image/fast_cached_network_image.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
 import 'package:go_router/go_router.dart';
@@ -37,10 +38,12 @@ void main() async {
   ]);
 
   runApp(
-    ProviderScope(
-      // Add all non-null overrides to the provider scope.
-      overrides: overrides.nonNulls.toList(),
-      child: const MyApp(),
+    Phoenix(
+      child: ProviderScope(
+        // Add all non-null overrides to the provider scope.
+        overrides: overrides.nonNulls.toList(),
+        child: const MyApp(),
+      ),
     ),
   );
 }
