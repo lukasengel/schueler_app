@@ -21,10 +21,19 @@ class SFirebaseAuthRepository extends SAuthRepository {
         // If an error occurred, log it.
         final privileges = result.fold(
           (l) {
-            SLogger.error('Failed to load user privileges for ${user.uid}.\n\n$l');
+            SLogger.error('Failed to load user privileges for ${user.uid}:\n$l');
             return null;
           },
           (r) => r,
+        );
+
+        // Attempt to register the client for analytics.
+        final analyticsResult = await registerClient();
+
+        // If an error occurred, log it.
+        analyticsResult.fold(
+          (l) => SLogger.error('Failed to register client for analytics:\n$l'),
+          (r) => null,
         );
 
         // If no privileges are available, either due to an error or because there is no entry for this user, they are considered a student.
@@ -73,15 +82,6 @@ class SFirebaseAuthRepository extends SAuthRepository {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: '$hash@lukasengel.net',
         password: password,
-      );
-
-      // Attempt to register the client for analytics.
-      final analyticsResult = await registerClient();
-
-      // If an error occurred, log it.
-      analyticsResult.fold(
-        (l) => SLogger.error('Failed to register client for analytics.\n\n$l'),
-        (r) => null,
       );
 
       SLogger.debug("Logged in as '$username.'");

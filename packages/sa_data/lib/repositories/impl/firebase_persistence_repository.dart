@@ -151,7 +151,7 @@ class SFirebasePersistenceRepository extends SPersistenceRepository {
     // Only Android and iOS clients should be registered.
     if (Platform.isAndroid || Platform.isIOS) {
       // ADJUST_VERSION_NUMBER
-      final document = firestore.collection('analytics').doc('clientMetrics-v2.0.0');
+      final document = firestore.collection('analytics').doc('clientMetrics-v2.0');
 
       await document.set(
         {

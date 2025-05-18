@@ -7,10 +7,10 @@ abstract final class SConstants {
   static const schoolName = 'Gnadenthal-Gymnasium Ingolstadt';
 
   /// The version of the app.
-  static const version = '2.0.0';
+  static const version = '2.0.1';
 
   /// The release month of the app.
-  static final releaseMonth = DateTime(2025, 4);
+  static final releaseMonth = DateTime(2025, 5);
 
   /// The artist of the app logo.
   static const logoArtist = 'Nika Peskova';
