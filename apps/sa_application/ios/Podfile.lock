@@ -1194,6 +1194,9 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.37):
     - BoringSSL-GRPC/Interface (= 0.0.37)
   - BoringSSL-GRPC/Interface (0.0.37)
+  - client_information (1.0.0):
+    - Flutter
+    - SAMKeychain
   - cloud_firestore (5.6.6):
     - Firebase/Firestore (= 11.10.0)
     - firebase_core
@@ -1430,6 +1433,7 @@ PODS:
     - Flutter
     - FlutterMacOS
   - RecaptchaInterop (101.0.0)
+  - SAMKeychain (1.5.3)
   - SDWebImage (5.21.0):
     - SDWebImage/Core (= 5.21.0)
   - SDWebImage/Core (5.21.0)
@@ -1441,6 +1445,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - client_information (from `.symlinks/plugins/client_information/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
@@ -1477,10 +1482,13 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - RecaptchaInterop
+    - SAMKeychain
     - SDWebImage
     - SwiftyGif
 
 EXTERNAL SOURCES:
+  client_information:
+    :path: ".symlinks/plugins/client_information/ios"
   cloud_firestore:
     :path: ".symlinks/plugins/cloud_firestore/ios"
   file_picker:
@@ -1507,14 +1515,15 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   abseil: a05cc83bf02079535e17169a73c5be5ba47f714b
   BoringSSL-GRPC: dded2a44897e45f28f08ae87a55ee4bcd19bc508
-  cloud_firestore: 07742f115155e19201e77b4cafb155011892d7b7
+  client_information: cd2088b683015ea782082d6562d17e0320ae7097
+  cloud_firestore: aef3217af294cd35afda47e63112d306f4c9a2e2
   DKImagePickerController: 946cec48c7873164274ecc4624d19e3da4c1ef3c
   DKPhotoGallery: b3834fecb755ee09a593d7c9e389d8b5d6deed60
-  file_picker: a0560bc09d61de87f12d246fc47d2119e6ef37be
+  file_picker: b159e0c068aef54932bb15dc9fd1571818edaf49
   Firebase: 1fe1c0a7d9aaea32efe01fbea5f0ebd8d70e53a2
-  firebase_auth: 34c515a8fa76a4ef678ac5ad5cfa3bb3120f5ab5
-  firebase_core: 2d4534e7b489907dcede540c835b48981d890943
-  firebase_storage: ce9dee18f1cc73129457d861ae3322656ec41a99
+  firebase_auth: e37065f3f80ff90580c13ad0e5a48e3bb8d2ad77
+  firebase_core: 432718558359a8c08762151b5f49bb0f093eb6e0
+  firebase_storage: 11a326ee2116e122192f7b960db6f17ea8c18681
   FirebaseAppCheckInterop: f23709c9ce92d810aa53ff4ce12ad3e666a3c7be
   FirebaseAuth: c4146bdfdc87329f9962babd24dae89373f49a32
   FirebaseAuthInterop: ac22ed402c2f4e3a8c63ebd3278af9a06073c1be
@@ -1526,21 +1535,22 @@ SPEC CHECKSUMS:
   FirebaseSharedSwift: b1d32c3b29a911dc174bcf363f2f70bda9509d2f
   FirebaseStorage: e83d1b9c8a5318d46ccfb2955f0d98095e0bf598
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  flutter_native_splash: c32d145d68aeda5502d5f543ee38c192065986cf
-  flutter_platform_alert: bf3b5fcd4ac14bd637e20527e9c471633071afd3
+  flutter_native_splash: df59bb2e1421aa0282cb2e95618af4dcb0c56c29
+  flutter_platform_alert: f507baf17889a38794d3cf16b98b637fb69479bd
   GoogleUtilities: 26a3abef001b6533cf678d3eb38fd3f614b7872d
   "gRPC-C++": cc207623316fb041a7a3e774c252cf68a058b9e8
   gRPC-Core: 860978b7db482de8b4f5e10677216309b5ff6330
   GTMSessionFetcher: 75b671f9e551e4c49153d4c4f8659ef4f559b970
   leveldb-library: cc8b8f8e013647a295ad3f8cd2ddf49a6f19be19
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
-  path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
+  path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   RecaptchaInterop: 11e0b637842dfb48308d242afc3f448062325aba
+  SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
   SDWebImage: f84b0feeb08d2d11e6a9b843cb06d75ebf5b8868
-  shared_preferences_foundation: 9e1978ff2562383bd5676f64ec4e9aa8fa06a6f7
+  shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
   SwiftyGif: 706c60cf65fa2bc5ee0313beece843c8eb8194d4
-  url_launcher_ios: 694010445543906933d732453a59da0a173ae33d
+  url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
 
 PODFILE CHECKSUM: 4305caec6b40dde0ae97be1573c53de1882a07e5
 
-COCOAPODS: 1.16.2
+COCOAPODS: 1.15.2

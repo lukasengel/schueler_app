@@ -47,5 +47,7 @@
 		<true/>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>Photo access is only required for admin users in order to upload pictures to the School Life blog. If you're a student, you can ignore this message.</string>
 	</dict>
 </plist>

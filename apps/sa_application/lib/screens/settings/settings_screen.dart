@@ -206,11 +206,11 @@ class _SSettingsScreenState extends ConsumerState<SSettingsScreen> {
                 ),
                 Text(
                   SLocalizations.of(context)!.developer.toUpperCase(),
-                  style: SCustomStyles.mediumCaptionStyle(context),
+                  style: SCustomStyles.smallCaptionStyle(context),
                 ),
                 Text(
                   SConstants.developer.toUpperCase(),
-                  style: SCustomStyles.smallCaptionStyle(context),
+                  style: SCustomStyles.mediumCaptionStyle(context),
                 ),
                 const SizedBox(
                   height: 2 * SCustomStyles.listTileSpacing,
